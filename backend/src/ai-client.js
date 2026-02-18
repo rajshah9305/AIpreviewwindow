@@ -1,6 +1,13 @@
 export async function callAI(prompt, settings) {
   const { modelName, apiKey, baseUrl } = settings
   
+  // Validate settings
+  if (!modelName || !apiKey || !baseUrl) {
+    throw new Error('Missing required AI settings: modelName, apiKey, or baseUrl')
+  }
+  
+  console.log(`Calling AI with model: ${modelName}, baseUrl: ${baseUrl}`)
+  
   // Detect provider based on base URL
   const isAnthropic = baseUrl.includes('anthropic.com')
   const isOpenAI = baseUrl.includes('openai.com') || !isAnthropic
