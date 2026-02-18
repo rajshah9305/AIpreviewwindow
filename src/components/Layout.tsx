@@ -14,24 +14,24 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-accent-50/30">
       <nav className="bg-white/90 backdrop-blur-xl border-b-2 border-neutral-200 sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Sparkles className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2.5">
+              <div className="w-9 h-9 bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 rounded-lg flex items-center justify-center shadow-lg">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                <h1 className="text-xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
                   AI UI Generator
                 </h1>
-                <p className="text-xs text-neutral-500 font-medium">Create stunning components instantly</p>
+                <p className="text-[10px] text-neutral-500 font-medium leading-tight">Create stunning components instantly</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5">
               <Link
                 to="/generator"
-                className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 flex items-center space-x-2 ${
+                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center space-x-1.5 ${
                   isActive('/generator')
                     ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg'
                     : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
@@ -43,7 +43,7 @@ export default function Layout({ children }: LayoutProps) {
               
               <Link
                 to="/history"
-                className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 flex items-center space-x-2 ${
+                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center space-x-1.5 ${
                   isActive('/history')
                     ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg'
                     : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
@@ -55,7 +55,7 @@ export default function Layout({ children }: LayoutProps) {
               
               <Link
                 to="/settings"
-                className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 flex items-center space-x-2 ${
+                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center space-x-1.5 ${
                   isActive('/settings')
                     ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg'
                     : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
@@ -69,7 +69,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="max-w-[1920px] mx-auto px-6 py-6">
+      <main className="max-w-[1920px] mx-auto px-6 py-4">
         {children}
       </main>
     </div>
