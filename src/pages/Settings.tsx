@@ -101,6 +101,7 @@ export default function Settings() {
             Settings saved successfully!
           </div>
         )}
+      </div>
     </div>
   )
 }
