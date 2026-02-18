@@ -94,5 +94,23 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     instruction,
     variations,
     timestamp: Date.now(),
+    modelName: settings.modelName,
+    provider: extractProvider(settings.baseUrl),
   }
+}
+
+function extractProvider(baseUrl) {
+  if (!baseUrl) return 'Unknown'
+  
+  const url = baseUrl.toLowerCase()
+  if (url.includes('openai')) return 'OpenAI'
+  if (url.includes('anthropic')) return 'Anthropic'
+  if (url.includes('cohere')) return 'Cohere'
+  if (url.includes('groq')) return 'Groq'
+  if (url.includes('together')) return 'Together AI'
+  if (url.includes('replicate')) return 'Replicate'
+  if (url.includes('huggingface')) return 'Hugging Face'
+  if (url.includes('localhost') || url.includes('127.0.0.1')) return 'Local'
+  
+  return 'Custom'
 }

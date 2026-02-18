@@ -9,6 +9,8 @@ export interface GenerationResult {
   instruction: string;
   variations: ComponentVariation[];
   timestamp: number;
+  modelName?: string;
+  provider?: string;
 }
 
 export interface AISettings {

@@ -89,7 +89,12 @@ export default function History() {
                 
                 <div className="grid grid-cols-1 gap-6">
                   {selectedResult.variations.map((variation) => (
-                    <ComponentPreview key={variation.id} variation={variation} />
+                    <ComponentPreview 
+                      key={variation.id} 
+                      variation={variation}
+                      modelName={selectedResult.modelName}
+                      provider={selectedResult.provider}
+                    />
                   ))}
                 </div>
               </div>

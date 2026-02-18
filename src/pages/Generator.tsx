@@ -137,7 +137,12 @@ export default function Generator() {
             
             <div className="flex-1 overflow-y-auto pr-2 space-y-4">
               {result.variations.map((variation) => (
-                <ComponentPreview key={variation.id} variation={variation} />
+                <ComponentPreview 
+                  key={variation.id} 
+                  variation={variation}
+                  modelName={result.modelName}
+                  provider={result.provider}
+                />
               ))}
             </div>
           </>
