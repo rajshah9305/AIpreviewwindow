@@ -5,9 +5,9 @@ import { saveSettings, loadSettings } from '../services/api'
 
 export default function Settings() {
   const [settings, setSettings] = useState<AISettings>({
-    modelName: 'gpt-4',
+    modelName: '',
     apiKey: '',
-    baseUrl: 'https://api.openai.com/v1',
+    baseUrl: '',
   })
   
   const [saved, setSaved] = useState(false)
@@ -46,7 +46,7 @@ export default function Settings() {
             type="text"
             value={settings.modelName}
             onChange={(e) => setSettings({ ...settings, modelName: e.target.value })}
-            placeholder="e.g., gpt-4, claude-3-opus-20240229"
+            placeholder="e.g., gpt-4, claude-3-5-sonnet-20241022, llama-3.3-70b-versatile"
             className="input-field"
           />
         </div>
@@ -60,7 +60,7 @@ export default function Settings() {
             type="password"
             value={settings.apiKey}
             onChange={(e) => setSettings({ ...settings, apiKey: e.target.value })}
-            placeholder="sk-..."
+            placeholder="Enter your API key"
             className="input-field"
           />
         </div>
@@ -74,7 +74,7 @@ export default function Settings() {
             type="text"
             value={settings.baseUrl}
             onChange={(e) => setSettings({ ...settings, baseUrl: e.target.value })}
-            placeholder="https://api.openai.com/v1"
+            placeholder="e.g., https://api.openai.com/v1, https://api.groq.com/openai/v1"
             className="input-field"
           />
         </div>
