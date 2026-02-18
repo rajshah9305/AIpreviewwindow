@@ -1,11 +1,9 @@
 # Dependencies
 node_modules
-backend/node_modules
 
 # Environment files
 .env
 .env.local
-backend/.env
 
 # Build cache
 .vite
@@ -27,7 +25,6 @@ Thumbs.db
 
 # Logs
 *.log
-npm-debug.log*
 
 # Testing
 coverage

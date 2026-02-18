@@ -1,4 +1,4 @@
-import { generateUIComponents } from '../backend/src/generator.js'
+import { generateUIComponents } from './lib/generator.js'
 
 export default async function handler(req, res) {
   // Enable CORS

@@ -32,7 +32,6 @@ export async function generateUIComponents(instruction, settings) {
   const styles = Object.keys(STYLE_THEMES)
   const maxRetries = 2
   
-  // Function to generate a single variation with retry logic
   const generateVariation = async (style, index, retryCount = 0) => {
     const theme = STYLE_THEMES[style]
     
@@ -81,10 +80,9 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     } catch (error) {
       console.error(`Failed to generate ${style} variation (attempt ${retryCount + 1}/${maxRetries + 1}):`, error.message)
       
-      // Retry if we haven't exceeded max retries
       if (retryCount < maxRetries) {
         console.log(`Retrying ${style} variation...`)
-        await new Promise(resolve => setTimeout(resolve, 1000)) // Wait 1 second before retry
+        await new Promise(resolve => setTimeout(resolve, 1000))
         return generateVariation(style, index, retryCount + 1)
       }
       
@@ -92,10 +90,7 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     }
   }
   
-  // Generate all 5 variations with retry logic
   const promises = styles.map((style, i) => generateVariation(style, i))
-  
-  // Wait for all promises to settle (not fail fast)
   const results = await Promise.allSettled(promises)
   
   const variations = []
@@ -112,12 +107,10 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     }
   })
   
-  // Log detailed error information
   if (errors.length > 0) {
     console.error(`Failed to generate ${errors.length} variations:`, errors)
   }
   
-  // If we got fewer than 5 variations, throw an error with details
   if (variations.length < 5) {
     const errorDetails = errors.map(e => `${e.style}: ${e.error}`).join('; ')
     throw new Error(`Only generated ${variations.length} out of 5 variations. Failed: ${errorDetails}`)

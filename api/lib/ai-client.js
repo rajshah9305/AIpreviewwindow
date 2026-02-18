@@ -1,17 +1,14 @@
 export async function callAI(prompt, settings) {
   const { modelName, apiKey, baseUrl } = settings
   
-  // Validate settings
   if (!modelName || !apiKey || !baseUrl) {
     throw new Error('Missing required AI settings: modelName, apiKey, or baseUrl')
   }
   
-  // Normalize base URL - remove trailing slash
   const normalizedBaseUrl = baseUrl.replace(/\/$/, '')
   
   console.log(`Calling AI with model: ${modelName}, baseUrl: ${normalizedBaseUrl}`)
   
-  // Detect provider based on base URL
   const isAnthropic = normalizedBaseUrl.includes('anthropic.com')
   const isOpenAI = normalizedBaseUrl.includes('openai.com') || !isAnthropic
   
@@ -24,17 +21,13 @@ export async function callAI(prompt, settings) {
 
 async function callOpenAI(prompt, model, apiKey, baseUrl) {
   try {
-    // Determine the correct endpoint
     let endpoint
     
     if (baseUrl.includes('/chat/completions')) {
-      // Full endpoint URL provided (e.g., https://api.cerebras.ai/v1/chat/completions)
       endpoint = baseUrl
     } else if (baseUrl.includes('/v1')) {
-      // Base URL with /v1 (e.g., https://api.openai.com/v1)
       endpoint = `${baseUrl}/chat/completions`
     } else {
-      // Base URL without /v1 (e.g., https://api.openai.com)
       endpoint = `${baseUrl}/v1/chat/completions`
     }
     
@@ -126,11 +119,7 @@ async function callAnthropic(prompt, model, apiKey, baseUrl) {
 }
 
 function cleanCode(code) {
-  // Remove markdown code blocks if present
   code = code.replace(/```html\n?/g, '').replace(/```\n?/g, '')
-  
-  // Remove any leading/trailing whitespace
   code = code.trim()
-  
   return code
 }

@@ -1,21 +1,18 @@
 #!/bin/bash
 
 # AI UI Generator - Vercel Deployment Script
-# This script automates the deployment process to Vercel
 
-set -e  # Exit on error
+set -e
 
 echo "🚀 AI UI Generator - Vercel Deployment"
 echo "======================================"
 echo ""
 
-# Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Check if Vercel CLI is installed
 if ! command -v vercel &> /dev/null; then
     echo -e "${RED}❌ Vercel CLI is not installed${NC}"
     echo ""
@@ -28,7 +25,6 @@ fi
 echo -e "${GREEN}✅ Vercel CLI found${NC}"
 echo ""
 
-# Check if user is logged in
 if ! vercel whoami &> /dev/null; then
     echo -e "${YELLOW}⚠️  Not logged in to Vercel${NC}"
     echo ""
@@ -41,7 +37,6 @@ USER=$(vercel whoami)
 echo -e "${GREEN}✅ Logged in as: $USER${NC}"
 echo ""
 
-# Ask for deployment type
 echo "Select deployment type:"
 echo "1) Preview (development)"
 echo "2) Production"
@@ -67,7 +62,6 @@ echo ""
 echo -e "${YELLOW}📦 Preparing $DEPLOY_TYPE deployment...${NC}"
 echo ""
 
-# Check if project is linked
 if [ ! -d ".vercel" ]; then
     echo -e "${YELLOW}⚠️  Project not linked to Vercel${NC}"
     echo ""
@@ -76,17 +70,14 @@ if [ ! -d ".vercel" ]; then
     echo ""
 fi
 
-# Run tests (optional)
 echo -e "${YELLOW}🧪 Running pre-deployment checks...${NC}"
 echo ""
 
-# Check if package.json exists
 if [ ! -f "package.json" ]; then
     echo -e "${RED}❌ package.json not found${NC}"
     exit 1
 fi
 
-# Check if vercel.json exists
 if [ ! -f "vercel.json" ]; then
     echo -e "${RED}❌ vercel.json not found${NC}"
     exit 1
@@ -95,12 +86,10 @@ fi
 echo -e "${GREEN}✅ Configuration files found${NC}"
 echo ""
 
-# Install dependencies
 echo -e "${YELLOW}📦 Installing dependencies...${NC}"
 npm install
 echo ""
 
-# Build locally to check for errors
 echo -e "${YELLOW}🔨 Building project...${NC}"
 npm run build
 
@@ -112,7 +101,6 @@ fi
 echo -e "${GREEN}✅ Build successful${NC}"
 echo ""
 
-# Deploy
 echo -e "${YELLOW}🚀 Deploying to Vercel ($DEPLOY_TYPE)...${NC}"
 echo ""
 
