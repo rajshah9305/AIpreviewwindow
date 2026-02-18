@@ -8,6 +8,7 @@ interface GenerationContextType {
   loading: boolean
   result: GenerationResult | null
   error: string | null
+  clearError: () => void
   handleGenerate: () => Promise<void>
 }
 
@@ -71,6 +72,10 @@ export function GenerationProvider({ children }: { children: ReactNode }) {
     }
   }
   
+  const clearError = () => {
+    setError(null)
+  }
+  
   return (
     <GenerationContext.Provider
       value={{
@@ -79,6 +84,7 @@ export function GenerationProvider({ children }: { children: ReactNode }) {
         loading,
         result,
         error,
+        clearError,
         handleGenerate,
       }}
     >

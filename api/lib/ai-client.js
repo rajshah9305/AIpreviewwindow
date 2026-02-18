@@ -1,4 +1,4 @@
-export async function callAI(prompt, settings) {
+  export async function callAI(prompt, settings) {
   const { modelName, apiKey, baseUrl } = settings
   
   if (!modelName || !apiKey || !baseUrl) {
