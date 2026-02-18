@@ -111,9 +111,15 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     console.error(`Failed to generate ${errors.length} variations:`, errors)
   }
   
-  if (variations.length < 5) {
+  // Allow at least 3 successful variations (instead of requiring all 5)
+  if (variations.length < 3) {
     const errorDetails = errors.map(e => `${e.style}: ${e.error}`).join('; ')
     throw new Error(`Only generated ${variations.length} out of 5 variations. Failed: ${errorDetails}`)
+  }
+  
+  // Log warning if not all variations succeeded
+  if (variations.length < 5) {
+    console.warn(`Generated ${variations.length} out of 5 variations. Some variations failed but continuing.`)
   }
   
   return {

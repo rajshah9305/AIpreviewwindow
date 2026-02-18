@@ -10,7 +10,6 @@ export async function callAI(prompt, settings) {
   console.log(`Calling AI with model: ${modelName}, baseUrl: ${normalizedBaseUrl}`)
   
   const isAnthropic = normalizedBaseUrl.includes('anthropic.com')
-  const isOpenAI = normalizedBaseUrl.includes('openai.com') || !isAnthropic
   
   if (isAnthropic) {
     return callAnthropic(prompt, modelName, apiKey, normalizedBaseUrl)
@@ -57,19 +56,35 @@ async function callOpenAI(prompt, model, apiKey, baseUrl) {
     })
     
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.error?.message || `API error: ${response.status} ${response.statusText}`)
+      const errorText = await response.text()
+      let errorMessage
+      try {
+        const errorJson = JSON.parse(errorText)
+        errorMessage = errorJson.error?.message || errorJson.message || `API error: ${response.status}`
+      } catch {
+        errorMessage = `API error: ${response.status} ${response.statusText}`
+      }
+      console.error('API Error Response:', errorText)
+      throw new Error(errorMessage)
     }
     
     const data = await response.json()
+    console.log('API Response structure:', Object.keys(data))
     
     if (!data.choices?.[0]?.message?.content) {
-      throw new Error('Invalid response from API')
+      console.error('Invalid API response structure:', JSON.stringify(data, null, 2))
+      throw new Error(`Invalid response from API - missing content. Response keys: ${Object.keys(data).join(', ')}`)
     }
     
-    return cleanCode(data.choices[0].message.content)
+    const content = data.choices[0].message.content
+    if (!content || content.trim().length < 50) {
+      throw new Error(`Generated content too short: ${content?.length || 0} characters`)
+    }
+    
+    return cleanCode(content)
   } catch (error) {
-    if (error.message.includes('fetch')) {
+    console.error('callOpenAI error:', error)
+    if (error.message.includes('fetch') || error.name === 'TypeError') {
       throw new Error('Network error: Unable to connect to API')
     }
     throw error
@@ -99,19 +114,35 @@ async function callAnthropic(prompt, model, apiKey, baseUrl) {
     })
     
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.error?.message || `Anthropic API error: ${response.status} ${response.statusText}`)
+      const errorText = await response.text()
+      let errorMessage
+      try {
+        const errorJson = JSON.parse(errorText)
+        errorMessage = errorJson.error?.message || errorJson.message || `Anthropic API error: ${response.status}`
+      } catch {
+        errorMessage = `Anthropic API error: ${response.status} ${response.statusText}`
+      }
+      console.error('Anthropic Error Response:', errorText)
+      throw new Error(errorMessage)
     }
     
     const data = await response.json()
+    console.log('Anthropic Response structure:', Object.keys(data))
     
     if (!data.content?.[0]?.text) {
-      throw new Error('Invalid response from Anthropic API')
+      console.error('Invalid Anthropic response structure:', JSON.stringify(data, null, 2))
+      throw new Error(`Invalid response from Anthropic API - missing content. Response keys: ${Object.keys(data).join(', ')}`)
     }
     
-    return cleanCode(data.content[0].text)
+    const text = data.content[0].text
+    if (!text || text.trim().length < 50) {
+      throw new Error(`Generated content too short: ${text?.length || 0} characters`)
+    }
+    
+    return cleanCode(text)
   } catch (error) {
-    if (error.message.includes('fetch')) {
+    console.error('callAnthropic error:', error)
+    if (error.message.includes('fetch') || error.name === 'TypeError') {
       throw new Error('Network error: Unable to connect to Anthropic API')
     }
     throw error
