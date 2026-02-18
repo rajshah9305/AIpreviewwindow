@@ -3,18 +3,21 @@ import Layout from './components/Layout'
 import Generator from './pages/Generator'
 import Settings from './pages/Settings'
 import History from './pages/History'
+import { GenerationProvider } from './contexts/GenerationContext'
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Navigate to="/generator" replace />} />
-          <Route path="/generator" element={<Generator />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/history" element={<History />} />
-        </Routes>
-      </Layout>
+      <GenerationProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Navigate to="/generator" replace />} />
+            <Route path="/generator" element={<Generator />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </Layout>
+      </GenerationProvider>
     </Router>
   )
 }

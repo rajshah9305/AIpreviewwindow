@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sparkles, Settings, History } from 'lucide-react'
+import { Sparkles, Settings, History, Loader2 } from 'lucide-react'
+import { useGeneration } from '../contexts/GenerationContext'
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,6 +9,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
+  const { loading, progress } = useGeneration()
   
   const isActive = (path: string) => location.pathname === path
   
@@ -65,6 +67,21 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </nav>
+      
+      {/* Global Loading Indicator */}
+      {loading && (
+        <div className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 shadow-lg">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span className="font-medium">Generating components in background...</span>
+            </div>
+            {progress && (
+              <span className="text-sm text-white/90">{progress}</span>
+            )}
+          </div>
+        </div>
+      )}
       
       <main className="max-w-7xl mx-auto px-6 py-8">
         {children}

@@ -1,45 +1,17 @@
-import { useState } from 'react'
 import { Wand2, Loader2 } from 'lucide-react'
-import { GenerationResult } from '../types'
-import { generateComponents, loadSettings, saveToHistory } from '../services/api'
 import ComponentPreview from '../components/ComponentPreview'
+import { useGeneration } from '../contexts/GenerationContext'
 
 export default function Generator() {
-  const [instruction, setInstruction] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<GenerationResult | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  
-  const handleGenerate = async () => {
-    const settings = loadSettings()
-    
-    if (!settings || !settings.apiKey) {
-      setError('Please configure your AI settings first')
-      return
-    }
-    
-    if (!instruction.trim()) {
-      setError('Please enter an instruction')
-      return
-    }
-    
-    setLoading(true)
-    setError(null)
-    
-    try {
-      const generatedResult = await generateComponents({
-        instruction: instruction.trim(),
-        settings,
-      })
-      
-      setResult(generatedResult)
-      saveToHistory(generatedResult)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate components')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const {
+    instruction,
+    setInstruction,
+    loading,
+    result,
+    error,
+    progress,
+    handleGenerate,
+  } = useGeneration()
   
   const examples = [
     'Create a pricing card with three tiers',
@@ -107,6 +79,12 @@ export default function Generator() {
               </>
             )}
           </button>
+          
+          {loading && progress && (
+            <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
+              {progress}
+            </div>
+          )}
           
           {error && (
             <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-800">
