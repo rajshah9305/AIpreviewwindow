@@ -2,31 +2,36 @@ import { callAI } from './ai-client.js'
 
 const STYLE_THEMES = {
   minimal: {
-    name: 'Clean & Simple',
+    name: 'Minimalist',
+    description: 'Clean lines, ample whitespace, and subtle design elements',
     colors: ['#78716c', '#a8a29e', '#292524'],
     spacing: 'tight',
     borders: 'thin',
   },
   bold: {
-    name: 'Bold & Vibrant',
+    name: 'Statement',
+    description: 'High contrast, bold typography, and strong visual hierarchy',
     colors: ['#dc2626', '#f97316', '#292524'],
     spacing: 'generous',
     borders: 'thick',
   },
   elegant: {
-    name: 'Elegant & Refined',
+    name: 'Sophisticated',
+    description: 'Refined aesthetics with balanced proportions and subtle gradients',
     colors: ['#f59e0b', '#ef4444', '#57534e'],
     spacing: 'balanced',
     borders: 'subtle',
   },
   playful: {
-    name: 'Fun & Dynamic',
+    name: 'Expressive',
+    description: 'Dynamic layouts with rounded corners and engaging interactions',
     colors: ['#fbbf24', '#f97316', '#292524'],
     spacing: 'varied',
     borders: 'rounded',
   },
   modern: {
-    name: 'Modern & Sleek',
+    name: 'Contemporary',
+    description: 'Sharp edges, spacious layouts, and modern design patterns',
     colors: ['#f97316', '#dc2626', '#1c1917'],
     spacing: 'spacious',
     borders: 'sharp',
@@ -55,10 +60,21 @@ Requirements:
 - Create a complete, functional component with all necessary elements
 - Include proper visual hierarchy and spacing
 - Make it interactive where appropriate (buttons, forms, etc.)
-- Use semantic HTML (form, button, input, etc.)
-- Ensure proper contrast and accessibility
+- Use semantic HTML5 elements (form, button, input, article, section, etc.)
+- Ensure WCAG 2.1 AA accessibility compliance:
+  * Proper color contrast ratios (4.5:1 for normal text, 3:1 for large text)
+  * ARIA labels and roles where appropriate
+  * Keyboard navigation support (focus states, tab order)
+  * Screen reader friendly markup
+- Implement responsive design:
+  * Mobile-first approach
+  * Use responsive Tailwind classes (sm:, md:, lg:, xl:)
+  * Ensure touch-friendly tap targets (min 44x44px)
+  * Flexible layouts that adapt to different screen sizes
 - The component should be centered and well-proportioned
-- Add hover states and transitions for interactive elements
+- Add smooth hover states and transitions for interactive elements
+- Include focus-visible states for keyboard navigation
+- Use proper heading hierarchy (h1, h2, h3, etc.)
 
 Style-specific guidance:
 ${style === 'minimal' ? '- Use clean lines, ample whitespace, subtle borders, muted colors' : ''}
