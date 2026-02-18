@@ -8,7 +8,6 @@ interface GenerationContextType {
   loading: boolean
   result: GenerationResult | null
   error: string | null
-  progress: string | null
   handleGenerate: () => Promise<void>
 }
 
@@ -19,7 +18,6 @@ export function GenerationProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<GenerationResult | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [progress, setProgress] = useState<string | null>(null)
   
   // Load persisted state on mount
   useEffect(() => {
@@ -57,23 +55,17 @@ export function GenerationProvider({ children }: { children: ReactNode }) {
     
     setLoading(true)
     setError(null)
-    setProgress('Starting generation...')
     
     try {
-      setProgress('Generating 5 unique variations...')
-      
       const generatedResult = await generateComponents({
         instruction: instruction.trim(),
         settings,
       })
       
-      setProgress('Finalizing...')
       setResult(generatedResult)
       saveToHistory(generatedResult)
-      setProgress(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate components')
-      setProgress(null)
     } finally {
       setLoading(false)
     }
@@ -87,7 +79,6 @@ export function GenerationProvider({ children }: { children: ReactNode }) {
         loading,
         result,
         error,
-        progress,
         handleGenerate,
       }}
     >

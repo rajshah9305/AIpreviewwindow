@@ -1,4 +1,4 @@
-import { Wand2, Loader2 } from 'lucide-react'
+import { Wand2 } from 'lucide-react'
 import ComponentPreview from '../components/ComponentPreview'
 import { useGeneration } from '../contexts/GenerationContext'
 
@@ -9,7 +9,6 @@ export default function Generator() {
     loading,
     result,
     error,
-    progress,
     handleGenerate,
   } = useGeneration()
   
@@ -67,24 +66,9 @@ export default function Generator() {
             disabled={loading}
             className="btn-primary w-full flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Generating...</span>
-              </>
-            ) : (
-              <>
-                <Wand2 className="w-5 h-5" />
-                <span>Generate Components</span>
-              </>
-            )}
+            <Wand2 className="w-5 h-5" />
+            <span>Generate Components</span>
           </button>
-          
-          {loading && progress && (
-            <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
-              {progress}
-            </div>
-          )}
           
           {error && (
             <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-800">

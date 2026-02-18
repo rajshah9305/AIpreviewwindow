@@ -33,8 +33,8 @@ export async function generateUIComponents(instruction, settings) {
   const variations = []
   const errors = []
   
-  for (let i = 0; i < 5; i++) {
-    const style = styles[i]
+  // Generate all 5 variations in parallel for better performance
+  const promises = styles.map(async (style, i) => {
     const theme = STYLE_THEMES[style]
     
     const prompt = `Generate a single, complete, self-contained HTML component based on this instruction: "${instruction}"
@@ -69,25 +69,40 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     try {
       const code = await callAI(prompt, settings)
       
-      variations.push({
+      return {
         id: `${Date.now()}-${i}`,
         name: `${style.charAt(0).toUpperCase() + style.slice(1)} Variation`,
         code: code.trim(),
         style,
-      })
+      }
     } catch (error) {
       console.error(`Failed to generate ${style} variation:`, error)
       errors.push({
         style,
         error: error.message
       })
-      // Don't add fallback - let the error propagate
+      return null
     }
-  }
+  })
+  
+  // Wait for all promises to complete
+  const results = await Promise.all(promises)
+  
+  // Filter out null results (failed generations)
+  results.forEach(result => {
+    if (result) {
+      variations.push(result)
+    }
+  })
   
   // If all variations failed, throw an error
   if (variations.length === 0) {
     throw new Error(`Failed to generate any variations. Errors: ${errors.map(e => `${e.style}: ${e.error}`).join('; ')}`)
+  }
+  
+  // Log if we got fewer than 5 variations
+  if (variations.length < 5) {
+    console.warn(`Only generated ${variations.length} out of 5 variations. Errors:`, errors)
   }
   
   return {
