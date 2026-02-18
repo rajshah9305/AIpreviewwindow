@@ -20,11 +20,16 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-neutral-300 rounded-full hover:bg-neutral-400;
   }
+  
+  /* Horizontal scrollbar styling */
+  ::-webkit-scrollbar-horizontal {
+    height: 10px;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-orange-100 text-orange-700 rounded-lg font-medium shadow-sm hover:bg-orange-600 hover:text-white hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+    @apply px-6 py-3 bg-primary-100 text-primary-700 rounded-lg font-medium shadow-sm hover:bg-primary-600 hover:text-white hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
   
   .btn-secondary {
@@ -71,5 +76,10 @@
   
   .animation-delay-400 {
     animation-delay: 400ms;
+  }
+  
+  /* Grid auto-fit for responsive columns */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }

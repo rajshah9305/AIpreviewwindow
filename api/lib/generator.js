@@ -55,7 +55,8 @@ Border style: ${theme.borders}
 Requirements:
 - Return ONLY the HTML code, no explanations or markdown
 - Use Tailwind CSS classes (Tailwind CDN will be available)
-- NO purple or blue colors - use orange (#f97316), red (#dc2626), yellow (#fbbf24), and neutral tones
+- Use the color palette: primary orange (#f0760b, #f39333, #e15a01), accent red (#ef4444, #dc2626), yellow (#fbbf24), and neutral tones (#78716c, #a8a29e, #292524, #1c1917)
+- NO purple or blue colors allowed
 - Make it visually distinct from other ${style} variations
 - Create a complete, functional component with all necessary elements
 - Include proper visual hierarchy and spacing

@@ -43,7 +43,7 @@ async function callOpenAI(prompt, model, apiKey, baseUrl) {
         messages: [
           {
             role: 'system',
-            content: 'You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Never use purple or blue colors. Return only HTML code without markdown formatting.',
+            content: 'You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.',
           },
           {
             role: 'user',
@@ -106,7 +106,7 @@ async function callAnthropic(prompt, model, apiKey, baseUrl) {
         messages: [
           {
             role: 'user',
-            content: `You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Never use purple or blue colors. Return only HTML code without markdown formatting.\n\n${prompt}`,
+            content: `You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.\n\n${prompt}`,
           },
         ],
         temperature: 0.8,

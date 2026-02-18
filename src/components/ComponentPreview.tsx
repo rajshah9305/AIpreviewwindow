@@ -55,22 +55,19 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
   
   const styleColors = {
     minimal: 'from-neutral-500 to-neutral-600',
-    bold: 'from-red-500 to-orange-500',
-    elegant: 'from-orange-400 to-red-400',
-    playful: 'from-yellow-500 to-orange-500',
-    modern: 'from-orange-500 to-red-500',
+    bold: 'from-accent-500 to-primary-500',
+    elegant: 'from-primary-400 to-accent-400',
+    playful: 'from-yellow-500 to-primary-500',
+    modern: 'from-primary-500 to-accent-500',
   }
   
   if (isLoading) {
     return (
       <div className="card overflow-hidden animate-fade-in">
-        <div className="p-3 bg-gradient-to-r from-neutral-50 to-orange-50 border-b border-neutral-200 flex items-center justify-between">
+        <div className="p-3 bg-gradient-to-r from-neutral-50 to-primary-50 border-b border-neutral-200 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${styleColors[variation.style]} shadow-sm animate-pulse`} />
             <h4 className="font-semibold text-sm text-neutral-900">{variation.name}</h4>
-            <span className="px-2 py-0.5 bg-white rounded-md text-xs font-medium text-neutral-600 capitalize border border-neutral-200">
-              {variation.style}
-            </span>
           </div>
           
           <div className="flex items-center space-x-1">
@@ -79,17 +76,17 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           </div>
         </div>
         
-        <div className="p-4 bg-gradient-to-br from-neutral-50 to-orange-50/30">
+        <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30">
           <div className="w-full bg-white rounded-lg shadow-sm p-8 space-y-4" style={{ minHeight: '300px' }}>
             <div className="flex items-center justify-center py-12">
               <div className="relative">
                 <div className="w-16 h-16 rounded-full border-4 border-neutral-200" />
                 <div 
-                  className="absolute inset-0 w-16 h-16 rounded-full border-4 border-transparent border-t-orange-500 animate-spin"
+                  className="absolute inset-0 w-16 h-16 rounded-full border-4 border-transparent border-t-primary-500 animate-spin"
                   style={{ animationDuration: '1s' }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-orange-100 animate-pulse" />
+                  <div className="w-8 h-8 rounded-full bg-primary-100 animate-pulse" />
                 </div>
               </div>
             </div>
@@ -112,20 +109,17 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
   }
   
   return (
-    <div className="card overflow-hidden transition-all duration-300 hover:shadow-xl">
-      <div className="p-3 bg-gradient-to-r from-neutral-50 to-orange-50 border-b border-neutral-200 flex items-center justify-between">
+    <div className="card overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+      <div className="p-3 bg-gradient-to-r from-neutral-50 to-primary-50 border-b border-neutral-200 flex items-center justify-between shrink-0">
         <div className="flex items-center space-x-2.5">
           <div className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${styleColors[variation.style]} shadow-sm`} />
           <h4 className="font-semibold text-sm text-neutral-900">{variation.name}</h4>
-          <span className="px-2 py-0.5 bg-white rounded-md text-xs font-medium text-neutral-600 capitalize border border-neutral-200">
-            {variation.style}
-          </span>
         </div>
         
         <div className="flex items-center space-x-1">
           <button
             onClick={() => setShowCode(!showCode)}
-            className={`p-1.5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ${
+            className={`p-1.5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
               showCode 
                 ? 'bg-primary-500 text-white shadow-md' 
                 : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
@@ -138,7 +132,7 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           
           <button
             onClick={copyCode}
-            className="p-1.5 rounded-lg bg-white text-neutral-600 hover:bg-neutral-100 transition-all duration-200 border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="p-1.5 rounded-lg bg-white text-neutral-600 hover:bg-neutral-100 transition-all duration-200 border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             title="Copy Code"
             aria-label="Copy Code"
           >
@@ -148,27 +142,27 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
       </div>
       
       {showCode ? (
-        <div className="p-4 bg-neutral-900 overflow-x-auto max-h-[400px] overflow-y-auto">
+        <div className="p-4 bg-neutral-900 overflow-x-auto flex-1 overflow-y-auto">
           <pre className="text-xs text-neutral-100 font-mono leading-relaxed">
             <code>{variation.code}</code>
           </pre>
         </div>
       ) : loadError ? (
-        <div className="p-8 bg-gradient-to-br from-neutral-50 to-orange-50/30">
+        <div className="p-8 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center justify-center text-center space-y-3">
             <AlertCircle className="w-12 h-12 text-red-500" />
             <p className="text-sm font-medium text-neutral-900">Failed to load preview</p>
             <p className="text-xs text-neutral-600">The component code may contain errors</p>
             <button
               onClick={() => setShowCode(true)}
-              className="text-xs text-orange-600 hover:text-orange-700 underline"
+              className="text-xs text-primary-600 hover:text-primary-700 underline"
             >
               View code instead
             </button>
           </div>
         </div>
       ) : (
-        <div className="p-4 bg-gradient-to-br from-neutral-50 to-orange-50/30">
+        <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 overflow-hidden">
           <iframe
             ref={iframeRef}
             srcDoc={`
@@ -199,8 +193,7 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
                 </body>
               </html>
             `}
-            className="w-full border-0 bg-white rounded-lg shadow-sm transition-opacity duration-300"
-            style={{ height: `${iframeHeight}px` }}
+            className="w-full h-full border-0 bg-white rounded-lg shadow-sm transition-opacity duration-300"
             sandbox="allow-scripts"
             title={`Preview of ${variation.name}`}
             loading="lazy"

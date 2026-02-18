@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => location.pathname === path
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-orange-50 to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-accent-50">
       <nav className="bg-white/80 backdrop-blur-lg border-b border-neutral-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -66,7 +66,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-[1920px] mx-auto px-6 py-6">
         {children}
       </main>
     </div>

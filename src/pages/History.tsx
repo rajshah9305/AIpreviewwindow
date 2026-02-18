@@ -47,8 +47,10 @@ export default function History() {
       
       {history.length === 0 ? (
         <div className="card p-12 text-center">
-          <Clock className="w-16 h-16 text-neutral-300 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-neutral-700 mb-2">
+          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl flex items-center justify-center shadow-sm">
+            <Clock className="w-10 h-10 text-primary-500" />
+          </div>
+          <h3 className="text-xl font-display font-semibold text-neutral-700 mb-2">
             No history yet
           </h3>
           <p className="text-neutral-500">
@@ -96,12 +98,13 @@ export default function History() {
                   <p className="text-neutral-700">{selectedResult.instruction}</p>
                 </div>
                 
-                <div className="grid grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                   {selectedResult.variations.map((variation) => (
-                    <ComponentPreview 
-                      key={variation.id} 
-                      variation={variation}
-                    />
+                    <div key={variation.id} className="flex flex-col min-h-[500px]">
+                      <ComponentPreview 
+                        variation={variation}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
