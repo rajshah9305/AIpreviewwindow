@@ -6,22 +6,34 @@ export async function callAI(prompt, settings) {
     throw new Error('Missing required AI settings: modelName, apiKey, or baseUrl')
   }
   
-  console.log(`Calling AI with model: ${modelName}, baseUrl: ${baseUrl}`)
+  // Normalize base URL - remove trailing slash
+  const normalizedBaseUrl = baseUrl.replace(/\/$/, '')
+  
+  console.log(`Calling AI with model: ${modelName}, baseUrl: ${normalizedBaseUrl}`)
   
   // Detect provider based on base URL
-  const isAnthropic = baseUrl.includes('anthropic.com')
-  const isOpenAI = baseUrl.includes('openai.com') || !isAnthropic
+  const isAnthropic = normalizedBaseUrl.includes('anthropic.com')
+  const isOpenAI = normalizedBaseUrl.includes('openai.com') || !isAnthropic
   
   if (isAnthropic) {
-    return callAnthropic(prompt, modelName, apiKey, baseUrl)
+    return callAnthropic(prompt, modelName, apiKey, normalizedBaseUrl)
   } else {
-    return callOpenAI(prompt, modelName, apiKey, baseUrl)
+    return callOpenAI(prompt, modelName, apiKey, normalizedBaseUrl)
   }
 }
 
 async function callOpenAI(prompt, model, apiKey, baseUrl) {
   try {
-    const response = await fetch(`${baseUrl}/chat/completions`, {
+    // Ensure base URL ends with /v1 for OpenAI
+    let apiUrl = baseUrl
+    if (!apiUrl.includes('/v1')) {
+      apiUrl = `${apiUrl}/v1`
+    }
+    
+    const endpoint = `${apiUrl}/chat/completions`
+    console.log(`OpenAI endpoint: ${endpoint}`)
+    
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

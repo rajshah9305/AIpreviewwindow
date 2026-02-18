@@ -84,7 +84,9 @@ export default function Settings() {
             className="input-field"
           />
           <p className="mt-2 text-sm text-neutral-500">
-            OpenAI: https://api.openai.com/v1 | Anthropic: https://api.anthropic.com
+            OpenAI: https://api.openai.com/v1<br />
+            Anthropic: https://api.anthropic.com<br />
+            Note: For OpenAI, include /v1 in the URL
           </p>
         </div>
         
