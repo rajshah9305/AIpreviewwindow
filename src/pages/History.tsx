@@ -23,51 +23,51 @@ export default function History() {
   }
   
   return (
-    <div className="pb-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="pb-12 animate-fade-in">
+      <div className="flex items-end justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-display font-bold text-neutral-900 mb-1">
+          <h2 className="text-3xl font-display font-extrabold text-neutral-900 mb-2 tracking-tight">
             Generation History
           </h2>
-          <p className="text-sm text-neutral-600">
-            View your previously generated components
+          <p className="text-base text-neutral-500 font-medium">
+            Retrieve and reuse your previous design masterpieces
           </p>
         </div>
         
         {history.length > 0 && (
           <button
             onClick={clearHistory}
-            className="btn-secondary flex items-center space-x-2"
+            className="flex items-center space-x-2 px-6 py-3 bg-red-50 text-red-600 rounded-2xl font-bold hover:bg-red-100 transition-all active:scale-95 shadow-sm border-2 border-red-100"
           >
             <Trash2 className="w-4 h-4" />
-            <span>Clear History</span>
+            <span>Wipe History</span>
           </button>
         )}
       </div>
       
       {history.length === 0 ? (
-        <div className="card p-12 text-center">
-          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl flex items-center justify-center shadow-sm">
-            <Clock className="w-10 h-10 text-primary-500" />
+        <div className="bg-white border-2 border-neutral-100 rounded-[32px] p-20 text-center shadow-xl shadow-neutral-200/20">
+          <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl flex items-center justify-center shadow-inner">
+            <Clock className="w-12 h-12 text-primary-300" />
           </div>
-          <h3 className="text-xl font-display font-semibold text-neutral-700 mb-2">
-            No history yet
+          <h3 className="text-2xl font-display font-bold text-neutral-800 mb-3">
+            Your vault is empty
           </h3>
-          <p className="text-neutral-500">
-            Generate some components to see them here
+          <p className="text-neutral-500 max-w-sm mx-auto font-medium">
+            Once you start generating components, they'll be automatically saved here for eternity.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-1 space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-1 space-y-4 overflow-y-auto max-h-[calc(100vh-20rem)] pr-4 scrollbar-thin scrollbar-thumb-neutral-200">
             {history.map((result) => (
               <div
                 key={result.timestamp}
                 onClick={() => setSelectedResult(result)}
-                className={`card p-4 cursor-pointer transition-all duration-200 ${
+                className={`group p-5 rounded-2xl cursor-pointer border-2 transition-all duration-300 ${
                   selectedResult?.timestamp === result.timestamp
-                    ? 'ring-2 ring-primary-500 shadow-lg'
-                    : 'hover:shadow-lg'
+                    ? 'bg-primary-50 border-primary-500 shadow-md ring-4 ring-primary-100'
+                    : 'bg-white border-neutral-100 hover:border-neutral-200 hover:shadow-lg'
                 }`}
               >
                 <p className="font-medium text-neutral-900 mb-2 line-clamp-2">
@@ -98,9 +98,9 @@ export default function History() {
                   <p className="text-neutral-700">{selectedResult.instruction}</p>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {selectedResult.variations.map((variation) => (
-                    <div key={variation.id} className="flex flex-col h-[550px]">
+                    <div key={variation.id} className="flex flex-col h-[600px]">
                       <ComponentPreview 
                         variation={variation}
                       />
@@ -109,9 +109,9 @@ export default function History() {
                 </div>
               </div>
             ) : (
-              <div className="card p-12 text-center">
-                <p className="text-neutral-500">
-                  Select a generation from the list to view details
+              <div className="bg-neutral-50 border-2 border-dashed border-neutral-200 rounded-[32px] p-24 text-center">
+                <p className="text-neutral-400 font-bold uppercase tracking-widest text-xs">
+                  Select a record from the history to preview
                 </p>
               </div>
             )}

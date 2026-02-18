@@ -53,32 +53,34 @@ export default function Generator() {
   }
   
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
-      {/* Main Content Area - Compact and Visible */}
-      <div className="flex-1 overflow-hidden pb-4">
+    <div className="flex flex-col h-[calc(100vh-10rem)] relative">
+      {/* Main Content Area */}
+      <div className="flex-1 overflow-hidden pb-24">
         {loading ? (
-          <div className="h-full flex flex-col">
-            <div className="mb-3 flex items-center justify-between">
+          <div className="h-full flex flex-col animate-fade-in">
+            <div className="mb-6 flex items-end justify-between">
               <div>
-                <h3 className="text-xl font-display font-bold text-neutral-900">
+                <h3 className="text-3xl font-display font-extrabold text-neutral-900 tracking-tight">
                   Generating Variations
                 </h3>
-                <p className="text-xs text-neutral-600">
-                  Creating 5 unique designs...
+                <p className="text-sm text-neutral-500 font-medium">
+                  Our AI is crafting 5 unique designs for you...
                 </p>
               </div>
             </div>
             
-            {/* Compact Horizontal Scroll for Loading */}
-            <div className="flex-1 overflow-hidden">
-              <div className="h-full overflow-x-auto overflow-y-hidden pb-3">
-                <div className="flex gap-4 h-full min-w-min pr-4">
+            {/* Horizontal Scroll for Loading */}
+            <div className="flex-1 overflow-hidden -mx-4">
+              <div className="h-full overflow-x-auto overflow-y-hidden px-4 pb-6">
+                <div className="flex gap-6 h-full min-w-min">
                   {loadingVariations.map((variation) => (
-                    <div key={variation.id} className="flex-shrink-0 w-[300px] h-full">
-                      <LoadingSkeleton 
-                        style={variation.style}
-                        name={variation.name}
-                      />
+                    <div key={variation.id} className="flex-shrink-0 w-[450px] h-full group">
+                      <div className="h-full rounded-2xl border-2 border-neutral-200 bg-white overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:border-primary-200">
+                        <LoadingSkeleton
+                          style={variation.style}
+                          name={variation.name}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -86,32 +88,33 @@ export default function Generator() {
             </div>
           </div>
         ) : result ? (
-          <div className="h-full flex flex-col">
-            <div className="mb-3 flex items-center justify-between">
+          <div className="h-full flex flex-col animate-fade-in">
+            <div className="mb-6 flex items-end justify-between">
               <div>
-                <h3 className="text-xl font-display font-bold text-neutral-900">
+                <h3 className="text-3xl font-display font-extrabold text-neutral-900 tracking-tight">
                   Generated Variations
                 </h3>
-                <p className="text-xs text-neutral-600">
-                  {result.variations.length} variations • Click to view code or copy
+                <p className="text-sm text-neutral-500 font-medium">
+                  {result.variations.length} unique interpretations of your request
                 </p>
               </div>
               
               {result.modelName && result.provider && (
-                <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-white rounded-lg border border-neutral-200 shadow-sm">
-                  <span className="text-xs font-medium text-neutral-500">{result.provider}</span>
-                  <span className="text-xs text-neutral-400" aria-hidden="true">•</span>
-                  <span className="text-xs font-semibold text-neutral-700">{result.modelName}</span>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white rounded-xl border border-neutral-200 shadow-sm transition-all hover:shadow-md">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs font-bold text-neutral-700 uppercase tracking-wider">{result.provider}</span>
+                  <span className="text-neutral-300">|</span>
+                  <span className="text-xs font-medium text-neutral-600">{result.modelName}</span>
                 </div>
               )}
             </div>
             
-            {/* Compact Horizontal Scroll for Results */}
-            <div className="flex-1 overflow-hidden">
-              <div className="h-full overflow-x-auto overflow-y-hidden pb-3">
-                <div className="flex gap-4 h-full min-w-min pr-4">
+            {/* Horizontal Scroll for Results */}
+            <div className="flex-1 overflow-hidden -mx-4">
+              <div className="h-full overflow-x-auto overflow-y-hidden px-4 pb-8">
+                <div className="flex gap-8 h-full min-w-min">
                   {result.variations.map((variation) => (
-                    <div key={variation.id} className="flex-shrink-0 w-[300px] h-full">
+                    <div key={variation.id} className="flex-shrink-0 w-[450px] h-full">
                       <ComponentPreview 
                         variation={variation}
                       />
@@ -142,21 +145,23 @@ export default function Generator() {
         )}
       </div>
       
-      {/* Compact Input Area */}
-      <div className="border-t-2 border-neutral-200 bg-white/95 backdrop-blur-xl pt-4 pb-3 shadow-2xl">
-        <div className="relative">
+      {/* Floating Input Area */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-4xl px-6 z-40">
+        <div className="glass-effect rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-2 border-primary-100 transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.25)]">
           {error && (
-            <div className="mb-2 bg-red-50 border-l-4 border-red-500 rounded-lg p-3 text-xs text-red-800 flex items-start justify-between shadow-sm animate-fade-in" role="alert">
-              <div className="flex items-start space-x-2">
-                <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="mb-4 bg-red-50 border-2 border-red-100 rounded-2xl p-4 text-sm text-red-800 flex items-start justify-between shadow-inner animate-fade-in" role="alert">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <AlertCircle className="w-5 h-5 text-red-600" />
+                </div>
                 <div>
-                  <p className="font-semibold">Error</p>
-                  <p>{error}</p>
+                  <p className="font-bold">Generation Error</p>
+                  <p className="text-red-600/80">{error}</p>
                 </div>
               </div>
               <button 
                 onClick={clearError} 
-                className="text-red-600 hover:text-red-800 text-xs font-semibold ml-3 transition-colors"
+                className="p-1 hover:bg-red-100 rounded-full transition-colors"
                 aria-label="Dismiss error"
               >
                 ✕
@@ -164,57 +169,49 @@ export default function Generator() {
             </div>
           )}
           
-          <div className="flex items-end gap-3">
-            <div className="flex-1">
-              <label htmlFor="instruction-input" className="block text-xs font-semibold text-neutral-700 mb-1.5">
-                Describe your component
-              </label>
-              <div className="relative">
-                <textarea
-                  id="instruction-input"
-                  value={instruction}
-                  onChange={(e) => setInstruction(e.target.value)}
-                  onKeyDown={handleKeyPress}
-                  placeholder="e.g., Design a contact form with name, email, and message fields"
-                  className="input-field w-full resize-none pr-28 min-h-[58px] max-h-[120px] text-sm leading-relaxed focus:ring-2 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+          <div className="flex items-center gap-4">
+            <div className="flex-1 relative group">
+              <textarea
+                id="instruction-input"
+                value={instruction}
+                onChange={(e) => setInstruction(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder="Describe your vision (e.g., 'Modern SaaS Pricing Table')"
+                className="w-full bg-neutral-50/50 border-2 border-neutral-100 rounded-2xl px-5 py-4 pr-32 min-h-[70px] max-h-[150px] text-base font-medium leading-relaxed focus:outline-none focus:border-primary-400 focus:bg-white transition-all duration-300 shadow-sm"
+                disabled={loading}
+                aria-label="Component description"
+                rows={1}
+              />
+
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+                <button
+                  onClick={() => setShowExamples(!showExamples)}
+                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-neutral-600 hover:text-primary-600 hover:border-primary-200 transition-all duration-200 shadow-sm text-xs font-bold"
                   disabled={loading}
-                  aria-label="Component description"
-                  rows={2}
-                />
-                
-                <div className="absolute bottom-2 right-2 flex items-center space-x-2">
-                  <button
-                    onClick={() => setShowExamples(!showExamples)}
-                    className="text-xs font-medium px-2 py-1 bg-neutral-100 hover:bg-neutral-200 rounded text-neutral-700 transition-all duration-200 border border-neutral-300"
-                    disabled={loading}
-                    aria-label={showExamples ? 'Hide examples' : 'Show examples'}
-                  >
-                    {showExamples ? '✕' : '💡'}
-                  </button>
-                  <span className="text-xs font-medium text-neutral-500 tabular-nums">
-                    {instruction.length}
-                  </span>
-                </div>
+                >
+                  <span>{showExamples ? 'Close' : 'Examples'}</span>
+                  <Sparkles className="w-3 h-3" />
+                </button>
+                <div className="h-6 w-px bg-neutral-200 mx-1" />
+                <span className="text-[10px] font-mono font-bold text-neutral-400 w-8 text-right">
+                  {instruction.length}
+                </span>
               </div>
               
               {showExamples && (
-                <div className="absolute bottom-full left-0 right-0 mb-2 p-3 bg-white rounded-lg border-2 border-primary-200 shadow-xl animate-fade-in z-50">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-xs font-bold text-neutral-800">Try these:</p>
-                    <button
-                      onClick={() => setShowExamples(false)}
-                      className="text-xs text-neutral-500 hover:text-neutral-700"
-                      aria-label="Close examples"
-                    >
-                      ✕
-                    </button>
+                <div className="absolute bottom-full left-0 right-0 mb-4 p-5 glass-effect rounded-3xl border-2 border-primary-200 shadow-2xl animate-fade-in z-50">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-sm font-extrabold text-neutral-800 uppercase tracking-widest flex items-center space-x-2">
+                      <Wand2 className="w-4 h-4 text-primary-500" />
+                      <span>Inspiration</span>
+                    </h4>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {examples.map((example, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleExampleClick(example)}
-                        className="text-xs px-3 py-2 bg-gradient-to-br from-primary-50 to-accent-50 hover:from-primary-100 hover:to-accent-100 rounded-lg text-neutral-800 transition-all duration-200 text-left border border-primary-200 hover:border-primary-300 hover:shadow-md font-medium"
+                        className="text-xs px-4 py-3 bg-white border border-neutral-100 hover:border-primary-300 hover:bg-primary-50 rounded-xl text-neutral-700 transition-all duration-200 text-left font-semibold shadow-sm hover:shadow-md"
                         disabled={loading}
                       >
                         {example}
@@ -228,11 +225,23 @@ export default function Generator() {
             <button
               onClick={handleGenerate}
               disabled={loading || !instruction.trim()}
-              className="btn-primary px-8 py-5 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed shrink-0 text-base font-bold shadow-xl hover:shadow-2xl"
+              className="group relative flex items-center justify-center h-[70px] min-w-[160px] bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl font-bold text-lg shadow-[0_10px_25px_-5px_rgba(240,118,11,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(240,118,11,0.5)] transition-all duration-300 disabled:opacity-50 disabled:grayscale overflow-hidden"
               aria-label="Generate UI components"
             >
-              <Wand2 className="w-5 h-5" aria-hidden="true" />
-              <span>{loading ? 'Generating...' : 'Generate'}</span>
+              <div className="absolute inset-0 bg-white/10 group-hover:translate-x-full transition-transform duration-700 -skew-x-12" />
+              <div className="relative flex items-center space-x-2">
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Working...</span>
+                  </div>
+                ) : (
+                  <>
+                    <Wand2 className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                    <span>Generate</span>
+                  </>
+                )}
+              </div>
             </button>
           </div>
         </div>
