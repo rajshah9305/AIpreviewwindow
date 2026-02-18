@@ -52,7 +52,7 @@ export default function Generator() {
                 <button
                   key={idx}
                   onClick={() => setInstruction(example)}
-                  className="text-xs px-3 py-2 bg-neutral-100 hover:bg-neutral-200 rounded-lg text-neutral-700 transition-colors duration-200 text-left"
+                  className="text-xs px-3 py-2 bg-orange-50 hover:bg-orange-600 hover:text-white rounded-lg text-neutral-700 transition-all duration-200 text-left border border-orange-200"
                   disabled={loading}
                 >
                   {example}

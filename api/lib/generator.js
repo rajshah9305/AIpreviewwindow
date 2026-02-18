@@ -2,26 +2,31 @@ import { callAI } from './ai-client.js'
 
 const STYLE_THEMES = {
   minimal: {
+    name: 'Clean & Simple',
     colors: ['#78716c', '#a8a29e', '#292524'],
     spacing: 'tight',
     borders: 'thin',
   },
   bold: {
+    name: 'Bold & Vibrant',
     colors: ['#dc2626', '#f97316', '#292524'],
     spacing: 'generous',
     borders: 'thick',
   },
   elegant: {
+    name: 'Elegant & Refined',
     colors: ['#f59e0b', '#ef4444', '#57534e'],
     spacing: 'balanced',
     borders: 'subtle',
   },
   playful: {
+    name: 'Fun & Dynamic',
     colors: ['#fbbf24', '#f97316', '#292524'],
     spacing: 'varied',
     borders: 'rounded',
   },
   modern: {
+    name: 'Modern & Sleek',
     colors: ['#f97316', '#dc2626', '#1c1917'],
     spacing: 'spacious',
     borders: 'sharp',
@@ -73,7 +78,7 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
       
       return {
         id: `${Date.now()}-${index}-${retryCount}`,
-        name: `${style.charAt(0).toUpperCase() + style.slice(1)} Variation`,
+        name: theme.name,
         code: code.trim(),
         style,
       }
