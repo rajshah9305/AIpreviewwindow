@@ -1,11 +1,19 @@
   export async function callAI(prompt, settings) {
   const { modelName, apiKey, baseUrl } = settings
   
-  if (!modelName || !apiKey || !baseUrl) {
-    throw new Error('Missing required AI settings: modelName, apiKey, or baseUrl')
+  if (!modelName?.trim()) {
+    throw new Error('Model name is required')
   }
   
-  const normalizedBaseUrl = baseUrl.replace(/\/$/, '')
+  if (!apiKey?.trim()) {
+    throw new Error('API key is required')
+  }
+  
+  if (!baseUrl?.trim()) {
+    throw new Error('Base URL is required')
+  }
+  
+  const normalizedBaseUrl = baseUrl.trim().replace(/\/$/, '')
   
   console.log(`Calling AI with model: ${modelName}, baseUrl: ${normalizedBaseUrl}`)
   
