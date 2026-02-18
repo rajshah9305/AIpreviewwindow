@@ -30,11 +30,10 @@ const STYLE_THEMES = {
 
 export async function generateUIComponents(instruction, settings) {
   const styles = Object.keys(STYLE_THEMES)
-  const variations = []
-  const errors = []
+  const maxRetries = 2
   
-  // Generate all 5 variations in parallel for better performance
-  const promises = styles.map(async (style, i) => {
+  // Function to generate a single variation with retry logic
+  const generateVariation = async (style, index, retryCount = 0) => {
     const theme = STYLE_THEMES[style]
     
     const prompt = `Generate a single, complete, self-contained HTML component based on this instruction: "${instruction}"
@@ -69,40 +68,59 @@ Return ONLY the HTML code without any markdown formatting, explanations, or code
     try {
       const code = await callAI(prompt, settings)
       
+      if (!code || code.trim().length < 50) {
+        throw new Error('Generated code is too short or empty')
+      }
+      
       return {
-        id: `${Date.now()}-${i}`,
+        id: `${Date.now()}-${index}-${retryCount}`,
         name: `${style.charAt(0).toUpperCase() + style.slice(1)} Variation`,
         code: code.trim(),
         style,
       }
     } catch (error) {
-      console.error(`Failed to generate ${style} variation:`, error)
-      errors.push({
-        style,
-        error: error.message
-      })
-      return null
+      console.error(`Failed to generate ${style} variation (attempt ${retryCount + 1}/${maxRetries + 1}):`, error.message)
+      
+      // Retry if we haven't exceeded max retries
+      if (retryCount < maxRetries) {
+        console.log(`Retrying ${style} variation...`)
+        await new Promise(resolve => setTimeout(resolve, 1000)) // Wait 1 second before retry
+        return generateVariation(style, index, retryCount + 1)
+      }
+      
+      throw error
     }
-  })
-  
-  // Wait for all promises to complete
-  const results = await Promise.all(promises)
-  
-  // Filter out null results (failed generations)
-  results.forEach(result => {
-    if (result) {
-      variations.push(result)
-    }
-  })
-  
-  // If all variations failed, throw an error
-  if (variations.length === 0) {
-    throw new Error(`Failed to generate any variations. Errors: ${errors.map(e => `${e.style}: ${e.error}`).join('; ')}`)
   }
   
-  // Log if we got fewer than 5 variations
+  // Generate all 5 variations with retry logic
+  const promises = styles.map((style, i) => generateVariation(style, i))
+  
+  // Wait for all promises to settle (not fail fast)
+  const results = await Promise.allSettled(promises)
+  
+  const variations = []
+  const errors = []
+  
+  results.forEach((result, index) => {
+    if (result.status === 'fulfilled' && result.value) {
+      variations.push(result.value)
+    } else if (result.status === 'rejected') {
+      errors.push({
+        style: styles[index],
+        error: result.reason?.message || 'Unknown error'
+      })
+    }
+  })
+  
+  // Log detailed error information
+  if (errors.length > 0) {
+    console.error(`Failed to generate ${errors.length} variations:`, errors)
+  }
+  
+  // If we got fewer than 5 variations, throw an error with details
   if (variations.length < 5) {
-    console.warn(`Only generated ${variations.length} out of 5 variations. Errors:`, errors)
+    const errorDetails = errors.map(e => `${e.style}: ${e.error}`).join('; ')
+    throw new Error(`Only generated ${variations.length} out of 5 variations. Failed: ${errorDetails}`)
   }
   
   return {

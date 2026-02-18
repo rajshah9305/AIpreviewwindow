@@ -37,12 +37,16 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Base URL is required in settings' })
     }
     
+    console.log(`Starting generation with model: ${settings.modelName}`)
     const result = await generateUIComponents(instruction, settings)
+    console.log(`Successfully generated ${result.variations.length} variations`)
+    
     res.status(200).json(result)
   } catch (error) {
     console.error('Generation error:', error)
     res.status(500).json({ 
-      message: error.message || 'Failed to generate components' 
+      message: error.message || 'Failed to generate components',
+      details: error.stack
     })
   }
 }
