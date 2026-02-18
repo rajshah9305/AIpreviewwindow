@@ -84,9 +84,11 @@ export default function Settings() {
             className="input-field"
           />
           <p className="mt-2 text-sm text-neutral-500">
-            OpenAI: https://api.openai.com/v1<br />
-            Anthropic: https://api.anthropic.com<br />
-            Note: For OpenAI, include /v1 in the URL
+            Supported formats:<br />
+            • https://api.openai.com/v1<br />
+            • https://api.anthropic.com<br />
+            • https://api.cerebras.ai/v1/chat/completions (full endpoint)<br />
+            Works with any OpenAI-compatible API
           </p>
         </div>
         

@@ -15,7 +15,7 @@ A sophisticated web application that interprets your instructions and automatica
 - 🤖 **AI-Powered Generation** - Natural language to UI component conversion
 - 🎭 **Five Unique Variations** - Each with distinct layouts, styles, and interactions
 - 👁️ **Live Preview** - See your components rendered in real-time
-- 🔌 **Flexible AI Integration** - Works with OpenAI, Anthropic, or any compatible API
+- 🔌 **Flexible AI Integration** - Works with OpenAI, Anthropic, Cerebras, or any OpenAI-compatible API
 - ⚙️ **Easy Configuration** - Simple settings interface for model, API key, and endpoint
 - 🎨 **Beautiful Design** - Cohesive interface with exceptional aesthetics
 - 🌈 **Smart Color Palette** - Orange, red, yellow, and neutral tones (no purple/blue)
@@ -138,11 +138,18 @@ DEFAULT_API_KEY=sk-ant-...
 DEFAULT_BASE_URL=https://api.anthropic.com
 ```
 
-**Custom Endpoint:**
+**Cerebras:**
+```env
+DEFAULT_MODEL=llama3.1-8b
+DEFAULT_API_KEY=your-key
+DEFAULT_BASE_URL=https://api.cerebras.ai/v1/chat/completions
+```
+
+**Any OpenAI-compatible API:**
 ```env
 DEFAULT_MODEL=your-model
 DEFAULT_API_KEY=your-key
-DEFAULT_BASE_URL=https://your-endpoint.com/v1
+DEFAULT_BASE_URL=https://your-api.com/v1
 ```
 
 ## 🚢 Deployment

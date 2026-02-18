@@ -24,14 +24,21 @@ export async function callAI(prompt, settings) {
 
 async function callOpenAI(prompt, model, apiKey, baseUrl) {
   try {
-    // Ensure base URL ends with /v1 for OpenAI
-    let apiUrl = baseUrl
-    if (!apiUrl.includes('/v1')) {
-      apiUrl = `${apiUrl}/v1`
+    // Determine the correct endpoint
+    let endpoint
+    
+    if (baseUrl.includes('/chat/completions')) {
+      // Full endpoint URL provided (e.g., https://api.cerebras.ai/v1/chat/completions)
+      endpoint = baseUrl
+    } else if (baseUrl.includes('/v1')) {
+      // Base URL with /v1 (e.g., https://api.openai.com/v1)
+      endpoint = `${baseUrl}/chat/completions`
+    } else {
+      // Base URL without /v1 (e.g., https://api.openai.com)
+      endpoint = `${baseUrl}/v1/chat/completions`
     }
     
-    const endpoint = `${apiUrl}/chat/completions`
-    console.log(`OpenAI endpoint: ${endpoint}`)
+    console.log(`OpenAI-compatible endpoint: ${endpoint}`)
     
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -58,19 +65,19 @@ async function callOpenAI(prompt, model, apiKey, baseUrl) {
     
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))
-      throw new Error(error.error?.message || `OpenAI API error: ${response.status} ${response.statusText}`)
+      throw new Error(error.error?.message || `API error: ${response.status} ${response.statusText}`)
     }
     
     const data = await response.json()
     
     if (!data.choices?.[0]?.message?.content) {
-      throw new Error('Invalid response from OpenAI API')
+      throw new Error('Invalid response from API')
     }
     
     return cleanCode(data.choices[0].message.content)
   } catch (error) {
     if (error.message.includes('fetch')) {
-      throw new Error('Network error: Unable to connect to OpenAI API')
+      throw new Error('Network error: Unable to connect to API')
     }
     throw error
   }
