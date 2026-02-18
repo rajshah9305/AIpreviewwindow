@@ -47,12 +47,19 @@ cd ai-ui-generator
 
 # Install dependencies
 npm install
+cd api && npm install && cd ..
 
-# Start development server
+# Start development servers (in separate terminals)
+# Terminal 1: Start API server
+npm run api
+
+# Terminal 2: Start frontend
 npm run dev
 ```
 
 Open http://localhost:5173 and configure your AI settings in the Settings tab.
+
+The API server runs on http://localhost:3000 and the frontend proxies `/api/*` requests to it.
 
 ## Tech Stack
 
