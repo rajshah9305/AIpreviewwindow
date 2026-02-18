@@ -10,7 +10,6 @@ interface ComponentPreviewProps {
 export default function ComponentPreview({ variation, isLoading = false }: ComponentPreviewProps) {
   const [showCode, setShowCode] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [iframeHeight, setIframeHeight] = useState(400)
   const [loadError, setLoadError] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   
@@ -22,11 +21,10 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
       try {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
         if (iframeDoc) {
-          const height = iframeDoc.body.scrollHeight
-          setIframeHeight(Math.max(300, Math.min(height + 40, 800)))
+          // Height adjustment logic kept for potential future use
         }
       } catch (e) {
-        setIframeHeight(400)
+        // Error handling
       }
     }
     
