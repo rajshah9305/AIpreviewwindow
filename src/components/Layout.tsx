@@ -69,7 +69,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="max-w-[1920px] mx-auto px-6 py-4">
+      <main className="max-w-[1920px] mx-auto px-6 py-5">
         {children}
       </main>
     </div>

@@ -140,8 +140,8 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
       </div>
       
       {showCode ? (
-        <div className="p-3 bg-neutral-900 overflow-x-auto flex-1 overflow-y-auto">
-          <pre className="text-[10px] text-neutral-100 font-mono leading-relaxed">
+        <div className="p-4 bg-neutral-900 overflow-auto flex-1">
+          <pre className="text-[11px] text-neutral-100 font-mono leading-relaxed whitespace-pre-wrap break-words">
             <code>{variation.code}</code>
           </pre>
         </div>
@@ -160,42 +160,44 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           </div>
         </div>
       ) : (
-        <div className="p-3 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 overflow-hidden">
-          <iframe
-            ref={iframeRef}
-            srcDoc={`
-              <!DOCTYPE html>
-              <html lang="en">
-                <head>
-                  <meta charset="UTF-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <script src="https://cdn.tailwindcss.com"></script>
-                  <style>
-                    body {
-                      margin: 0;
-                      padding: 12px;
-                      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                      background: transparent;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      min-height: 100vh;
-                    }
-                    * {
-                      box-sizing: border-box;
-                    }
-                  </style>
-                </head>
-                <body>
-                  ${variation.code}
-                </body>
-              </html>
-            `}
-            className="w-full h-full border-0 bg-white rounded-lg shadow-sm transition-opacity duration-300"
-            sandbox="allow-scripts"
-            title={`Preview of ${variation.name}`}
-            loading="lazy"
-          />
+        <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 overflow-auto">
+          <div className="w-full h-full min-h-[400px]">
+            <iframe
+              ref={iframeRef}
+              srcDoc={`
+                <!DOCTYPE html>
+                <html lang="en">
+                  <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    <style>
+                      body {
+                        margin: 0;
+                        padding: 16px;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                        background: transparent;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 100%;
+                      }
+                      * {
+                        box-sizing: border-box;
+                      }
+                    </style>
+                  </head>
+                  <body>
+                    ${variation.code}
+                  </body>
+                </html>
+              `}
+              className="w-full h-full border-0 bg-white rounded-lg shadow-sm transition-opacity duration-300"
+              sandbox="allow-scripts"
+              title={`Preview of ${variation.name}`}
+              loading="lazy"
+            />
+          </div>
         </div>
       )}
     </div>

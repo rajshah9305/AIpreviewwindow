@@ -53,9 +53,9 @@ export default function Generator() {
   }
   
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
+    <div className="flex flex-col h-[calc(100vh-8rem)]">
       {/* Main Content Area - Compact and Visible */}
-      <div className="flex-1 overflow-hidden pb-3">
+      <div className="flex-1 overflow-hidden pb-4">
         {loading ? (
           <div className="h-full flex flex-col">
             <div className="mb-3 flex items-center justify-between">
@@ -71,10 +71,10 @@ export default function Generator() {
             
             {/* Compact Horizontal Scroll for Loading */}
             <div className="flex-1 overflow-hidden">
-              <div className="h-full overflow-x-auto overflow-y-hidden pb-2">
-                <div className="flex gap-3 h-full min-w-min">
+              <div className="h-full overflow-x-auto overflow-y-hidden pb-3">
+                <div className="flex gap-4 h-full min-w-min pr-4">
                   {loadingVariations.map((variation) => (
-                    <div key={variation.id} className="flex-shrink-0 w-[280px] h-full">
+                    <div key={variation.id} className="flex-shrink-0 w-[300px] h-full">
                       <LoadingSkeleton 
                         style={variation.style}
                         name={variation.name}
@@ -108,10 +108,10 @@ export default function Generator() {
             
             {/* Compact Horizontal Scroll for Results */}
             <div className="flex-1 overflow-hidden">
-              <div className="h-full overflow-x-auto overflow-y-hidden pb-2">
-                <div className="flex gap-3 h-full min-w-min">
+              <div className="h-full overflow-x-auto overflow-y-hidden pb-3">
+                <div className="flex gap-4 h-full min-w-min pr-4">
                   {result.variations.map((variation) => (
-                    <div key={variation.id} className="flex-shrink-0 w-[280px] h-full">
+                    <div key={variation.id} className="flex-shrink-0 w-[300px] h-full">
                       <ComponentPreview 
                         variation={variation}
                       />
@@ -143,7 +143,7 @@ export default function Generator() {
       </div>
       
       {/* Compact Input Area */}
-      <div className="border-t-2 border-neutral-200 bg-white/95 backdrop-blur-xl pt-3 pb-2 shadow-2xl">
+      <div className="border-t-2 border-neutral-200 bg-white/95 backdrop-blur-xl pt-4 pb-3 shadow-2xl">
         <div className="relative">
           {error && (
             <div className="mb-2 bg-red-50 border-l-4 border-red-500 rounded-lg p-3 text-xs text-red-800 flex items-start justify-between shadow-sm animate-fade-in" role="alert">
@@ -175,8 +175,8 @@ export default function Generator() {
                   value={instruction}
                   onChange={(e) => setInstruction(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="e.g., Create a modern pricing card with three tiers..."
-                  className="input-field w-full resize-none pr-28 min-h-[70px] max-h-[140px] text-sm leading-relaxed focus:ring-2 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                  placeholder="e.g., Design a contact form with name, email, and message fields"
+                  className="input-field w-full resize-none pr-28 min-h-[58px] max-h-[120px] text-sm leading-relaxed focus:ring-2 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
                   disabled={loading}
                   aria-label="Component description"
                   rows={2}

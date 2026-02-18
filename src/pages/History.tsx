@@ -23,13 +23,13 @@ export default function History() {
   }
   
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="pb-6">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-3xl font-display font-bold text-neutral-900 mb-2">
+          <h2 className="text-2xl font-display font-bold text-neutral-900 mb-1">
             Generation History
           </h2>
-          <p className="text-neutral-600">
+          <p className="text-sm text-neutral-600">
             View your previously generated components
           </p>
         </div>
@@ -98,9 +98,9 @@ export default function History() {
                   <p className="text-neutral-700">{selectedResult.instruction}</p>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                   {selectedResult.variations.map((variation) => (
-                    <div key={variation.id} className="flex flex-col min-h-[500px]">
+                    <div key={variation.id} className="flex flex-col h-[550px]">
                       <ComponentPreview 
                         variation={variation}
                       />

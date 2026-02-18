@@ -69,8 +69,8 @@ export default function Settings() {
   }
   
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-4">
+    <div className="max-w-4xl mx-auto pb-6">
+      <div className="mb-5">
         <h2 className="text-2xl font-display font-bold text-neutral-900 mb-1">
           AI Configuration
         </h2>

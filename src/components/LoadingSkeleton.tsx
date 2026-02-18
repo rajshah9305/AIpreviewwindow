@@ -29,29 +29,29 @@ export default function LoadingSkeleton({ style, name }: LoadingSkeletonProps) {
         </div>
       </div>
       
-      <div className="p-3 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 flex items-center justify-center">
-        <div className="w-full bg-white rounded-lg shadow-sm p-6 space-y-3">
-          <div className="flex items-center justify-center py-8">
+      <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 flex items-center justify-center">
+        <div className="w-full bg-white rounded-lg shadow-sm p-8 space-y-4 min-h-[400px] flex flex-col justify-center">
+          <div className="flex items-center justify-center py-10">
             <div className="relative">
-              <div className={`w-12 h-12 rounded-full border-4 border-neutral-200`} />
+              <div className={`w-14 h-14 rounded-full border-4 border-neutral-200`} />
               <div 
-                className={`absolute inset-0 w-12 h-12 rounded-full border-4 border-transparent border-t-primary-500 animate-spin`}
+                className={`absolute inset-0 w-14 h-14 rounded-full border-4 border-transparent border-t-primary-500 animate-spin`}
                 style={{ animationDuration: '1s' }}
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-6 h-6 rounded-full bg-primary-100 animate-pulse" />
+                <div className="w-7 h-7 rounded-full bg-primary-100 animate-pulse" />
               </div>
             </div>
           </div>
           
-          <div className="space-y-2 animate-pulse">
-            <div className="h-3 bg-neutral-200 rounded w-3/4" />
-            <div className="h-3 bg-neutral-200 rounded w-1/2" />
-            <div className="h-3 bg-neutral-200 rounded w-5/6" />
+          <div className="space-y-3 animate-pulse">
+            <div className="h-3 bg-neutral-200 rounded w-3/4 mx-auto" />
+            <div className="h-3 bg-neutral-200 rounded w-1/2 mx-auto" />
+            <div className="h-3 bg-neutral-200 rounded w-5/6 mx-auto" />
           </div>
           
-          <div className="text-center">
-            <p className="text-xs text-neutral-500 animate-pulse">
+          <div className="text-center pt-2">
+            <p className="text-sm text-neutral-500 animate-pulse font-medium">
               Generating {name.toLowerCase()}...
             </p>
           </div>

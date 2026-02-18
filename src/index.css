@@ -9,8 +9,8 @@
   
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
   
   ::-webkit-scrollbar-track {
@@ -18,12 +18,18 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-300 rounded-full hover:bg-neutral-400;
+    @apply bg-neutral-400 rounded-full hover:bg-neutral-500;
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
   
   /* Horizontal scrollbar styling */
   ::-webkit-scrollbar-horizontal {
-    height: 10px;
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-horizontal:hover {
+    height: 12px;
   }
 }
 
