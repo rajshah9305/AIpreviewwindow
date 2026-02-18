@@ -12,14 +12,6 @@ export default function LoadingSkeleton({ style, name }: LoadingSkeletonProps) {
     modern: 'from-orange-500 to-red-500',
   }
 
-  const animationDelays = {
-    minimal: 'animation-delay-0',
-    bold: 'animation-delay-100',
-    elegant: 'animation-delay-200',
-    playful: 'animation-delay-300',
-    modern: 'animation-delay-400',
-  }
-
   return (
     <div 
       className="card overflow-hidden animate-fade-in"
