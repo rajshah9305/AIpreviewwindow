@@ -4,11 +4,9 @@ import { ComponentVariation } from '../types'
 
 interface ComponentPreviewProps {
   variation: ComponentVariation;
-  modelName?: string;
-  provider?: string;
 }
 
-export default function ComponentPreview({ variation, modelName, provider }: ComponentPreviewProps) {
+export default function ComponentPreview({ variation }: ComponentPreviewProps) {
   const [showCode, setShowCode] = useState(false)
   const [copied, setCopied] = useState(false)
   const [iframeHeight, setIframeHeight] = useState(400)
@@ -60,36 +58,26 @@ export default function ComponentPreview({ variation, modelName, provider }: Com
           </span>
         </div>
         
-        <div className="flex items-center space-x-2">
-          {modelName && provider && (
-            <div className="flex items-center space-x-1.5 px-2.5 py-1 bg-white rounded-md border border-neutral-200">
-              <span className="text-xs font-medium text-neutral-500">{provider}</span>
-              <span className="text-xs text-neutral-400">•</span>
-              <span className="text-xs font-medium text-neutral-700">{modelName}</span>
-            </div>
-          )}
+        <div className="flex items-center space-x-1">
+          <button
+            onClick={() => setShowCode(!showCode)}
+            className={`p-1.5 rounded-lg transition-all duration-200 ${
+              showCode 
+                ? 'bg-primary-500 text-white shadow-md' 
+                : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
+            }`}
+            title={showCode ? 'Show Preview' : 'Show Code'}
+          >
+            {showCode ? <Code className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          </button>
           
-          <div className="flex items-center space-x-1">
-            <button
-              onClick={() => setShowCode(!showCode)}
-              className={`p-1.5 rounded-lg transition-all duration-200 ${
-                showCode 
-                  ? 'bg-primary-500 text-white shadow-md' 
-                  : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
-              }`}
-              title={showCode ? 'Show Preview' : 'Show Code'}
-            >
-              {showCode ? <Code className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-            </button>
-            
-            <button
-              onClick={copyCode}
-              className="p-1.5 rounded-lg bg-white text-neutral-600 hover:bg-neutral-100 transition-all duration-200 border border-neutral-200"
-              title="Copy Code"
-            >
-              {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-            </button>
-          </div>
+          <button
+            onClick={copyCode}
+            className="p-1.5 rounded-lg bg-white text-neutral-600 hover:bg-neutral-100 transition-all duration-200 border border-neutral-200"
+            title="Copy Code"
+          >
+            {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+          </button>
         </div>
       </div>
       

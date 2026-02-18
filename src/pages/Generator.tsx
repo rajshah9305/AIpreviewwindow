@@ -88,13 +88,23 @@ export default function Generator() {
       <div className="flex-1 flex flex-col overflow-hidden pl-6">
         {result ? (
           <>
-            <div className="mb-4">
-              <h3 className="text-xl font-display font-bold text-neutral-900">
-                Generated Variations
-              </h3>
-              <p className="text-sm text-neutral-600">
-                {result.variations.length} variations ready
-              </p>
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-display font-bold text-neutral-900">
+                  Generated Variations
+                </h3>
+                <p className="text-sm text-neutral-600">
+                  {result.variations.length} variations ready
+                </p>
+              </div>
+              
+              {result.modelName && result.provider && (
+                <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-white rounded-lg border border-neutral-200 shadow-sm">
+                  <span className="text-xs font-medium text-neutral-500">{result.provider}</span>
+                  <span className="text-xs text-neutral-400">•</span>
+                  <span className="text-xs font-medium text-neutral-700">{result.modelName}</span>
+                </div>
+              )}
             </div>
             
             <div className="flex-1 overflow-y-auto pr-2 space-y-4">
@@ -102,8 +112,6 @@ export default function Generator() {
                 <ComponentPreview 
                   key={variation.id} 
                   variation={variation}
-                  modelName={result.modelName}
-                  provider={result.provider}
                 />
               ))}
             </div>

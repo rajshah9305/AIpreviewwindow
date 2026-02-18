@@ -83,7 +83,16 @@ export default function History() {
             {selectedResult ? (
               <div className="space-y-6">
                 <div className="card p-6">
-                  <h3 className="font-semibold text-neutral-900 mb-2">Instruction</h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-neutral-900">Instruction</h3>
+                    {selectedResult.modelName && selectedResult.provider && (
+                      <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-neutral-50 rounded-lg border border-neutral-200">
+                        <span className="text-xs font-medium text-neutral-500">{selectedResult.provider}</span>
+                        <span className="text-xs text-neutral-400">•</span>
+                        <span className="text-xs font-medium text-neutral-700">{selectedResult.modelName}</span>
+                      </div>
+                    )}
+                  </div>
                   <p className="text-neutral-700">{selectedResult.instruction}</p>
                 </div>
                 
@@ -92,8 +101,6 @@ export default function History() {
                     <ComponentPreview 
                       key={variation.id} 
                       variation={variation}
-                      modelName={selectedResult.modelName}
-                      provider={selectedResult.provider}
                     />
                   ))}
                 </div>
