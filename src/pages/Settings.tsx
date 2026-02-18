@@ -49,9 +49,6 @@ export default function Settings() {
             placeholder="e.g., gpt-4, claude-3-opus-20240229"
             className="input-field"
           />
-          <p className="mt-2 text-sm text-neutral-500">
-            Examples: gpt-4, gpt-3.5-turbo, claude-3-opus-20240229, claude-3-sonnet-20240229
-          </p>
         </div>
         
         <div>
@@ -66,9 +63,6 @@ export default function Settings() {
             placeholder="sk-..."
             className="input-field"
           />
-          <p className="mt-2 text-sm text-neutral-500">
-            Your API key is stored locally and never sent to our servers
-          </p>
         </div>
         
         <div>
@@ -107,17 +101,6 @@ export default function Settings() {
             Settings saved successfully!
           </div>
         )}
-      </div>
-      
-      <div className="mt-8 card p-6 bg-gradient-to-r from-orange-50 to-red-50 border-orange-200">
-        <h3 className="font-semibold text-neutral-900 mb-2">Getting Started</h3>
-        <ul className="space-y-2 text-sm text-neutral-700">
-          <li>• Get an API key from OpenAI or Anthropic</li>
-          <li>• Enter your model name and API key above</li>
-          <li>• Adjust the base URL if using a custom endpoint</li>
-          <li>• Save settings and head to the Generator tab</li>
-        </ul>
-      </div>
     </div>
   )
 }
