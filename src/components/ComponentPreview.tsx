@@ -108,21 +108,23 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
   }
   
   return (
-    <div className={`card overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] h-full flex flex-col border-2 border-neutral-200 hover:border-primary-200 group/card ${isExpanded ? 'fixed inset-4 z-[100] !w-auto !h-auto' : ''}`}>
-      <div className="p-3 bg-white border-b-2 border-neutral-100 flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-3">
-          <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${styleColors[variation.style]} shadow-[0_0_10px_rgba(0,0,0,0.1)] group-hover/card:animate-bounce`} />
-          <h4 className="font-bold text-sm text-neutral-800 tracking-tight">{variation.name}</h4>
-          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest bg-neutral-100 px-2 py-0.5 rounded-full">{variation.style}</span>
+    <div className={`bg-white rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] h-full flex flex-col border border-neutral-200/60 hover:border-primary-300/50 group/card ${isExpanded ? 'fixed inset-6 z-[100] !w-auto !h-auto' : ''}`}>
+      <div className="px-5 py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
+        <div className="flex items-center space-x-4">
+          <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${styleColors[variation.style]} shadow-sm group-hover/card:scale-125 transition-transform duration-500`} />
+          <div className="flex flex-col">
+            <h4 className="font-bold text-[13px] text-neutral-900 tracking-tight leading-none">{variation.name}</h4>
+            <span className="text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{variation.style}</span>
+          </div>
         </div>
         
-        <div className="flex items-center space-x-1.5">
+        <div className="flex items-center space-x-1">
           <button
             onClick={() => setShowCode(!showCode)}
-            className={`p-2 rounded-xl transition-all duration-300 focus:outline-none ${
+            className={`p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
               showCode 
-                ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30'
-                : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
+                ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
+                : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
             }`}
             title={showCode ? 'Show Preview' : 'Show Code'}
           >
@@ -131,10 +133,10 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           
           <button
             onClick={copyCode}
-            className={`p-2 rounded-xl transition-all duration-300 border focus:outline-none ${
+            className={`p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
               copied
-                ? 'bg-green-500 text-white border-green-500 shadow-lg shadow-green-500/30'
-                : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border-neutral-200'
+                ? 'bg-green-600 text-white shadow-lg shadow-green-600/20'
+                : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
             }`}
             title="Copy Code"
           >
@@ -143,7 +145,7 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-2 rounded-xl bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border border-neutral-200 transition-all duration-300 focus:outline-none hidden md:block"
+            className="p-2.5 rounded-xl bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-300 focus:outline-none hidden md:block"
             title={isExpanded ? 'Exit Fullscreen' : 'Fullscreen'}
           >
             {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -179,7 +181,7 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           </div>
         </div>
       ) : (
-        <div className="p-6 bg-neutral-50/50 flex-1 overflow-auto scrollbar-hide">
+        <div className="p-6 bg-neutral-50/30 flex-1 overflow-auto scrollbar-hide">
           <div className={`w-full h-full min-h-[500px] transition-all duration-500 ${isExpanded ? 'min-h-[70vh]' : ''}`}>
             <iframe
               ref={iframeRef}

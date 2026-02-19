@@ -2,7 +2,6 @@ import { Wand2, Sparkles, AlertCircle } from 'lucide-react'
 import ComponentPreview from '../components/ComponentPreview'
 import LoadingSkeleton from '../components/LoadingSkeleton'
 import { useGeneration } from '../contexts/GenerationContext'
-import { useState } from 'react'
 
 export default function Generator() {
   const {
@@ -15,16 +14,6 @@ export default function Generator() {
     handleGenerate,
   } = useGeneration()
   
-  const [showExamples, setShowExamples] = useState(false)
-  
-  const examples = [
-    'Create a pricing card with three tiers',
-    'Design a contact form with name, email, and message fields',
-    'Build a product showcase with image and details',
-    'Make a testimonial card with avatar and quote',
-    'Design a hero section with headline and CTA',
-    'Create a feature grid with icons',
-  ]
   
   // Loading skeleton variations
   const loadingVariations = [
@@ -42,15 +31,6 @@ export default function Generator() {
     }
   }
   
-  const handleExampleClick = (example: string) => {
-    setInstruction(example)
-    setShowExamples(false)
-    // Focus the textarea after setting example
-    setTimeout(() => {
-      const textarea = document.getElementById('instruction-input') as HTMLTextAreaElement
-      textarea?.focus()
-    }, 0)
-  }
   
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)] relative">
@@ -58,12 +38,12 @@ export default function Generator() {
       <div className="flex-1 overflow-hidden pb-24">
         {loading ? (
           <div className="h-full flex flex-col animate-fade-in">
-            <div className="mb-6 flex items-end justify-between">
+            <div className="mb-10 flex items-end justify-between">
               <div>
-                <h3 className="text-3xl font-display font-extrabold text-neutral-900 tracking-tight">
+                <h3 className="text-4xl font-display font-black text-neutral-900 tracking-tight">
                   Generating Variations
                 </h3>
-                <p className="text-sm text-neutral-500 font-medium">
+                <p className="text-base text-neutral-500 font-medium mt-1">
                   Our AI is crafting 5 unique designs for you...
                 </p>
               </div>
@@ -75,12 +55,10 @@ export default function Generator() {
                 <div className="flex gap-6 h-full min-w-min">
                   {loadingVariations.map((variation) => (
                     <div key={variation.id} className="flex-shrink-0 w-[450px] h-full group">
-                      <div className="h-full rounded-2xl border-2 border-neutral-200 bg-white overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:border-primary-200">
-                        <LoadingSkeleton
-                          style={variation.style}
-                          name={variation.name}
-                        />
-                      </div>
+                      <LoadingSkeleton
+                        style={variation.style}
+                        name={variation.name}
+                      />
                     </div>
                   ))}
                 </div>
@@ -89,12 +67,12 @@ export default function Generator() {
           </div>
         ) : result ? (
           <div className="h-full flex flex-col animate-fade-in">
-            <div className="mb-6 flex items-end justify-between">
+            <div className="mb-10 flex items-end justify-between">
               <div>
-                <h3 className="text-3xl font-display font-extrabold text-neutral-900 tracking-tight">
+                <h3 className="text-4xl font-display font-black text-neutral-900 tracking-tight">
                   Generated Variations
                 </h3>
-                <p className="text-sm text-neutral-500 font-medium">
+                <p className="text-base text-neutral-500 font-medium mt-1">
                   {result.variations.length} unique interpretations of your request
                 </p>
               </div>
@@ -146,10 +124,10 @@ export default function Generator() {
       </div>
       
       {/* Floating Input Area */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-4xl px-6 z-40">
-        <div className="glass-effect rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-2 border-primary-100 transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.25)]">
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 w-full max-w-4xl px-6 z-40">
+        <div className="bg-white/90 backdrop-blur-xl rounded-[2.5rem] p-3 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-neutral-200/50 transition-all duration-500 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] group/input-container">
           {error && (
-            <div className="mb-4 bg-red-50 border-2 border-red-100 rounded-2xl p-4 text-sm text-red-800 flex items-start justify-between shadow-inner animate-fade-in" role="alert">
+            <div className="mx-2 mb-3 bg-red-50/50 backdrop-blur-md border border-red-100 rounded-2xl p-4 text-sm text-red-800 flex items-start justify-between animate-fade-in" role="alert">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-red-100 rounded-lg">
                   <AlertCircle className="w-5 h-5 text-red-600" />
@@ -169,66 +147,35 @@ export default function Generator() {
             </div>
           )}
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <div className="flex-1 relative group">
               <textarea
                 id="instruction-input"
                 value={instruction}
                 onChange={(e) => setInstruction(e.target.value)}
                 onKeyDown={handleKeyPress}
-                placeholder="Describe your vision (e.g., 'Modern SaaS Pricing Table')"
-                className="w-full bg-neutral-50/50 border-2 border-neutral-100 rounded-2xl px-5 py-4 pr-32 min-h-[70px] max-h-[150px] text-base font-medium leading-relaxed focus:outline-none focus:border-primary-400 focus:bg-white transition-all duration-300 shadow-sm"
+                placeholder="What can I build for you today?"
+                className="w-full bg-neutral-50/50 border border-neutral-200 rounded-[2rem] px-7 py-5 pr-32 min-h-[72px] max-h-[200px] text-base font-medium leading-relaxed focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:bg-white transition-all duration-400 placeholder:text-neutral-400"
                 disabled={loading}
                 aria-label="Component description"
                 rows={1}
               />
 
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-                <button
-                  onClick={() => setShowExamples(!showExamples)}
-                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-neutral-600 hover:text-primary-600 hover:border-primary-200 transition-all duration-200 shadow-sm text-xs font-bold"
-                  disabled={loading}
-                >
-                  <span>{showExamples ? 'Close' : 'Examples'}</span>
-                  <Sparkles className="w-3 h-3" />
-                </button>
-                <div className="h-6 w-px bg-neutral-200 mx-1" />
-                <span className="text-[10px] font-mono font-bold text-neutral-400 w-8 text-right">
-                  {instruction.length}
+              <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center">
+                <div className="h-4 w-px bg-neutral-200 mr-4" />
+                <span className="text-[10px] font-mono font-bold text-neutral-400 tracking-tight">
+                  {instruction.length} / 500
                 </span>
               </div>
-              
-              {showExamples && (
-                <div className="absolute bottom-full left-0 right-0 mb-4 p-5 glass-effect rounded-3xl border-2 border-primary-200 shadow-2xl animate-fade-in z-50">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-sm font-extrabold text-neutral-800 uppercase tracking-widest flex items-center space-x-2">
-                      <Wand2 className="w-4 h-4 text-primary-500" />
-                      <span>Inspiration</span>
-                    </h4>
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {examples.map((example, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleExampleClick(example)}
-                        className="text-xs px-4 py-3 bg-white border border-neutral-100 hover:border-primary-300 hover:bg-primary-50 rounded-xl text-neutral-700 transition-all duration-200 text-left font-semibold shadow-sm hover:shadow-md"
-                        disabled={loading}
-                      >
-                        {example}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
             
             <button
               onClick={handleGenerate}
               disabled={loading || !instruction.trim()}
-              className="group relative flex items-center justify-center h-[70px] min-w-[160px] bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl font-bold text-lg shadow-[0_10px_25px_-5px_rgba(240,118,11,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(240,118,11,0.5)] transition-all duration-300 disabled:opacity-50 disabled:grayscale overflow-hidden"
+              className="group relative flex items-center justify-center h-[72px] px-8 bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-[1.75rem] font-bold text-base shadow-[0_10px_20px_-5px_rgba(240,118,11,0.3)] hover:shadow-[0_15px_30px_-5px_rgba(240,118,11,0.4)] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:grayscale disabled:scale-100 overflow-hidden"
               aria-label="Generate UI components"
             >
-              <div className="absolute inset-0 bg-white/10 group-hover:translate-x-full transition-transform duration-700 -skew-x-12" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <div className="relative flex items-center space-x-2">
                 {loading ? (
                   <div className="flex items-center space-x-2">

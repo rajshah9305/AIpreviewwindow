@@ -14,23 +14,26 @@ export default function LoadingSkeleton({ style, name }: LoadingSkeletonProps) {
 
   return (
     <div 
-      className="card overflow-hidden animate-fade-in h-full flex flex-col border-2"
+      className="bg-white rounded-[2rem] overflow-hidden animate-fade-in h-full flex flex-col border border-neutral-200/60"
       style={{ animationDelay: `${Object.keys(styleColors).indexOf(style) * 100}ms` }}
     >
-      <div className="p-2.5 bg-gradient-to-r from-neutral-50 to-primary-50 border-b-2 border-neutral-200 flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-2">
-          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${styleColors[style]} shadow-sm animate-pulse`} />
-          <h4 className="font-semibold text-xs text-neutral-900">{name}</h4>
+      <div className="px-5 py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
+        <div className="flex items-center space-x-4">
+          <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${styleColors[style]} shadow-sm animate-pulse`} />
+          <div className="flex flex-col">
+            <h4 className="font-bold text-[13px] text-neutral-900 tracking-tight leading-none">{name}</h4>
+            <span className="text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{style}</span>
+          </div>
         </div>
         
         <div className="flex items-center space-x-1">
-          <div className="w-7 h-7 rounded-lg bg-neutral-100 animate-pulse" />
-          <div className="w-7 h-7 rounded-lg bg-neutral-100 animate-pulse" />
+          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" />
+          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" />
         </div>
       </div>
       
-      <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 flex items-center justify-center">
-        <div className="w-full bg-white rounded-lg shadow-sm p-8 space-y-4 min-h-[400px] flex flex-col justify-center">
+      <div className="p-6 bg-neutral-50/30 flex-1 flex items-center justify-center">
+        <div className="w-full bg-white rounded-2xl shadow-sm p-8 space-y-4 min-h-[400px] flex flex-col justify-center border border-neutral-100">
           <div className="flex items-center justify-center py-10">
             <div className="relative">
               <div className={`w-14 h-14 rounded-full border-4 border-neutral-200`} />

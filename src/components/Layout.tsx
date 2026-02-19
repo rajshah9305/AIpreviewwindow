@@ -13,27 +13,27 @@ export default function Layout({ children }: LayoutProps) {
   
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
-      <nav className="sticky top-0 z-50 w-full border-b border-neutral-200/60 bg-white/70 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      <nav className="sticky top-0 z-50 w-full border-b border-neutral-200/40 bg-white/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3 group transition-transform duration-300 hover:scale-[1.02]">
-              <div className="w-10 h-10 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:rotate-6 transition-transform duration-300">
+            <Link to="/" className="flex items-center space-x-4 group transition-all duration-300">
+              <div className="w-11 h-11 bg-gradient-to-tr from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-display font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-transparent">
+                <h1 className="text-xl font-display font-black tracking-tight text-neutral-900">
                   AI UI Generator
                 </h1>
-                <p className="text-[10px] text-neutral-500 font-semibold tracking-wider uppercase">V2.0 Showcase</p>
+                <p className="text-[10px] text-primary-600 font-bold tracking-[0.2em] uppercase">Enterprise Edition</p>
               </div>
             </Link>
             
-            <div className="flex items-center space-x-1 bg-neutral-100/50 p-1 rounded-xl border border-neutral-200/50">
+            <div className="flex items-center space-x-1 bg-neutral-100/80 p-1 rounded-2xl border border-neutral-200/50">
               <Link
                 to="/generator"
-                className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/generator')
-                    ? 'bg-white text-primary-600 shadow-sm ring-1 ring-neutral-200'
+                    ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >
@@ -43,9 +43,9 @@ export default function Layout({ children }: LayoutProps) {
               
               <Link
                 to="/history"
-                className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/history')
-                    ? 'bg-white text-primary-600 shadow-sm ring-1 ring-neutral-200'
+                    ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >
@@ -55,9 +55,9 @@ export default function Layout({ children }: LayoutProps) {
               
               <Link
                 to="/settings"
-                className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/settings')
-                    ? 'bg-white text-primary-600 shadow-sm ring-1 ring-neutral-200'
+                    ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >

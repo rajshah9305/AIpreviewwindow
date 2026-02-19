@@ -71,10 +71,10 @@ export default function Settings() {
   return (
     <div className="max-w-4xl mx-auto pb-12 animate-fade-in">
       <div className="mb-8">
-        <h2 className="text-3xl font-display font-extrabold text-neutral-900 mb-2 tracking-tight">
+        <h2 className="text-4xl font-display font-black text-neutral-900 mb-2 tracking-tight">
           AI Configuration
         </h2>
-        <p className="text-base text-neutral-500 font-medium">
+        <p className="text-base text-neutral-500 font-medium mt-1">
           Fine-tune the engine powering your component generations
         </p>
       </div>
@@ -96,7 +96,7 @@ export default function Settings() {
             </div>
           </div>
           
-          <div className="bg-white border-2 border-neutral-100 rounded-3xl p-8 shadow-xl shadow-neutral-200/20 space-y-6">
+          <div className="bg-white border border-neutral-200/60 rounded-[3rem] p-10 shadow-sm space-y-6">
             <div>
               <label className="flex items-center space-x-1.5 text-xs font-medium text-neutral-700 mb-1.5">
                 <Tag className="w-3.5 h-3.5" />
@@ -129,7 +129,7 @@ export default function Settings() {
                   value={settings.apiKey}
                   onChange={(e) => handleInputChange('apiKey', e.target.value)}
                   placeholder="Enter your API key"
-                  className={`input-field text-sm pr-10 ${errors.apiKey ? 'border-red-500 focus:ring-red-500' : ''}`}
+                  className={`w-full px-5 py-4 border border-neutral-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-300 bg-neutral-50/30 text-sm pr-12 ${errors.apiKey ? 'border-red-500 focus:ring-red-500' : ''}`}
                   aria-invalid={!!errors.apiKey}
                   aria-describedby={errors.apiKey ? 'apiKey-error' : undefined}
                 />
@@ -173,10 +173,10 @@ export default function Settings() {
             <div className="pt-4">
               <button
                 onClick={handleSave}
-                className="w-full bg-neutral-900 text-white rounded-2xl py-4 font-bold flex items-center justify-center space-x-2 hover:bg-neutral-800 transition-all active:scale-[0.98] shadow-lg shadow-neutral-900/20"
+                className="w-full bg-neutral-900 text-white rounded-2xl py-4 font-bold flex items-center justify-center space-x-2 hover:bg-neutral-800 hover:shadow-xl transition-all duration-300 active:scale-[0.98] shadow-lg shadow-neutral-900/20"
               >
                 <Save className="w-5 h-5" />
-                <span>{saved ? 'Settings Saved!' : 'Save Configuration'}</span>
+                <span>{saved ? 'Configuration Saved!' : 'Save Configuration'}</span>
               </button>
             </div>
             
