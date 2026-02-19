@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Code, Eye, Copy, Check, AlertCircle } from 'lucide-react'
+import { Code, Eye, Copy, Check, AlertCircle, Maximize2, Minimize2 } from 'lucide-react'
 import { ComponentVariation } from '../types'
 
 interface ComponentPreviewProps {
@@ -9,6 +9,7 @@ interface ComponentPreviewProps {
 
 export default function ComponentPreview({ variation, isLoading = false }: ComponentPreviewProps) {
   const [showCode, setShowCode] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
   const [copied, setCopied] = useState(false)
   const [loadError, setLoadError] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -107,43 +108,61 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
   }
   
   return (
-    <div className="card overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] h-full flex flex-col border-2">
-      <div className="p-2.5 bg-gradient-to-r from-neutral-50 to-primary-50 border-b-2 border-neutral-200 flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-2">
-          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${styleColors[variation.style]} shadow-sm animate-pulse`} />
-          <h4 className="font-semibold text-xs text-neutral-900">{variation.name}</h4>
+    <div className={`card overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] h-full flex flex-col border-2 border-neutral-200 hover:border-primary-200 group/card ${isExpanded ? 'fixed inset-4 z-[100] !w-auto !h-auto' : ''}`}>
+      <div className="p-3 bg-white border-b-2 border-neutral-100 flex items-center justify-between shrink-0">
+        <div className="flex items-center space-x-3">
+          <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${styleColors[variation.style]} shadow-[0_0_10px_rgba(0,0,0,0.1)] group-hover/card:animate-bounce`} />
+          <h4 className="font-bold text-sm text-neutral-800 tracking-tight">{variation.name}</h4>
+          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest bg-neutral-100 px-2 py-0.5 rounded-full">{variation.style}</span>
         </div>
         
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1.5">
           <button
             onClick={() => setShowCode(!showCode)}
-            className={`p-1.5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 ${
+            className={`p-2 rounded-xl transition-all duration-300 focus:outline-none ${
               showCode 
-                ? 'bg-primary-500 text-white shadow-md' 
-                : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
+                ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30'
+                : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
             }`}
             title={showCode ? 'Show Preview' : 'Show Code'}
-            aria-label={showCode ? 'Show Preview' : 'Show Code'}
           >
-            {showCode ? <Code className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+            {showCode ? <Eye className="w-4 h-4" /> : <Code className="w-4 h-4" />}
           </button>
           
           <button
             onClick={copyCode}
-            className="p-1.5 rounded-lg bg-white text-neutral-600 hover:bg-neutral-100 transition-all duration-200 border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1"
+            className={`p-2 rounded-xl transition-all duration-300 border focus:outline-none ${
+              copied
+                ? 'bg-green-500 text-white border-green-500 shadow-lg shadow-green-500/30'
+                : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border-neutral-200'
+            }`}
             title="Copy Code"
-            aria-label="Copy Code"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+          </button>
+
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="p-2 rounded-xl bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border border-neutral-200 transition-all duration-300 focus:outline-none hidden md:block"
+            title={isExpanded ? 'Exit Fullscreen' : 'Fullscreen'}
+          >
+            {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </button>
         </div>
       </div>
       
       {showCode ? (
-        <div className="p-4 bg-neutral-900 overflow-auto flex-1">
-          <pre className="text-[11px] text-neutral-100 font-mono leading-relaxed whitespace-pre-wrap break-words">
-            <code>{variation.code}</code>
-          </pre>
+        <div className="relative flex-1 bg-neutral-900 overflow-hidden group/code">
+          <div className="absolute top-4 right-4 z-10 opacity-0 group-hover/code:opacity-100 transition-opacity">
+            <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-mono text-white/70 border border-white/10">
+              JSX • Tailwind CSS
+            </div>
+          </div>
+          <div className="h-full overflow-auto p-6 scrollbar-thin scrollbar-thumb-white/10">
+            <pre className="text-xs text-primary-300 font-mono leading-relaxed whitespace-pre-wrap break-words">
+              <code className="block">{variation.code}</code>
+            </pre>
+          </div>
         </div>
       ) : loadError ? (
         <div className="p-6 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 flex items-center justify-center">
@@ -160,8 +179,8 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
           </div>
         </div>
       ) : (
-        <div className="p-4 bg-gradient-to-br from-neutral-50 to-primary-50/30 flex-1 overflow-auto">
-          <div className="w-full h-full min-h-[400px]">
+        <div className="p-6 bg-neutral-50/50 flex-1 overflow-auto scrollbar-hide">
+          <div className={`w-full h-full min-h-[500px] transition-all duration-500 ${isExpanded ? 'min-h-[70vh]' : ''}`}>
             <iframe
               ref={iframeRef}
               srcDoc={`

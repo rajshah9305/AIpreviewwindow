@@ -69,32 +69,34 @@ export default function Settings() {
   }
   
   return (
-    <div className="max-w-4xl mx-auto pb-6">
-      <div className="mb-5">
-        <h2 className="text-2xl font-display font-bold text-neutral-900 mb-1">
+    <div className="max-w-4xl mx-auto pb-12 animate-fade-in">
+      <div className="mb-8">
+        <h2 className="text-3xl font-display font-extrabold text-neutral-900 mb-2 tracking-tight">
           AI Configuration
         </h2>
-        <p className="text-sm text-neutral-600">
-          Configure your AI model settings to power the component generator
+        <p className="text-base text-neutral-500 font-medium">
+          Fine-tune the engine powering your component generations
         </p>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2">
-          <div className="card p-5 mb-4 bg-yellow-50 border-yellow-200">
-            <div className="flex items-start space-x-2">
-              <AlertTriangle className="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="bg-amber-50 border-2 border-amber-100 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-start space-x-3">
+              <div className="p-2 bg-amber-100 rounded-lg">
+                <AlertTriangle className="w-5 h-5 text-amber-700" />
+              </div>
               <div>
-                <h3 className="font-semibold text-sm text-yellow-900 mb-0.5">Security Notice</h3>
-                <p className="text-xs text-yellow-800">
-                  Your API key is stored locally in your browser and never sent to our servers. 
-                  Keep it secure and never share it.
+                <h3 className="font-bold text-amber-900 mb-1">Security Notice</h3>
+                <p className="text-sm text-amber-800/80 leading-relaxed">
+                  Your credentials are encrypted and stored <strong>locally</strong> in your browser.
+                  They are only used for direct API calls to your provider.
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="card p-5 space-y-4">
+          <div className="bg-white border-2 border-neutral-100 rounded-3xl p-8 shadow-xl shadow-neutral-200/20 space-y-6">
             <div>
               <label className="flex items-center space-x-1.5 text-xs font-medium text-neutral-700 mb-1.5">
                 <Tag className="w-3.5 h-3.5" />
@@ -168,19 +170,19 @@ export default function Settings() {
               )}
             </div>
             
-            <div className="pt-2">
+            <div className="pt-4">
               <button
                 onClick={handleSave}
-                className="btn-primary w-full flex items-center justify-center space-x-2 py-3"
+                className="w-full bg-neutral-900 text-white rounded-2xl py-4 font-bold flex items-center justify-center space-x-2 hover:bg-neutral-800 transition-all active:scale-[0.98] shadow-lg shadow-neutral-900/20"
               >
-                <Save className="w-4 h-4" />
-                <span className="text-sm">{saved ? 'Settings Saved!' : 'Save Settings'}</span>
+                <Save className="w-5 h-5" />
+                <span>{saved ? 'Settings Saved!' : 'Save Configuration'}</span>
               </button>
             </div>
             
             {saved && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-green-800 text-center animate-fade-in text-xs">
-                Settings saved successfully! You can now generate components.
+              <div className="bg-green-50 border-2 border-green-100 rounded-2xl p-4 text-green-800 text-center animate-fade-in font-bold text-sm shadow-inner">
+                ✓ Configuration updated successfully
               </div>
             )}
           </div>
