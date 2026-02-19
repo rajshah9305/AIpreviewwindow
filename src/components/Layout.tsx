@@ -14,62 +14,62 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 selection:bg-primary-100 selection:text-primary-900">
       <nav className="sticky top-0 z-50 w-full border-b border-neutral-200/40 bg-white/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-4 group transition-all duration-300">
-              <div className="w-11 h-11 bg-gradient-to-tr from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300">
-                <Sparkles className="w-6 h-6 text-white" />
+            <Link to="/" className="flex items-center space-x-3 sm:space-x-4 group transition-all duration-300">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 bg-gradient-to-tr from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-xl font-display font-black tracking-tight text-neutral-900">
+              <div className="hidden min-[400px]:block">
+                <h1 className="text-lg sm:text-xl font-display font-black tracking-tight text-neutral-900 leading-tight">
                   AI UI Generator
                 </h1>
-                <p className="text-[10px] text-primary-600 font-bold tracking-[0.2em] uppercase">Enterprise Edition</p>
+                <p className="text-[9px] sm:text-[10px] text-primary-600 font-bold tracking-[0.2em] uppercase">Enterprise Edition</p>
               </div>
             </Link>
             
             <div className="flex items-center space-x-1 bg-neutral-100/80 p-1 rounded-2xl border border-neutral-200/50">
               <Link
                 to="/generator"
-                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/generator')
                     ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >
-                <Sparkles className={`w-4 h-4 ${isActive('/generator') ? 'text-primary-500' : ''}`} />
-                <span>Generator</span>
+                <Sparkles className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive('/generator') ? 'text-primary-500' : ''}`} />
+                <span className="hidden sm:inline">Generator</span>
               </Link>
               
               <Link
                 to="/history"
-                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/history')
                     ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >
-                <History className={`w-4 h-4 ${isActive('/history') ? 'text-primary-500' : ''}`} />
-                <span>History</span>
+                <History className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive('/history') ? 'text-primary-500' : ''}`} />
+                <span className="hidden sm:inline">History</span>
               </Link>
               
               <Link
                 to="/settings"
-                className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center space-x-2 ${
                   isActive('/settings')
                     ? 'bg-white text-primary-600 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ring-1 ring-neutral-200'
                     : 'text-neutral-500 hover:text-neutral-900 hover:bg-white/50'
                 }`}
               >
-                <Settings className={`w-4 h-4 ${isActive('/settings') ? 'text-primary-500' : ''}`} />
-                <span>Settings</span>
+                <Settings className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive('/settings') ? 'text-primary-500' : ''}`} />
+                <span className="hidden sm:inline">Settings</span>
               </Link>
             </div>
           </div>
         </div>
       </nav>
       
-      <main className="max-w-[1920px] mx-auto px-6 py-8">
+      <main className="max-w-[1920px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {children}
       </main>
     </div>

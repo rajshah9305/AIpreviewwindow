@@ -17,23 +17,23 @@ export default function LoadingSkeleton({ style, name }: LoadingSkeletonProps) {
       className="bg-white rounded-[2rem] overflow-hidden animate-fade-in h-full flex flex-col border border-neutral-200/60"
       style={{ animationDelay: `${Object.keys(styleColors).indexOf(style) * 100}ms` }}
     >
-      <div className="px-5 py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-4">
-          <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${styleColors[style]} shadow-sm animate-pulse`} />
+      <div className="px-4 sm:px-5 py-3 sm:py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-gradient-to-br ${styleColors[style]} shadow-sm animate-pulse`} />
           <div className="flex flex-col">
-            <h4 className="font-bold text-[13px] text-neutral-900 tracking-tight leading-none">{name}</h4>
-            <span className="text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{style}</span>
+            <h4 className="font-bold text-xs sm:text-[13px] text-neutral-900 tracking-tight leading-none">{name}</h4>
+            <span className="text-[8px] sm:text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{style}</span>
           </div>
         </div>
         
         <div className="flex items-center space-x-1">
-          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" />
-          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-neutral-50 animate-pulse" />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-neutral-50 animate-pulse" />
         </div>
       </div>
       
-      <div className="p-6 bg-neutral-50/30 flex-1 flex items-center justify-center">
-        <div className="w-full bg-white rounded-2xl shadow-sm p-8 space-y-4 min-h-[400px] flex flex-col justify-center border border-neutral-100">
+      <div className="p-4 sm:p-6 bg-neutral-50/30 flex-1 flex items-center justify-center">
+        <div className="w-full bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-4 min-h-[350px] sm:min-h-[400px] flex flex-col justify-center border border-neutral-100">
           <div className="flex items-center justify-center py-10">
             <div className="relative">
               <div className={`w-14 h-14 rounded-full border-4 border-neutral-200`} />
