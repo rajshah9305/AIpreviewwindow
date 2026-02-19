@@ -108,50 +108,61 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
   }
   
   return (
-    <div className={`bg-white rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] h-full flex flex-col border border-neutral-200/60 hover:border-primary-300/50 group/card ${isExpanded ? 'fixed inset-6 z-[100] !w-auto !h-auto' : ''}`}>
-      <div className="px-5 py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-4">
-          <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${styleColors[variation.style]} shadow-sm group-hover/card:scale-125 transition-transform duration-500`} />
-          <div className="flex flex-col">
-            <h4 className="font-bold text-[13px] text-neutral-900 tracking-tight leading-none">{variation.name}</h4>
-            <span className="text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{variation.style}</span>
+    <>
+      {isExpanded && (
+        <div
+          className="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-[90] animate-fade-in"
+          onClick={() => setIsExpanded(false)}
+        />
+      )}
+      <div className={`bg-white rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] h-full flex flex-col border border-neutral-200/60 hover:border-primary-300/50 group/card ${isExpanded ? 'fixed inset-4 sm:inset-10 z-[100] !w-auto !h-auto shadow-2xl ring-1 ring-black/5' : 'relative'}`}>
+        <div className="px-4 sm:px-5 py-3 sm:py-4 bg-white border-b border-neutral-100 flex items-center justify-between shrink-0">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-gradient-to-br ${styleColors[variation.style]} shadow-sm group-hover/card:scale-125 transition-transform duration-500`} />
+            <div className="flex flex-col">
+              <h4 className="font-bold text-xs sm:text-[13px] text-neutral-900 tracking-tight leading-none">{variation.name}</h4>
+              <span className="text-[8px] sm:text-[9px] font-black text-neutral-400 uppercase tracking-widest mt-1">{variation.style}</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-1">
+            <button
+              onClick={() => setShowCode(!showCode)}
+              className={`p-2 sm:p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
+                showCode
+                  ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
+                  : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
+              }`}
+              title={showCode ? 'Show Preview' : 'Show Code'}
+            >
+              {showCode ? <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Code className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            </button>
+
+            <button
+              onClick={copyCode}
+              className={`p-2 sm:p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
+                copied
+                  ? 'bg-green-600 text-white shadow-lg shadow-green-600/20'
+                  : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
+              }`}
+              title="Copy Code"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            </button>
+
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`p-2 sm:p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
+                isExpanded
+                  ? 'bg-neutral-900 text-white shadow-lg'
+                  : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
+              }`}
+              title={isExpanded ? 'Exit Fullscreen' : 'Fullscreen'}
+            >
+              {isExpanded ? <Minimize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            </button>
           </div>
         </div>
-        
-        <div className="flex items-center space-x-1">
-          <button
-            onClick={() => setShowCode(!showCode)}
-            className={`p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
-              showCode 
-                ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
-                : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
-            }`}
-            title={showCode ? 'Show Preview' : 'Show Code'}
-          >
-            {showCode ? <Eye className="w-4 h-4" /> : <Code className="w-4 h-4" />}
-          </button>
-          
-          <button
-            onClick={copyCode}
-            className={`p-2.5 rounded-xl transition-all duration-300 focus:outline-none ${
-              copied
-                ? 'bg-green-600 text-white shadow-lg shadow-green-600/20'
-                : 'bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
-            }`}
-            title="Copy Code"
-          >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-          </button>
-
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="p-2.5 rounded-xl bg-neutral-50 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-300 focus:outline-none hidden md:block"
-            title={isExpanded ? 'Exit Fullscreen' : 'Fullscreen'}
-          >
-            {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-          </button>
-        </div>
-      </div>
       
       {showCode ? (
         <div className="relative flex-1 bg-neutral-900 overflow-hidden group/code">
@@ -222,5 +233,6 @@ export default function ComponentPreview({ variation, isLoading = false }: Compo
         </div>
       )}
     </div>
+    </>
   )
 }
