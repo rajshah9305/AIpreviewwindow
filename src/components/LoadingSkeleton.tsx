@@ -1,8 +1,4 @@
-interface LoadingSkeletonProps {
-  name: string;
-}
-
-export default function LoadingSkeleton({ name }: LoadingSkeletonProps) {
+export default function LoadingSkeleton() {
   return (
     <div className="bg-white rounded-[2rem] h-full flex flex-col border border-neutral-100 overflow-hidden relative group">
       <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -32,11 +28,6 @@ export default function LoadingSkeleton({ name }: LoadingSkeletonProps) {
           <div className="h-2 bg-neutral-100 rounded-full w-1/2 mx-auto animate-pulse" />
         </div>
 
-        <div className="pt-4">
-          <p className="text-center text-[10px] text-neutral-400 font-black uppercase tracking-[0.2em] animate-pulse">
-            Crafting <span className="text-orange-500">{name}</span>
-          </p>
-        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-1 bg-neutral-50 overflow-hidden">
