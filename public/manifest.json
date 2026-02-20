@@ -1,7 +1,7 @@
 {
-  "name": "AI UI Generator - Enterprise Edition",
-  "short_name": "AI UI Gen",
-  "description": "Transform natural language into production-ready UI components with AI-powered precision",
+  "name": "AI UI Generator",
+  "short_name": "AI UI",
+  "description": "Minimalistic AI-powered UI component generator",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafaf9",
