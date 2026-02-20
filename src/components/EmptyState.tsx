@@ -1,5 +1,4 @@
 import { LucideIcon } from 'lucide-react'
-import { ReactNode } from 'react'
 
 interface EmptyStateProps {
   icon: LucideIcon
@@ -9,19 +8,16 @@ interface EmptyStateProps {
     label: string
     onClick: () => void
   }
-  children?: ReactNode
 }
 
-export default function EmptyState({ icon: Icon, title, description, action, children }: EmptyStateProps) {
+export default function EmptyState({ icon: Icon, title, description, action }: EmptyStateProps) {
   return (
-    <div className="bg-white border border-neutral-200/60 rounded-[2rem] sm:rounded-[3rem] p-12 sm:p-20 text-center shadow-sm animate-fade-in">
-      <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8 bg-gradient-to-br from-neutral-50 to-primary-50 rounded-[2rem] flex items-center justify-center shadow-inner">
-        <Icon className="w-10 h-10 sm:w-12 sm:h-12 text-neutral-300" />
+    <div className="bg-white border border-neutral-100 rounded-[2.5rem] p-16 text-center shadow-sm animate-fade-in">
+      <div className="w-16 h-16 mx-auto mb-6 bg-neutral-50 rounded-2xl flex items-center justify-center">
+        <Icon className="w-8 h-8 text-neutral-300" />
       </div>
-      <h3 className="text-xl sm:text-2xl font-display font-black text-neutral-900 mb-3">
-        {title}
-      </h3>
-      <p className="text-sm sm:text-base text-neutral-500 max-w-md mx-auto font-medium leading-relaxed mb-6">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-sm text-neutral-400 max-w-xs mx-auto mb-8 font-medium leading-relaxed">
         {description}
       </p>
       {action && (
@@ -32,7 +28,6 @@ export default function EmptyState({ icon: Icon, title, description, action, chi
           {action.label}
         </button>
       )}
-      {children}
     </div>
   )
 }

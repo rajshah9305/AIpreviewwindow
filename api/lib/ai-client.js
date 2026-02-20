@@ -1,152 +1,99 @@
-  export async function callAI(prompt, settings) {
+export async function callAI(prompt, settings) {
   const { modelName, apiKey, baseUrl } = settings
   
-  if (!modelName?.trim()) {
-    throw new Error('Model name is required')
-  }
-  
-  if (!apiKey?.trim()) {
-    throw new Error('API key is required')
-  }
-  
-  if (!baseUrl?.trim()) {
-    throw new Error('Base URL is required')
-  }
+  if (!modelName?.trim()) throw new Error('Model name is required')
+  if (!apiKey?.trim()) throw new Error('API key is required')
+  if (!baseUrl?.trim()) throw new Error('Base URL is required')
   
   const normalizedBaseUrl = baseUrl.trim().replace(/\/$/, '')
-  
   const isAnthropic = normalizedBaseUrl.includes('anthropic.com')
   
-  if (isAnthropic) {
-    return callAnthropic(prompt, modelName, apiKey, normalizedBaseUrl)
-  } else {
-    return callOpenAI(prompt, modelName, apiKey, normalizedBaseUrl)
-  }
+  return isAnthropic
+    ? callAnthropic(prompt, modelName, apiKey, normalizedBaseUrl)
+    : callOpenAI(prompt, modelName, apiKey, normalizedBaseUrl)
 }
 
 async function callOpenAI(prompt, model, apiKey, baseUrl) {
-  try {
-    let endpoint
-    
-    if (baseUrl.includes('/chat/completions')) {
-      endpoint = baseUrl
-    } else if (baseUrl.includes('/v1')) {
-      endpoint = `${baseUrl}/chat/completions`
-    } else {
-      endpoint = `${baseUrl}/v1/chat/completions`
-    }
-    
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.',
-          },
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
-        temperature: 0.8,
-        max_tokens: 2000,
-      }),
-    })
-    
-    if (!response.ok) {
-      const errorText = await response.text()
-      let errorMessage
-      try {
-        const errorJson = JSON.parse(errorText)
-        errorMessage = errorJson.error?.message || errorJson.message || `API error: ${response.status}`
-      } catch {
-        errorMessage = `API error: ${response.status} ${response.statusText}`
-      }
-      throw new Error(errorMessage)
-    }
-    
-    const data = await response.json()
-    
-    if (!data.choices?.[0]?.message?.content) {
-      throw new Error(`Invalid response from API - missing content. Response keys: ${Object.keys(data).join(', ')}`)
-    }
-    
-    const content = data.choices[0].message.content
-    if (!content || content.trim().length < 50) {
-      throw new Error(`Generated content too short: ${content?.length || 0} characters`)
-    }
-    
-    return cleanCode(content)
-  } catch (error) {
-    if (error.message.includes('fetch') || error.name === 'TypeError') {
-      throw new Error('Network error: Unable to connect to API')
-    }
-    throw error
+  const endpoint = baseUrl.includes('/chat/completions') ? baseUrl :
+                   baseUrl.includes('/v1') ? `${baseUrl}/chat/completions` :
+                   `${baseUrl}/v1/chat/completions`
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.',
+        },
+        { role: 'user', content: prompt },
+      ],
+      temperature: 0.8,
+      max_tokens: 2000,
+    }),
+  })
+
+  const data = await handleResponse(response, 'OpenAI')
+  const content = data.choices?.[0]?.message?.content
+
+  if (!content || content.trim().length < 50) {
+    throw new Error('Generated content too short or missing')
   }
+
+  return cleanCode(content)
 }
 
 async function callAnthropic(prompt, model, apiKey, baseUrl) {
-  try {
-    const response = await fetch(`${baseUrl}/v1/messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model,
-        max_tokens: 2000,
-        messages: [
-          {
-            role: 'user',
-            content: `You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.\n\n${prompt}`,
-          },
-        ],
-        temperature: 0.8,
-      }),
-    })
-    
-    if (!response.ok) {
-      const errorText = await response.text()
-      let errorMessage
-      try {
-        const errorJson = JSON.parse(errorText)
-        errorMessage = errorJson.error?.message || errorJson.message || `Anthropic API error: ${response.status}`
-      } catch {
-        errorMessage = `Anthropic API error: ${response.status} ${response.statusText}`
-      }
-      throw new Error(errorMessage)
-    }
-    
-    const data = await response.json()
-    
-    if (!data.content?.[0]?.text) {
-      throw new Error(`Invalid response from Anthropic API - missing content. Response keys: ${Object.keys(data).join(', ')}`)
-    }
-    
-    const text = data.content[0].text
-    if (!text || text.trim().length < 50) {
-      throw new Error(`Generated content too short: ${text?.length || 0} characters`)
-    }
-    
-    return cleanCode(text)
-  } catch (error) {
-    if (error.message.includes('fetch') || error.name === 'TypeError') {
-      throw new Error('Network error: Unable to connect to Anthropic API')
-    }
-    throw error
+  const response = await fetch(`${baseUrl}/v1/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: 2000,
+      messages: [
+        {
+          role: 'user',
+          content: `You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.\n\n${prompt}`,
+        },
+      ],
+      temperature: 0.8,
+    }),
+  })
+
+  const data = await handleResponse(response, 'Anthropic')
+  const content = data.content?.[0]?.text
+
+  if (!content || content.trim().length < 50) {
+    throw new Error('Generated content too short or missing')
   }
+
+  return cleanCode(content)
+}
+
+async function handleResponse(response, provider) {
+  if (!response.ok) {
+    const errorText = await response.text()
+    let errorMessage
+    try {
+      const errorJson = JSON.parse(errorText)
+      errorMessage = errorJson.error?.message || errorJson.message || `${provider} API error: ${response.status}`
+    } catch {
+      errorMessage = `${provider} API error: ${response.status} ${response.statusText}`
+    }
+    throw new Error(errorMessage)
+  }
+  return response.json()
 }
 
 function cleanCode(code) {
-  code = code.replace(/```html\n?/g, '').replace(/```\n?/g, '')
-  code = code.trim()
-  return code
+  return code.replace(/```html\n?/g, '').replace(/```\n?/g, '').trim()
 }
