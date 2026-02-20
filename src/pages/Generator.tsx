@@ -1,4 +1,4 @@
-import { Wand2, AlertCircle, RefreshCw, ChevronRight } from 'lucide-react'
+import { Wand2, AlertCircle, RefreshCw, ChevronRight, Sparkles } from 'lucide-react'
 import ComponentPreview from '../components/ComponentPreview'
 import LoadingSkeleton from '../components/LoadingSkeleton'
 import { useGeneration } from '../contexts/GenerationContext'
@@ -35,18 +35,18 @@ export default function Generator() {
   }, [instruction])
   
   const loadingVariations = [
-    { id: 'loading-1', name: 'Minimalist', style: 'minimal' as const },
-    { id: 'loading-2', name: 'Statement', style: 'bold' as const },
-    { id: 'loading-3', name: 'Sophisticated', style: 'elegant' as const },
-    { id: 'loading-4', name: 'Expressive', style: 'playful' as const },
-    { id: 'loading-5', name: 'Contemporary', style: 'modern' as const },
+    { id: 'loading-1', name: 'Minimalist' },
+    { id: 'loading-2', name: 'Statement' },
+    { id: 'loading-3', name: 'Sophisticated' },
+    { id: 'loading-4', name: 'Expressive' },
+    { id: 'loading-5', name: 'Contemporary' },
   ]
   
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault()
       if (!loading && instruction.trim()) {
-        handleGenerate()
+        handleGenerateClick()
       }
     }
   }
@@ -66,25 +66,36 @@ export default function Generator() {
   }
   
   return (
-    <div className="flex flex-col min-h-[calc(100vh-12rem)] relative">
-      <div className="flex-1 pb-32">
+    <div className="flex flex-col min-h-[calc(100vh-16rem)] relative">
+      <div className="flex-1 pb-40">
         {!loading && !result && (
-          <div className="max-w-2xl mx-auto text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl font-bold tracking-tight mb-4">What are we building today?</h2>
-            <p className="text-neutral-500">Describe your UI component and watch AI generate five distinct variations.</p>
+          <div className="max-w-3xl mx-auto text-center mb-16 animate-slide-up">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 text-orange-600 mb-8 border border-orange-100">
+               <Sparkles className="w-4 h-4" />
+               <span className="text-[10px] font-black uppercase tracking-[0.2em]">Next-Gen Component Engine</span>
+             </div>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 italic uppercase leading-none">
+              Build <span className="text-orange-500">Faster</span>.<br />
+              Design <span className="text-orange-500">Better</span>.
+            </h2>
+            <p className="text-lg text-neutral-400 font-medium max-w-xl mx-auto leading-relaxed">
+              Transform your thoughts into premium UI components with AI. Describe your vision, we'll handle the rest.
+            </p>
 
             {!hasSettings && (
-              <div className="mt-8 p-6 bg-neutral-50 rounded-3xl border border-neutral-100 inline-block text-left">
-                <div className="flex items-start gap-4">
-                  <AlertCircle className="w-5 h-5 text-neutral-400 mt-1" />
+              <div className="mt-12 p-8 bg-neutral-50 rounded-[2.5rem] border border-neutral-100 inline-block text-left animate-float shadow-premium">
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-neutral-100">
+                    <AlertCircle className="w-6 h-6 text-orange-500" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-sm">Configuration Required</p>
-                    <p className="text-xs text-neutral-500 mb-4">Set up your AI provider to start generating.</p>
+                    <p className="font-black text-sm uppercase italic tracking-tight">Configuration Required</p>
+                    <p className="text-xs text-neutral-400 font-medium mb-6 mt-1">Setup your API provider to start the engine.</p>
                     <button
                       onClick={() => navigate('/settings')}
-                      className="px-4 py-2 bg-neutral-900 text-white rounded-xl text-xs font-medium hover:bg-neutral-800 transition-colors flex items-center gap-2"
+                      className="px-6 py-2.5 bg-black text-white rounded-xl text-xs font-bold hover:bg-neutral-900 transition-all flex items-center gap-2 group shadow-lg shadow-black/10 active:scale-95"
                     >
-                      Configure <ChevronRight className="w-3.5 h-3.5" />
+                      Connect Provider <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -94,51 +105,57 @@ export default function Generator() {
         )}
 
         {loading ? (
-          <div className="space-y-8 animate-fade-in">
-            <div className="flex items-center justify-between">
+          <div className="space-y-12 animate-fade-in">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-100 pb-8">
               <div>
-                <h3 className="text-2xl font-bold">Generating variations...</h3>
-                <p className="text-sm text-neutral-500">Crafting five unique designs based on your prompt.</p>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-500 text-[10px] font-black uppercase tracking-widest mb-4">
+                  Processing
+                </div>
+                <h3 className="text-4xl font-black italic uppercase tracking-tighter leading-none">Generating Variations</h3>
+                <p className="text-sm text-neutral-400 font-medium mt-2">Our AI is distilling your prompt into five high-end designs.</p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {loadingVariations.map((v) => (
-                <div key={v.id} className="h-[500px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {loadingVariations.map((v, i) => (
+                <div key={v.id} className="h-[550px] animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
                   <LoadingSkeleton name={v.name} />
                 </div>
               ))}
             </div>
           </div>
         ) : result ? (
-          <div className="space-y-8 animate-fade-in">
-            <div className="flex items-center justify-between">
+          <div className="space-y-12 animate-fade-in">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
               <div>
-                <h3 className="text-2xl font-bold">Results</h3>
-                <p className="text-sm text-neutral-500">Five unique interpretations generated by {result.provider}.</p>
+                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-600 text-[10px] font-black uppercase tracking-widest mb-4">
+                  Complete
+                </div>
+                <h3 className="text-4xl font-black italic uppercase tracking-tighter leading-none">The Collection</h3>
+                <p className="text-sm text-neutral-400 font-medium mt-2">Five distinct interpretations powered by <span className="text-black font-bold uppercase italic tracking-tight">{result.provider}</span></p>
               </div>
               <button
                 onClick={handleClearAndNew}
-                className="flex items-center gap-2 px-4 py-2 bg-neutral-100 text-neutral-900 rounded-xl text-sm font-medium hover:bg-neutral-200 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-neutral-100 text-black rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-neutral-200 transition-all active:scale-95"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>New Generation</span>
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {result.variations.map((variation) => (
-                <div key={variation.id} className="h-[600px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {result.variations.map((variation, i) => (
+                <div key={variation.id} className="h-[600px] animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
                   <ComponentPreview variation={variation} />
                 </div>
               ))}
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-20 grayscale pointer-events-none">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-[0.03] grayscale pointer-events-none transition-all duration-1000">
             {loadingVariations.map((v) => (
               <div key={v.id} className="h-[400px]">
-                <div className="w-full h-full bg-neutral-100 rounded-3xl border border-neutral-200" />
+                <div className="w-full h-full bg-black rounded-[2.5rem]" />
               </div>
             ))}
           </div>
@@ -146,25 +163,25 @@ export default function Generator() {
       </div>
       
       {/* Input Area */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-6 z-50">
-        <div className="bg-white/80 backdrop-blur-xl border border-neutral-200 rounded-[2rem] p-2 shadow-2xl">
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 w-full max-w-3xl px-6 z-50">
+        <div className="bg-white/90 backdrop-blur-3xl border border-neutral-100 rounded-[2.5rem] p-3 shadow-orange group/input transition-all duration-500 focus-within:shadow-[0_30px_60px_-12px_rgb(249_115_22_0.2)] focus-within:border-orange-500/20">
           {error && (
-            <div className="mx-4 mb-2 p-3 bg-red-50 rounded-2xl text-xs text-red-600 flex items-center justify-between">
+            <div className="mx-4 mb-3 p-4 bg-red-50 rounded-2xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
-                <AlertCircle className="w-3.5 h-3.5" />
-                {error}
+                <AlertCircle className="w-4 h-4" />
+                {error.toUpperCase()}
               </span>
-              <button onClick={clearError} className="p-1 hover:bg-red-100 rounded-lg">✕</button>
+              <button onClick={clearError} className="p-1 hover:bg-red-100 rounded-lg transition-colors">✕</button>
             </div>
           )}
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4 px-3">
             <textarea
               value={instruction}
               onChange={(e) => setInstruction(e.target.value.slice(0, maxChars))}
               onKeyDown={handleKeyPress}
-              placeholder="Describe what you want to build..."
-              className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-sm resize-none min-h-[50px] max-h-[150px]"
+              placeholder="Describe your vision (e.g., 'A premium checkout card with glassmorphism')"
+              className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-4 text-[15px] font-medium placeholder:text-neutral-300 resize-none min-h-[56px] max-h-[150px] scrollbar-hide"
               disabled={loading}
               rows={1}
             />
@@ -172,17 +189,21 @@ export default function Generator() {
             <button
               onClick={handleGenerateClick}
               disabled={loading || !instruction.trim()}
-              className="h-12 w-12 flex items-center justify-center bg-neutral-900 text-white rounded-full hover:bg-neutral-800 transition-all disabled:opacity-30 disabled:grayscale"
+              className={`h-14 w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
+                loading || !instruction.trim()
+                ? 'bg-neutral-100 text-neutral-300'
+                : 'bg-black text-white hover:bg-orange-500 hover:scale-110 shadow-lg active:scale-95'
+              }`}
             >
-              {loading ? <div className="spinner !w-4 !h-4" /> : <Wand2 className="w-5 h-5" />}
+              {loading ? <div className="spinner !w-5 !h-5" /> : <Wand2 className="w-6 h-6" />}
             </button>
           </div>
-          <div className="px-4 pb-2 flex justify-between items-center">
-            <span className="text-[10px] text-neutral-400 font-medium">
-              Press {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Enter to generate
+          <div className="px-5 pb-2 flex justify-between items-center opacity-40">
+            <span className="text-[10px] font-bold tracking-tight uppercase">
+              {navigator.platform.includes('Mac') ? '⌘' : 'CTRL'} + ENTER TO DEPLOY
             </span>
-            <span className={`text-[10px] font-medium ${charCount > maxChars * 0.9 ? 'text-red-500' : 'text-neutral-400'}`}>
-              {charCount}/{maxChars}
+            <span className={`text-[10px] font-bold tracking-tight uppercase ${charCount > maxChars * 0.9 ? 'text-red-500' : ''}`}>
+              {charCount} / {maxChars}
             </span>
           </div>
         </div>

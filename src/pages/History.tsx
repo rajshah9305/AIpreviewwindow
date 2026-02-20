@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Clock, Trash2, Search } from 'lucide-react'
+import { Clock, Trash2, Search, Calendar, ChevronRight } from 'lucide-react'
 import { GenerationResult } from '../types'
 import { loadHistory, clearHistory } from '../services/api'
 import ComponentPreview from '../components/ComponentPreview'
@@ -36,81 +36,116 @@ export default function History() {
   
   if (history.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto py-12 animate-fade-in">
+      <div className="max-w-4xl mx-auto py-24 animate-fade-in">
         <EmptyState
           icon={Clock}
-          title="No history"
-          description="Your generations will appear here."
-          action={{ label: 'Start generating', onClick: () => navigate('/generator') }}
+          title="Archive Empty"
+          description="Your creative journey hasn't started yet. Let's build something extraordinary."
+          action={{ label: 'Launch Generator', onClick: () => navigate('/generator') }}
         />
       </div>
     )
   }
   
   return (
-    <div className="space-y-8 animate-fade-in">
-      <div className="flex items-end justify-between">
+    <div className="space-y-12 animate-fade-in pb-20">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <h2 className="text-4xl font-bold tracking-tight mb-2">History</h2>
-          <p className="text-neutral-500">{history.length} components saved</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-4">
+            Archive
+          </div>
+          <h2 className="text-5xl font-black italic uppercase tracking-tighter leading-none">History</h2>
+          <p className="text-sm text-neutral-400 font-medium mt-2">Access your past {history.length} generations</p>
         </div>
         <button
           onClick={() => setShowClearDialog(true)}
-          className="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-50 rounded-xl transition-colors text-sm font-medium"
+          className="flex items-center gap-2 px-6 py-3 text-red-500 hover:bg-red-50 rounded-2xl transition-all text-[11px] font-black uppercase tracking-widest border border-transparent hover:border-red-100"
         >
-          <Trash2 className="w-4 h-4" /> Clear All
+          <Trash2 className="w-4 h-4" /> Purge History
         </button>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <div className="lg:col-span-1 space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4 space-y-6">
+          <div className="relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-300 group-focus-within:text-orange-500 transition-colors" />
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
-              className="w-full pl-10 pr-4 py-2 bg-white border border-neutral-100 rounded-xl text-sm focus:outline-none focus:border-neutral-900 transition-colors"
+              placeholder="Search concepts..."
+              className="w-full pl-12 pr-4 py-4 bg-white border border-neutral-100 rounded-2xl text-sm font-medium focus:outline-none focus:border-orange-500/30 focus:ring-4 focus:ring-orange-500/5 transition-all"
             />
           </div>
           
-          <div className="space-y-2 max-h-[600px] overflow-auto pr-2 scrollbar-thin">
+          <div className="space-y-3 max-h-[70vh] overflow-auto pr-3 scrollbar-thin">
             {filtered.map((r) => (
               <button
                 key={r.timestamp}
                 onClick={() => setSelectedResult(r)}
-                className={`w-full p-4 rounded-2xl text-left transition-all ${
+                className={`w-full p-5 rounded-3xl text-left transition-all duration-500 flex items-center justify-between group ${
                   selectedResult?.timestamp === r.timestamp
-                    ? 'bg-neutral-900 text-white shadow-lg'
-                    : 'bg-white border border-neutral-100 hover:border-neutral-900 text-neutral-600'
+                    ? 'bg-black text-white shadow-premium scale-[1.02]'
+                    : 'bg-white border border-neutral-50 hover:border-orange-500/20 text-neutral-600 hover:bg-neutral-50/50'
                 }`}
               >
-                <p className="text-xs font-bold truncate mb-1">{r.instruction}</p>
-                <p className="text-[10px] opacity-60">{new Date(r.timestamp).toLocaleDateString()}</p>
+                <div className="min-w-0 flex-1">
+                  <p className={`text-xs font-black truncate uppercase italic tracking-tight ${selectedResult?.timestamp === r.timestamp ? 'text-white' : 'text-black'}`}>
+                    {r.instruction}
+                  </p>
+                  <div className="flex items-center gap-2 mt-2 opacity-50">
+                    <Calendar className="w-3 h-3" />
+                    <p className="text-[10px] font-bold uppercase tracking-wider">{new Date(r.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                  </div>
+                </div>
+                <ChevronRight className={`w-4 h-4 transition-transform ${selectedResult?.timestamp === r.timestamp ? 'text-orange-500 translate-x-1' : 'text-neutral-200 group-hover:translate-x-1'}`} />
               </button>
             ))}
+            {filtered.length === 0 && (
+              <div className="text-center py-12 opacity-30">
+                <p className="text-xs font-black uppercase tracking-[0.2em]">No Matches</p>
+              </div>
+            )}
           </div>
         </div>
         
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-8">
           {selectedResult ? (
-            <div className="space-y-8">
-              <div className="p-6 bg-white border border-neutral-100 rounded-3xl">
-                <p className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Prompt</p>
-                <p className="text-sm font-medium text-neutral-900">"{selectedResult.instruction}"</p>
+            <div className="space-y-10 animate-fade-in">
+              <div className="p-10 bg-black rounded-[3rem] text-white relative overflow-hidden shadow-premium">
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+                 <div className="relative z-10">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 mb-4">Prompt Analysis</p>
+                  <p className="text-2xl font-black italic uppercase leading-tight tracking-tight">"{selectedResult.instruction}"</p>
+                  <div className="flex gap-4 mt-8">
+                    <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/10">
+                      <p className="text-[8px] font-black uppercase tracking-widest text-neutral-500">Provider</p>
+                      <p className="text-[11px] font-bold text-white mt-1">{selectedResult.provider}</p>
+                    </div>
+                    <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/10">
+                      <p className="text-[8px] font-black uppercase tracking-widest text-neutral-500">Model</p>
+                      <p className="text-[11px] font-bold text-white mt-1">{selectedResult.modelName}</p>
+                    </div>
+                  </div>
+                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {selectedResult.variations.map((v) => (
-                  <div key={v.id} className="h-[500px]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {selectedResult.variations.map((v, i) => (
+                  <div key={v.id} className="h-[550px] animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
                     <ComponentPreview variation={v} />
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="h-full flex items-center justify-center border-2 border-dashed border-neutral-100 rounded-3xl p-12">
-              <p className="text-neutral-400 text-sm font-medium">Select a generation to preview</p>
+            <div className="h-full min-h-[500px] flex items-center justify-center border-2 border-dashed border-neutral-100 rounded-[3rem] p-12 bg-neutral-50/30">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-3xl border border-neutral-100 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                  <Clock className="w-6 h-6 text-neutral-300" />
+                </div>
+                <p className="text-neutral-400 text-sm font-black uppercase tracking-[0.2em]">Select a Concept</p>
+                <p className="text-neutral-300 text-[11px] font-medium mt-2">Pick a previous generation to re-examine the results</p>
+              </div>
             </div>
           )}
         </div>
@@ -118,10 +153,10 @@ export default function History() {
       
       <ConfirmDialog
         isOpen={showClearDialog}
-        title="Clear history?"
-        message="This cannot be undone."
-        confirmText="Clear"
-        cancelText="Cancel"
+        title="Purge Archive?"
+        message="This will permanently delete all your generated history. This action cannot be reversed."
+        confirmText="Yes, Purge Everything"
+        cancelText="Keep My History"
         onConfirm={handleClear}
         onCancel={() => setShowClearDialog(false)}
         variant="danger"

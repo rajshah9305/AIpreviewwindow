@@ -29,23 +29,18 @@ async function callOpenAI(prompt, model, apiKey, baseUrl) {
       messages: [
         {
           role: 'system',
-          content: 'You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.',
+          content: 'You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML without markdown.',
         },
         { role: 'user', content: prompt },
       ],
-      temperature: 0.8,
-      max_tokens: 2000,
+      temperature: 0.7,
+      max_tokens: 3000,
     }),
   })
 
   const data = await handleResponse(response, 'OpenAI')
   const content = data.choices?.[0]?.message?.content
-
-  if (!content || content.trim().length < 50) {
-    throw new Error('Generated content too short or missing')
-  }
-
-  return cleanCode(content)
+  return validateAndClean(content)
 }
 
 async function callAnthropic(prompt, model, apiKey, baseUrl) {
@@ -58,25 +53,20 @@ async function callAnthropic(prompt, model, apiKey, baseUrl) {
     },
     body: JSON.stringify({
       model,
-      max_tokens: 2000,
+      max_tokens: 3000,
       messages: [
         {
           role: 'user',
-          content: `You are a UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Use the color palette: primary orange (#f0760b, #f39333), accent red (#ef4444, #dc2626), and neutral tones. Never use purple or blue colors. Return only HTML code without markdown formatting.\n\n${prompt}`,
+          content: `You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML without markdown.\n\n${prompt}`,
         },
       ],
-      temperature: 0.8,
+      temperature: 0.7,
     }),
   })
 
   const data = await handleResponse(response, 'Anthropic')
   const content = data.content?.[0]?.text
-
-  if (!content || content.trim().length < 50) {
-    throw new Error('Generated content too short or missing')
-  }
-
-  return cleanCode(content)
+  return validateAndClean(content)
 }
 
 async function handleResponse(response, provider) {
@@ -94,6 +84,9 @@ async function handleResponse(response, provider) {
   return response.json()
 }
 
-function cleanCode(code) {
-  return code.replace(/```html\n?/g, '').replace(/```\n?/g, '').trim()
+function validateAndClean(content) {
+  if (!content || content.trim().length < 50) {
+    throw new Error('Generated content is too short or missing. Please try a more detailed prompt.')
+  }
+  return content.replace(/```html\n?/g, '').replace(/```\n?/g, '').trim()
 }

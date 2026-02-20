@@ -10,7 +10,7 @@ interface ToastProps {
   duration?: number
 }
 
-export default function Toast({ message, type, onClose, duration = 3000 }: ToastProps) {
+export default function Toast({ message, type, onClose, duration = 4000 }: ToastProps) {
   useEffect(() => {
     if (duration > 0) {
       const timer = setTimeout(onClose, duration)
@@ -21,21 +21,39 @@ export default function Toast({ message, type, onClose, duration = 3000 }: Toast
   const icons = {
     success: <CheckCircle className="w-4 h-4 text-green-500" />,
     error: <XCircle className="w-4 h-4 text-red-500" />,
-    warning: <AlertCircle className="w-4 h-4 text-yellow-500" />,
-    info: <Info className="w-4 h-4 text-blue-500" />,
+    warning: <AlertCircle className="w-4 h-4 text-orange-500" />,
+    info: <Info className="w-4 h-4 text-black" />,
+  }
+
+  const styles = {
+    success: 'border-green-100',
+    error: 'border-red-100',
+    warning: 'border-orange-100',
+    info: 'border-neutral-100',
   }
 
   return (
     <div
-      className="bg-white border border-neutral-100 rounded-2xl p-4 shadow-2xl flex items-center justify-between gap-4 min-w-[300px] max-w-md animate-fade-in"
+      className={`bg-white/90 backdrop-blur-xl border ${styles[type]} rounded-[1.5rem] p-5 shadow-premium flex items-center justify-between gap-6 min-w-[320px] max-w-md animate-slide-up relative overflow-hidden group`}
       role="alert"
     >
-      <div className="flex items-center gap-3">
-        {icons[type]}
-        <p className="text-sm font-semibold text-neutral-900">{message}</p>
+      <div className={`absolute left-0 top-0 w-1 h-full ${
+        type === 'success' ? 'bg-green-500' :
+        type === 'error' ? 'bg-red-500' :
+        type === 'warning' ? 'bg-orange-500' :
+        'bg-black'
+      }`} />
+
+      <div className="flex items-center gap-4">
+        <div className="shrink-0">{icons[type]}</div>
+        <p className="text-xs font-black uppercase italic tracking-tight text-black">{message}</p>
       </div>
-      <button onClick={onClose} className="p-1 hover:bg-neutral-50 rounded-lg text-neutral-400 transition-colors">
-        <X className="w-3.5 h-3.5" />
+
+      <button
+        onClick={onClose}
+        className="p-2 hover:bg-neutral-50 rounded-xl text-neutral-300 hover:text-black transition-all"
+      >
+        <X className="w-4 h-4" />
       </button>
     </div>
   )
