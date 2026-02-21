@@ -30,12 +30,34 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
         <html>
           <head>
             <title>${variation.name} - AI UI Preview</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
             <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://unpkg.com/lucide@latest"></script>
             <style>
-              body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f9fafb; padding: 2rem; }
+              body {
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f9fafb;
+                padding: 2rem;
+                font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                -webkit-font-smoothing: antialiased;
+              }
+              h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
             </style>
           </head>
-          <body>${variation.code}</body>
+          <body>
+            ${variation.code}
+            <script>
+              if (window.lucide) {
+                lucide.createIcons();
+              }
+            </script>
+          </body>
         </html>
       `)
       newWindow.document.close()
@@ -118,24 +140,37 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                   <!DOCTYPE html>
                   <html>
                     <head>
+                      <link rel="preconnect" href="https://fonts.googleapis.com">
+                      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
                       <script src="https://cdn.tailwindcss.com"></script>
+                      <script src="https://unpkg.com/lucide@latest"></script>
                       <style>
                         body {
                           margin: 0;
                           padding: 2rem;
                           background: white;
-                          font-family: system-ui, -apple-system, sans-serif;
+                          font-family: 'Inter', system-ui, -apple-system, sans-serif;
                           display: flex;
                           align-items: center;
                           justify-content: center;
                           min-height: 100vh;
+                          -webkit-font-smoothing: antialiased;
                         }
+                        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
                         /* Hide scrollbars but allow scrolling */
                         body::-webkit-scrollbar { display: none; }
                         body { -ms-overflow-style: none; scrollbar-width: none; }
                       </style>
                     </head>
-                    <body>${variation.code}</body>
+                    <body>
+                      ${variation.code}
+                      <script>
+                        if (window.lucide) {
+                          lucide.createIcons();
+                        }
+                      </script>
+                    </body>
                   </html>
                 `}
                 className="w-full h-full border-0 bg-white rounded-2xl md:rounded-3xl shadow-premium"

@@ -88,5 +88,21 @@ function validateAndClean(content) {
   if (!content || content.trim().length < 50) {
     throw new Error('Generated content is too short or missing. Please try a more detailed prompt.')
   }
-  return content.replace(/```html\n?/g, '').replace(/```\n?/g, '').trim()
+
+  // Extract content between ```html and ``` if present
+  const htmlMatch = content.match(/```html\s*([\s\S]*?)\s*```/i)
+  if (htmlMatch) return htmlMatch[1].trim()
+
+  // Extract content between ``` and ``` if present
+  const codeMatch = content.match(/```\s*([\s\S]*?)\s*```/)
+  if (codeMatch) return codeMatch[1].trim()
+
+  // If no code blocks, try to find the first < and last >
+  const firstTag = content.indexOf('<')
+  const lastTag = content.lastIndexOf('>')
+  if (firstTag !== -1 && lastTag !== -1 && lastTag > firstTag) {
+    return content.substring(firstTag, lastTag + 1).trim()
+  }
+
+  return content.trim()
 }

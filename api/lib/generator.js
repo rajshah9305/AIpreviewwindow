@@ -50,6 +50,8 @@ Strict Design System:
 Technical Constraints:
 - Return ONLY the raw HTML code (no markdown, no explanations).
 - Use Tailwind CSS classes exclusively.
+- Lucide icons are available via <i data-lucide="icon-name"></i>.
+- You can include simple vanilla JavaScript in <script> tags for basic interactivity (toggles, tabs, modals).
 - Ensure WCAG 2.1 AA accessibility (proper contrast, ARIA, keyboard support).
 - Mobile-first responsive design (sm:, md:, lg:).
 - Center the component and ensure it's self-contained.
