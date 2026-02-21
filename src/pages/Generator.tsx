@@ -6,7 +6,6 @@ import { useToast } from '../components/ToastContainer'
 import { useNavigate } from 'react-router-dom'
 import { loadSettings } from '../services/api'
 import { useEffect, useState } from 'react'
-import { GLSLHills } from '../components/ui/glsl-hills'
 
 export default function Generator() {
   const {
@@ -62,32 +61,19 @@ export default function Generator() {
   }
   
   return (
-    <div className="flex flex-col min-h-[calc(100vh-12rem)] relative">
-      {/* GLSL Hills Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style={{ width: '100vw', height: '100vh', top: 0, left: 0 }}>
-        <GLSLHills 
-          width="100vw" 
-          height="100vh" 
-          cameraZ={125} 
-          planeSize={256} 
-          speed={0.3}
-        />
-        {/* Orange tint overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-orange-400/3 to-transparent mix-blend-multiply" />
-      </div>
-      
+    <div className="flex flex-col min-h-[calc(100vh-8rem)] relative">
       <div className="flex-1 pb-40">
         {!loading && !result && (
-          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
-             <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full bg-white/60 backdrop-blur-xl text-orange-600 mb-8 md:mb-10 border border-white/40 shadow-lg shadow-black/5">
-               <Sparkles className="w-4 h-4 md:w-4.5 md:h-4.5" />
-               <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em]">Next-Gen Component Engine</span>
+          <div className="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-12 md:mb-16 animate-slide-up">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50/50 text-orange-600 mb-10 border border-orange-100/50 shadow-sm">
+               <Sparkles className="w-4 h-4" />
+               <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Next-Gen Component Engine</span>
              </div>
-            <h2 className="text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6 md:mb-8 italic uppercase leading-none">
-              Build <span className="text-orange-500">Faster</span>.<br />
-              Design <span className="text-orange-500">Better</span>.
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-10 italic leading-[0.85]">
+              BUILD <span className="text-orange-500">FASTER.</span><br />
+              DESIGN <span className="text-orange-500">BETTER.</span>
             </h2>
-            <p className="text-lg md:text-xl text-neutral-500 font-normal max-w-2xl mx-auto leading-relaxed px-4">
+            <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed px-4">
               Transform your thoughts into premium UI components with AI.<br className="hidden md:block" /> Describe your vision, we'll handle the rest.
             </p>
 
@@ -156,25 +142,25 @@ export default function Generator() {
       </div>
       
       {/* Input Area */}
-      <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 md:px-6 z-50">
-        <div className="bg-white/90 backdrop-blur-3xl border border-neutral-200 rounded-2xl md:rounded-3xl p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-orange-500/30">
+      <div className="fixed bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50">
+        <div className="bg-white border border-neutral-100 rounded-[2.5rem] p-3 md:p-4 shadow-2xl shadow-black/5 group/input transition-all duration-500 focus-within:border-orange-500/20 focus-within:shadow-orange-500/5">
           {error && (
-            <div className="mx-3 md:mx-4 mb-2 md:mb-3 p-3 md:p-4 bg-red-50 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-semibold text-red-600 flex items-center justify-between animate-slide-up">
+            <div className="mx-3 md:mx-4 mb-3 p-4 bg-red-50 rounded-2xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
-                <AlertCircle className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <AlertCircle className="w-4 h-4" />
                 {error.toUpperCase()}
               </span>
               <button onClick={clearError} className="p-1 hover:bg-red-100 rounded-lg transition-colors">✕</button>
             </div>
           )}
           
-          <div className="flex items-center gap-2 md:gap-4 px-2 md:px-3">
+          <div className="flex items-center gap-4 px-4">
             <textarea
               value={instruction}
               onChange={(e) => setInstruction(e.target.value.slice(0, maxChars))}
               onKeyDown={handleKeyPress}
-              placeholder="Describe your vision (e.g., 'A premium checkout card')"
-              className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-3 md:py-4 text-sm md:text-[15px] font-normal placeholder:text-neutral-300 resize-none min-h-[48px] md:min-h-[56px] max-h-[120px] md:max-h-[150px] scrollbar-hide"
+              placeholder="Describe your vision..."
+              className="flex-1 bg-transparent border-none focus:ring-0 py-4 text-base md:text-lg font-medium placeholder:text-neutral-300 resize-none min-h-[56px] max-h-[150px] scrollbar-hide"
               disabled={loading}
               rows={1}
             />
@@ -182,13 +168,13 @@ export default function Generator() {
             <button
               onClick={handleGenerateClick}
               disabled={loading || !instruction.trim()}
-              className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
+              className={`h-14 w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
                 loading || !instruction.trim()
                 ? 'bg-neutral-100 text-neutral-300'
-                : 'bg-black text-white hover:bg-orange-500 hover:scale-110 shadow-lg active:scale-95'
+                : 'bg-black text-white hover:bg-orange-500 hover:scale-105 shadow-xl active:scale-95'
               }`}
             >
-              {loading ? <div className="spinner !w-4 !h-4 md:!w-5 md:!h-5" /> : <Wand2 className="w-5 h-5 md:w-6 md:h-6" />}
+              {loading ? <div className="spinner !w-5 !h-5" /> : <Wand2 className="w-6 h-6" />}
             </button>
           </div>
         </div>
