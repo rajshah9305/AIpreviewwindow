@@ -25,23 +25,23 @@ export default function ConfirmDialog({
         className="absolute inset-0 bg-black/40 backdrop-blur-md"
         onClick={onCancel}
       />
-      <div className="relative bg-white rounded-[2.5rem] p-10 max-w-sm w-full shadow-2xl border border-neutral-100 animate-slide-up">
-        <h3 className="text-xl font-black italic uppercase tracking-tighter mb-10">{title}</h3>
+      <div className="relative bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl border border-neutral-100 animate-slide-up">
+        <h3 className="text-xl font-bold tracking-tight mb-8 text-black">{title}</h3>
 
         <div className="flex flex-col gap-3">
            <button
             onClick={onConfirm}
-            className={`w-full py-4 rounded-2xl font-black uppercase italic tracking-widest transition-all duration-300 shadow-lg active:scale-[0.98] ${
+            className={`w-full py-3.5 rounded-xl font-semibold uppercase tracking-widest transition-all duration-300 active:scale-[0.98] ${
               variant === 'danger'
-              ? 'bg-red-500 text-white hover:bg-red-600 shadow-red-500/20'
-              : 'bg-black text-white hover:bg-neutral-900 shadow-black/10'
+              ? 'bg-red-500 text-white hover:bg-red-600'
+              : 'bg-black text-white hover:bg-neutral-900'
             }`}
           >
             {confirmText}
           </button>
           <button
             onClick={onCancel}
-            className="w-full py-4 bg-neutral-50 text-neutral-400 rounded-2xl font-black uppercase italic tracking-widest hover:bg-neutral-100 transition-all active:scale-[0.98]"
+            className="w-full py-3.5 bg-neutral-50 text-neutral-500 rounded-xl font-semibold uppercase tracking-widest hover:bg-neutral-100 transition-all active:scale-[0.98]"
           >
             {cancelText}
           </button>

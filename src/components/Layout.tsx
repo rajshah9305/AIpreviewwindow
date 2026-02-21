@@ -20,13 +20,13 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white text-black selection:bg-orange-500/10 selection:text-orange-600">
       <nav className="sticky top-0 z-[100] w-full px-4 md:px-6 py-3 md:py-4">
-        <div className="max-w-5xl mx-auto glass rounded-2xl md:rounded-3xl px-4 md:px-6 py-2.5 md:py-3 shadow-premium flex items-center justify-between">
+        <div className="max-w-5xl mx-auto glass rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-2.5 shadow-premium flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 md:space-x-3 group">
-            <div className="w-9 h-9 md:w-10 md:h-10 bg-black rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-orange-500 shadow-lg shadow-black/5 group-hover:shadow-orange-500/20">
-              <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-white animate-pulse-slow" />
+            <div className="w-8 h-8 md:w-9 md:h-9 bg-black rounded-lg md:rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-orange-500 shadow-sm shadow-black/5">
+              <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-xs md:text-sm font-black tracking-tighter leading-none uppercase italic">AI UI</h1>
+              <h1 className="text-sm md:text-base font-bold tracking-tight leading-none text-black">AI UI</h1>
             </div>
           </Link>
 
@@ -38,9 +38,9 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-3 md:px-4 py-2 rounded-xl md:rounded-2xl text-xs md:text-[13px] font-bold transition-all duration-300 flex items-center gap-1.5 md:gap-2 ${
+                  className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-xs md:text-[13px] font-medium transition-all duration-300 flex items-center gap-1.5 md:gap-2 ${
                     active
-                      ? 'bg-black text-white shadow-lg shadow-black/10'
+                      ? 'bg-black text-white'
                       : 'text-neutral-500 hover:text-black hover:bg-neutral-50'
                   }`}
                 >
@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
             <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-white" />
             </div>
-            <p className="text-xs font-bold tracking-tight text-neutral-400">
+            <p className="text-xs font-medium tracking-tight text-neutral-400">
               AI UI GENERATOR &copy; {new Date().getFullYear()}
             </p>
           </div>
