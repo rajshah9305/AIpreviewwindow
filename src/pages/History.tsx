@@ -47,21 +47,21 @@ export default function History() {
   }
   
   return (
-    <div className="space-y-12 animate-fade-in pb-20">
+    <div className="space-y-10 md:space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">History</h2>
         </div>
         <button
           onClick={() => setShowClearDialog(true)}
-          className="flex items-center gap-2 px-6 py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-semibold border border-transparent hover:border-red-100"
+          className="flex items-center gap-2 px-6 py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-semibold border border-transparent hover:border-red-100 w-fit"
         >
           <Trash2 className="w-4 h-4" /> Purge History
         </button>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-        <div className="lg:col-span-4 space-y-4 md:space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div className="md:col-span-4 space-y-4 md:space-y-6">
           <div className="relative group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-300 group-focus-within:text-orange-500 transition-colors" />
             <input
@@ -103,7 +103,7 @@ export default function History() {
           </div>
         </div>
         
-        <div className="lg:col-span-8">
+        <div className="md:col-span-8">
           {selectedResult ? (
               <div className="space-y-8 md:space-y-10 animate-fade-in">
               <div className="p-8 md:p-10 bg-black rounded-3xl text-white relative overflow-hidden shadow-premium">

@@ -5,7 +5,7 @@ import { useGeneration } from '../contexts/GenerationContext'
 import { useToast } from '../components/ToastContainer'
 import { useNavigate } from 'react-router-dom'
 import { loadSettings } from '../services/api'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function Generator() {
   const {
@@ -22,12 +22,20 @@ export default function Generator() {
   const toast = useToast()
   const navigate = useNavigate()
   const [hasSettings, setHasSettings] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const maxChars = 500
   
   useEffect(() => {
     const settings = loadSettings()
     setHasSettings(!!(settings && settings.apiKey))
   }, [])
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+  }, [instruction])
   
   const loadingVariations = [
     { id: 'loading-1', name: 'Minimalist' },
@@ -64,16 +72,15 @@ export default function Generator() {
     <div className="flex flex-col min-h-[calc(100vh-8rem)] relative">
       <div className="flex-1 pb-40">
         {!loading && !result && (
-          <div className="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-12 md:mb-16 animate-slide-up">
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50/50 text-orange-600 mb-10 border border-orange-100/50 shadow-sm">
-               <Sparkles className="w-4 h-4" />
+          <div className="max-w-5xl mx-auto text-center pt-12 md:pt-24 mb-12 md:mb-16 animate-slide-up px-4">
+             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-orange-500 mb-10 border border-neutral-100 shadow-sm">
+               <Sparkles className="w-3.5 h-3.5" />
                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Next-Gen Component Engine</span>
              </div>
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-10 italic leading-[0.85]">
-              BUILD <span className="text-orange-500">FASTER.</span><br />
-              DESIGN <span className="text-orange-500">BETTER.</span>
-            </h2>
-            <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed px-4">
+            <h1 className="text-[5.2vw] md:text-5xl font-black tracking-[-0.07em] mb-12 italic leading-none whitespace-nowrap">
+              AI – <span className="text-orange-500">BUILD BETTER</span> AND <span className="text-orange-500">DESIGN BETTER</span>
+            </h1>
+            <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed">
               Transform your thoughts into premium UI components with AI.<br className="hidden md:block" /> Describe your vision, we'll handle the rest.
             </p>
 
@@ -142,10 +149,10 @@ export default function Generator() {
       </div>
       
       {/* Input Area */}
-      <div className="fixed bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50">
-        <div className="bg-white border border-neutral-100 rounded-[2.5rem] p-3 md:p-4 shadow-2xl shadow-black/5 group/input transition-all duration-500 focus-within:border-orange-500/20 focus-within:shadow-orange-500/5">
+      <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50">
+        <div className="bg-white border border-neutral-100 rounded-[2.5rem] p-2 md:p-3 shadow-2xl shadow-black/10 group/input transition-all duration-500 focus-within:border-orange-500/20 focus-within:shadow-orange-500/10">
           {error && (
-            <div className="mx-3 md:mx-4 mb-3 p-4 bg-red-50 rounded-2xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
+            <div className="mx-4 mb-3 p-4 bg-red-50 rounded-3xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
                 <AlertCircle className="w-4 h-4" />
                 {error.toUpperCase()}
@@ -154,13 +161,14 @@ export default function Generator() {
             </div>
           )}
           
-          <div className="flex items-center gap-4 px-4">
+          <div className="flex items-center gap-4 px-6">
             <textarea
+              ref={textareaRef}
               value={instruction}
               onChange={(e) => setInstruction(e.target.value.slice(0, maxChars))}
               onKeyDown={handleKeyPress}
               placeholder="Describe your vision..."
-              className="flex-1 bg-transparent border-none focus:ring-0 py-4 text-base md:text-lg font-medium placeholder:text-neutral-300 resize-none min-h-[56px] max-h-[150px] scrollbar-hide"
+              className="flex-1 bg-transparent border-none focus:ring-0 py-4 text-base md:text-lg font-medium placeholder:text-neutral-300 resize-none min-h-[56px] max-h-[200px] scrollbar-hide"
               disabled={loading}
               rows={1}
             />
@@ -168,13 +176,13 @@ export default function Generator() {
             <button
               onClick={handleGenerateClick}
               disabled={loading || !instruction.trim()}
-              className={`h-14 w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
+              className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
                 loading || !instruction.trim()
                 ? 'bg-neutral-100 text-neutral-300'
                 : 'bg-black text-white hover:bg-orange-500 hover:scale-105 shadow-xl active:scale-95'
               }`}
             >
-              {loading ? <div className="spinner !w-5 !h-5" /> : <Wand2 className="w-6 h-6" />}
+              {loading ? <div className="spinner !w-5 !h-5" /> : <Wand2 className="w-5 h-5 md:w-6 md:h-6" />}
             </button>
           </div>
         </div>

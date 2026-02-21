@@ -57,15 +57,15 @@ export default function Settings() {
   ]
   
   return (
-    <div className="max-w-5xl mx-auto space-y-12 animate-fade-in pb-20">
+    <div className="max-w-5xl mx-auto space-y-10 md:space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Settings</h2>
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-7 space-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
+        <div className="md:col-span-7 space-y-10">
           <div className="bg-white rounded-2xl border border-neutral-100 p-8 md:p-10 space-y-8 shadow-premium relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             
@@ -135,7 +135,7 @@ export default function Settings() {
           </div>
         </div>
         
-        <div className="lg:col-span-5 space-y-8">
+        <div className="md:col-span-5 space-y-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2 ml-1">
               <Sparkles className="w-4 h-4 text-orange-500" />

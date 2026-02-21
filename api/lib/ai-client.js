@@ -29,7 +29,7 @@ async function callOpenAI(prompt, model, apiKey, baseUrl) {
       messages: [
         {
           role: 'system',
-          content: 'You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML without markdown.',
+          content: 'You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML. Do not include markdown code blocks or any explanation.',
         },
         { role: 'user', content: prompt },
       ],
@@ -57,7 +57,7 @@ async function callAnthropic(prompt, model, apiKey, baseUrl) {
       messages: [
         {
           role: 'user',
-          content: `You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML without markdown.\n\n${prompt}`,
+          content: `You are a world-class UI component generator. Generate clean, accessible HTML with inline Tailwind CSS classes. Adhere to a premium design system: primary orange (#f97316), black text, and white backgrounds. Never use purple or blue. Return only raw HTML without markdown code blocks or explanations.\n\n${prompt}`,
         },
       ],
       temperature: 0.7,
