@@ -40,7 +40,6 @@ export default function History() {
         <EmptyState
           icon={Clock}
           title="Archive Empty"
-          description="Your creative journey hasn't started yet. Let's build something extraordinary."
           action={{ label: 'Launch Generator', onClick: () => navigate('/generator') }}
         />
       </div>
@@ -51,11 +50,7 @@ export default function History() {
     <div className="space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-4">
-            Archive
-          </div>
           <h2 className="text-5xl font-black italic uppercase tracking-tighter leading-none">History</h2>
-          <p className="text-sm text-neutral-400 font-medium mt-2">Access your past {history.length} generations</p>
         </div>
         <button
           onClick={() => setShowClearDialog(true)}
@@ -114,7 +109,6 @@ export default function History() {
               <div className="p-8 md:p-10 bg-black rounded-[2.5rem] text-white relative overflow-hidden shadow-premium">
                  <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                  <div className="relative z-10">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 mb-3 md:mb-4">Prompt Analysis</p>
                   <p className="text-xl md:text-2xl font-black italic uppercase leading-tight tracking-tight">"{selectedResult.instruction}"</p>
                   <div className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8">
                     <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/10">
@@ -144,7 +138,6 @@ export default function History() {
                   <Clock className="w-6 h-6 text-neutral-300" />
                 </div>
                 <p className="text-neutral-400 text-sm font-black uppercase tracking-[0.2em]">Select a Concept</p>
-                <p className="text-neutral-300 text-[11px] font-medium mt-2">Pick a previous generation to re-examine the results</p>
               </div>
             </div>
           )}
@@ -154,7 +147,6 @@ export default function History() {
       <ConfirmDialog
         isOpen={showClearDialog}
         title="Purge Archive?"
-        message="This will permanently delete all your generated history. This action cannot be reversed."
         confirmText="Yes, Purge Everything"
         cancelText="Keep My History"
         onConfirm={handleClear}

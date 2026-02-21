@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Save, Key, Server, Tag, Shield, Eye, EyeOff, Sparkles } from 'lucide-react'
+import { Save, Key, Server, Tag, Eye, EyeOff, Sparkles } from 'lucide-react'
 import { AISettings } from '../types'
 import { saveSettings, loadSettings } from '../services/api'
 import { useToast } from '../components/ToastContainer'
@@ -60,11 +60,7 @@ export default function Settings() {
     <div className="max-w-5xl mx-auto space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-500 text-[10px] font-black uppercase tracking-widest mb-4">
-            Configuration
-          </div>
           <h2 className="text-5xl font-black italic uppercase tracking-tighter leading-none">Settings</h2>
-          <p className="text-sm text-neutral-400 font-medium mt-2">Power your creative engine with custom AI providers</p>
         </div>
       </div>
       
@@ -137,18 +133,6 @@ export default function Settings() {
               {saved ? 'Settings Deployed' : 'Deploy Configuration'}
             </button>
           </div>
-
-          <div className="p-6 md:p-8 bg-neutral-50 rounded-[2rem] border border-neutral-100 flex items-start gap-4 md:gap-6 shadow-sm">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm shrink-0">
-               <Shield className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
-            </div>
-            <div>
-              <p className="text-xs md:text-sm font-black uppercase italic tracking-tight mb-1">Vault Security</p>
-              <p className="text-[11px] md:text-xs text-neutral-400 font-medium leading-relaxed">
-                Your credentials are never transmitted to our backend. Everything is encrypted and stored locally in your browser's secure storage.
-              </p>
-            </div>
-          </div>
         </div>
         
         <div className="lg:col-span-5 space-y-8">
@@ -173,16 +157,6 @@ export default function Settings() {
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="p-6 md:p-8 bg-black rounded-[2rem] text-white overflow-hidden relative group">
-             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent opacity-50 pointer-events-none" />
-             <div className="relative z-10">
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500 mb-3 md:mb-4 italic">Performance Tip</p>
-                <p className="text-xs md:text-sm font-bold leading-relaxed italic">
-                  "Using flagship models like GPT-4o or Claude 3.5 Sonnet will yield the most premium UI components and superior code quality."
-                </p>
-             </div>
           </div>
         </div>
       </div>

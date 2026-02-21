@@ -82,7 +82,6 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-orange-500 animate-pulse shrink-0" />
             <div className="flex flex-col min-w-0">
               <span className="text-[11px] md:text-xs font-black text-black tracking-tight leading-none uppercase italic truncate">{variation.name}</span>
-              <span className="text-[8px] md:text-[9px] text-neutral-400 font-bold uppercase tracking-[0.15em] mt-0.5 md:mt-1">{variation.style} style</span>
             </div>
           </div>
           
