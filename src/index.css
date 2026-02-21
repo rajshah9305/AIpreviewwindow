@@ -27,6 +27,8 @@
   body {
     @apply bg-white text-black font-sans antialiased;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
   
   ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -78,15 +80,23 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-2xl border border-white/20;
+    @apply bg-white/60 backdrop-blur-3xl border border-white/40;
   }
 
   .text-gradient-orange {
     @apply bg-clip-text text-transparent bg-gradient-to-br from-orange-400 to-orange-600;
   }
 
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--tw-gradient-stops));
+  }
+
   .shadow-premium {
     box-shadow: 0 10px 40px -10px rgb(0 0 0 / 0.05);
+  }
+  
+  .shadow-orange {
+    box-shadow: 0 20px 50px -12px rgb(249 115 22 / 0.15);
   }
 
   .scrollbar-hide {
