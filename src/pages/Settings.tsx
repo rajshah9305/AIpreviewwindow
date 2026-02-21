@@ -60,18 +60,18 @@ export default function Settings() {
     <div className="max-w-5xl mx-auto space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <h2 className="text-5xl font-black italic uppercase tracking-tighter leading-none">Settings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Settings</h2>
         </div>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div className="lg:col-span-7 space-y-10">
-          <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-8 md:p-10 space-y-8 shadow-premium relative overflow-hidden">
+          <div className="bg-white rounded-2xl border border-neutral-100 p-8 md:p-10 space-y-8 shadow-premium relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             
             <div className="space-y-6">
               <div className="space-y-3">
-                <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 ml-1">
+                <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
                   <Tag className="w-3.5 h-3.5 text-orange-500" /> Model Identifier
                 </label>
                 <input
@@ -80,11 +80,11 @@ export default function Settings() {
                   placeholder="e.g., gpt-4o-2024-08-06"
                   className={`input-field ${errors.modelName ? 'input-error' : ''}`}
                 />
-                {errors.modelName && <p className="text-[10px] font-bold text-red-500 ml-1 uppercase">{errors.modelName}</p>}
+                {errors.modelName && <p className="text-[10px] font-semibold text-red-500 ml-1 uppercase">{errors.modelName}</p>}
               </div>
 
               <div className="space-y-3">
-                <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 ml-1">
+                <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
                   <Key className="w-3.5 h-3.5 text-orange-500" /> Secret API Key
                 </label>
                 <div className="relative">
@@ -103,11 +103,11 @@ export default function Settings() {
                     {showApiKey ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
-                {errors.apiKey && <p className="text-[10px] font-bold text-red-500 ml-1 uppercase">{errors.apiKey}</p>}
+                {errors.apiKey && <p className="text-[10px] font-semibold text-red-500 ml-1 uppercase">{errors.apiKey}</p>}
               </div>
 
               <div className="space-y-3">
-                <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 ml-1">
+                <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
                   <Server className="w-3.5 h-3.5 text-orange-500" /> Provider Endpoint
                 </label>
                 <input
@@ -116,16 +116,16 @@ export default function Settings() {
                   placeholder="https://api.openai.com/v1"
                   className={`input-field ${errors.baseUrl ? 'input-error' : ''}`}
                 />
-                {errors.baseUrl && <p className="text-[10px] font-bold text-red-500 ml-1 uppercase">{errors.baseUrl}</p>}
+                {errors.baseUrl && <p className="text-[10px] font-semibold text-red-500 ml-1 uppercase">{errors.baseUrl}</p>}
               </div>
             </div>
             
             <button
               onClick={handleSave}
               disabled={!isModified}
-              className={`w-full py-4 rounded-2xl font-black uppercase italic tracking-widest transition-all duration-500 flex items-center justify-center gap-3 shadow-lg active:scale-[0.98] text-sm ${
+              className={`w-full py-4 rounded-xl font-semibold uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3 active:scale-[0.98] text-sm ${
                 isModified
-                ? 'bg-black text-white hover:bg-orange-600 hover:shadow-orange shadow-black/10'
+                ? 'bg-black text-white hover:bg-neutral-900 shadow-lg shadow-black/10'
                 : 'bg-neutral-100 text-neutral-400 cursor-not-allowed shadow-none'
               }`}
             >
@@ -139,7 +139,7 @@ export default function Settings() {
           <div className="space-y-4">
             <div className="flex items-center gap-2 ml-1">
               <Sparkles className="w-4 h-4 text-orange-500" />
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-black italic">Rapid Presets</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-black">Rapid Presets</h3>
             </div>
             <div className="grid grid-cols-1 gap-4">
               {presets.map((p) => (
@@ -149,11 +149,11 @@ export default function Settings() {
                     setSettings({ ...settings, baseUrl: p.baseUrl, modelName: p.model })
                     setIsModified(true)
                   }}
-                  className="w-full p-6 bg-white border border-neutral-100 rounded-[2rem] text-left hover:border-orange-500/30 hover:shadow-premium transition-all group relative overflow-hidden"
+                  className="w-full p-6 bg-white border border-neutral-100 rounded-2xl text-left hover:border-orange-500/20 hover:shadow-premium transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-2 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                  <p className="font-black text-lg uppercase italic tracking-tighter mb-1">{p.name}</p>
-                  <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest">{p.model}</p>
+                  <div className="absolute top-0 right-0 w-1.5 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                  <p className="font-bold text-base tracking-tight mb-1">{p.name}</p>
+                  <p className="text-[10px] text-neutral-400 font-medium uppercase tracking-widest">{p.model}</p>
                 </button>
               ))}
             </div>

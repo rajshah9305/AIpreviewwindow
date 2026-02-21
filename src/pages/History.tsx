@@ -50,11 +50,11 @@ export default function History() {
     <div className="space-y-12 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <h2 className="text-5xl font-black italic uppercase tracking-tighter leading-none">History</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">History</h2>
         </div>
         <button
           onClick={() => setShowClearDialog(true)}
-          className="flex items-center gap-2 px-6 py-3 text-red-500 hover:bg-red-50 rounded-2xl transition-all text-[11px] font-black uppercase tracking-widest border border-transparent hover:border-red-100"
+          className="flex items-center gap-2 px-6 py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-semibold border border-transparent hover:border-red-100"
         >
           <Trash2 className="w-4 h-4" /> Purge History
         </button>
@@ -68,7 +68,7 @@ export default function History() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search concepts..."
-              className="w-full pl-12 pr-4 py-4 bg-white border border-neutral-100 rounded-2xl text-sm font-medium focus:outline-none focus:border-orange-500/30 focus:ring-4 focus:ring-orange-500/5 transition-all"
+              className="w-full pl-12 pr-4 py-3.5 bg-white border border-neutral-100 rounded-xl text-sm font-normal focus:outline-none focus:border-orange-500/30 focus:ring-4 focus:ring-orange-500/5 transition-all"
             />
           </div>
           
@@ -77,19 +77,19 @@ export default function History() {
               <button
                 key={r.timestamp}
                 onClick={() => setSelectedResult(r)}
-                className={`w-full p-5 rounded-3xl text-left transition-all duration-500 flex items-center justify-between group ${
+                className={`w-full p-5 rounded-2xl text-left transition-all duration-500 flex items-center justify-between group ${
                   selectedResult?.timestamp === r.timestamp
-                    ? 'bg-black text-white shadow-premium scale-[1.02]'
+                    ? 'bg-black text-white shadow-premium'
                     : 'bg-white border border-neutral-50 hover:border-orange-500/20 text-neutral-600 hover:bg-neutral-50/50'
                 }`}
               >
                 <div className="min-w-0 flex-1">
-                  <p className={`text-xs font-black truncate uppercase italic tracking-tight ${selectedResult?.timestamp === r.timestamp ? 'text-white' : 'text-black'}`}>
+                  <p className={`text-sm font-semibold truncate tracking-tight ${selectedResult?.timestamp === r.timestamp ? 'text-white' : 'text-black'}`}>
                     {r.instruction}
                   </p>
                   <div className="flex items-center gap-2 mt-2 opacity-50">
                     <Calendar className="w-3 h-3" />
-                    <p className="text-[10px] font-bold uppercase tracking-wider">{new Date(r.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider">{new Date(r.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</p>
                   </div>
                 </div>
                 <ChevronRight className={`w-4 h-4 transition-transform ${selectedResult?.timestamp === r.timestamp ? 'text-orange-500 translate-x-1' : 'text-neutral-200 group-hover:translate-x-1'}`} />
@@ -106,17 +106,17 @@ export default function History() {
         <div className="lg:col-span-8">
           {selectedResult ? (
               <div className="space-y-8 md:space-y-10 animate-fade-in">
-              <div className="p-8 md:p-10 bg-black rounded-[2.5rem] text-white relative overflow-hidden shadow-premium">
+              <div className="p-8 md:p-10 bg-black rounded-3xl text-white relative overflow-hidden shadow-premium">
                  <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                  <div className="relative z-10">
-                  <p className="text-xl md:text-2xl font-black italic uppercase leading-tight tracking-tight">"{selectedResult.instruction}"</p>
+                  <p className="text-lg md:text-xl font-bold leading-tight tracking-tight">"{selectedResult.instruction}"</p>
                   <div className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8">
                     <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/10">
-                      <p className="text-[8px] font-black uppercase tracking-widest text-neutral-500">Provider</p>
+                      <p className="text-[8px] font-semibold uppercase tracking-widest text-neutral-500">Provider</p>
                       <p className="text-[11px] font-bold text-white mt-1">{selectedResult.provider}</p>
                     </div>
                     <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/10">
-                      <p className="text-[8px] font-black uppercase tracking-widest text-neutral-500">Model</p>
+                      <p className="text-[8px] font-semibold uppercase tracking-widest text-neutral-500">Model</p>
                       <p className="text-[11px] font-bold text-white mt-1">{selectedResult.modelName}</p>
                     </div>
                   </div>
@@ -132,12 +132,12 @@ export default function History() {
               </div>
             </div>
           ) : (
-            <div className="h-full min-h-[400px] md:min-h-[500px] flex items-center justify-center border-2 border-dashed border-neutral-100 rounded-[2.5rem] p-8 md:p-12 bg-neutral-50/30">
+            <div className="h-full min-h-[400px] md:min-h-[500px] flex items-center justify-center border-2 border-dashed border-neutral-100 rounded-3xl p-8 md:p-12 bg-neutral-50/30">
               <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-3xl border border-neutral-100 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <div className="w-16 h-16 bg-white rounded-2xl border border-neutral-100 flex items-center justify-center mx-auto mb-6 shadow-sm">
                   <Clock className="w-6 h-6 text-neutral-300" />
                 </div>
-                <p className="text-neutral-400 text-sm font-black uppercase tracking-[0.2em]">Select a Concept</p>
+                <p className="text-neutral-400 text-sm font-semibold uppercase tracking-widest">Select a Concept</p>
               </div>
             </div>
           )}

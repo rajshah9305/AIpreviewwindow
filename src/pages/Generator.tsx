@@ -65,22 +65,22 @@ export default function Generator() {
       <div className="flex-1 pb-40">
         {!loading && !result && (
           <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-4 md:mb-6 italic uppercase leading-none">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 md:mb-8 text-black leading-[1.1]">
               Build <span className="text-orange-500">Faster</span>.<br />
               Design <span className="text-orange-500">Better</span>.
             </h2>
 
             {!hasSettings && (
-              <div className="mt-8 md:mt-12 p-6 md:p-8 bg-neutral-50 rounded-[2rem] md:rounded-[2.5rem] border border-neutral-100 inline-block text-left animate-float shadow-premium max-w-md mx-4">
+              <div className="mt-8 md:mt-12 p-6 md:p-8 bg-neutral-50 rounded-2xl md:rounded-3xl border border-neutral-100 inline-block text-left shadow-premium max-w-md mx-4">
                 <div className="flex items-start gap-4 md:gap-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm border border-neutral-100 shrink-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-lg md:rounded-xl flex items-center justify-center shadow-sm border border-neutral-100 shrink-0">
                     <AlertCircle className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
                   </div>
                   <div>
-                    <p className="font-black text-xs md:text-sm uppercase italic tracking-tight">Configuration Required</p>
+                    <p className="font-semibold text-xs md:text-sm text-neutral-600">Configuration Required</p>
                     <button
                       onClick={() => navigate('/settings')}
-                      className="mt-4 px-5 md:px-6 py-2 md:py-2.5 bg-black text-white rounded-xl text-[11px] md:text-xs font-bold hover:bg-neutral-900 transition-all flex items-center gap-2 group shadow-lg shadow-black/10 active:scale-95"
+                      className="mt-4 px-5 md:px-6 py-2 md:py-2.5 bg-black text-white rounded-lg text-[11px] md:text-xs font-semibold hover:bg-neutral-900 transition-all flex items-center gap-2 group active:scale-95"
                     >
                       Connect Provider <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -95,7 +95,7 @@ export default function Generator() {
           <div className="space-y-8 md:space-y-12 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-100 pb-6 md:pb-8">
               <div>
-                <h3 className="text-3xl md:text-4xl font-black italic uppercase tracking-tighter leading-none">Generating Variations</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Generating Variations</h3>
               </div>
             </div>
             
@@ -111,11 +111,11 @@ export default function Generator() {
           <div className="space-y-8 md:space-y-12 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 border-b border-neutral-100 pb-6 md:pb-8">
               <div>
-                <h3 className="text-3xl md:text-4xl font-black italic uppercase tracking-tighter leading-none">The Collection</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">The Collection</h3>
               </div>
               <button
                 onClick={handleClearAndNew}
-                className="flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-neutral-100 text-black rounded-xl md:rounded-2xl text-[11px] md:text-xs font-black uppercase tracking-widest hover:bg-neutral-200 transition-all active:scale-95"
+                className="flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-neutral-100 text-black rounded-lg md:rounded-xl text-[11px] md:text-xs font-semibold hover:bg-neutral-200 transition-all active:scale-95"
               >
                 <RefreshCw className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 <span>New Generation</span>
@@ -135,9 +135,9 @@ export default function Generator() {
       
       {/* Input Area */}
       <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 md:px-6 z-50">
-        <div className="bg-white/90 backdrop-blur-3xl border border-neutral-100 rounded-[2rem] md:rounded-[2.5rem] p-2 md:p-3 shadow-orange group/input transition-all duration-500 focus-within:shadow-[0_30px_60px_-12px_rgb(249_115_22_0.2)] focus-within:border-orange-500/20">
+        <div className="bg-white/90 backdrop-blur-3xl border border-neutral-200 rounded-2xl md:rounded-3xl p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-orange-500/30">
           {error && (
-            <div className="mx-3 md:mx-4 mb-2 md:mb-3 p-3 md:p-4 bg-red-50 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
+            <div className="mx-3 md:mx-4 mb-2 md:mb-3 p-3 md:p-4 bg-red-50 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-semibold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
                 <AlertCircle className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 {error.toUpperCase()}
@@ -151,8 +151,8 @@ export default function Generator() {
               value={instruction}
               onChange={(e) => setInstruction(e.target.value.slice(0, maxChars))}
               onKeyDown={handleKeyPress}
-              placeholder="Describe your vision (e.g., 'A premium checkout card with glassmorphism')"
-              className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-3 md:py-4 text-sm md:text-[15px] font-medium placeholder:text-neutral-300 resize-none min-h-[48px] md:min-h-[56px] max-h-[120px] md:max-h-[150px] scrollbar-hide"
+              placeholder="Describe your vision (e.g., 'A premium checkout card')"
+              className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-3 md:py-4 text-sm md:text-[15px] font-normal placeholder:text-neutral-300 resize-none min-h-[48px] md:min-h-[56px] max-h-[120px] md:max-h-[150px] scrollbar-hide"
               disabled={loading}
               rows={1}
             />

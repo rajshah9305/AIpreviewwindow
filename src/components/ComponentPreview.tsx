@@ -72,16 +72,16 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
           onClick={() => setIsExpanded(false)}
         />
       )}
-      <div className={`bg-white rounded-[2rem] overflow-hidden border border-neutral-100 flex flex-col group/card transition-all duration-500 ${
+      <div className={`bg-white rounded-2xl overflow-hidden border border-neutral-100 flex flex-col group/card transition-all duration-500 ${
         isExpanded
           ? 'fixed inset-4 sm:inset-10 z-[120] shadow-2xl ring-1 ring-black/5'
-          : 'relative h-full hover:border-orange-500/30 hover:shadow-premium'
+          : 'relative h-full hover:border-orange-500/20 hover:shadow-premium'
       }`}>
         <div className="px-4 md:px-5 py-3 md:py-4 border-b border-neutral-50 flex items-center justify-between shrink-0 bg-white/80 backdrop-blur-md">
           <div className="flex items-center space-x-2 md:space-x-4 min-w-0">
-            <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-orange-500 animate-pulse shrink-0" />
+            <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-orange-500 shrink-0" />
             <div className="flex flex-col min-w-0">
-              <span className="text-[11px] md:text-xs font-black text-black tracking-tight leading-none uppercase italic truncate">{variation.name}</span>
+              <span className="text-[11px] md:text-xs font-bold text-black tracking-tight leading-none truncate">{variation.name}</span>
             </div>
           </div>
           
@@ -172,7 +172,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                     </body>
                   </html>
                 `}
-                className="w-full h-full border-0 bg-white rounded-2xl md:rounded-3xl shadow-premium"
+                className="w-full h-full border-0 bg-white rounded-xl md:rounded-2xl shadow-premium"
                 title={variation.name}
               />
             </div>
