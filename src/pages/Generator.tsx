@@ -1,4 +1,4 @@
-import { Wand2, AlertCircle, RefreshCw, ChevronRight } from 'lucide-react'
+import { Wand2, AlertCircle, RefreshCw, ChevronRight, Sparkles } from 'lucide-react'
 import ComponentPreview from '../components/ComponentPreview'
 import LoadingSkeleton from '../components/LoadingSkeleton'
 import { useGeneration } from '../contexts/GenerationContext'
@@ -6,6 +6,7 @@ import { useToast } from '../components/ToastContainer'
 import { useNavigate } from 'react-router-dom'
 import { loadSettings } from '../services/api'
 import { useEffect, useState } from 'react'
+import { GLSLHills } from '../components/ui/glsl-hills'
 
 export default function Generator() {
   const {
@@ -61,23 +62,44 @@ export default function Generator() {
   }
   
   return (
-    <div className="flex flex-col min-h-[calc(100vh-16rem)] relative">
+    <div className="flex flex-col min-h-[calc(100vh-12rem)] relative">
+      {/* GLSL Hills Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style={{ width: '100vw', height: '100vh', top: 0, left: 0 }}>
+        <GLSLHills 
+          width="100vw" 
+          height="100vh" 
+          cameraZ={125} 
+          planeSize={256} 
+          speed={0.3}
+        />
+        {/* Orange tint overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-orange-400/3 to-transparent mix-blend-multiply" />
+      </div>
+      
       <div className="flex-1 pb-40">
         {!loading && !result && (
-          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 md:mb-8 text-black leading-[1.1]">
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
+             <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full bg-white/60 backdrop-blur-xl text-orange-600 mb-8 md:mb-10 border border-white/40 shadow-lg shadow-black/5">
+               <Sparkles className="w-4 h-4 md:w-4.5 md:h-4.5" />
+               <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em]">Next-Gen Component Engine</span>
+             </div>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6 md:mb-8 italic uppercase leading-none">
               Build <span className="text-orange-500">Faster</span>.<br />
               Design <span className="text-orange-500">Better</span>.
             </h2>
+            <p className="text-lg md:text-xl text-neutral-500 font-normal max-w-2xl mx-auto leading-relaxed px-4">
+              Transform your thoughts into premium UI components with AI.<br className="hidden md:block" /> Describe your vision, we'll handle the rest.
+            </p>
 
             {!hasSettings && (
-              <div className="mt-8 md:mt-12 p-6 md:p-8 bg-neutral-50 rounded-2xl md:rounded-3xl border border-neutral-100 inline-block text-left shadow-premium max-w-md mx-4">
-                <div className="flex items-start gap-4 md:gap-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-lg md:rounded-xl flex items-center justify-center shadow-sm border border-neutral-100 shrink-0">
-                    <AlertCircle className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
+              <div className="mt-10 md:mt-14 p-8 md:p-10 bg-white/70 backdrop-blur-2xl rounded-3xl md:rounded-[2.5rem] border border-white/60 inline-block text-left animate-float shadow-2xl shadow-black/10 max-w-md mx-4">
+                <div className="flex items-start gap-5 md:gap-6">
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30 shrink-0">
+                    <AlertCircle className="w-6 h-6 md:w-7 md:h-7 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-xs md:text-sm text-neutral-600">Configuration Required</p>
+                    <p className="font-bold text-sm md:text-base text-black mb-1">Configuration Required</p>
+                    <p className="text-xs md:text-sm text-neutral-500 font-normal mb-5 md:mb-6 leading-relaxed">Setup your API provider to start generating components.</p>
                     <button
                       onClick={() => navigate('/settings')}
                       className="mt-4 px-5 md:px-6 py-2 md:py-2.5 bg-black text-white rounded-lg text-[11px] md:text-xs font-semibold hover:bg-neutral-900 transition-all flex items-center gap-2 group active:scale-95"
