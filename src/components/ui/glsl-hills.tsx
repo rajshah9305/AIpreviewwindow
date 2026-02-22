@@ -133,10 +133,10 @@ void main(void) {
   float noise3 = cnoise(noisePosition * 0.4);
   vec3 lastPosition = updatePosition + vec3(
     0.0,
-    noise1 * sin1 * 8.0
-    + noise2 * sin1 * 8.0
-    + noise3 * (abs(sin1) * 2.0 + 0.5)
-    + pow(sin1, 2.0) * 40.0,
+    noise1 * sin1 * 12.0
+    + noise2 * sin1 * 12.0
+    + noise3 * (abs(sin1) * 3.0 + 0.5)
+    + pow(sin1, 2.0) * 45.0,
     0.0
   );
   vPosition = lastPosition;
@@ -148,7 +148,10 @@ varying vec3 vPosition;
 
 void main(void) {
   float opacity = (96.0 - length(vPosition)) / 256.0 * 0.6;
-  vec3 color = vec3(0.0, 0.0, 0.0);
+  float highlight = smoothstep(0.0, 40.0, vPosition.y);
+  vec3 baseColor = vec3(0.976, 0.451, 0.086);
+  vec3 peakColor = vec3(1.0, 0.7, 0.3);
+  vec3 color = mix(baseColor, peakColor, highlight);
   gl_FragColor = vec4(color, opacity);
 }`,
             transparent: true
