@@ -22,7 +22,10 @@
     --ring: 24 95% 53%;
   }
 
-  * { @apply border-neutral-200; }
+  * { 
+    @apply border-neutral-200;
+    box-sizing: border-box;
+  }
   
   html { 
     @apply scroll-smooth selection:bg-orange-500/20 selection:text-orange-500;
@@ -30,6 +33,8 @@
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   body {
@@ -42,6 +47,8 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
     letter-spacing: -0.015em;
     font-weight: 400;
     position: relative;
