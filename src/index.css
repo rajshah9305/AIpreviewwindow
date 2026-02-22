@@ -22,7 +22,7 @@
     --ring: 24 95% 53%;
   }
 
-  * { @apply border-border; }
+  * { @apply border-neutral-200; }
   html { @apply scroll-smooth selection:bg-orange-500/20 selection:text-orange-950; }
   body {
     @apply bg-white text-black font-sans antialiased;
