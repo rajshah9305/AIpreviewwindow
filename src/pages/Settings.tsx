@@ -125,7 +125,7 @@ export default function Settings() {
               disabled={!isModified}
               className={`w-full py-4 rounded-xl font-semibold transition-all duration-500 flex items-center justify-center gap-3 active:scale-[0.98] text-sm ${
                 isModified
-                ? 'bg-black text-white hover:bg-neutral-900 shadow-sm'
+                ? 'bg-orange-500 text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20'
                 : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
               }`}
             >
@@ -149,9 +149,9 @@ export default function Settings() {
                     setSettings({ ...settings, baseUrl: p.baseUrl, modelName: p.model })
                     setIsModified(true)
                   }}
-                  className="w-full p-6 bg-white border border-neutral-100 rounded-2xl text-left hover:border-neutral-200 hover:shadow-premium transition-all group relative overflow-hidden"
+                  className="w-full p-6 bg-white border border-neutral-100 rounded-2xl text-left hover:border-orange-200 hover:shadow-premium transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-1.5 h-full bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                  <div className="absolute top-0 right-0 w-1.5 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                   <p className="font-bold text-base tracking-tight mb-1">{p.name}</p>
                   <p className="text-[10px] text-neutral-400 font-medium uppercase tracking-widest">{p.model}</p>
                 </button>

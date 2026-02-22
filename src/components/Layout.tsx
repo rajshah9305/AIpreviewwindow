@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sparkles, History, Settings, LayoutGrid } from 'lucide-react'
+import Background from './Background'
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,11 +19,12 @@ export default function Layout({ children }: LayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-neutral-100 selection:text-black">
+    <div className="min-h-screen bg-transparent text-black selection:bg-neutral-100 selection:text-black">
+      <Background />
       <nav className="sticky top-0 z-[100] w-full px-4 md:px-6 py-4 md:py-6">
         <div className="max-w-5xl mx-auto bg-white border border-neutral-100 rounded-2xl md:rounded-3xl px-4 md:px-6 py-2.5 md:py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 shadow-sm relative">
+            <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 shadow-sm relative">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col">
@@ -41,8 +43,8 @@ export default function Layout({ children }: LayoutProps) {
                   aria-label={item.label}
                   className={`w-10 h-10 md:w-11 md:h-11 rounded-xl md:rounded-2xl transition-all duration-500 flex items-center justify-center relative group/nav ${
                     active
-                      ? 'bg-black text-white scale-105'
-                      : 'text-neutral-400 hover:text-black hover:bg-neutral-50'
+                      ? 'bg-orange-500 text-white scale-105 shadow-lg shadow-orange-500/20'
+                      : 'text-neutral-400 hover:text-orange-500 hover:bg-orange-50/50'
                   }`}
                 >
                   <Icon className={`w-5 h-5 transition-colors duration-500 ${active ? 'text-white' : 'group-hover/nav:text-black'}`} />

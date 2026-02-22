@@ -51,7 +51,7 @@ Technical Constraints:
 - Return ONLY the raw HTML code (no markdown blocks, no explanations).
 - Use Tailwind CSS classes exclusively. Do not use custom CSS unless essential.
 - Lucide icons are available via <i data-lucide="icon-name"></i>.
-- You can include simple vanilla JavaScript in <script> tags for basic interactivity (toggles, tabs, modals). Always call `lucide.createIcons()` at the end of scripts.
+- You can include simple vanilla JavaScript in <script> tags for basic interactivity (toggles, tabs, modals). Always call \`lucide.createIcons()\` at the end of scripts.
 - Ensure WCAG 2.1 AA accessibility (proper contrast, ARIA labels, keyboard focus states).
 - Mobile-first responsive design using sm:, md:, lg: variants.
 - Center the component using a container and ensure it is fully self-contained.

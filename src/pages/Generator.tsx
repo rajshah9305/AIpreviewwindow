@@ -91,7 +91,7 @@ export default function Generator() {
                     <p className="text-xs md:text-sm text-neutral-500 font-normal mb-5 md:mb-6 leading-relaxed">Setup your API provider to start generating components.</p>
                     <button
                       onClick={() => navigate('/settings')}
-                      className="mt-4 px-5 md:px-6 py-2 md:py-2.5 bg-black text-white rounded-lg text-[11px] md:text-xs font-semibold hover:bg-neutral-900 transition-all flex items-center gap-2 group active:scale-95"
+                      className="mt-4 px-5 md:px-6 py-2 md:py-2.5 bg-orange-500 text-white rounded-lg text-[11px] md:text-xs font-semibold hover:bg-orange-600 transition-all flex items-center gap-2 group active:scale-95 shadow-md shadow-orange-500/20"
                     >
                       Connect Provider <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -175,7 +175,7 @@ export default function Generator() {
               className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 relative ${
                 loading || !instruction.trim()
                 ? 'bg-neutral-100 text-neutral-300'
-                : 'bg-black text-white hover:bg-neutral-900 active:scale-95'
+                : 'bg-orange-500 text-white hover:bg-orange-600 active:scale-95 shadow-lg shadow-orange-500/30'
               }`}
             >
               {loading ? (
