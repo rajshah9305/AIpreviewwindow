@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wand2, AlertCircle, RefreshCw, ChevronRight } from 'lucide-react'
 import { useGeneration } from '../contexts/GenerationContext'
@@ -58,8 +59,8 @@ export default function Generator() {
   })
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-12rem)] relative w-full max-w-full overflow-x-hidden">
-      <div className="flex-1 pb-20 sm:pb-24 md:pb-28 lg:pb-32 w-full">
+    <div className="flex flex-col min-h-[calc(100vh-8rem)] relative w-full max-w-full overflow-x-hidden pb-[100px] sm:pb-[110px] md:pb-[120px]">
+      <div className="flex-1 w-full">
         {!loading && !result && (
           <HeroSection hasSettings={hasSettings} onNavigateToSettings={() => navigate(ROUTES.SETTINGS)} />
         )}
@@ -221,58 +222,77 @@ const InputArea = ({
   onInstructionChange,
   onGenerate,
   onClearError,
-}: InputAreaProps) => (
-  <div className="fixed bottom-1 sm:bottom-2 md:bottom-4 lg:bottom-6 xl:bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-3xl px-0 z-50 safe-bottom">
-    <div className="bg-white/95 backdrop-blur-xl border border-neutral-200 rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-3xl p-1.5 sm:p-2 md:p-2.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] group/input transition-all duration-300 focus-within:border-orange-500/50 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.15)] w-full">
-      {error && (
-        <div className="mx-1.5 sm:mx-2 md:mx-2.5 lg:mx-3 mb-1.5 sm:mb-2 md:mb-2.5 p-2 sm:p-2.5 md:p-3 lg:p-3.5 bg-red-50 rounded-lg sm:rounded-xl text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up tracking-wide border border-red-100">
-          <span className="flex items-center gap-1 sm:gap-1.5 md:gap-2 min-w-0 flex-1">
-            <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 shrink-0" />
-            <span className="break-words truncate">{error.toUpperCase()}</span>
-          </span>
-          <button
-            onClick={onClearError}
-            className="p-1 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors touch-manipulation shrink-0 ml-1 sm:ml-2"
-            aria-label="Clear error"
-          >
-            ✕
-          </button>
-        </div>
-      )}
+}: InputAreaProps) => {
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
-      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5 lg:gap-3 px-2 sm:px-2.5 md:px-3 lg:px-4">
-        <textarea
-          value={instruction}
-          onChange={(e) => onInstructionChange(e.target.value)}
-          placeholder="Describe your vision"
-          className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-2.5 sm:py-3 md:py-3.5 lg:py-4 text-sm sm:text-base font-sans font-normal placeholder:text-neutral-400 resize-none min-h-[44px] sm:min-h-[48px] md:min-h-[52px] lg:min-h-[56px] max-h-[80px] sm:max-h-[100px] md:max-h-[120px] lg:max-h-[140px] scrollbar-hide text-neutral-800 leading-relaxed"
-          style={{ fontSize: 'max(16px, 1rem)' }}
-          disabled={loading}
-          rows={1}
-          aria-label="Component description"
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="sentences"
-          spellCheck="true"
-        />
+  // Auto-resize textarea
+  React.useEffect(() => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      textarea.style.height = 'auto'
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`
+    }
+  }, [instruction])
 
-        <button
-          onClick={onGenerate}
-          disabled={loading || !instruction.trim()}
-          className={`h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl transition-all duration-300 touch-manipulation ${
-            loading || !instruction.trim()
-              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
-              : 'bg-neutral-100 text-neutral-700 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/25 active:scale-95'
-          }`}
-          aria-label="Generate components"
-        >
-          {loading ? (
-            <div className="spinner !w-3.5 !h-3.5 sm:!w-4 sm:!h-4 md:!w-4.5 md:!h-4.5 lg:!w-5 lg:!h-5 !border-neutral-400" />
-          ) : (
-            <Wand2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-5.5 lg:h-5.5" />
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-[200] w-full bg-gradient-to-t from-[#faf8f6] via-[#faf8f6] to-transparent pt-4">
+      <div className="w-full max-w-3xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 pb-2 sm:pb-3 md:pb-4 lg:pb-6">
+        <div className="bg-white/98 backdrop-blur-xl border-2 border-neutral-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-2.5 md:p-3 shadow-[0_12px_48px_rgba(0,0,0,0.15)] group/input transition-all duration-300 focus-within:border-orange-500 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.2)] w-full">
+          {error && (
+            <div className="mx-1 sm:mx-1.5 md:mx-2 mb-2 sm:mb-2.5 p-2.5 sm:p-3 md:p-3.5 bg-red-50 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] md:text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up tracking-wide border border-red-100">
+              <span className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="break-words line-clamp-2">{error.toUpperCase()}</span>
+              </span>
+              <button
+                onClick={onClearError}
+                className="p-1.5 hover:bg-red-100 rounded-lg transition-colors touch-manipulation shrink-0 ml-2"
+                aria-label="Clear error"
+              >
+                ✕
+              </button>
+            </div>
           )}
-        </button>
+
+          <div className="flex items-end gap-2 sm:gap-2.5 md:gap-3">
+            <div className="flex-1 min-w-0">
+              <textarea
+                ref={textareaRef}
+                value={instruction}
+                onChange={(e) => onInstructionChange(e.target.value)}
+                placeholder="Describe your vision..."
+                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-3 sm:px-4 py-3 sm:py-3.5 md:py-4 text-base font-sans font-normal placeholder:text-neutral-400 resize-none min-h-[52px] max-h-[120px] scrollbar-hide text-neutral-800 leading-relaxed rounded-lg"
+                style={{ fontSize: 'max(16px, 1rem)' }}
+                disabled={loading}
+                rows={1}
+                aria-label="Component description"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="sentences"
+                spellCheck="true"
+              />
+            </div>
+
+            <button
+              onClick={onGenerate}
+              disabled={loading || !instruction.trim()}
+              type="button"
+              className={`h-12 w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-xl transition-all duration-300 touch-manipulation ${
+                loading || !instruction.trim()
+                  ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                  : 'bg-orange-500 text-white hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30 active:scale-95'
+              }`}
+              aria-label="Generate components"
+            >
+              {loading ? (
+                <div className="spinner !w-5 !h-5 !border-2 !border-white/30 !border-t-white" />
+              ) : (
+                <Wand2 className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6" />
+              )}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
