@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sparkles, History, Settings, LayoutGrid } from 'lucide-react'
-import GLSLHills from './ui/glsl-hills'
+import { GLSLHills } from './ui/glsl-hills'
 
 interface LayoutProps {
   children: ReactNode;
