@@ -64,11 +64,17 @@ export default function Generator() {
     <div className="flex flex-col min-h-[calc(100vh-16rem)] relative">
       <div className="flex-1 pb-40">
         {!loading && !result && (
-          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 md:mb-8 text-black leading-[1.1]">
-              Build <span className="text-orange-500">Faster</span>.<br />
-              Design <span className="text-orange-500">Better</span>.
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 animate-slide-up">
+            <div className="text-xs md:text-sm font-medium text-orange-500 tracking-widest mb-6 md:mb-8">
+              NEXT-GEN COMPONENT ENGINE
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 md:mb-8 text-black leading-[1.1]">
+              <span className="text-black">BUILD</span> <span className="text-orange-500">FASTER</span><br />
+              <span className="text-black">DESIGN</span> <span className="text-orange-500">BETTER</span>
             </h2>
+            <p className="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+              Transform your thoughts into premium UI components with AI. Describe your vision, we'll handle the rest.
+            </p>
 
             {!hasSettings && (
               <div className="mt-8 md:mt-12 p-6 md:p-8 bg-neutral-50 rounded-2xl md:rounded-3xl border border-neutral-100 inline-block text-left shadow-premium max-w-md mx-4">
@@ -135,7 +141,7 @@ export default function Generator() {
       
       {/* Input Area */}
       <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 md:px-6 z-50">
-        <div className="bg-white/90 backdrop-blur-3xl border border-neutral-200 rounded-2xl md:rounded-3xl p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-orange-500/30">
+        <div className="bg-white/90 backdrop-blur-3xl border-2 border-black rounded-2xl md:rounded-3xl p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-orange-500">
           {error && (
             <div className="mx-3 md:mx-4 mb-2 md:mb-3 p-3 md:p-4 bg-red-50 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-semibold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">

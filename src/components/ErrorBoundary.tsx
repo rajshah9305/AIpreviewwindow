@@ -33,13 +33,13 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-accent-50/30 flex items-center justify-center p-6">
+        <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-orange-50/30 to-neutral-50/30 flex items-center justify-center p-6">
           <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
             <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center">
               <AlertCircle className="w-10 h-10 text-red-600" />
             </div>
             
-            <h1 className="text-2xl font-display font-bold text-neutral-900 mb-3">
+            <h1 className="text-2xl font-bold text-neutral-900 mb-3">
               Something went wrong
             </h1>
             
@@ -57,7 +57,7 @@ export default class ErrorBoundary extends Component<Props, State> {
             
             <button
               onClick={this.handleReset}
-              className="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold shadow-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 flex items-center justify-center space-x-2"
+              className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-semibold shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 flex items-center justify-center space-x-2"
             >
               <RefreshCw className="w-5 h-5" />
               <span>Reload Application</span>

@@ -44,10 +44,6 @@ export default {
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
-      boxShadow: {
-        'premium': '0 20px 50px -12px rgb(0 0 0 / 0.08)',
-        'orange': '0 20px 50px -12px rgb(249 115 22 / 0.15)',
-      }
     },
   },
   plugins: [],
