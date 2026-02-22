@@ -70,6 +70,10 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-md z-[110] animate-fade-in"
           onClick={() => setIsExpanded(false)}
+          role="button"
+          aria-label="Close expanded view"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Escape' && setIsExpanded(false)}
         />
       )}
       <div className={`bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-neutral-100 flex flex-col group/card transition-all duration-500 ${
@@ -137,15 +141,17 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                 ref={iframeRef}
                 srcDoc={`
                   <!DOCTYPE html>
-                  <html>
+                  <html lang="en">
                     <head>
-                      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
                       <link rel="preconnect" href="https://fonts.googleapis.com">
                       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-                      <script src="https://cdn.tailwindcss.com"></script>
-                      <script src="https://unpkg.com/lucide@latest"></script>
+                      <script src="https://cdn.tailwindcss.com"><\/script>
+                      <script src="https://unpkg.com/lucide@latest"><\/script>
                       <style>
+                        * { box-sizing: border-box; }
                         body {
                           margin: 0;
                           padding: 0.75rem;
@@ -156,6 +162,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                           justify-content: center;
                           min-height: 100vh;
                           -webkit-font-smoothing: antialiased;
+                          -moz-osx-font-smoothing: grayscale;
                           overflow: auto;
                         }
                         @media (min-width: 640px) {
@@ -164,11 +171,16 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                         @media (min-width: 768px) {
                           body { padding: 2rem; }
                         }
-                        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+                        h1, h2, h3, h4, h5, h6 { 
+                          font-family: 'Space Grotesk', sans-serif; 
+                          font-weight: 700; 
+                          letter-spacing: -0.02em; 
+                        }
                         body::-webkit-scrollbar { width: 6px; height: 6px; }
                         body::-webkit-scrollbar-track { background: transparent; }
                         body::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 3px; }
-                        * { box-sizing: border-box; }
+                        img { max-width: 100%; height: auto; }
+                        button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
                       </style>
                     </head>
                     <body>
@@ -177,7 +189,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                         if (window.lucide) {
                           lucide.createIcons();
                         }
-                      </script>
+                      <\/script>
                     </body>
                   </html>
                 `}

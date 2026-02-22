@@ -229,8 +229,8 @@ const InputArea = ({
   onGenerate,
   onClearError,
 }: InputAreaProps) => (
-  <div className="fixed bottom-2 sm:bottom-3 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-3 sm:px-4 md:px-6 z-50">
-    <div className="bg-white border border-neutral-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-1.5 sm:p-2 md:p-2.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] group/input transition-all duration-300 focus-within:border-orange-500/50 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.15)]">
+  <div className="fixed bottom-2 sm:bottom-3 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-3 sm:px-4 md:px-6 z-50 safe-bottom">
+    <div className="bg-white/95 backdrop-blur-xl border border-neutral-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-1.5 sm:p-2 md:p-2.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] group/input transition-all duration-300 focus-within:border-orange-500/50 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.15)]">
       {error && (
         <div className="mx-2 sm:mx-2.5 md:mx-3 mb-2 sm:mb-2.5 p-2.5 sm:p-3 md:p-3.5 bg-red-50 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] md:text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up tracking-wide border border-red-100">
           <span className="flex items-center gap-1.5 sm:gap-2">
@@ -253,9 +253,14 @@ const InputArea = ({
           onChange={(e) => onInstructionChange(e.target.value)}
           placeholder="Describe your vision"
           className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-3 sm:py-3.5 md:py-4 text-sm sm:text-base font-sans font-normal placeholder:text-neutral-400 resize-none min-h-[48px] sm:min-h-[52px] md:min-h-[56px] max-h-[100px] sm:max-h-[120px] md:max-h-[140px] scrollbar-hide text-neutral-800 leading-relaxed"
+          style={{ fontSize: 'max(16px, 1rem)' }}
           disabled={loading}
           rows={1}
           aria-label="Component description"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="sentences"
+          spellCheck="true"
         />
 
         <button

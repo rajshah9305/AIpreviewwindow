@@ -27,6 +27,9 @@
   html { 
     @apply scroll-smooth selection:bg-orange-500/20 selection:text-orange-500;
     font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   body {
@@ -37,9 +40,11 @@
     text-rendering: optimizeLegibility;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'calt', 'liga', 'ss01';
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     overflow-x: hidden;
     letter-spacing: -0.015em;
     font-weight: 400;
+    position: relative;
   }
   
   /* Enhanced Typography Hierarchy */
@@ -189,6 +194,7 @@
     @apply w-full px-4 sm:px-5 py-3 sm:py-4 border border-neutral-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all duration-300 bg-white placeholder:text-neutral-400 text-sm tracking-tight touch-manipulation;
     font-family: 'Inter', system-ui, sans-serif;
     letter-spacing: -0.015em;
+    font-size: max(16px, 1rem);
   }
   
   .input-error { @apply border-red-200 focus:ring-red-500/5 focus:border-red-400; }
@@ -410,3 +416,85 @@
     color: rgb(249, 115, 22);
   }
 }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      min-height: -webkit-fill-available;
+    }
+  }
+
+  /* Prevent zoom on input focus for iOS */
+  @media screen and (max-width: 767px) {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="search"],
+    textarea,
+    select {
+      font-size: max(16px, 1rem);
+    }
+  }
+
+  /* Safe area insets for notched devices */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+
+  /* Improve touch targets on mobile */
+  @media (hover: none) and (pointer: coarse) {
+    button,
+    a,
+    input,
+    textarea,
+    select {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .card,
+    .input-field,
+    button {
+      border-width: 2px;
+    }
+  }
+
+  /* Dark mode preparation (optional) */
+  @media (prefers-color-scheme: dark) {
+    /* Currently using light theme only, but structure is ready */
+  }
+
+  /* Safe area utilities for notched devices */
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 0.625rem);
+  }
+
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  .safe-left {
+    padding-left: max(env(safe-area-inset-left), 0.75rem);
+  }
+
+  .safe-right {
+    padding-right: max(env(safe-area-inset-right), 0.75rem);
+  }

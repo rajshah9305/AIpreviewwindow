@@ -13,6 +13,7 @@ export class APIError extends Error {
   ) {
     super(message)
     this.name = 'APIError'
+    Object.setPrototypeOf(this, APIError.prototype)
   }
 }
 
