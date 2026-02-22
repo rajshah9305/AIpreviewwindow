@@ -3,7 +3,6 @@ import { Clock, Trash2, Search, Calendar, ChevronRight } from 'lucide-react'
 import { GenerationResult } from '../types'
 import { loadHistory, clearHistory } from '../services/api'
 import ComponentPreview from '../components/ComponentPreview'
-import EmptyState from '../components/EmptyState'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { useToast } from '../components/ToastContainer'
 import { useNavigate } from 'react-router-dom'
@@ -36,12 +35,21 @@ export default function History() {
   
   if (history.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto py-24 animate-fade-in">
-        <EmptyState
-          icon={Clock}
-          title="Archive Empty"
-          action={{ label: 'Launch Generator', onClick: () => navigate('/generator') }}
-        />
+      <div className="max-w-4xl mx-auto py-24 animate-fade-in px-4">
+        <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-12 md:p-20 text-center shadow-premium relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="w-20 h-20 bg-neutral-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
+            <Clock className="w-10 h-10 text-neutral-300" />
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight mb-4 uppercase italic">Archive Empty</h2>
+          <p className="text-neutral-400 font-medium mb-10 max-w-sm mx-auto">Your design history is waiting to be written. Start creating your vision today.</p>
+          <button
+            onClick={() => navigate('/generator')}
+            className="px-8 py-4 bg-black text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-orange-500 hover:scale-105 transition-all shadow-xl active:scale-95"
+          >
+            Launch Engine
+          </button>
+        </div>
       </div>
     )
   }
