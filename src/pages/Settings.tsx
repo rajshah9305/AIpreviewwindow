@@ -82,7 +82,7 @@ const SettingsForm = ({
   onToggleApiKey,
   onSave,
 }: SettingsFormProps) => (
-  <div className="bg-white rounded-2xl border border-neutral-100 p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-premium relative overflow-hidden">
+  <div className="bg-white rounded-2xl border border-neutral-100 p-4 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-premium relative overflow-hidden">
     <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
     <div className="space-y-5 sm:space-y-6">
@@ -191,7 +191,7 @@ const PresetsSection = ({ onApplyPreset }: PresetsSectionProps) => (
       <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500" />
       <h3 className="text-label text-black">Rapid Presets</h3>
     </div>
-    <div className="grid grid-cols-1 gap-3 sm:gap-4">
+    <div className="grid grid-cols-1 gap-2 sm:gap-4">
       {AI_PRESETS.map((preset) => (
         <button
           key={preset.name}

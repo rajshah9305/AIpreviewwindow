@@ -90,7 +90,7 @@ interface PageHeaderProps {
 }
 
 const PageHeader = ({ onClearClick }: PageHeaderProps) => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 border-b border-neutral-100 pb-6 sm:pb-8">
+  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 border-b border-neutral-100 pb-4 sm:pb-8">
     <h2 className="heading-section">History</h2>
     <button
       onClick={onClearClick}
@@ -126,7 +126,7 @@ interface HistoryListProps {
 }
 
 const HistoryList = ({ items, selectedTimestamp, onSelect }: HistoryListProps) => (
-  <div className="space-y-2.5 sm:space-y-3 max-h-[55vh] sm:max-h-[65vh] overflow-auto pr-1 sm:pr-2 scrollbar-thin">
+  <div className="space-y-2.5 sm:space-y-3 max-h-[50vh] sm:max-h-[65vh] overflow-auto pr-1 sm:pr-2 scrollbar-thin">
     {items.map((item) => (
       <HistoryItem
         key={item.timestamp}
@@ -152,7 +152,7 @@ interface HistoryItemProps {
 const HistoryItem = ({ item, isSelected, onSelect }: HistoryItemProps) => (
   <button
     onClick={onSelect}
-    className={`w-full p-4 sm:p-5 rounded-xl sm:rounded-2xl text-left transition-all duration-500 flex items-center justify-between group touch-manipulation ${
+    className={`w-full p-3 sm:p-5 rounded-xl sm:rounded-2xl text-left transition-all duration-500 flex items-center justify-between group touch-manipulation ${
       isSelected
         ? 'bg-black text-white shadow-premium'
         : 'bg-white border border-neutral-50 hover:border-orange-500/20 text-neutral-600 hover:bg-neutral-50/50'
@@ -224,7 +224,7 @@ const ResultDetail = ({ result }: ResultDetailProps) => (
 )
 
 const MetadataBadge = ({ label, value }: { label: string; value: string }) => (
-  <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 rounded-lg sm:rounded-xl border border-white/10">
+  <div className="px-2 sm:px-4 py-1 sm:py-2 bg-white/5 rounded-lg sm:rounded-xl border border-white/10">
     <p className="text-[7px] sm:text-[8px] font-display font-bold uppercase tracking-widest-xl text-neutral-500">
       {label}
     </p>
