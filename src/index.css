@@ -23,7 +23,7 @@
   }
 
   * { @apply border-border; }
-  html { @apply scroll-smooth selection:bg-orange-500/20 selection:text-orange-950; }
+  html { @apply scroll-smooth selection:bg-neutral-100 selection:text-black; }
   body {
     @apply bg-white text-black font-sans antialiased;
     -webkit-font-smoothing: antialiased;
@@ -92,7 +92,7 @@
   }
 
   .shadow-premium {
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
   
   .shadow-orange {
@@ -114,16 +114,6 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-  }
-
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-  }
-  
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
   }
 
   @keyframes slide-up {

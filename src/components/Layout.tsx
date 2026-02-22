@@ -18,17 +18,15 @@ export default function Layout({ children }: LayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-orange-500/10 selection:text-orange-600">
+    <div className="min-h-screen bg-white text-black selection:bg-neutral-100 selection:text-black">
       <nav className="sticky top-0 z-[100] w-full px-4 md:px-6 py-4 md:py-6">
-        <div className="max-w-5xl mx-auto bg-white border border-neutral-100 rounded-2xl md:rounded-3xl px-4 md:px-6 py-2.5 md:py-3 shadow-sm flex items-center justify-between">
+        <div className="max-w-5xl mx-auto bg-white border border-neutral-100 rounded-2xl md:rounded-3xl px-4 md:px-6 py-2.5 md:py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 shadow-lg shadow-black/5 relative">
+            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 shadow-sm relative">
               <Sparkles className="w-5 h-5 text-white" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 border-2 border-white rounded-full animate-pulse" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-black leading-none">AI UI</span>
-              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-orange-500 mt-1">Engine Live</span>
             </div>
           </Link>
 
@@ -43,14 +41,11 @@ export default function Layout({ children }: LayoutProps) {
                   aria-label={item.label}
                   className={`w-10 h-10 md:w-11 md:h-11 rounded-xl md:rounded-2xl transition-all duration-500 flex items-center justify-center relative group/nav ${
                     active
-                      ? 'bg-black text-white shadow-xl shadow-black/10 scale-105'
+                      ? 'bg-black text-white scale-105'
                       : 'text-neutral-400 hover:text-black hover:bg-neutral-50'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 transition-colors duration-500 ${active ? 'text-orange-500' : 'group-hover/nav:text-black'}`} />
-                  {active && (
-                    <div className="absolute -bottom-1 w-1 h-1 bg-orange-500 rounded-full" />
-                  )}
+                  <Icon className={`w-5 h-5 transition-colors duration-500 ${active ? 'text-white' : 'group-hover/nav:text-black'}`} />
                 </Link>
               )
             })}
