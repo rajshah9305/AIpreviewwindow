@@ -147,10 +147,10 @@ void main(void) {
 varying vec3 vPosition;
 
 void main(void) {
-  float opacity = (96.0 - length(vPosition)) / 256.0 * 0.6;
+  float opacity = (96.0 - length(vPosition)) / 256.0 * 1.2;
   float highlight = smoothstep(0.0, 40.0, vPosition.y);
-  vec3 baseColor = vec3(0.976, 0.451, 0.086);
-  vec3 peakColor = vec3(1.0, 0.7, 0.3);
+  vec3 baseColor = vec3(0.92, 0.55, 0.30);
+  vec3 peakColor = vec3(0.96, 0.72, 0.52);
   vec3 color = mix(baseColor, peakColor, highlight);
   gl_FragColor = vec4(color, opacity);
 }`,
@@ -211,7 +211,7 @@ void main(void) {
       
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0xffffff, 1);
+      renderer.setClearColor(0xfaf8f6, 1);
       camera.position.set(0, 16, cameraZ);
       camera.lookAt(new THREE.Vector3(0, 28, 0));
       scene.add(plane.mesh);
