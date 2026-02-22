@@ -122,8 +122,7 @@ npm run preview
 - Loading skeletons for better perceived performance
 - Error boundaries for graceful error handling
 - Toast notifications for user feedback
-- Keyboard shortcuts (Cmd/Ctrl + Enter to generate)
-
+  
 ### Accessibility
 - Semantic HTML structure
 - ARIA labels and roles
@@ -197,10 +196,6 @@ The project includes:
 ## 📄 License
 
 MIT License. See [LICENSE](LICENSE) for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🙏 Acknowledgments
 
