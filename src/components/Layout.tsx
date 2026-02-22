@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sparkles, History, Settings, LayoutGrid } from 'lucide-react'
+import GLSLHills from './ui/glsl-hills'
 
 interface LayoutProps {
   children: ReactNode;
@@ -19,6 +20,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-white text-black selection:bg-orange-500/10 selection:text-orange-600">
+      <GLSLHills />
       <nav className="sticky top-0 z-[100] w-full px-4 md:px-6 py-3 md:py-4">
         <div className="max-w-5xl mx-auto glass rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-2.5 shadow-premium flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 md:space-x-3 group">
