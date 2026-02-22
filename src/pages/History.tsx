@@ -36,18 +36,17 @@ export default function History() {
   if (history.length === 0) {
     return (
       <div className="max-w-4xl mx-auto py-24 animate-fade-in px-4">
-        <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-12 md:p-20 text-center shadow-premium relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-          <div className="w-20 h-20 bg-neutral-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
-            <Clock className="w-10 h-10 text-neutral-300" />
+        <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-12 md:p-20 text-center shadow-premium relative">
+          <div className="w-16 h-16 flex items-center justify-center mx-auto mb-8">
+            <Clock className="w-10 h-10 text-neutral-200" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight mb-4 uppercase italic">Archive Empty</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">Archive Empty</h2>
           <p className="text-neutral-400 font-medium mb-10 max-w-sm mx-auto">Your design history is waiting to be written. Start creating your vision today.</p>
           <button
             onClick={() => navigate('/generator')}
-            className="px-8 py-4 bg-black text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-orange-500 hover:scale-105 transition-all shadow-xl active:scale-95"
+            className="px-8 py-3 bg-black text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-neutral-900 transition-all active:scale-95"
           >
-            Launch Engine
+            Start Creating
           </button>
         </div>
       </div>
@@ -114,8 +113,7 @@ export default function History() {
         <div className="md:col-span-8">
           {selectedResult ? (
               <div className="space-y-8 md:space-y-10 animate-fade-in">
-              <div className="p-8 md:p-10 bg-black rounded-3xl text-white relative overflow-hidden shadow-premium">
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="p-8 md:p-10 bg-black rounded-3xl text-white relative shadow-premium">
                  <div className="relative z-10">
                   <p className="text-lg md:text-xl font-bold leading-tight tracking-tight">"{selectedResult.instruction}"</p>
                   <div className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8">

@@ -73,19 +73,15 @@ export default function Generator() {
       <div className="flex-1 pb-40">
         {!loading && !result && (
           <div className="max-w-5xl mx-auto text-center pt-12 md:pt-24 mb-12 md:mb-16 animate-slide-up px-4">
-             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-orange-500 mb-10 border border-neutral-100 shadow-sm">
-               <Sparkles className="w-3.5 h-3.5" />
-               <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Next-Gen Component Engine</span>
-             </div>
-            <h1 className="text-[6.2vw] md:text-7xl font-black tracking-[-0.08em] mb-12 italic leading-[0.85] uppercase">
-              AI – <span className="text-orange-500">BUILD BETTER</span><br />AND <span className="text-orange-500">DESIGN BETTER</span>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
+              Build better and <br className="hidden md:block" /> design better with AI
             </h1>
             <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed">
               Transform your thoughts into premium UI components with AI.<br className="hidden md:block" /> Describe your vision, we'll handle the rest.
             </p>
 
             {!hasSettings && (
-              <div className="mt-10 md:mt-14 p-8 md:p-10 bg-white/70 backdrop-blur-2xl rounded-3xl md:rounded-[2.5rem] border border-white/60 inline-block text-left animate-float shadow-2xl shadow-black/10 max-w-md mx-4">
+              <div className="mt-10 md:mt-14 p-8 md:p-10 bg-white border border-neutral-100 rounded-[2.5rem] inline-block text-left shadow-premium max-w-md mx-4">
                 <div className="flex items-start gap-5 md:gap-6">
                   <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30 shrink-0">
                     <AlertCircle className="w-6 h-6 md:w-7 md:h-7 text-white" />
@@ -110,7 +106,7 @@ export default function Generator() {
           <div className="space-y-8 md:space-y-12 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-100 pb-6 md:pb-8">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Generating Variations</h3>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight">Generating Variations</h3>
               </div>
             </div>
             
@@ -126,7 +122,7 @@ export default function Generator() {
           <div className="space-y-8 md:space-y-12 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 border-b border-neutral-100 pb-6 md:pb-8">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">The Collection</h3>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight">The Collection</h3>
               </div>
               <button
                 onClick={handleClearAndNew}
@@ -150,7 +146,7 @@ export default function Generator() {
       
       {/* Input Area */}
       <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50 animate-slide-up" style={{ animationDelay: '400ms' }}>
-        <div className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 rounded-[2.5rem] p-2 md:p-3 shadow-2xl shadow-black/10 group/input transition-all duration-500 focus-within:border-orange-500/40 focus-within:shadow-orange-500/10 focus-within:bg-white">
+        <div className="bg-white border border-neutral-200 rounded-[2.5rem] p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-neutral-400 focus-within:bg-white">
           {error && (
             <div className="mx-4 mb-3 p-4 bg-red-50 rounded-3xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
@@ -179,13 +175,13 @@ export default function Generator() {
               className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 relative ${
                 loading || !instruction.trim()
                 ? 'bg-neutral-100 text-neutral-300'
-                : 'bg-black text-white hover:bg-orange-500 hover:scale-105 shadow-xl active:scale-95'
-              } ${loading ? 'animate-pulse' : ''}`}
+                : 'bg-black text-white hover:bg-neutral-900 active:scale-95'
+              }`}
             >
               {loading ? (
                 <div className="flex items-center justify-center">
-                   <div className="absolute inset-0 rounded-full border-2 border-orange-500 border-t-transparent animate-spin" />
-                   <Sparkles className="w-5 h-5 text-orange-500" />
+                   <div className="absolute inset-0 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
               ) : (
                 <Wand2 className="w-5 h-5 md:w-6 md:h-6" />

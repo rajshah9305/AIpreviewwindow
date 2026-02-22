@@ -60,20 +60,19 @@ export default function Settings() {
     <div className="max-w-6xl mx-auto space-y-10 md:space-y-16 animate-fade-in pb-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-100 pb-8">
         <div>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight italic uppercase">Configuration</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Configuration</h2>
           <p className="text-neutral-400 font-medium mt-2">Manage your AI providers and model preferences.</p>
         </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
         <div className="md:col-span-7 space-y-10">
-          <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-8 md:p-12 space-y-10 shadow-premium relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="bg-white rounded-[2.5rem] border border-neutral-100 p-8 md:p-12 space-y-10 shadow-premium relative">
             
             <div className="space-y-6">
               <div className="space-y-3">
                 <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
-                  <Tag className="w-3.5 h-3.5 text-orange-500" /> Model Identifier
+                  <Tag className="w-3.5 h-3.5 text-black" /> Model Identifier
                 </label>
                 <input
                   value={settings.modelName}
@@ -86,7 +85,7 @@ export default function Settings() {
 
               <div className="space-y-3">
                 <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
-                  <Key className="w-3.5 h-3.5 text-orange-500" /> Secret API Key
+                  <Key className="w-3.5 h-3.5 text-black" /> Secret API Key
                 </label>
                 <div className="relative">
                   <input
@@ -109,7 +108,7 @@ export default function Settings() {
 
               <div className="space-y-3">
                 <label className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400 ml-1">
-                  <Server className="w-3.5 h-3.5 text-orange-500" /> Provider Endpoint
+                  <Server className="w-3.5 h-3.5 text-black" /> Provider Endpoint
                 </label>
                 <input
                   value={settings.baseUrl}
@@ -124,10 +123,10 @@ export default function Settings() {
             <button
               onClick={handleSave}
               disabled={!isModified}
-              className={`w-full py-4 rounded-xl font-semibold uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3 active:scale-[0.98] text-sm ${
+              className={`w-full py-4 rounded-xl font-semibold transition-all duration-500 flex items-center justify-center gap-3 active:scale-[0.98] text-sm ${
                 isModified
-                ? 'bg-black text-white hover:bg-neutral-900 shadow-lg shadow-black/10'
-                : 'bg-neutral-100 text-neutral-400 cursor-not-allowed shadow-none'
+                ? 'bg-black text-white hover:bg-neutral-900 shadow-sm'
+                : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
               }`}
             >
               <Save className="w-5 h-5" />
@@ -139,7 +138,7 @@ export default function Settings() {
         <div className="md:col-span-5 space-y-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2 ml-1">
-              <Sparkles className="w-4 h-4 text-orange-500" />
+              <Sparkles className="w-4 h-4 text-black" />
               <h3 className="text-xs font-bold uppercase tracking-widest text-black">Rapid Presets</h3>
             </div>
             <div className="grid grid-cols-1 gap-4">
@@ -150,9 +149,9 @@ export default function Settings() {
                     setSettings({ ...settings, baseUrl: p.baseUrl, modelName: p.model })
                     setIsModified(true)
                   }}
-                  className="w-full p-6 bg-white border border-neutral-100 rounded-2xl text-left hover:border-orange-500/20 hover:shadow-premium transition-all group relative overflow-hidden"
+                  className="w-full p-6 bg-white border border-neutral-100 rounded-2xl text-left hover:border-neutral-200 hover:shadow-premium transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-1.5 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                  <div className="absolute top-0 right-0 w-1.5 h-full bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                   <p className="font-bold text-base tracking-tight mb-1">{p.name}</p>
                   <p className="text-[10px] text-neutral-400 font-medium uppercase tracking-widest">{p.model}</p>
                 </button>
