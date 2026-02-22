@@ -98,7 +98,7 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
     <div className="text-label text-orange-500 mb-4 sm:mb-6 md:mb-8 animate-text-reveal">
       {APP_CONFIG.TAGLINE.toUpperCase()}
     </div>
-    <h2 className="heading-hero mb-4 sm:mb-6 md:mb-8 text-black leading-[0.95]">
+    <h2 className="heading-hero mb-4 sm:mb-6 md:mb-8 text-black">
       <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.1s' }}>BUILD</span>{' '}
       <span className="text-gradient-sunset animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>FASTER</span>
       <br />
@@ -223,7 +223,7 @@ const InputArea = ({
           value={instruction}
           onChange={(e) => onInstructionChange(e.target.value)}
           placeholder="Describe your vision (e.g., 'A premium checkout card')"
-          className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-fluid-base font-normal placeholder:text-neutral-300 resize-none min-h-[44px] sm:min-h-[48px] md:min-h-[56px] max-h-[100px] sm:max-h-[120px] md:max-h-[150px] scrollbar-hide tracking-tight"
+          className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-2.5 sm:py-3 md:py-4 text-fluid-sm md:text-fluid-base font-normal placeholder:text-neutral-300 resize-none min-h-[44px] sm:min-h-[48px] md:min-h-[56px] max-h-[100px] sm:max-h-[120px] md:max-h-[150px] scrollbar-hide"
           disabled={loading}
           rows={1}
           aria-label="Component description"

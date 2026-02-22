@@ -42,7 +42,7 @@ Key Traits: ${theme.traits.join(', ')}
 
 Strict Design System:
 1. Palette: Primary Orange (#f97316), Pure Black (#000000), Pure White (#ffffff).
-2. Typography: Use sans-serif (Inter) or display (Poppins) fonts.
+2. Typography: Use sans-serif (Inter) or display (Space Grotesk) fonts.
 3. Shadows: Use high-end, very subtle shadows (e.g., shadow-[0_10px_40px_rgba(0,0,0,0.04)]).
 4. Corners: Use refined rounding (rounded-xl to rounded-2xl).
 5. Hover: Add smooth transitions and sophisticated hover effects.
