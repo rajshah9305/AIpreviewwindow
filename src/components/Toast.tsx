@@ -28,7 +28,7 @@ export default function Toast({ message, type, onClose, duration = 4000 }: Toast
   const styles = {
     success: 'border-green-100',
     error: 'border-red-100',
-    warning: 'border-orange-100',
+    warning: 'border-orange-500/20',
     info: 'border-neutral-100',
   }
 

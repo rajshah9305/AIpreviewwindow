@@ -4,10 +4,9 @@
  */
 
 import { useState } from 'react'
-import { Save, Key, Server, Tag, Eye, EyeOff, Sparkles } from 'lucide-react'
+import { Save, Key, Server, Tag, Eye, EyeOff } from 'lucide-react'
 import { useSettings } from '../hooks/useSettings'
 import { useToast } from '../components/ToastContainer'
-import { AI_PRESETS } from '../config/constants'
 
 export default function Settings() {
   const {
@@ -17,7 +16,6 @@ export default function Settings() {
     isSaved,
     updateField,
     save,
-    applyPreset,
   } = useSettings()
 
   const toast = useToast()
@@ -33,23 +31,17 @@ export default function Settings() {
     <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 md:space-y-10 animate-fade-in pb-12 sm:pb-16">
       <PageHeader />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 md:gap-10">
-        <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-          <SettingsForm
-            settings={settings}
-            errors={errors}
-            isModified={isModified}
-            isSaved={isSaved}
-            showApiKey={showApiKey}
-            onFieldChange={updateField}
-            onToggleApiKey={() => setShowApiKey(!showApiKey)}
-            onSave={handleSave}
-          />
-        </div>
-
-        <div className="lg:col-span-5 space-y-4 sm:space-y-6">
-          <PresetsSection onApplyPreset={applyPreset} />
-        </div>
+      <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
+        <SettingsForm
+          settings={settings}
+          errors={errors}
+          isModified={isModified}
+          isSaved={isSaved}
+          showApiKey={showApiKey}
+          onFieldChange={updateField}
+          onToggleApiKey={() => setShowApiKey(!showApiKey)}
+          onSave={handleSave}
+        />
       </div>
     </div>
   )
@@ -181,31 +173,4 @@ const FormField = ({
   </div>
 )
 
-interface PresetsSectionProps {
-  onApplyPreset: (baseUrl: string, modelName: string) => void
-}
-
-const PresetsSection = ({ onApplyPreset }: PresetsSectionProps) => (
-  <div className="space-y-3 sm:space-y-4">
-    <div className="flex items-center gap-1.5 sm:gap-2 ml-1">
-      <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500" />
-      <h3 className="text-label text-black">Rapid Presets</h3>
-    </div>
-    <div className="grid grid-cols-1 gap-2 sm:gap-3">
-      {AI_PRESETS.map((preset) => (
-        <button
-          key={preset.name}
-          onClick={() => onApplyPreset(preset.baseUrl, preset.model)}
-          className="w-full p-4 sm:p-5 bg-white border border-neutral-200 rounded-lg sm:rounded-xl text-left hover:border-orange-500/30 hover:shadow-sm transition-all group relative overflow-hidden touch-manipulation active:scale-[0.99]"
-        >
-          <div className="absolute top-0 right-0 w-1 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-          <p className="font-display font-bold text-sm sm:text-base mb-0.5 sm:mb-1 tracking-tight">{preset.name}</p>
-          <p className="text-label text-neutral-500 text-[10px] sm:text-[11px]">
-            {preset.model}
-          </p>
-        </button>
-      ))}
-    </div>
-  </div>
-)
 

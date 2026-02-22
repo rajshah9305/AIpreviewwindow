@@ -62,11 +62,6 @@ export const useSettings = () => {
     return success
   }, [settings, validate])
 
-  const applyPreset = useCallback((baseUrl: string, modelName: string) => {
-    setSettings((prev) => ({ ...prev, baseUrl, modelName }))
-    setIsModified(true)
-  }, [])
-
   const hasSettings = useCallback((): boolean => {
     return !!(settings.apiKey && settings.modelName && settings.baseUrl)
   }, [settings])
@@ -79,7 +74,6 @@ export const useSettings = () => {
     updateField,
     validate,
     save,
-    applyPreset,
     hasSettings,
   }
 }
