@@ -32,7 +32,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             <title>${variation.name} - AI UI Preview</title>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://unpkg.com/lucide@latest"></script>
             <style>
@@ -47,7 +47,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
                 -webkit-font-smoothing: antialiased;
               }
-              h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+              h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
             </style>
           </head>
           <body>
@@ -142,7 +142,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
                       <link rel="preconnect" href="https://fonts.googleapis.com">
                       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+                      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
                       <script src="https://cdn.tailwindcss.com"></script>
                       <script src="https://unpkg.com/lucide@latest"></script>
                       <style>
@@ -160,7 +160,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                         @media (min-width: 640px) {
                           body { padding: 2rem; }
                         }
-                        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+                        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
                         body::-webkit-scrollbar { display: none; }
                         body { -ms-overflow-style: none; scrollbar-width: none; }
                       </style>

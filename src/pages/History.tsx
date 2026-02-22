@@ -159,7 +159,7 @@ const HistoryItem = ({ item, isSelected, onSelect }: HistoryItemProps) => (
     }`}
   >
     <div className="min-w-0 flex-1">
-      <p className={`text-xs sm:text-sm font-display font-semibold truncate tracking-tight ${isSelected ? 'text-white' : 'text-black'}`}>
+      <p className={`text-fluid-sm font-display font-semibold truncate ${isSelected ? 'text-white' : 'text-black'}`}>
         {item.instruction}
       </p>
       <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 opacity-50">
@@ -195,7 +195,7 @@ const ResultDetail = ({ result }: ResultDetailProps) => (
     <div className="p-6 sm:p-8 md:p-10 bg-black rounded-2xl sm:rounded-3xl text-white relative overflow-hidden shadow-premium">
       <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-orange-500/10 rounded-full blur-[60px] sm:blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="relative z-10">
-        <p className="text-base sm:text-lg md:text-xl font-display font-bold leading-tight tracking-tight">
+        <p className="text-fluid-lg md:text-fluid-xl font-display font-bold">
           "{result.instruction}"
         </p>
         <div className="flex flex-wrap gap-2.5 sm:gap-3 md:gap-4 mt-5 sm:mt-6 md:mt-8">
