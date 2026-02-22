@@ -1,8 +1,3 @@
-/**
- * Keyboard shortcut hook
- * Handles keyboard event listeners with cleanup
- */
-
 import { useEffect, useCallback } from 'react'
 
 type KeyboardHandler = (event: KeyboardEvent) => void
@@ -21,23 +16,25 @@ export const useKeyboardShortcut = (
 
   const handleKeyPress = useCallback<KeyboardHandler>(
     (event) => {
-      const matchesKey = event.key === key
-      const matchesCtrl = !ctrl || event.ctrlKey
-      const matchesMeta = !meta || event.metaKey
-      const matchesShift = !shift || event.shiftKey
-      const matchesModifier = (ctrl || meta) ? (event.ctrlKey || event.metaKey) : true
+      if (event.key !== key) return
+      if (shift && !event.shiftKey) return
 
-      if (matchesKey && matchesCtrl && matchesMeta && matchesShift && matchesModifier) {
-        event.preventDefault()
-        handler()
+      // When both ctrl and meta are requested, accept either (cross-platform Ctrl/Cmd)
+      if (ctrl && meta) {
+        if (!event.ctrlKey && !event.metaKey) return
+      } else {
+        if (ctrl && !event.ctrlKey) return
+        if (meta && !event.metaKey) return
       }
+
+      event.preventDefault()
+      handler()
     },
     [key, ctrl, meta, shift, handler]
   )
 
   useEffect(() => {
     if (!enabled) return
-
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [handleKeyPress, enabled])

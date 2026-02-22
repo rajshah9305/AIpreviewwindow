@@ -1,8 +1,3 @@
-/**
- * Settings management hook
- * Encapsulates settings state and operations
- */
-
 import { useState, useEffect, useCallback } from 'react'
 import { storage } from '../lib/storage'
 import { validateSettingsForm } from '../lib/validation'

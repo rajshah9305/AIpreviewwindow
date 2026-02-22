@@ -1,8 +1,3 @@
-/**
- * History page
- * View and manage generation history
- */
-
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Clock, Trash2, Search, Calendar, ChevronRight } from 'lucide-react'
@@ -12,6 +7,7 @@ import { ROUTES, ANIMATION_DELAYS } from '../config/constants'
 import ComponentPreview from '../components/ComponentPreview'
 import EmptyState from '../components/EmptyState'
 import ConfirmDialog from '../components/ConfirmDialog'
+import type { GenerationResult } from '../types'
 
 export default function History() {
   const {
@@ -120,9 +116,9 @@ const SearchBar = ({ value, onChange }: SearchBarProps) => (
 )
 
 interface HistoryListProps {
-  items: Array<{ timestamp: number; instruction: string }>
+  items: GenerationResult[]
   selectedTimestamp?: number
-  onSelect: (item: any) => void
+  onSelect: (item: GenerationResult) => void
 }
 
 const HistoryList = ({ items, selectedTimestamp, onSelect }: HistoryListProps) => (

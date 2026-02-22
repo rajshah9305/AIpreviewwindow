@@ -1,8 +1,3 @@
-/**
- * LocalStorage abstraction layer
- * Provides type-safe storage operations with error handling
- */
-
 import { STORAGE_KEYS, APP_CONFIG } from '../config/constants'
 import type { AISettings, GenerationResult } from '../types'
 

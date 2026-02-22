@@ -1,8 +1,3 @@
-/**
- * API client for backend communication
- * Centralized HTTP request handling with error management
- */
-
 import type { GenerationRequest, GenerationResult } from '../types'
 
 export class APIError extends Error {
@@ -45,11 +40,9 @@ class APIClient {
       if (error instanceof APIError) {
         throw error
       }
-      
       if (error instanceof Error) {
         throw new APIError(error.message)
       }
-      
       throw new APIError('An unexpected error occurred')
     }
   }
@@ -59,10 +52,6 @@ class APIClient {
       method: 'POST',
       body: JSON.stringify(request),
     })
-  }
-
-  async healthCheck(): Promise<{ status: string; timestamp: string }> {
-    return this.request('/api/health')
   }
 }
 

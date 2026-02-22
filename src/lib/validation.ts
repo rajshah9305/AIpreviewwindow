@@ -1,8 +1,3 @@
-/**
- * Validation utilities
- * Centralized validation logic with clear error messages
- */
-
 import { APP_CONFIG } from '../config/constants'
 import type { AISettings } from '../types'
 

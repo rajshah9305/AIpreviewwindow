@@ -1,8 +1,3 @@
-/**
- * Generator page
- * Main UI component generation interface
- */
-
 import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wand2, AlertCircle, RefreshCw, ChevronRight } from 'lucide-react'
@@ -85,8 +80,6 @@ export default function Generator() {
     </div>
   )
 }
-
-// Sub-components for better organization
 
 interface HeroSectionProps {
   hasSettings: boolean

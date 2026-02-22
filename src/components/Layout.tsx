@@ -63,9 +63,6 @@ export default function Layout({ children }: LayoutProps) {
       <main className="w-full max-w-6xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4 md:py-6 lg:py-8 xl:py-10 relative z-10 safe-bottom overflow-x-hidden">
         {children}
       </main>
-
-      <footer className="w-full max-w-6xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4 md:py-6 lg:py-8 border-t border-neutral-50 relative z-10 safe-bottom">
-      </footer>
     </div>
   )
 }

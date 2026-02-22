@@ -1,8 +1,3 @@
-/**
- * History management hook
- * Encapsulates history state and operations
- */
-
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { storage } from '../lib/storage'
 import type { GenerationResult } from '../types'

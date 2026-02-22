@@ -1,8 +1,3 @@
-/**
- * Generation context
- * Manages component generation state and operations
- */
-
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
 import { apiClient } from '../lib/api-client'
 import { storage } from '../lib/storage'

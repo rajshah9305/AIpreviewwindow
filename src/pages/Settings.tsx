@@ -1,8 +1,3 @@
-/**
- * Settings page
- * AI provider configuration interface
- */
-
 import { useState } from 'react'
 import { Save, Key, Server, Tag, Eye, EyeOff } from 'lucide-react'
 import { useSettings } from '../hooks/useSettings'
@@ -172,5 +167,3 @@ const FormField = ({
     )}
   </div>
 )
-
-
