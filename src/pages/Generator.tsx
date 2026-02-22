@@ -95,25 +95,25 @@ interface HeroSectionProps {
 
 const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
   <div className="max-w-4xl mx-auto text-center mb-6 sm:mb-10 md:mb-14 lg:mb-16 animate-slide-up px-3 sm:px-4">
-    <div className="text-label text-orange-600 mb-4 sm:mb-6 md:mb-8 animate-text-reveal tracking-[0.12em]">
+    <div className="text-label text-orange-500 mb-4 sm:mb-6 md:mb-8 animate-text-reveal tracking-[0.12em]">
       {APP_CONFIG.TAGLINE.toUpperCase()}
     </div>
     <h2 className="heading-hero mb-5 sm:mb-7 md:mb-9 text-black px-2">
       <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.1s' }}>BUILD</span>{' '}
-      <span className="text-gradient-sunset animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>FASTER</span>
+      <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>FASTER</span>
       <br />
       <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.3s' }}>DESIGN</span>{' '}
-      <span className="text-gradient-sunset animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>BETTER</span>
+      <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>BETTER</span>
     </h2>
     <p className="text-body-lg text-neutral-700 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed" style={{ animationDelay: '0.5s' }}>
       Transform your <span className="text-elegant text-black font-semibold">thoughts</span> into premium UI components with AI. Describe your <span className="text-elegant text-black font-semibold">vision</span>, we'll handle the rest.
     </p>
 
     {!hasSettings && (
-      <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 p-5 sm:p-6 md:p-7 bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl md:rounded-3xl border border-neutral-200 inline-block text-left shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-md mx-auto w-full sm:w-auto animate-scale-in hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] transition-shadow duration-300" style={{ animationDelay: '0.6s' }}>
+      <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 p-5 sm:p-6 md:p-7 bg-white rounded-xl sm:rounded-2xl md:rounded-3xl border border-neutral-200 inline-block text-left shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-md mx-auto w-full sm:w-auto animate-scale-in hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] transition-shadow duration-300" style={{ animationDelay: '0.6s' }}>
         <div className="flex items-start gap-3 sm:gap-4 md:gap-5">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-orange-100 shrink-0">
-            <AlertCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-orange-600" />
+          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-orange-500/10 rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-orange-500/10 shrink-0">
+            <AlertCircle className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-orange-500" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-display font-semibold text-xs sm:text-sm md:text-base text-neutral-700 tracking-tight mb-0.5 sm:mb-1">Configuration Required</p>
@@ -202,7 +202,7 @@ const InputArea = ({
   onClearError,
 }: InputAreaProps) => (
   <div className="fixed bottom-2 sm:bottom-3 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-3 sm:px-4 md:px-6 z-50">
-    <div className="bg-white/95 backdrop-blur-xl border border-neutral-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-1.5 sm:p-2 md:p-2.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] group/input transition-all duration-300 focus-within:border-orange-300 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.15)]">
+    <div className="bg-white border border-neutral-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-1.5 sm:p-2 md:p-2.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] group/input transition-all duration-300 focus-within:border-orange-500/50 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.15)]">
       {error && (
         <div className="mx-2 sm:mx-2.5 md:mx-3 mb-2 sm:mb-2.5 p-2.5 sm:p-3 md:p-3.5 bg-red-50 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] md:text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up tracking-wide border border-red-100">
           <span className="flex items-center gap-1.5 sm:gap-2">
@@ -236,7 +236,7 @@ const InputArea = ({
           className={`h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl transition-all duration-300 touch-manipulation ${
             loading || !instruction.trim()
               ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
-              : 'bg-gradient-to-br from-neutral-100 to-neutral-200 text-neutral-700 hover:from-orange-500 hover:to-orange-600 hover:text-white hover:shadow-lg hover:shadow-orange-500/25 active:scale-95'
+              : 'bg-neutral-100 text-neutral-700 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/25 active:scale-95'
           }`}
           aria-label="Generate components"
         >

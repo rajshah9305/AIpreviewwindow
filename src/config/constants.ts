@@ -35,23 +35,6 @@ export const ANIMATION_DELAYS = {
   NAVIGATION_DELAY: 1500,
 } as const
 
-export const AI_PRESETS = [
-  {
-    name: 'OpenAI',
-    baseUrl: 'https://api.openai.com/v1',
-    model: 'gpt-4o',
-  },
-  {
-    name: 'Anthropic',
-    baseUrl: 'https://api.anthropic.com',
-    model: 'claude-3-5-sonnet-20241022',
-  },
-  {
-    name: 'Groq',
-    baseUrl: 'https://api.groq.com/openai/v1',
-    model: 'llama-3.1-70b-versatile',
-  },
-] as const
 
 export const LOADING_VARIATIONS = [
   { id: 'loading-1', name: 'Minimalist' },

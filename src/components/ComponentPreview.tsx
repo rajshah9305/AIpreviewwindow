@@ -127,7 +127,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
         <div className="flex-1 overflow-hidden relative bg-neutral-50/20">
           {showCode ? (
             <div className="h-full overflow-auto p-3 sm:p-4 md:p-8 bg-black">
-              <pre className="text-[9px] sm:text-[10px] md:text-[11px] text-orange-200/80 font-mono leading-relaxed selection:bg-orange-500/30">
+              <pre className="text-[9px] sm:text-[10px] md:text-[11px] text-orange-500/60 font-mono leading-relaxed selection:bg-orange-500/30">
                 <code>{variation.code}</code>
               </pre>
             </div>

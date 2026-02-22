@@ -148,11 +148,8 @@ varying vec3 vPosition;
 
 void main(void) {
   float opacity = (96.0 - length(vPosition)) / 256.0 * 1.2;
-  float highlight = smoothstep(0.0, 40.0, vPosition.y);
-  vec3 baseColor = vec3(0.92, 0.55, 0.30);
-  vec3 peakColor = vec3(0.96, 0.72, 0.52);
-  vec3 color = mix(baseColor, peakColor, highlight);
-  gl_FragColor = vec4(color, opacity);
+  vec3 brandOrange = vec3(0.97, 0.45, 0.08);
+  gl_FragColor = vec4(brandOrange, opacity);
 }`,
             transparent: true
           })
