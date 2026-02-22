@@ -55,11 +55,11 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 relative">
+      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 relative z-10">
         {children}
       </main>
 
-      <footer className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 border-t border-neutral-50">
+      <footer className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 border-t border-neutral-50 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">

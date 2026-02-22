@@ -230,7 +230,7 @@ void main(void) {
   }, [cameraZ, planeSize, speed]);
 
   return (
-    <div ref={containerRef} style={{ position: 'absolute', width, height, top: 0, left: 0 }}>
+    <div ref={containerRef} style={{ position: 'fixed', width, height, top: 0, left: 0, zIndex: 0, pointerEvents: 'none' }}>
       <canvas
         ref={canvasRef}
         style={{
@@ -240,8 +240,7 @@ void main(void) {
           bottom: 0,
           left: 0,
           width: '100%',
-          height: '100%',
-          zIndex: 1
+          height: '100%'
         }}
       />
     </div>
