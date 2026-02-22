@@ -77,8 +77,8 @@ export default function Generator() {
                <Sparkles className="w-3.5 h-3.5" />
                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Next-Gen Component Engine</span>
              </div>
-            <h1 className="text-[5.2vw] md:text-5xl font-black tracking-[-0.07em] mb-12 italic leading-none whitespace-nowrap">
-              AI – <span className="text-orange-500">BUILD BETTER</span> AND <span className="text-orange-500">DESIGN BETTER</span>
+            <h1 className="text-[6.2vw] md:text-7xl font-black tracking-[-0.08em] mb-12 italic leading-[0.85] uppercase">
+              AI – <span className="text-orange-500">BUILD BETTER</span><br />AND <span className="text-orange-500">DESIGN BETTER</span>
             </h1>
             <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed">
               Transform your thoughts into premium UI components with AI.<br className="hidden md:block" /> Describe your vision, we'll handle the rest.
@@ -149,8 +149,8 @@ export default function Generator() {
       </div>
       
       {/* Input Area */}
-      <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50">
-        <div className="bg-white border border-neutral-100 rounded-[2.5rem] p-2 md:p-3 shadow-2xl shadow-black/10 group/input transition-all duration-500 focus-within:border-orange-500/20 focus-within:shadow-orange-500/10">
+      <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 md:px-8 z-50 animate-slide-up" style={{ animationDelay: '400ms' }}>
+        <div className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 rounded-[2.5rem] p-2 md:p-3 shadow-2xl shadow-black/10 group/input transition-all duration-500 focus-within:border-orange-500/40 focus-within:shadow-orange-500/10 focus-within:bg-white">
           {error && (
             <div className="mx-4 mb-3 p-4 bg-red-50 rounded-3xl text-[11px] font-bold text-red-600 flex items-center justify-between animate-slide-up">
               <span className="flex items-center gap-2">
@@ -176,13 +176,20 @@ export default function Generator() {
             <button
               onClick={handleGenerateClick}
               disabled={loading || !instruction.trim()}
-              className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 ${
+              className={`h-12 w-12 md:h-14 md:w-14 shrink-0 flex items-center justify-center rounded-full transition-all duration-500 relative ${
                 loading || !instruction.trim()
                 ? 'bg-neutral-100 text-neutral-300'
                 : 'bg-black text-white hover:bg-orange-500 hover:scale-105 shadow-xl active:scale-95'
-              }`}
+              } ${loading ? 'animate-pulse' : ''}`}
             >
-              {loading ? <div className="spinner !w-5 !h-5" /> : <Wand2 className="w-5 h-5 md:w-6 md:h-6" />}
+              {loading ? (
+                <div className="flex items-center justify-center">
+                   <div className="absolute inset-0 rounded-full border-2 border-orange-500 border-t-transparent animate-spin" />
+                   <Sparkles className="w-5 h-5 text-orange-500" />
+                </div>
+              ) : (
+                <Wand2 className="w-5 h-5 md:w-6 md:h-6" />
+              )}
             </button>
           </div>
         </div>

@@ -92,11 +92,19 @@
   }
 
   .shadow-premium {
-    box-shadow: 0 10px 40px -10px rgb(0 0 0 / 0.05);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
   }
   
   .shadow-orange {
-    box-shadow: 0 20px 50px -12px rgb(249 115 22 / 0.15);
+    box-shadow: 0 20px 50px -12px rgba(249, 115, 22, 0.12), 0 8px 16px -4px rgba(249, 115, 22, 0.08);
+  }
+
+  .text-premium-tight {
+    @apply tracking-[-0.03em] leading-[1.1];
+  }
+
+  .text-premium-wide {
+    @apply tracking-[0.15em] uppercase font-bold;
   }
 
   .scrollbar-hide {
