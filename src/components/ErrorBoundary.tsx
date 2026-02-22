@@ -21,8 +21,9 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Error is logged to console for debugging in development
-    console.error('Error boundary caught error:', error, errorInfo)
+    if (import.meta.env.DEV) {
+      console.error('Error boundary caught error:', error, errorInfo)
+    }
   }
 
   handleReset = () => {

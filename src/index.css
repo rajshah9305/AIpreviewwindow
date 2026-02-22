@@ -292,6 +292,7 @@
 
   .scrollbar-thin {
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
@@ -305,6 +306,28 @@
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
     @apply bg-neutral-200 rounded-full hover:bg-neutral-300 transition-colors;
+  }
+
+  /* Snap scrolling support */
+  @supports (scroll-snap-type: x mandatory) {
+    .snap-x {
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 1rem;
+    }
+    
+    .snap-start {
+      scroll-snap-align: start;
+    }
+    
+    .snap-always {
+      scroll-snap-stop: always;
+    }
+  }
+
+  /* Smooth momentum scrolling for iOS */
+  .scroll-smooth {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
 
   .touch-manipulation {

@@ -135,19 +135,26 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
 const LoadingState = () => (
   <div className="space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in">
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-3 border-b border-neutral-100 pb-3 sm:pb-4 md:pb-6">
-      <h3 className="heading-section">Generating Variations</h3>
+      <div>
+        <h3 className="heading-section">Generating Variations</h3>
+        <p className="text-xs sm:text-sm text-neutral-500 mt-1 font-sans">Creating 5 unique design variations...</p>
+      </div>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-      {LOADING_VARIATIONS.map((v, i) => (
-        <div
-          key={v.id}
-          className="h-[400px] sm:h-[450px] md:h-[500px] animate-slide-up"
-          style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
-        >
-          <LoadingSkeleton />
+    <div className="relative -mx-3 sm:-mx-4 md:-mx-6">
+      <div className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-4 md:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent">
+        <div className="flex gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+          {LOADING_VARIATIONS.map((v, i) => (
+            <div
+              key={v.id}
+              className="flex-shrink-0 snap-start snap-always animate-slide-up w-[calc(100vw-3rem)] sm:w-[calc(85vw-2rem)] md:w-[calc(60vw-2rem)] lg:w-[500px] xl:w-[550px] h-[400px] xs:h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px]"
+              style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
+            >
+              <LoadingSkeleton />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   </div>
 )
@@ -160,26 +167,47 @@ interface ResultsStateProps {
 const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
   <div className="space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in">
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-3 md:gap-4 border-b border-neutral-100 pb-3 sm:pb-4 md:pb-6">
-      <h3 className="heading-section">The Collection</h3>
+      <div>
+        <h3 className="heading-section">The Collection</h3>
+        <p className="text-xs sm:text-sm text-neutral-500 mt-1 font-sans">Scroll horizontally to explore all variations</p>
+      </div>
       <button
         onClick={onClearAndNew}
-        className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-neutral-100 text-black rounded-lg sm:rounded-xl text-xs sm:text-sm font-display font-semibold hover:bg-neutral-200 transition-all active:scale-95 touch-manipulation tracking-tight"
+        className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-neutral-100 text-black rounded-lg sm:rounded-xl text-xs sm:text-sm font-display font-semibold hover:bg-neutral-200 transition-all active:scale-95 touch-manipulation tracking-tight shrink-0"
       >
         <RefreshCw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         <span>New Generation</span>
       </button>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-      {result.variations.map((variation, i) => (
-        <div
-          key={variation.id}
-          className="h-[450px] sm:h-[500px] md:h-[550px] animate-slide-up"
-          style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
-        >
-          <ComponentPreview variation={variation} />
+    <div className="relative -mx-3 sm:-mx-4 md:-mx-6">
+      {/* Gradient fade on edges for visual hint */}
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-r from-[#faf8f6] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-l from-[#faf8f6] to-transparent z-10 pointer-events-none" />
+      
+      <div className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-4 md:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent hover:scrollbar-thumb-neutral-400">
+        <div className="flex gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+          {result.variations.map((variation, i) => (
+            <div
+              key={variation.id}
+              className="flex-shrink-0 snap-start snap-always animate-slide-up w-[calc(100vw-3rem)] sm:w-[calc(85vw-2rem)] md:w-[calc(60vw-2rem)] lg:w-[500px] xl:w-[550px] h-[400px] xs:h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px]"
+              style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
+            >
+              <ComponentPreview variation={variation} />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+      
+      {/* Scroll indicator for mobile */}
+      <div className="flex justify-center gap-1.5 mt-3 sm:hidden">
+        {result.variations.map((_, i) => (
+          <div
+            key={i}
+            className="w-1.5 h-1.5 rounded-full bg-neutral-300 transition-colors"
+          />
+        ))}
+      </div>
     </div>
   </div>
 )

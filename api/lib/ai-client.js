@@ -76,8 +76,14 @@ async function handleResponse(response, provider) {
     try {
       const errorJson = JSON.parse(errorText)
       errorMessage = errorJson.error?.message || errorJson.message || `${provider} API error: ${response.status}`
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(`[${provider}] API Error:`, errorJson)
+      }
     } catch {
       errorMessage = `${provider} API error: ${response.status} ${response.statusText}`
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(`[${provider}] Raw error:`, errorText)
+      }
     }
     throw new Error(errorMessage)
   }

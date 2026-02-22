@@ -21,6 +21,15 @@ export default async function handler(req, res) {
   try {
     const { instruction, settings } = req.body
     
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[Generate] Request received:', { 
+        instruction: instruction?.substring(0, 50) + '...', 
+        hasSettings: !!settings,
+        modelName: settings?.modelName,
+        baseUrl: settings?.baseUrl
+      })
+    }
+    
     if (!instruction?.trim()) {
       return res.status(400).json({ message: 'Instruction is required' })
     }
@@ -39,11 +48,21 @@ export default async function handler(req, res) {
     
     const result = await generateUIComponents(instruction, settings)
     
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[Generate] Success:', { 
+        variationCount: result.variations.length,
+        timestamp: result.timestamp 
+      })
+    }
+    
     res.status(200).json(result)
   } catch (error) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('[Generate] Error:', error)
+    }
     res.status(500).json({ 
       message: error.message || 'Failed to generate components',
-      details: error.stack
+      details: process.env.NODE_ENV !== 'production' ? error.stack : undefined
     })
   }
 }

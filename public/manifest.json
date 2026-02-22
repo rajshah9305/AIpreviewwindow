@@ -1,33 +1,11 @@
 {
   "name": "AI UI Generator",
   "short_name": "AI UI",
-  "description": "Minimalistic AI-powered UI component generator",
+  "description": "AI-powered UI component generator with natural language input",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafaf9",
-  "theme_color": "#f0760b",
+  "theme_color": "#f97316",
   "orientation": "portrait-primary",
-  "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "categories": ["productivity", "development", "utilities"],
-  "screenshots": [
-    {
-      "src": "/screenshot-1.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "label": "AI Component Generator Interface"
-    }
-  ]
+  "categories": ["productivity", "development", "utilities"]
 }

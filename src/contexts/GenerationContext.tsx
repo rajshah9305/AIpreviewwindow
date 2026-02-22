@@ -55,7 +55,9 @@ export const GenerationProvider = ({ children }: { children: ReactNode }) => {
         ? err.message
         : 'Failed to generate components'
       setError(errorMessage)
-      console.error('Generation error:', err)
+      if (import.meta.env.DEV) {
+        console.error('Generation error:', err)
+      }
     } finally {
       setLoading(false)
     }

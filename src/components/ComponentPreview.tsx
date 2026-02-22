@@ -72,10 +72,10 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
           onClick={() => setIsExpanded(false)}
         />
       )}
-      <div className={`bg-white rounded-2xl overflow-hidden border border-neutral-100 flex flex-col group/card transition-all duration-500 ${
+      <div className={`bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-neutral-100 flex flex-col group/card transition-all duration-500 ${
         isExpanded
           ? 'fixed inset-3 sm:inset-6 md:inset-10 z-[120] shadow-2xl ring-1 ring-black/5'
-          : 'relative h-full hover:border-orange-500/20 hover:shadow-premium'
+          : 'relative h-full w-full hover:border-orange-500/20 hover:shadow-premium'
       }`}>
         <div className="px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 border-b border-neutral-50 flex items-center justify-between shrink-0 bg-white/80 backdrop-blur-md">
           <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-4 min-w-0">
@@ -124,7 +124,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
           </div>
         </div>
       
-        <div className="flex-1 overflow-hidden relative bg-neutral-50/20">
+        <div className="flex-1 overflow-hidden relative bg-neutral-50/20 min-h-0">
           {showCode ? (
             <div className="h-full overflow-auto p-3 sm:p-4 md:p-8 bg-black">
               <pre className="text-[9px] sm:text-[10px] md:text-[11px] text-orange-500/60 font-mono leading-relaxed selection:bg-orange-500/30">
@@ -132,7 +132,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
               </pre>
             </div>
           ) : (
-            <div className={`h-full flex flex-col transition-all duration-700 ${isExpanded ? 'p-4 sm:p-6 md:p-12' : 'p-3 sm:p-4 md:p-6 lg:p-8'}`}>
+            <div className={`h-full w-full flex flex-col transition-all duration-700 ${isExpanded ? 'p-4 sm:p-6 md:p-12' : 'p-2 sm:p-3 md:p-4 lg:p-6'}`}>
               <iframe
                 ref={iframeRef}
                 srcDoc={`
@@ -148,7 +148,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                       <style>
                         body {
                           margin: 0;
-                          padding: 1rem;
+                          padding: 0.75rem;
                           background: white;
                           font-family: 'Inter', system-ui, -apple-system, sans-serif;
                           display: flex;
@@ -156,13 +156,19 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                           justify-content: center;
                           min-height: 100vh;
                           -webkit-font-smoothing: antialiased;
+                          overflow: auto;
                         }
                         @media (min-width: 640px) {
+                          body { padding: 1.5rem; }
+                        }
+                        @media (min-width: 768px) {
                           body { padding: 2rem; }
                         }
                         h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
-                        body::-webkit-scrollbar { display: none; }
-                        body { -ms-overflow-style: none; scrollbar-width: none; }
+                        body::-webkit-scrollbar { width: 6px; height: 6px; }
+                        body::-webkit-scrollbar-track { background: transparent; }
+                        body::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 3px; }
+                        * { box-sizing: border-box; }
                       </style>
                     </head>
                     <body>
@@ -175,7 +181,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                     </body>
                   </html>
                 `}
-                className="w-full h-full border-0 bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-premium"
+                className="w-full h-full border-0 bg-white rounded-lg sm:rounded-xl shadow-premium"
                 title={variation.name}
               />
             </div>

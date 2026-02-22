@@ -11,10 +11,12 @@ api/node_modules/
 dist/
 build/
 
+# Vite cache
+.vite/
+
 # Logs
 *.log
 logs/
-!logs/.gitkeep
 
 # Editor directories
 .vscode/*

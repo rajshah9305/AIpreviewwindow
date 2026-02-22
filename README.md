@@ -15,10 +15,10 @@ Transform your thoughts into premium UI components with AI. Build faster, design
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18 + TypeScript, Vite, Tailwind CSS 3
+- **Frontend**: React 18 + TypeScript, Vite 5, Tailwind CSS 3
 - **UI Components**: Lucide React icons, Three.js (GLSL shaders)
 - **Routing**: React Router v6
-- **Backend**: Node.js + Express (API server)
+- **Backend**: Node.js serverless functions (Vercel)
 - **State Management**: React Context API + LocalStorage
 
 ## 📱 Responsive Design
@@ -61,7 +61,6 @@ The application is fully optimized for all screen sizes:
 2. Install dependencies:
    ```bash
    npm install
-   cd api && npm install
    ```
 
 3. Start the development environment:
