@@ -105,8 +105,8 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
       <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.3s' }}>DESIGN</span>{' '}
       <span className="text-gradient-sunset animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>BETTER</span>
     </h2>
-    <p className="text-body-lg text-neutral-600 max-w-2xl mx-auto px-4 animate-text-reveal" style={{ animationDelay: '0.5s' }}>
-      Transform your thoughts into premium UI components with AI. Describe your vision, we'll handle the rest.
+    <p className="text-body-lg text-neutral-600 max-w-2xl mx-auto px-4 animate-text-reveal font-sans" style={{ animationDelay: '0.5s' }}>
+      Transform your <span className="text-elegant text-black">thoughts</span> into premium UI components with AI. Describe your <span className="text-elegant text-black">vision</span>, we'll handle the rest.
     </p>
 
     {!hasSettings && (
@@ -223,11 +223,10 @@ const InputArea = ({
           value={instruction}
           onChange={(e) => onInstructionChange(e.target.value)}
           placeholder="Describe your vision (e.g., 'A premium checkout card')"
-          className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-2.5 sm:py-3 md:py-4 text-fluid-sm md:text-fluid-base font-normal placeholder:text-neutral-300 resize-none min-h-[44px] sm:min-h-[48px] md:min-h-[56px] max-h-[100px] sm:max-h-[120px] md:max-h-[150px] scrollbar-hide"
+          className="flex-1 bg-transparent border-none focus:ring-0 px-1 py-2.5 sm:py-3 md:py-4 text-fluid-sm md:text-fluid-base font-sans font-normal placeholder:text-neutral-300 resize-none min-h-[44px] sm:min-h-[48px] md:min-h-[56px] max-h-[100px] sm:max-h-[120px] md:max-h-[150px] scrollbar-hide"
           disabled={loading}
           rows={1}
           aria-label="Component description"
-          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
         />
 
         <button

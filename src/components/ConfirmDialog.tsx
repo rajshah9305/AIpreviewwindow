@@ -31,7 +31,7 @@ export default function ConfirmDialog({
         <div className="flex flex-col gap-2.5 sm:gap-3">
            <button
             onClick={onConfirm}
-            className={`w-full py-3 sm:py-3.5 rounded-xl font-semibold uppercase tracking-widest transition-all duration-300 active:scale-[0.98] text-xs sm:text-sm touch-manipulation ${
+            className={`w-full py-3 sm:py-3.5 rounded-xl font-semibold uppercase tracking-widest-xl transition-all duration-300 active:scale-[0.98] text-[10px] sm:text-xs touch-manipulation ${
               variant === 'danger'
               ? 'bg-red-500 text-white hover:bg-red-600'
               : 'bg-black text-white hover:bg-neutral-900'
@@ -41,7 +41,7 @@ export default function ConfirmDialog({
           </button>
           <button
             onClick={onCancel}
-            className="w-full py-3 sm:py-3.5 bg-neutral-50 text-neutral-500 rounded-xl font-semibold uppercase tracking-widest hover:bg-neutral-100 transition-all active:scale-[0.98] text-xs sm:text-sm touch-manipulation"
+            className="w-full py-3 sm:py-3.5 bg-neutral-50 text-neutral-500 rounded-xl font-semibold uppercase tracking-widest-xl hover:bg-neutral-100 transition-all active:scale-[0.98] text-[10px] sm:text-xs touch-manipulation"
           >
             {cancelText}
           </button>

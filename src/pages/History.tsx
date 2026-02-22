@@ -159,7 +159,7 @@ const HistoryItem = ({ item, isSelected, onSelect }: HistoryItemProps) => (
     }`}
   >
     <div className="min-w-0 flex-1">
-      <p className={`text-fluid-sm font-display font-semibold truncate ${isSelected ? 'text-white' : 'text-black'}`}>
+<p className={`text-fluid-sm font-display font-semibold truncate tracking-tight ${isSelected ? 'text-white' : 'text-black'}`}>
         {item.instruction}
       </p>
       <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 opacity-50">
@@ -195,7 +195,7 @@ const ResultDetail = ({ result }: ResultDetailProps) => (
     <div className="p-6 sm:p-8 md:p-10 bg-black rounded-2xl sm:rounded-3xl text-white relative overflow-hidden shadow-premium">
       <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-orange-500/10 rounded-full blur-[60px] sm:blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="relative z-10">
-        <p className="text-fluid-lg md:text-fluid-xl font-display font-bold">
+      <p className="text-fluid-xl md:text-fluid-2xl font-display font-bold tracking-tighter leading-tight">
           "{result.instruction}"
         </p>
         <div className="flex flex-wrap gap-2.5 sm:gap-3 md:gap-4 mt-5 sm:mt-6 md:mt-8">
@@ -225,7 +225,7 @@ const ResultDetail = ({ result }: ResultDetailProps) => (
 
 const MetadataBadge = ({ label, value }: { label: string; value: string }) => (
   <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 rounded-lg sm:rounded-xl border border-white/10">
-    <p className="text-[7px] sm:text-[8px] font-display font-bold uppercase tracking-widest text-neutral-500">
+    <p className="text-[7px] sm:text-[8px] font-display font-bold uppercase tracking-widest-xl text-neutral-500">
       {label}
     </p>
     <p className="text-[10px] sm:text-[11px] font-display font-bold text-white mt-0.5 sm:mt-1 tracking-tight">{value}</p>

@@ -128,7 +128,7 @@ const SettingsForm = ({
     <button
       onClick={onSave}
       disabled={!isModified}
-      className={`w-full py-3.5 sm:py-4 rounded-xl font-display font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-2.5 sm:gap-3 active:scale-[0.98] text-xs sm:text-sm touch-manipulation ${
+      className={`w-full py-3.5 sm:py-4 rounded-xl font-display font-bold uppercase tracking-widest-xl transition-all duration-500 flex items-center justify-center gap-2.5 sm:gap-3 active:scale-[0.98] text-[10px] sm:text-xs touch-manipulation ${
         isModified
           ? 'bg-black text-white hover:bg-neutral-900 shadow-lg shadow-black/10'
           : 'bg-neutral-100 text-neutral-400 cursor-not-allowed shadow-none'
@@ -199,7 +199,7 @@ const PresetsSection = ({ onApplyPreset }: PresetsSectionProps) => (
           className="w-full p-5 sm:p-6 bg-white border border-neutral-100 rounded-xl sm:rounded-2xl text-left hover:border-orange-500/20 hover:shadow-premium transition-all group relative overflow-hidden touch-manipulation"
         >
           <div className="absolute top-0 right-0 w-1.5 h-full bg-orange-500 translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-          <p className="font-display font-bold text-fluid-base mb-1">{preset.name}</p>
+          <p className="font-display font-bold text-fluid-base mb-1 tracking-tight">{preset.name}</p>
           <p className="text-label text-neutral-400">
             {preset.model}
           </p>
