@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-white" />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-xs sm:text-sm md:text-base font-display font-bold tracking-tighter leading-none text-black">RAJ AI UI</h1>
+              <h1 className="text-xs sm:text-sm md:text-base font-display font-bold tracking-tighter-extra leading-none text-black">RAJ AI UI</h1>
             </div>
           </Link>
 
@@ -44,10 +44,10 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-2 sm:px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-[10px] sm:text-xs md:text-[13px] font-display font-medium transition-all duration-300 flex items-center gap-1 sm:gap-1.5 md:gap-2 touch-manipulation tracking-tight ${
+                  className={`px-2 sm:px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-[10px] sm:text-xs md:text-[13px] font-display font-bold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 md:gap-2 touch-manipulation tracking-tighter ${
                     active
                       ? 'bg-black text-white shadow-sm'
-                      : 'text-neutral-500 hover:text-black hover:bg-neutral-50'
+                      : 'text-neutral-400 hover:text-black hover:bg-neutral-50'
                   }`}
                 >
                   <Icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 ${active ? 'text-orange-500' : ''}`} />

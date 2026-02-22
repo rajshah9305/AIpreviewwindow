@@ -42,7 +42,7 @@
   
   /* Enhanced Typography Hierarchy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold;
+    @apply font-display font-bold text-black;
     letter-spacing: -0.03em;
     font-feature-settings: 'ss01', 'ss02', 'salt', 'onum';
     text-wrap: balance;
@@ -50,39 +50,39 @@
   }
   
   h1 { 
-    @apply text-fluid-3xl md:text-fluid-4xl leading-super-tight;
+    @apply text-fluid-4xl leading-none;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+  }
+  
+  h2 { 
+    @apply text-fluid-3xl leading-extra-tight;
     font-weight: 700;
     letter-spacing: -0.05em;
   }
   
-  h2 { 
-    @apply text-fluid-2xl md:text-fluid-3xl leading-extra-tight;
+  h3 { 
+    @apply text-fluid-2xl leading-tight;
     font-weight: 700;
     letter-spacing: -0.04em;
   }
   
-  h3 { 
-    @apply text-fluid-xl md:text-fluid-2xl leading-tight;
+  h4 { 
+    @apply text-fluid-xl leading-tight;
     font-weight: 700;
     letter-spacing: -0.03em;
   }
   
-  h4 { 
-    @apply text-fluid-lg md:text-fluid-xl leading-tight;
-    font-weight: 700;
+  h5 {
+    @apply text-fluid-lg leading-snug;
+    font-weight: 600;
     letter-spacing: -0.025em;
   }
   
-  h5 {
-    @apply text-fluid-base md:text-fluid-lg leading-snug;
+  h6 {
+    @apply text-fluid-base leading-normal;
     font-weight: 600;
     letter-spacing: -0.02em;
-  }
-  
-  h6 {
-    @apply text-fluid-sm md:text-fluid-base leading-normal;
-    font-weight: 600;
-    letter-spacing: -0.015em;
   }
   
   p { 
@@ -100,8 +100,14 @@
   
   .text-serif {
     font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.02em;
+  }
+
+  .text-elegant {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    letter-spacing: -0.01em;
   }
   
   .text-mono {
@@ -196,16 +202,16 @@
   
   /* Typography Components */
   .heading-hero {
-    @apply font-display text-fluid-4xl leading-super-tight;
-    font-weight: 700;
-    letter-spacing: -0.05em;
+    @apply font-display text-fluid-4xl leading-none;
+    font-weight: 800;
+    letter-spacing: -0.06em;
     text-wrap: balance;
   }
   
   .heading-section {
-    @apply font-display text-fluid-2xl md:text-fluid-3xl leading-extra-tight;
+    @apply font-display text-fluid-3xl leading-extra-tight;
     font-weight: 700;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.05em;
     text-wrap: balance;
   }
   
