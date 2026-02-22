@@ -94,7 +94,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
-  <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-12 md:mb-16 animate-slide-up px-4">
+  <div className="max-w-4xl mx-auto text-center mb-6 sm:mb-12 animate-slide-up px-4">
     <div className="text-label text-orange-500 mb-4 sm:mb-6 md:mb-8 animate-text-reveal">
       {APP_CONFIG.TAGLINE.toUpperCase()}
     </div>
@@ -137,7 +137,7 @@ const LoadingState = () => (
       <h3 className="heading-section">Generating Variations</h3>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
       {LOADING_VARIATIONS.map((v, i) => (
         <div
           key={v.id}
@@ -169,7 +169,7 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
       </button>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
       {result.variations.map((variation, i) => (
         <div
           key={variation.id}
@@ -200,7 +200,7 @@ const InputArea = ({
   onGenerate,
   onClearError,
 }: InputAreaProps) => (
-  <div className="fixed bottom-3 sm:bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-3 sm:px-4 md:px-6 z-50">
+  <div className="fixed bottom-2 sm:bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-2 sm:px-4 md:px-6 z-50">
     <div className="bg-white/90 backdrop-blur-3xl border-2 border-black rounded-xl sm:rounded-2xl md:rounded-3xl p-1.5 sm:p-2 md:p-3 shadow-premium group/input transition-all duration-500 focus-within:border-orange-500 focus-within:shadow-orange">
       {error && (
         <div className="mx-2 sm:mx-3 md:mx-4 mb-2 sm:mb-2.5 md:mb-3 p-2.5 sm:p-3 md:p-4 bg-red-50 rounded-lg sm:rounded-xl md:rounded-2xl text-[9px] sm:text-[10px] md:text-[11px] font-display font-bold text-red-600 flex items-center justify-between animate-slide-up tracking-wide">

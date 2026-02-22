@@ -388,11 +388,6 @@
     animation: bounce-subtle 2s ease-in-out infinite;
   }
 
-  /* Extra small breakpoint for very small devices */
-  @media (min-width: 375px) {
-    .xs\:inline { display: inline; }
-  }
-  
   /* Text selection enhancement */
   ::selection {
     background-color: rgba(249, 115, 22, 0.2);
