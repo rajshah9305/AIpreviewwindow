@@ -1,51 +1,20 @@
-import { GenerationRequest, GenerationResult, AISettings } from '../types'
+/**
+ * API service layer
+ * Re-exports from modular services for backward compatibility
+ */
 
-export const generateComponents = async (request: GenerationRequest): Promise<GenerationResult> => {
-  const response = await fetch('/api/generate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(request),
-  })
-  
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to generate components')
-  }
-  
-  return response.json()
-}
+import { storage as storageService } from '../lib/storage'
+import { apiClient as client } from '../lib/api-client'
 
-export const saveSettings = (settings: AISettings): void => {
-  localStorage.setItem('aiSettings', JSON.stringify(settings))
-}
+export { storage } from '../lib/storage'
+export { apiClient } from '../lib/api-client'
 
-export const loadSettings = (): AISettings | null => {
-  const stored = localStorage.getItem('aiSettings')
-  return stored ? JSON.parse(stored) : null
-}
-
-export const clearSettings = (): void => {
-  localStorage.removeItem('aiSettings')
-}
-
-export const saveToHistory = (result: GenerationResult): void => {
-  const history = loadHistory()
-  history.unshift(result)
-  localStorage.setItem('generationHistory', JSON.stringify(history.slice(0, 50)))
-}
-
-export const loadHistory = (): GenerationResult[] => {
-  const stored = localStorage.getItem('generationHistory')
-  return stored ? JSON.parse(stored) : []
-}
-
-export const clearHistory = (): void => {
-  localStorage.removeItem('generationHistory')
-}
-
-// Clean up old persisted generation state on app load
-export const cleanupOldState = (): void => {
-  localStorage.removeItem('generationState')
-}
+// Re-export for backward compatibility
+export const generateComponents = client.generateComponents.bind(client)
+export const saveSettings = storageService.saveSettings.bind(storageService)
+export const loadSettings = storageService.loadSettings.bind(storageService)
+export const clearSettings = storageService.clearSettings.bind(storageService)
+export const saveToHistory = storageService.saveToHistory.bind(storageService)
+export const loadHistory = storageService.loadHistory.bind(storageService)
+export const clearHistory = storageService.clearHistory.bind(storageService)
+export const cleanupOldState = storageService.cleanupOldState.bind(storageService)

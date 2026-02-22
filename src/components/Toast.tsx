@@ -34,7 +34,7 @@ export default function Toast({ message, type, onClose, duration = 4000 }: Toast
 
   return (
     <div
-      className={`bg-white/90 backdrop-blur-xl border ${styles[type]} rounded-xl p-4 shadow-premium flex items-center justify-between gap-6 min-w-[320px] max-w-md animate-slide-up relative overflow-hidden group`}
+      className={`bg-white/90 backdrop-blur-xl border ${styles[type]} rounded-xl p-3 sm:p-4 shadow-premium flex items-center justify-between gap-3 sm:gap-6 min-w-[280px] sm:min-w-[320px] max-w-md animate-slide-up relative overflow-hidden group`}
       role="alert"
     >
       <div className={`absolute left-0 top-0 w-1 h-full ${
@@ -44,16 +44,16 @@ export default function Toast({ message, type, onClose, duration = 4000 }: Toast
         'bg-black'
       }`} />
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
         <div className="shrink-0">{icons[type]}</div>
-        <p className="text-xs font-semibold tracking-tight text-black">{message}</p>
+        <p className="text-[11px] sm:text-xs font-semibold tracking-tight text-black break-words">{message}</p>
       </div>
 
       <button
         onClick={onClose}
-        className="p-1.5 hover:bg-neutral-50 rounded-lg text-neutral-300 hover:text-black transition-all"
+        className="p-1.5 hover:bg-neutral-50 rounded-lg text-neutral-300 hover:text-black transition-all shrink-0 touch-manipulation"
       >
-        <X className="w-4 h-4" />
+        <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
       </button>
     </div>
   )

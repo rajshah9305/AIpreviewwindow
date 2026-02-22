@@ -1,8 +1,15 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { GenerationResult } from '../types'
-import { generateComponents, loadSettings, saveToHistory, cleanupOldState } from '../services/api'
+/**
+ * Generation context
+ * Manages component generation state and operations
+ */
 
-interface GenerationContextType {
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
+import { apiClient } from '../lib/api-client'
+import { storage } from '../lib/storage'
+import { validateInstruction, validateSettings, ValidationError } from '../lib/validation'
+import type { GenerationResult } from '../types'
+
+interface GenerationContextValue {
   instruction: string
   setInstruction: (instruction: string) => void
   loading: boolean
@@ -13,87 +20,76 @@ interface GenerationContextType {
   clearResult: () => void
 }
 
-const GenerationContext = createContext<GenerationContextType | undefined>(undefined)
+const GenerationContext = createContext<GenerationContextValue | undefined>(undefined)
 
-export function GenerationProvider({ children }: { children: ReactNode }) {
+export const GenerationProvider = ({ children }: { children: ReactNode }) => {
   const [instruction, setInstruction] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<GenerationResult | null>(null)
   const [error, setError] = useState<string | null>(null)
-  
-  // Clean up old persisted state on mount to ensure fresh start
+
   useEffect(() => {
-    cleanupOldState()
+    storage.cleanupOldState()
   }, [])
-  
-  const handleGenerate = async () => {
-    const settings = loadSettings()
-    
-    if (!settings || !settings.apiKey) {
-      setError('Please configure your AI settings first')
-      return
-    }
-    
-    if (!instruction.trim()) {
-      setError('Please enter an instruction')
-      return
-    }
-    
-    if (instruction.trim().length < 10) {
-      setError('Please provide a more detailed instruction (at least 10 characters)')
-      return
-    }
-    
-    setLoading(true)
-    setError(null)
-    setResult(null)
-    
+
+  const handleGenerate = useCallback(async () => {
     try {
-      const generatedResult = await generateComponents({
-        instruction: instruction.trim(),
-        settings,
-      })
+      const settings = storage.loadSettings()
       
+      validateSettings(settings)
+      validateInstruction(instruction)
+
+      setLoading(true)
+      setError(null)
+      setResult(null)
+
+      const generatedResult = await apiClient.generateComponents({
+        instruction: instruction.trim(),
+        settings: settings!,
+      })
+
       setResult(generatedResult)
-      saveToHistory(generatedResult)
+      storage.saveToHistory(generatedResult)
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to generate components'
+      const errorMessage = err instanceof ValidationError || err instanceof Error
+        ? err.message
+        : 'Failed to generate components'
       setError(errorMessage)
       console.error('Generation error:', err)
     } finally {
       setLoading(false)
     }
-  }
-  
-  const clearError = () => {
+  }, [instruction])
+
+  const clearError = useCallback(() => {
     setError(null)
-  }
-  
-  const clearResult = () => {
+  }, [])
+
+  const clearResult = useCallback(() => {
     setResult(null)
+  }, [])
+
+  const value: GenerationContextValue = {
+    instruction,
+    setInstruction,
+    loading,
+    result,
+    error,
+    clearError,
+    handleGenerate,
+    clearResult,
   }
-  
+
   return (
-    <GenerationContext.Provider
-      value={{
-        instruction,
-        setInstruction,
-        loading,
-        result,
-        error,
-        clearError,
-        handleGenerate,
-        clearResult,
-      }}
-    >
+    <GenerationContext.Provider value={value}>
       {children}
     </GenerationContext.Provider>
   )
 }
 
-export function useGeneration() {
+export const useGeneration = () => {
   const context = useContext(GenerationContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useGeneration must be used within a GenerationProvider')
   }
   return context
