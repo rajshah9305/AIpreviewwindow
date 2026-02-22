@@ -24,13 +24,17 @@ const GLSLHills = ({
 
     // Plane class
     class Plane {
-      uniforms: { time: { type: string; value: number } };
+      uniforms: {
+        time: { type: string; value: number };
+        uAspect: { type: string; value: number };
+      };
       mesh: THREE.Mesh;
       time: number;
 
       constructor() {
         this.uniforms = {
           time: { type: 'f', value: 0 },
+          uAspect: { type: 'f', value: window.innerWidth / window.innerHeight }
         };
         this.mesh = this.createMesh();
         this.time = speed;
@@ -46,6 +50,7 @@ attribute vec3 position;
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
 uniform float time;
+uniform float uAspect;
 varying vec3 vPosition;
 
 mat4 rotateMatrixX(float radian) {
@@ -126,7 +131,11 @@ float cnoise(vec3 P) {
 
 void main(void) {
   vec3 updatePosition = (rotateMatrixX(radians(90.0)) * vec4(position, 1.0)).xyz;
-  float sin1 = sin(radians(updatePosition.x / 128.0 * 90.0));
+
+  // Adjust hill frequency based on aspect ratio to keep peaks visible on mobile
+  float responsiveX = updatePosition.x / (128.0 * min(1.0, uAspect * 0.8));
+  float sin1 = sin(radians(responsiveX * 90.0));
+
   vec3 noisePosition = updatePosition + vec3(0.0, 0.0, time * -30.0);
   float noise1 = cnoise(noisePosition * 0.08);
   float noise2 = cnoise(noisePosition * 0.06);
@@ -183,10 +192,25 @@ void main(void) {
       
       const width = window.innerWidth;
       const height = window.innerHeight;
+      const aspect = width / height;
       
       canvas.width = width;
       canvas.height = height;
-      camera.aspect = width / height;
+      camera.aspect = aspect;
+
+      // Responsive camera adjustments
+      if (aspect < 1.0) {
+        // Mobile: Bring camera closer and adjust height for better framing
+        const dynamicZ = cameraZ * (aspect * 0.5 + 0.5); // Closer on mobile
+        camera.position.set(0, 24, dynamicZ);
+        camera.lookAt(new THREE.Vector3(0, 32, 0));
+      } else {
+        // Desktop: Standard positioning
+        camera.position.set(0, 16, cameraZ);
+        camera.lookAt(new THREE.Vector3(0, 28, 0));
+      }
+
+      plane.uniforms.uAspect.value = aspect;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
