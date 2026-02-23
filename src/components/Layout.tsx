@@ -1,8 +1,7 @@
 import { ReactNode, lazy, Suspense } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sparkles, History, Settings, LayoutGrid } from 'lucide-react'
+import { Sparkles, History, Settings, Wand2 } from 'lucide-react'
 
-// Lazy load the heavy GLSL component
 const GLSLHills = lazy(() => import('./ui/glsl-hills').then(module => ({ default: module.GLSLHills })))
 
 interface LayoutProps {
@@ -15,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => location.pathname === path
   
   const navItems = [
-    { path: '/generator', label: 'Generator', icon: LayoutGrid },
+    { path: '/generator', label: 'Generator', icon: Wand2 },
     { path: '/history', label: 'History', icon: History },
     { path: '/settings', label: 'Settings', icon: Settings },
   ]
@@ -25,18 +24,24 @@ export default function Layout({ children }: LayoutProps) {
       <Suspense fallback={null}>
         <GLSLHills />
       </Suspense>
-      <nav className="sticky top-0 z-[100] w-full px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 safe-top">
-        <div className="max-w-5xl mx-auto bg-white/95 backdrop-blur-md border border-neutral-200 rounded-lg sm:rounded-xl md:rounded-2xl px-2 sm:px-3 md:px-4 lg:px-5 py-1.5 sm:py-2 md:py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.06)] flex items-center justify-between gap-2">
-          <Link to="/" className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-2.5 lg:space-x-3 group shrink-0">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-black rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-orange-500 shadow-sm shadow-black/10 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-orange-500/25 shrink-0">
-              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-4.5 lg:h-4.5 text-white" />
+
+      {/* Desktop top nav */}
+      <nav className="sticky top-0 z-[100] w-full px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 safe-top hidden sm:block">
+        <div className="max-w-5xl mx-auto bg-white/80 backdrop-blur-2xl border border-neutral-200/60 rounded-2xl px-3 md:px-5 py-2 md:py-2.5 shadow-[0_8px_40px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.04)] flex items-center justify-between gap-2 transition-all duration-500">
+          <Link to="/" className="flex items-center space-x-2.5 md:space-x-3 group shrink-0">
+            <div className="relative w-9 h-9 md:w-10 md:h-10">
+              <div className="absolute inset-0 bg-orange-500/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-full h-full bg-gradient-to-br from-neutral-900 to-black rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/20 shrink-0">
+                <Sparkles className="w-4 h-4 md:w-[18px] md:h-[18px] text-orange-500" />
+              </div>
             </div>
-            <div className="hidden sm:flex flex-col">
-              <h1 className="text-xs md:text-sm lg:text-base font-display font-extrabold tracking-tighter leading-none text-black whitespace-nowrap" style={{ fontWeight: 800 }}>RAJ AI UI</h1>
+            <div className="flex flex-col">
+              <h1 className="text-sm md:text-[15px] font-display font-extrabold tracking-tighter leading-none text-black whitespace-nowrap" style={{ fontWeight: 800 }}>RAJ AI UI</h1>
+              <span className="text-[9px] md:text-[10px] font-display font-semibold text-neutral-400 tracking-wide uppercase leading-none mt-0.5">Component Engine</span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center gap-1 md:gap-1.5 shrink-0">
             {navItems.map((item) => {
               const Icon = item.icon
               const active = isActive(item.path)
@@ -44,23 +49,55 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-2.5 sm:px-3 md:px-3.5 lg:px-4 py-1.5 sm:py-2 md:py-2.5 rounded-lg md:rounded-xl text-[10px] sm:text-[11px] md:text-xs lg:text-sm font-display transition-all duration-300 flex items-center gap-1.5 sm:gap-2 touch-manipulation tracking-tight ${
+                  className={`relative px-3 md:px-4 py-2 md:py-2.5 rounded-xl text-[11px] md:text-xs font-display transition-all duration-300 flex items-center gap-1.5 md:gap-2 touch-manipulation tracking-tight overflow-hidden ${
                     active
-                      ? 'bg-black text-white shadow-md font-bold'
-                      : 'text-neutral-500 hover:text-black hover:bg-neutral-50 font-semibold'
+                      ? 'bg-neutral-900 text-white shadow-md shadow-black/10 font-bold'
+                      : 'text-neutral-500 hover:text-black hover:bg-neutral-50/80 font-semibold'
                   }`}
                   aria-current={active ? 'page' : undefined}
                 >
-                  <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-4 md:h-4 shrink-0 ${active ? 'text-orange-500' : ''}`} />
-                  <span className="whitespace-nowrap">{item.label}</span>
+                  <Icon className={`w-3.5 h-3.5 md:w-4 md:h-4 shrink-0 transition-colors duration-300 ${active ? 'text-orange-400' : ''}`} />
+                  <span className="whitespace-nowrap relative z-10">{item.label}</span>
                 </Link>
               )
             })}
           </div>
         </div>
       </nav>
+
+      {/* Mobile bottom nav */}
+      <nav className="fixed bottom-0 left-0 right-0 z-[100] sm:hidden safe-bottom">
+        <div className="mx-2 mb-2 bg-white/90 backdrop-blur-2xl border border-neutral-200/60 rounded-2xl px-2 py-1.5 shadow-[0_-4px_32px_rgba(0,0,0,0.08)] flex items-center justify-around gap-1">
+          {navItems.map((item) => {
+            const Icon = item.icon
+            const active = isActive(item.path)
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-300 touch-manipulation min-w-[64px] ${
+                  active
+                    ? 'text-orange-500'
+                    : 'text-neutral-400'
+                }`}
+                aria-current={active ? 'page' : undefined}
+              >
+                <div className="relative">
+                  {active && (
+                    <div className="absolute -inset-1.5 bg-orange-500/10 rounded-lg animate-scale-in" />
+                  )}
+                  <Icon className={`w-5 h-5 relative z-10 transition-all duration-300 ${active ? 'text-orange-500 scale-110' : ''}`} />
+                </div>
+                <span className={`text-[9px] font-display font-bold tracking-wide transition-colors duration-300 ${active ? 'text-orange-500' : 'text-neutral-400'}`}>
+                  {item.label}
+                </span>
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
       
-      <main className="w-full max-w-6xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4 md:py-6 lg:py-8 xl:py-10 relative z-10 safe-bottom overflow-x-hidden">
+      <main className="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10 relative z-10 overflow-x-hidden pb-24 sm:pb-0">
         {children}
       </main>
     </div>

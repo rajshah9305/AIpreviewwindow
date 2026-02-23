@@ -57,10 +57,6 @@ export const useSettings = () => {
     return success
   }, [settings, validate])
 
-  const hasSettings = useCallback((): boolean => {
-    return !!(settings.apiKey && settings.modelName && settings.baseUrl)
-  }, [settings])
-
   return {
     settings,
     errors,
@@ -69,6 +65,5 @@ export const useSettings = () => {
     updateField,
     validate,
     save,
-    hasSettings,
   }
 }

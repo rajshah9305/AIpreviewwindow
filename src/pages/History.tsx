@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Clock, Trash2, Search, Calendar, ChevronRight } from 'lucide-react'
+import { Clock, Trash2, Search, Calendar, ChevronRight, Layers, X } from 'lucide-react'
 import { useHistory } from '../hooks/useHistory'
 import { useToast } from '../components/ToastContainer'
 import { ROUTES, ANIMATION_DELAYS } from '../config/constants'
@@ -32,12 +32,13 @@ export default function History() {
 
   if (isEmpty) {
     return (
-      <div className="max-w-4xl mx-auto py-24 animate-fade-in">
+      <div className="max-w-4xl mx-auto py-16 sm:py-24 animate-fade-in">
         <EmptyState
           icon={Clock}
-          title="Archive Empty"
+          title="No History Yet"
+          description="Generated components will appear here"
           action={{
-            label: 'Launch Generator',
+            label: 'Start Generating',
             onClick: () => navigate(ROUTES.GENERATOR),
           }}
         />
@@ -46,8 +47,11 @@ export default function History() {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 md:space-y-10 animate-fade-in pb-12 sm:pb-16">
-      <PageHeader onClearClick={() => setShowClearDialog(true)} />
+    <div className="space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12">
+      <PageHeader
+        count={history.length}
+        onClearClick={() => setShowClearDialog(true)}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8">
         <div className="lg:col-span-4 space-y-3 sm:space-y-4">
@@ -70,9 +74,10 @@ export default function History() {
 
       <ConfirmDialog
         isOpen={showClearDialog}
-        title="Purge Archive?"
-        confirmText="Yes, Purge Everything"
-        cancelText="Keep My History"
+        title="Clear all history?"
+        description="This will permanently remove all saved generations. This action cannot be undone."
+        confirmText="Clear History"
+        cancelText="Cancel"
         onConfirm={handleClear}
         onCancel={() => setShowClearDialog(false)}
         variant="danger"
@@ -82,17 +87,21 @@ export default function History() {
 }
 
 interface PageHeaderProps {
+  count: number
   onClearClick: () => void
 }
 
-const PageHeader = ({ onClearClick }: PageHeaderProps) => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-100 pb-3 sm:pb-4 md:pb-6">
-    <h2 className="heading-section">History</h2>
+const PageHeader = ({ count, onClearClick }: PageHeaderProps) => (
+  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-200/60 pb-4 sm:pb-6">
+    <div>
+      <h2 className="heading-section text-neutral-900">History</h2>
+      <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-medium">{count} generation{count !== 1 ? 's' : ''} saved</p>
+    </div>
     <button
       onClick={onClearClick}
-      className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 text-red-600 hover:bg-red-50 rounded-lg sm:rounded-xl transition-all text-xs sm:text-sm font-display font-bold border border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95"
+      className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-[10px] sm:text-xs font-display font-bold border border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95"
     >
-      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Purge History
+      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Clear All
     </button>
   </div>
 )
@@ -104,15 +113,24 @@ interface SearchBarProps {
 
 const SearchBar = ({ value, onChange }: SearchBarProps) => (
   <div className="relative group">
-    <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 group-focus-within:text-orange-500 transition-colors" />
+    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-300 group-focus-within:text-orange-500 transition-colors duration-300" />
     <input
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      placeholder="Search concepts..."
-      className="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-3 sm:py-3.5 bg-white border-2 border-neutral-900 rounded-lg sm:rounded-xl text-sm font-sans font-medium focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all placeholder:text-neutral-400"
+      placeholder="Search generations..."
+      className="w-full pl-10 pr-9 py-3 sm:py-3.5 bg-white border border-neutral-200/60 rounded-xl text-sm font-sans font-medium focus:outline-none focus:border-orange-500/40 focus:ring-4 focus:ring-orange-500/5 transition-all placeholder:text-neutral-300"
       style={{ letterSpacing: '-0.015em' }}
       aria-label="Search history"
     />
+    {value && (
+      <button
+        onClick={() => onChange('')}
+        className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-neutral-300 hover:text-neutral-500 transition-colors touch-manipulation"
+        aria-label="Clear search"
+      >
+        <X className="w-3.5 h-3.5" />
+      </button>
+    )}
   </div>
 )
 
@@ -123,56 +141,66 @@ interface HistoryListProps {
 }
 
 const HistoryList = ({ items, selectedTimestamp, onSelect }: HistoryListProps) => (
-  <div className="space-y-2 sm:space-y-2.5 max-h-[50vh] sm:max-h-[65vh] overflow-auto pr-1 scrollbar-thin">
-    {items.map((item) => (
+  <div className="space-y-1.5 sm:space-y-2 max-h-[50vh] sm:max-h-[65vh] overflow-auto pr-1 scrollbar-thin">
+    {items.map((item, i) => (
       <HistoryItem
         key={item.timestamp}
         item={item}
         isSelected={selectedTimestamp === item.timestamp}
         onSelect={() => onSelect(item)}
+        index={i}
       />
     ))}
     {items.length === 0 && (
-      <div className="text-center py-10 sm:py-12 opacity-40">
-        <p className="text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.12em] text-neutral-400">No Matches</p>
+      <div className="text-center py-12 opacity-40">
+        <p className="text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.1em] text-neutral-400">No matches found</p>
       </div>
     )}
   </div>
 )
 
 interface HistoryItemProps {
-  item: { timestamp: number; instruction: string }
+  item: { timestamp: number; instruction: string; variations: Array<{ style: string }> }
   isSelected: boolean
   onSelect: () => void
+  index: number
 }
 
-const HistoryItem = ({ item, isSelected, onSelect }: HistoryItemProps) => (
+const HistoryItem = ({ item, isSelected, onSelect, index }: HistoryItemProps) => (
   <button
     onClick={onSelect}
-    className={`w-full p-3.5 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation ${
+    className={`w-full p-3 sm:p-3.5 rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation animate-slide-up ${
       isSelected
-        ? 'bg-gradient-to-br from-black to-neutral-900 text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]'
-        : 'bg-white border border-neutral-200 hover:border-orange-500/30 text-neutral-600 hover:bg-neutral-50 hover:shadow-sm'
+        ? 'bg-neutral-900 text-white shadow-md shadow-black/10'
+        : 'bg-white border border-neutral-100/60 hover:border-neutral-200 text-neutral-600 hover:shadow-sm'
     }`}
+    style={{ animationDelay: `${index * 30}ms` }}
   >
     <div className="min-w-0 flex-1">
-      <p className={`text-sm sm:text-base font-display font-bold truncate tracking-tight ${isSelected ? 'text-white' : 'text-black'}`}>
+      <p className={`text-[13px] sm:text-sm font-display font-bold truncate tracking-tight ${isSelected ? 'text-white' : 'text-neutral-800'}`}>
         {item.instruction}
       </p>
-      <div className="flex items-center gap-1.5 mt-1.5 opacity-60">
-        <Calendar className="w-3 h-3" />
-        <p className="text-[10px] sm:text-[11px] font-display font-bold uppercase tracking-wide">
-          {new Date(item.timestamp).toLocaleDateString(undefined, {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-          })}
-        </p>
+      <div className="flex items-center gap-2 mt-1.5">
+        <div className="flex items-center gap-1 opacity-50">
+          <Calendar className="w-2.5 h-2.5" />
+          <p className="text-[9px] sm:text-[10px] font-display font-semibold tracking-wide">
+            {new Date(item.timestamp).toLocaleDateString(undefined, {
+              month: 'short',
+              day: 'numeric',
+            })}
+          </p>
+        </div>
+        <div className={`flex items-center gap-1 opacity-50`}>
+          <Layers className="w-2.5 h-2.5" />
+          <p className="text-[9px] sm:text-[10px] font-display font-semibold tracking-wide">
+            {item.variations?.length || 0}
+          </p>
+        </div>
       </div>
     </div>
     <ChevronRight
-      className={`w-4 h-4 transition-transform shrink-0 ml-2 ${
-        isSelected ? 'text-orange-500 translate-x-1' : 'text-neutral-300 group-hover:translate-x-1 group-hover:text-neutral-400'
+      className={`w-3.5 h-3.5 transition-all shrink-0 ml-2 ${
+        isSelected ? 'text-orange-400 translate-x-0.5' : 'text-neutral-200 group-hover:translate-x-0.5 group-hover:text-neutral-400'
       }`}
     />
   </button>
@@ -188,29 +216,32 @@ interface ResultDetailProps {
 }
 
 const ResultDetail = ({ result }: ResultDetailProps) => (
-  <div className="space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in">
-    <div className="p-5 sm:p-7 md:p-9 bg-gradient-to-br from-black to-neutral-900 rounded-xl sm:rounded-2xl md:rounded-3xl text-white relative overflow-hidden shadow-[0_12px_48px_rgba(0,0,0,0.15)]">
-      <div className="absolute top-0 right-0 w-40 sm:w-56 md:w-64 h-40 sm:h-56 md:h-64 bg-orange-500/10 rounded-full blur-[60px] sm:blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+  <div className="space-y-4 sm:space-y-6 animate-fade-in">
+    {/* Instruction card */}
+    <div className="p-5 sm:p-7 bg-neutral-900 rounded-2xl text-white relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+      <div className="absolute top-0 right-0 w-40 sm:w-56 h-40 sm:h-56 bg-orange-500/8 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="relative z-10">
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-display tracking-tight leading-tight" style={{ fontWeight: 750 }}>
+        <p className="text-base sm:text-lg md:text-xl font-display tracking-tight leading-snug" style={{ fontWeight: 700 }}>
           &ldquo;{result.instruction}&rdquo;
         </p>
-        <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3 mt-4 sm:mt-5 md:mt-6">
+        <div className="flex flex-wrap gap-2 mt-4 sm:mt-5">
           {result.provider && (
             <MetadataBadge label="Provider" value={result.provider} />
           )}
           {result.modelName && (
             <MetadataBadge label="Model" value={result.modelName} />
           )}
+          <MetadataBadge label="Variations" value={String(result.variations.length)} />
         </div>
       </div>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+    {/* Variations grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
       {result.variations.map((variation, i) => (
         <div
           key={variation.id}
-          className="h-[400px] sm:h-[450px] md:h-[500px] animate-slide-up"
+          className="h-[380px] sm:h-[420px] md:h-[460px] animate-slide-up"
           style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
         >
           <ComponentPreview variation={variation} />
@@ -221,22 +252,22 @@ const ResultDetail = ({ result }: ResultDetailProps) => (
 )
 
 const MetadataBadge = ({ label, value }: { label: string; value: string }) => (
-  <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/10">
-    <p className="text-[8px] sm:text-[9px] font-display font-bold uppercase tracking-[0.12em] text-neutral-400">
+  <div className="px-3 py-1.5 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+    <p className="text-[8px] font-display font-bold uppercase tracking-[0.1em] text-neutral-500 leading-none">
       {label}
     </p>
-    <p className="text-[11px] sm:text-xs font-display font-bold text-white mt-0.5 tracking-tight">{value}</p>
+    <p className="text-[11px] font-display font-bold text-white mt-0.5 tracking-tight leading-none">{value}</p>
   </div>
 )
 
 const EmptySelection = () => (
-  <div className="h-full min-h-[350px] sm:min-h-[400px] md:min-h-[500px] flex items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 bg-neutral-50/50">
+  <div className="h-full min-h-[350px] sm:min-h-[400px] flex items-center justify-center border border-dashed border-neutral-200/60 rounded-2xl p-8 bg-neutral-50/30">
     <div className="text-center">
-      <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-xl border border-neutral-200 flex items-center justify-center mx-auto mb-4 sm:mb-5 shadow-sm">
-        <Clock className="w-6 h-6 sm:w-7 sm:h-7 text-neutral-400" />
+      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mx-auto mb-4 shadow-sm">
+        <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-300" />
       </div>
-      <p className="text-neutral-500 text-xs sm:text-sm font-display font-bold uppercase tracking-[0.1em]">
-        Select a Concept
+      <p className="text-neutral-400 text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.08em]">
+        Select a generation to preview
       </p>
     </div>
   </div>
