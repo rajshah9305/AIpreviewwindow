@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import './styles/typography.css';
 
 @tailwind base;
@@ -385,5 +385,270 @@ textarea {
 @media screen and (max-width: 767px) {
   textarea:focus {
     font-size: max(16px, 1rem) !important;
+  }
+}
+
+/* ============================================
+   ELITE TYPOGRAPHY UTILITIES
+   ============================================ */
+
+@layer utilities {
+  /* Text gradient effects */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-dark {
+    @apply bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-shine {
+    @apply bg-gradient-to-r from-neutral-400 via-white to-neutral-400 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+  }
+  
+  /* Text shadow effects */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.2);
+  }
+  
+  /* Advanced text effects */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  /* Optical alignment */
+  .optical-align {
+    margin-left: -0.05em;
+  }
+  
+  /* Number formatting */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .proportional-nums {
+    font-variant-numeric: proportional-nums;
+  }
+  
+  /* Advanced hover effects */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-0.5 scale-[1.02];
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-500;
+  }
+  
+  .hover-glow:hover {
+    filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.4));
+  }
+}
+
+/* ============================================
+   ADVANCED ANIMATIONS
+   ============================================ */
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes text-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes text-reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
+  }
+}
+
+/* Animation utility classes */
+.animate-text-reveal-up {
+  animation: text-reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-text-reveal-scale {
+  animation: text-reveal-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.animate-float-subtle {
+  animation: float-subtle 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   ENHANCED COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+  /* Premium button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-accent font-600 text-sm tracking-snug;
+    @apply bg-gradient-to-r from-orange-600 to-orange-500;
+    @apply text-white shadow-lg shadow-orange-500/30;
+    @apply transition-all duration-300;
+    @apply hover:shadow-xl hover:shadow-orange-500/40 hover:-translate-y-0.5;
+    @apply active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-accent font-500 text-sm tracking-snug;
+    @apply bg-white border-2 border-neutral-200 text-neutral-900;
+    @apply shadow-sm transition-all duration-300;
+    @apply hover:border-neutral-300 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:scale-95;
+  }
+  
+  /* Premium card styles */
+  .card-premium {
+    @apply bg-white rounded-2xl border border-neutral-200/50;
+    @apply shadow-[0_8px_32px_rgba(0,0,0,0.06)];
+    @apply backdrop-blur-xl;
+    @apply transition-all duration-500;
+    @apply hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] hover:-translate-y-1;
+  }
+  
+  /* Premium input styles */
+  .input-premium {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-white border-2 border-neutral-200;
+    @apply font-sans text-base font-400 tracking-snug;
+    @apply transition-all duration-300;
+    @apply focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10;
+    @apply placeholder:text-neutral-400 placeholder:font-400;
+  }
+  
+  /* Badge styles */
+  .badge-premium {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full;
+    @apply font-accent text-xs font-600 tracking-wide uppercase;
+    @apply bg-gradient-to-r from-orange-50 to-amber-50;
+    @apply text-orange-700 border border-orange-200/50;
+  }
+  
+  /* Section header styles */
+  .section-header {
+    @apply font-display text-4xl sm:text-5xl font-700 tracking-tighter;
+    @apply text-gradient-dark;
+    @apply mb-4;
+  }
+  
+  .section-subheader {
+    @apply font-accent text-lg sm:text-xl font-400 tracking-snug;
+    @apply text-neutral-600 leading-relaxed;
+  }
+}
+
+/* ============================================
+   RESPONSIVE ENHANCEMENTS
+   ============================================ */
+
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible styles */
+*:focus-visible {
+  @apply outline-none ring-4 ring-orange-500/30 ring-offset-2;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-gradient-primary,
+  .text-gradient-dark {
+    @apply text-black bg-none;
   }
 }

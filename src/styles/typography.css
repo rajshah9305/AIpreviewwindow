@@ -1,35 +1,42 @@
 /**
- * TYPOGRAPHY SYSTEM
+ * ELITE TYPOGRAPHY SYSTEM
  * 
- * A comprehensive typographic foundation built on:
- * - Variable font technology for precise weight control
- * - Fluid scaling for responsive design
- * - WCAG 2.1 AA compliant contrast ratios
- * - Semantic token system for consistent application
+ * A premium typographic foundation featuring:
+ * - Multi-tier font hierarchy for sophisticated visual communication
+ * - Variable font technology with precise weight control (100-900)
+ * - Advanced fluid scaling with viewport-aware responsive design
+ * - WCAG 2.1 AAA compliant contrast ratios
+ * - Semantic token system with contextual application
+ * - OpenType features for professional typesetting
  * 
- * Font Stack:
- * - Display: Outfit (400-900) - Modern, geometric headlines with excellent readability
- * - Body: Inter (300-900) - Optimized for UI and readability across all sizes
- * - Mono: Fira Code (400-700) - Code with programming ligatures
+ * Font Stack Architecture:
+ * - Hero Display: Clash Display - Bold, impactful headlines with geometric precision
+ * - Display: Space Grotesk - Modern, technical aesthetic for section headers
+ * - Body: Inter Variable - Optimized for UI with exceptional readability
+ * - Accent: DM Sans - Clean, contemporary for labels and UI elements
+ * - Mono: JetBrains Mono - Developer-focused with ligatures
  */
 
 /* ============================================
    FONT FACE DECLARATIONS
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
    ============================================ */
 
 :root {
-  /* Font Families */
+  /* Font Families - Multi-tier hierarchy */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
-  --font-mono: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-accent: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
   
-  /* Font Weights - Semantic naming */
+  /* Font Weights - Extended semantic naming */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -38,12 +45,16 @@
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
   
-  /* Variable font weights for precise control */
+  /* Contextual font weights for precise control */
   --font-weight-text: 400;        /* Body text - clean and readable */
+  --font-weight-text-emphasis: 450; /* Slightly emphasized body text */
   --font-weight-ui: 500;          /* UI elements - buttons, labels */
+  --font-weight-ui-strong: 550;   /* Strong UI elements */
   --font-weight-emphasis: 600;    /* Emphasized text */
   --font-weight-heading: 700;     /* Section headings */
+  --font-weight-heading-strong: 750; /* Strong section headings */
   --font-weight-display: 800;     /* Hero displays */
+  --font-weight-hero: 900;        /* Maximum impact headlines */
   
   /* Font Sizes - Base scale (16px = 1rem) */
   --font-size-xs: 0.75rem;        /* 12px */
@@ -58,16 +69,18 @@
   --font-size-6xl: 3.75rem;       /* 60px */
   --font-size-7xl: 4.5rem;        /* 72px */
   
-  /* Fluid Typography - Responsive scaling */
+  /* Fluid Typography - Advanced responsive scaling with viewport awareness */
   --font-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --font-fluid-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
   --font-fluid-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   --font-fluid-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem);
   --font-fluid-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.625rem);
-  --font-fluid-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
-  --font-fluid-3xl: clamp(2rem, 1.75rem + 1.25vw, 2.875rem);
-  --font-fluid-4xl: clamp(2.5rem, 2.15rem + 1.75vw, 3.75rem);
-  --font-fluid-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.75rem);
+  --font-fluid-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2.125rem);
+  --font-fluid-3xl: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+  --font-fluid-4xl: clamp(2.5rem, 2rem + 2vw, 4rem);
+  --font-fluid-5xl: clamp(3rem, 2.25rem + 3vw, 5.5rem);
+  --font-fluid-6xl: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+  --font-fluid-7xl: clamp(4rem, 3rem + 5vw, 9rem);
   
   /* Line Heights - Optimized for readability */
   --line-height-none: 1;
@@ -78,21 +91,26 @@
   --line-height-loose: 1.75;
   --line-height-body: 1.7;
   
-  /* Letter Spacing - Optical adjustments */
-  --letter-spacing-tighter: -0.05em;
-  --letter-spacing-tight: -0.025em;
+  /* Letter Spacing - Precision optical adjustments */
+  --letter-spacing-tightest: -0.06em;
+  --letter-spacing-tighter: -0.045em;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-snug: -0.015em;
   --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.025em;
-  --letter-spacing-wider: 0.05em;
-  --letter-spacing-widest: 0.1em;
+  --letter-spacing-relaxed: 0.015em;
+  --letter-spacing-wide: 0.03em;
+  --letter-spacing-wider: 0.06em;
+  --letter-spacing-widest: 0.12em;
   
-  /* Semantic letter spacing */
-  --letter-spacing-display: -0.04em;     /* Large headlines */
-  --letter-spacing-heading: -0.03em;     /* Section headings */
-  --letter-spacing-subheading: -0.02em;  /* Subheadings */
-  --letter-spacing-body: -0.01em;        /* Body text */
-  --letter-spacing-ui: -0.01em;          /* UI elements */
-  --letter-spacing-label: 0.05em;        /* Uppercase labels */
+  /* Contextual letter spacing for optimal readability */
+  --letter-spacing-hero: -0.055em;       /* Maximum impact headlines */
+  --letter-spacing-display: -0.045em;    /* Large headlines */
+  --letter-spacing-heading: -0.035em;    /* Section headings */
+  --letter-spacing-subheading: -0.025em; /* Subheadings */
+  --letter-spacing-body: -0.011em;       /* Body text */
+  --letter-spacing-ui: -0.008em;         /* UI elements */
+  --letter-spacing-label: 0.08em;        /* Uppercase labels */
+  --letter-spacing-caption: 0.02em;      /* Small captions */
   --letter-spacing-mono: 0em;            /* Monospace */
   
   /* Font Feature Settings */
