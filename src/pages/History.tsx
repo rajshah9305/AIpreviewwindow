@@ -92,16 +92,16 @@ interface PageHeaderProps {
 }
 
 const PageHeader = ({ count, onClearClick }: PageHeaderProps) => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-200/60 pb-4 sm:pb-6">
+  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-6">
     <div>
       <h2 className="heading-section text-neutral-900">History</h2>
-      <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-medium">{count} generation{count !== 1 ? 's' : ''} saved</p>
+      <p className="text-sm sm:text-sm text-neutral-500 mt-1.5 font-medium">{count} generation{count !== 1 ? 's' : ''} saved</p>
     </div>
     <button
       onClick={onClearClick}
-      className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-[10px] sm:text-xs font-display font-bold border border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95"
+      className="flex items-center justify-center gap-2 sm:gap-2 px-5 sm:px-5 py-3 sm:py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-sm sm:text-xs font-display font-bold border-2 border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95 min-h-[48px] sm:min-h-0"
     >
-      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Clear All
+      <Trash2 className="w-4 h-4 sm:w-4 sm:h-4" /> Clear All
     </button>
   </div>
 )
@@ -113,22 +113,22 @@ interface SearchBarProps {
 
 const SearchBar = ({ value, onChange }: SearchBarProps) => (
   <div className="relative group">
-    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-300 group-focus-within:text-orange-500 transition-colors duration-300" />
+    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-neutral-300 group-focus-within:text-orange-500 transition-colors duration-300" />
     <input
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Search generations..."
-      className="w-full pl-10 pr-9 py-3 sm:py-3.5 bg-white border border-neutral-200/60 rounded-xl text-sm font-sans font-medium focus:outline-none focus:border-orange-500/40 focus:ring-4 focus:ring-orange-500/5 transition-all placeholder:text-neutral-300"
-      style={{ letterSpacing: '-0.015em' }}
+      className="w-full pl-11 pr-11 py-3.5 sm:py-3.5 bg-white border-2 border-neutral-200 rounded-xl text-base font-sans font-medium focus:outline-none focus:border-orange-500/40 focus:ring-4 focus:ring-orange-500/5 transition-all placeholder:text-neutral-300 min-h-[48px]"
+      style={{ letterSpacing: '-0.015em', fontSize: 'max(16px, 1rem)' }}
       aria-label="Search history"
     />
     {value && (
       <button
         onClick={() => onChange('')}
-        className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-neutral-300 hover:text-neutral-500 transition-colors touch-manipulation"
+        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-neutral-300 hover:text-neutral-500 transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
         aria-label="Clear search"
       >
-        <X className="w-3.5 h-3.5" />
+        <X className="w-4 h-4" />
       </button>
     )}
   </div>
@@ -169,37 +169,37 @@ interface HistoryItemProps {
 const HistoryItem = ({ item, isSelected, onSelect, index }: HistoryItemProps) => (
   <button
     onClick={onSelect}
-    className={`w-full p-3 sm:p-3.5 rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation animate-slide-up ${
+    className={`w-full p-4 sm:p-3.5 rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation animate-slide-up min-h-[72px] ${
       isSelected
-        ? 'bg-neutral-900 text-white shadow-md shadow-black/10'
-        : 'bg-white border border-neutral-100/60 hover:border-neutral-200 text-neutral-600 hover:shadow-sm'
+        ? 'bg-neutral-900 text-white shadow-lg shadow-black/10'
+        : 'bg-white border-2 border-neutral-100 hover:border-neutral-200 text-neutral-600 hover:shadow-sm'
     }`}
     style={{ animationDelay: `${index * 30}ms` }}
   >
     <div className="min-w-0 flex-1">
-      <p className={`text-[13px] sm:text-sm font-display font-bold truncate tracking-tight ${isSelected ? 'text-white' : 'text-neutral-800'}`}>
+      <p className={`text-sm sm:text-sm font-display font-bold truncate tracking-tight ${isSelected ? 'text-white' : 'text-neutral-800'}`}>
         {item.instruction}
       </p>
-      <div className="flex items-center gap-2 mt-1.5">
-        <div className="flex items-center gap-1 opacity-50">
-          <Calendar className="w-2.5 h-2.5" />
-          <p className="text-[9px] sm:text-[10px] font-display font-semibold tracking-wide">
+      <div className="flex items-center gap-3 mt-2">
+        <div className="flex items-center gap-1.5 opacity-60">
+          <Calendar className="w-3 h-3" />
+          <p className="text-[10px] sm:text-[10px] font-display font-semibold tracking-wide">
             {new Date(item.timestamp).toLocaleDateString(undefined, {
               month: 'short',
               day: 'numeric',
             })}
           </p>
         </div>
-        <div className={`flex items-center gap-1 opacity-50`}>
-          <Layers className="w-2.5 h-2.5" />
-          <p className="text-[9px] sm:text-[10px] font-display font-semibold tracking-wide">
+        <div className={`flex items-center gap-1.5 opacity-60`}>
+          <Layers className="w-3 h-3" />
+          <p className="text-[10px] sm:text-[10px] font-display font-semibold tracking-wide">
             {item.variations?.length || 0}
           </p>
         </div>
       </div>
     </div>
     <ChevronRight
-      className={`w-3.5 h-3.5 transition-all shrink-0 ml-2 ${
+      className={`w-4 h-4 transition-all shrink-0 ml-3 ${
         isSelected ? 'text-orange-400 translate-x-0.5' : 'text-neutral-200 group-hover:translate-x-0.5 group-hover:text-neutral-400'
       }`}
     />

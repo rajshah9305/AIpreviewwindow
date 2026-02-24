@@ -8,16 +8,16 @@
  * - Semantic token system for consistent application
  * 
  * Font Stack:
- * - Display: Space Grotesk (400-800) - Geometric, modern headlines
- * - Body: Inter (300-900) - Optimized for UI and readability
- * - Mono: JetBrains Mono (400-700) - Code and technical content
+ * - Display: Outfit (400-900) - Modern, geometric headlines with excellent readability
+ * - Body: Inter (300-900) - Optimized for UI and readability across all sizes
+ * - Mono: Fira Code (400-700) - Code with programming ligatures
  */
 
 /* ============================================
    FONT FACE DECLARATIONS
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
 
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
@@ -26,8 +26,8 @@
 :root {
   /* Font Families */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'SF Mono', 'Consolas', monospace;
   
   /* Font Weights - Semantic naming */
   --font-weight-light: 300;
@@ -39,11 +39,11 @@
   --font-weight-black: 900;
   
   /* Variable font weights for precise control */
-  --font-weight-text: 450;        /* Body text - slightly heavier than 400 */
-  --font-weight-ui: 550;          /* UI elements - buttons, labels */
-  --font-weight-emphasis: 650;    /* Emphasized text */
-  --font-weight-heading: 750;     /* Section headings */
-  --font-weight-display: 850;     /* Hero displays */
+  --font-weight-text: 400;        /* Body text - clean and readable */
+  --font-weight-ui: 500;          /* UI elements - buttons, labels */
+  --font-weight-emphasis: 600;    /* Emphasized text */
+  --font-weight-heading: 700;     /* Section headings */
+  --font-weight-display: 800;     /* Hero displays */
   
   /* Font Sizes - Base scale (16px = 1rem) */
   --font-size-xs: 0.75rem;        /* 12px */
@@ -59,15 +59,15 @@
   --font-size-7xl: 4.5rem;        /* 72px */
   
   /* Fluid Typography - Responsive scaling */
-  --font-fluid-xs: clamp(0.75rem, 0.68rem + 0.35vw, 0.875rem);
-  --font-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
-  --font-fluid-base: clamp(1rem, 0.93rem + 0.35vw, 1.125rem);
-  --font-fluid-lg: clamp(1.125rem, 1.02rem + 0.525vw, 1.375rem);
-  --font-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
-  --font-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 2.125rem);
-  --font-fluid-3xl: clamp(2rem, 1.65rem + 1.75vw, 3.25rem);
-  --font-fluid-4xl: clamp(2.5rem, 2rem + 2.5vw, 4.25rem);
-  --font-fluid-5xl: clamp(3rem, 2.25rem + 3.75vw, 5.5rem);
+  --font-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-fluid-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
+  --font-fluid-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-fluid-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem);
+  --font-fluid-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.625rem);
+  --font-fluid-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --font-fluid-3xl: clamp(2rem, 1.75rem + 1.25vw, 2.875rem);
+  --font-fluid-4xl: clamp(2.5rem, 2.15rem + 1.75vw, 3.75rem);
+  --font-fluid-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.75rem);
   
   /* Line Heights - Optimized for readability */
   --line-height-none: 1;
@@ -87,13 +87,13 @@
   --letter-spacing-widest: 0.1em;
   
   /* Semantic letter spacing */
-  --letter-spacing-display: -0.052em;    /* Large headlines */
-  --letter-spacing-heading: -0.035em;    /* Section headings */
-  --letter-spacing-subheading: -0.025em; /* Subheadings */
-  --letter-spacing-body: -0.012em;       /* Body text */
-  --letter-spacing-ui: -0.015em;         /* UI elements */
-  --letter-spacing-label: 0.08em;        /* Uppercase labels */
-  --letter-spacing-mono: -0.012em;       /* Monospace */
+  --letter-spacing-display: -0.04em;     /* Large headlines */
+  --letter-spacing-heading: -0.03em;     /* Section headings */
+  --letter-spacing-subheading: -0.02em;  /* Subheadings */
+  --letter-spacing-body: -0.01em;        /* Body text */
+  --letter-spacing-ui: -0.01em;          /* UI elements */
+  --letter-spacing-label: 0.05em;        /* Uppercase labels */
+  --letter-spacing-mono: 0em;            /* Monospace */
   
   /* Font Feature Settings */
   --font-features-default: 'cv02', 'cv03', 'cv04', 'cv11', 'calt', 'ss01', 'ss02';
@@ -150,8 +150,8 @@ h1 {
 h2 {
   font-size: var(--font-fluid-4xl);
   font-weight: var(--font-weight-extrabold);
-  letter-spacing: -0.045em;
-  line-height: 1;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
 
 h3 {
@@ -164,22 +164,22 @@ h3 {
 h4 {
   font-size: var(--font-fluid-2xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.028em;
-  line-height: 1.1;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 h5 {
   font-size: var(--font-fluid-xl);
   font-weight: var(--font-weight-emphasis);
-  letter-spacing: -0.022em;
-  line-height: 1.15;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 h6 {
   font-size: var(--font-fluid-lg);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.018em;
-  line-height: 1.2;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 /* ============================================
@@ -222,7 +222,7 @@ p {
   font-family: var(--font-display);
   font-size: var(--font-fluid-5xl);
   font-weight: var(--font-weight-display);
-  line-height: 0.92;
+  line-height: 1;
   letter-spacing: var(--letter-spacing-display);
   text-wrap: balance;
   font-feature-settings: var(--font-features-display);
@@ -233,8 +233,8 @@ p {
   font-family: var(--font-display);
   font-size: var(--font-fluid-4xl);
   font-weight: var(--font-weight-extrabold);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   text-wrap: balance;
   font-feature-settings: var(--font-features-display);
 }

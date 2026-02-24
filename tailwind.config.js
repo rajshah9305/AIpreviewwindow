@@ -18,8 +18,8 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+        display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'SF Mono', 'Consolas', 'monospace'],
       },
       fontWeight: {
         '450': '450',

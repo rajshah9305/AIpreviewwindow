@@ -102,24 +102,24 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
           : 'relative h-full w-full border-neutral-100/80 hover:border-neutral-200 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]'
       }`}>
         {/* Header */}
-        <div className="px-3 sm:px-4 py-2.5 sm:py-3 border-b border-neutral-100/60 flex items-center justify-between shrink-0 bg-white/90 backdrop-blur-md">
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <div className="w-2 h-2 rounded-full bg-orange-500 shrink-0 ring-2 ring-orange-500/10" />
-            <span className="text-[11px] sm:text-xs font-display font-bold text-neutral-900 tracking-tight leading-none truncate" style={{ fontWeight: 750 }}>
+        <div className="px-4 sm:px-4 py-3 sm:py-3 border-b border-neutral-100/60 flex items-center justify-between shrink-0 bg-white/90 backdrop-blur-md">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="w-2.5 h-2.5 rounded-full bg-orange-500 shrink-0 ring-4 ring-orange-500/10" />
+            <span className="text-xs sm:text-xs font-display font-bold text-neutral-900 tracking-tight leading-none truncate" style={{ fontWeight: 750 }}>
               {variation.name}
             </span>
-            <span className={`hidden sm:inline-flex px-2 py-0.5 rounded-md text-[8px] font-display font-bold uppercase tracking-widest ${styleBadgeClass}`}>
+            <span className={`hidden sm:inline-flex px-2.5 py-1 rounded-md text-[9px] font-display font-bold uppercase tracking-widest ${styleBadgeClass}`}>
               {variation.style}
             </span>
           </div>
           
-          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-1 shrink-0">
             <ToolbarButton
               onClick={() => setShowCode(!showCode)}
               active={showCode}
               title={showCode ? 'View Preview' : 'View Code'}
             >
-              {showCode ? <Eye className="w-3.5 h-3.5" /> : <Code className="w-3.5 h-3.5" />}
+              {showCode ? <Eye className="w-4 h-4" /> : <Code className="w-4 h-4" />}
             </ToolbarButton>
 
             <ToolbarButton
@@ -128,22 +128,22 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
               activeClass="bg-green-500 text-white"
               title="Copy Code"
             >
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             </ToolbarButton>
 
             <ToolbarButton onClick={downloadCode} title="Download HTML" className="hidden sm:flex">
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-4 h-4" />
             </ToolbarButton>
 
             <ToolbarButton onClick={openInNewTab} title="Open in New Tab" className="hidden sm:flex">
-              <ExternalLink className="w-3.5 h-3.5" />
+              <ExternalLink className="w-4 h-4" />
             </ToolbarButton>
 
             <ToolbarButton
               onClick={() => setIsExpanded(!isExpanded)}
               title={isExpanded ? 'Minimize' : 'Expand'}
             >
-              {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+              {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </ToolbarButton>
           </div>
         </div>
@@ -185,7 +185,7 @@ function ToolbarButton({ onClick, title, active, activeClass, className = '', ch
   return (
     <button
       onClick={onClick}
-      className={`p-1.5 sm:p-2 rounded-lg transition-all duration-200 touch-manipulation ${
+      className={`p-2 sm:p-2 rounded-lg transition-all duration-200 touch-manipulation min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 flex items-center justify-center ${
         active
           ? (activeClass || 'bg-neutral-900 text-white')
           : 'text-neutral-400 hover:bg-neutral-50 hover:text-neutral-700'

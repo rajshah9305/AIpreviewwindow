@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
 @import './styles/typography.css';
 
 @tailwind base;
@@ -47,12 +47,12 @@
     font-feature-settings: var(--font-features-display);
   }
   
-  h1 { @apply text-fluid-5xl; font-weight: var(--font-weight-display); letter-spacing: var(--letter-spacing-display); line-height: 0.95; }
-  h2 { @apply text-fluid-4xl; font-weight: var(--font-weight-extrabold); letter-spacing: -0.042em; line-height: 1; }
-  h3 { @apply text-fluid-3xl; font-weight: var(--font-weight-heading); letter-spacing: var(--letter-spacing-heading); line-height: 1.05; }
-  h4 { @apply text-fluid-2xl; font-weight: var(--font-weight-bold); letter-spacing: -0.028em; line-height: 1.1; }
-  h5 { @apply text-fluid-xl; font-weight: var(--font-weight-emphasis); letter-spacing: -0.022em; line-height: 1.15; }
-  h6 { @apply text-fluid-lg; font-weight: var(--font-weight-semibold); letter-spacing: -0.018em; line-height: 1.2; }
+  h1 { @apply text-fluid-5xl; font-weight: var(--font-weight-display); letter-spacing: var(--letter-spacing-display); line-height: 1; }
+  h2 { @apply text-fluid-4xl; font-weight: var(--font-weight-extrabold); letter-spacing: -0.035em; line-height: 1.05; }
+  h3 { @apply text-fluid-3xl; font-weight: var(--font-weight-heading); letter-spacing: var(--letter-spacing-heading); line-height: 1.1; }
+  h4 { @apply text-fluid-2xl; font-weight: var(--font-weight-bold); letter-spacing: -0.025em; line-height: 1.15; }
+  h5 { @apply text-fluid-xl; font-weight: var(--font-weight-emphasis); letter-spacing: -0.02em; line-height: 1.2; }
+  h6 { @apply text-fluid-lg; font-weight: var(--font-weight-semibold); letter-spacing: -0.015em; line-height: 1.25; }
   
   p { 
     @apply leading-relaxed;
@@ -64,26 +64,26 @@
   
   strong, b {
     font-weight: var(--font-weight-emphasis);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
   }
   
   em, i {
     font-style: italic;
-    letter-spacing: -0.008em;
+    letter-spacing: -0.005em;
   }
   
   .text-display {
     font-family: var(--font-display);
     font-weight: var(--font-weight-bold);
-    letter-spacing: -0.032em;
+    letter-spacing: -0.025em;
     font-feature-settings: var(--font-features-display);
   }
   
   .text-mono {
     font-family: var(--font-mono);
     font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-mono);
-    font-variant-ligatures: none;
+    letter-spacing: 0em;
+    font-variant-ligatures: common-ligatures;
     font-feature-settings: var(--font-features-mono);
   }
   
@@ -109,33 +109,33 @@
 
 @layer components {
   .btn-primary {
-    @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-neutral-900 text-white rounded-xl font-display text-xs sm:text-sm tracking-tight transition-all duration-300 hover:bg-black hover:shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation;
+    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-neutral-900 text-white rounded-xl font-display text-sm sm:text-base tracking-tight transition-all duration-300 hover:bg-black hover:shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-ui);
   }
 
   .btn-orange {
-    @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-orange-500 text-white rounded-xl font-display text-xs sm:text-sm tracking-tight transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation;
+    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-orange-500 text-white rounded-xl font-display text-sm sm:text-base tracking-tight transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-ui);
   }
   
   .btn-secondary {
-    @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-neutral-100 text-neutral-700 rounded-xl font-display text-xs sm:text-sm tracking-tight hover:bg-neutral-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 touch-manipulation;
+    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-neutral-100 text-neutral-700 rounded-xl font-display text-sm sm:text-base tracking-tight hover:bg-neutral-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
     font-weight: var(--font-weight-emphasis);
     letter-spacing: -0.012em;
   }
   
   .card {
-    @apply bg-white rounded-2xl border border-neutral-100/60 shadow-[0_4px_24px_rgb(0,0,0,0.03)];
+    @apply bg-white rounded-2xl border-2 border-neutral-100 shadow-[0_8px_32px_rgb(0,0,0,0.04)];
   }
   
   .card-interactive {
-    @apply card cursor-pointer hover:border-neutral-200 hover:shadow-[0_8px_40px_rgb(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-500;
+    @apply card cursor-pointer hover:border-neutral-200 hover:shadow-[0_12px_48px_rgb(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-500;
   }
   
   .input-field {
-    @apply w-full px-4 sm:px-5 py-3 sm:py-3.5 border border-neutral-200/60 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all duration-300 bg-white placeholder:text-neutral-300 text-sm tracking-tight touch-manipulation;
+    @apply w-full px-4 sm:px-5 py-3.5 sm:py-4 border border-neutral-200/60 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all duration-300 bg-white placeholder:text-neutral-300 text-base tracking-tight touch-manipulation min-h-[48px];
     font-family: var(--font-sans);
     font-size: max(16px, 1rem);
     font-weight: var(--font-weight-medium);
@@ -159,7 +159,7 @@
     @apply font-display text-fluid-5xl;
     font-weight: var(--font-weight-display);
     letter-spacing: var(--letter-spacing-display);
-    line-height: 0.92;
+    line-height: 1;
     text-wrap: balance;
     font-feature-settings: var(--font-features-display);
   }
@@ -167,8 +167,8 @@
   .heading-section {
     @apply font-display text-fluid-4xl;
     font-weight: var(--font-weight-extrabold);
-    letter-spacing: -0.045em;
-    line-height: 0.98;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
     text-wrap: balance;
     font-feature-settings: var(--font-features-display);
   }
@@ -177,14 +177,14 @@
     @apply font-display text-fluid-3xl;
     font-weight: var(--font-weight-heading);
     letter-spacing: var(--letter-spacing-heading);
-    line-height: 1.05;
+    line-height: 1.1;
     text-wrap: balance;
   }
   
   .text-body-lg {
     font-size: var(--font-fluid-lg);
     line-height: var(--line-height-loose);
-    letter-spacing: -0.014em;
+    letter-spacing: -0.01em;
     text-wrap: pretty;
     font-weight: var(--font-weight-text);
   }
@@ -223,7 +223,11 @@
   }
 
   .shadow-premium {
-    box-shadow: 0 4px 24px rgb(0 0 0 / 0.04);
+    box-shadow: 0 8px 32px rgb(0 0 0 / 0.06), 0 2px 8px rgb(0 0 0 / 0.02);
+  }
+  
+  .shadow-premium-lg {
+    box-shadow: 0 16px 64px rgb(0 0 0 / 0.08), 0 4px 16px rgb(0 0 0 / 0.04);
   }
 
   .scrollbar-hide {
@@ -340,6 +344,12 @@
   button, a, input, textarea, select {
     min-height: 44px;
   }
+  
+  /* Larger touch targets for interactive elements */
+  button:not(.no-touch-expand), 
+  a:not(.no-touch-expand) {
+    min-height: 48px;
+  }
 }
 
 /* Reduced motion */
@@ -353,8 +363,10 @@
 }
 
 /* Safe area utilities */
-.safe-top { padding-top: max(env(safe-area-inset-top), 0.5rem); }
-.safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 1rem); }
+.safe-top { padding-top: max(env(safe-area-inset-top), 0.75rem); }
+.safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 1.5rem); }
+.safe-left { padding-left: max(env(safe-area-inset-left), 0); }
+.safe-right { padding-right: max(env(safe-area-inset-right), 0); }
 
 /* Line clamp */
 .line-clamp-2 {

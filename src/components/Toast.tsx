@@ -38,29 +38,29 @@ export default function Toast({ message, type, onClose, duration = 4000 }: Toast
 
   return (
     <div
-      className={`bg-white/95 backdrop-blur-xl border ${config.border} rounded-xl p-3 sm:p-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3 min-w-[280px] sm:min-w-[320px] max-w-md animate-slide-up relative overflow-hidden`}
+      className={`bg-white backdrop-blur-xl border-2 ${config.border} rounded-2xl p-4 sm:p-3.5 shadow-[0_12px_48px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3 min-w-[300px] sm:min-w-[320px] max-w-md animate-slide-up relative overflow-hidden`}
       role="alert"
     >
       {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-100">
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-50">
         <div
           className={`h-full ${config.accent} transition-all duration-100 ease-linear`}
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div className="flex items-center gap-2.5 min-w-0">
-        <div className={`w-7 h-7 ${config.bg} rounded-lg flex items-center justify-center shrink-0`}>
-          <Icon className="w-3.5 h-3.5" style={{ color: 'inherit' }} />
+      <div className="flex items-center gap-3 min-w-0">
+        <div className={`w-9 h-9 ${config.bg} rounded-xl flex items-center justify-center shrink-0 border ${config.border}`}>
+          <Icon className="w-4.5 h-4.5" style={{ color: 'inherit' }} />
         </div>
-        <p className="text-[11px] sm:text-xs font-display font-bold tracking-tight text-neutral-800 break-words">{message}</p>
+        <p className="text-sm sm:text-xs font-display font-bold tracking-tight text-neutral-800 break-words">{message}</p>
       </div>
 
       <button
         onClick={onClose}
-        className="p-1 hover:bg-neutral-50 rounded-lg text-neutral-300 hover:text-neutral-500 transition-all shrink-0 touch-manipulation"
+        className="p-2 hover:bg-neutral-50 rounded-lg text-neutral-300 hover:text-neutral-500 transition-all shrink-0 touch-manipulation min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 flex items-center justify-center"
       >
-        <X className="w-3.5 h-3.5" />
+        <X className="w-4 h-4" />
       </button>
     </div>
   )
