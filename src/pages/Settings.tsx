@@ -1,14 +1,7 @@
 import { useState, useCallback } from 'react'
-import { Save, Key, Server, Tag, Eye, EyeOff, CheckCircle, Zap, ChevronDown } from 'lucide-react'
+import { Save, Key, Server, Tag, Eye, EyeOff, CheckCircle, Zap } from 'lucide-react'
 import { useSettings } from '../hooks/useSettings'
 import { useToast } from '../components/ToastContainer'
-
-const PROVIDER_PRESETS = [
-  { label: 'OpenAI', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o' },
-  { label: 'Anthropic', baseUrl: 'https://api.anthropic.com', model: 'claude-sonnet-4-20250514' },
-  { label: 'Groq', baseUrl: 'https://api.groq.com/openai/v1', model: 'llama-3.3-70b-versatile' },
-  { label: 'Together', baseUrl: 'https://api.together.xyz/v1', model: 'meta-llama/Llama-3-70b-chat-hf' },
-] as const
 
 export default function Settings() {
   const {
@@ -22,7 +15,6 @@ export default function Settings() {
 
   const toast = useToast()
   const [showApiKey, setShowApiKey] = useState(false)
-  const [showPresets, setShowPresets] = useState(false)
   const [testing, setTesting] = useState(false)
   const [testResult, setTestResult] = useState<'success' | 'error' | null>(null)
 
@@ -31,12 +23,6 @@ export default function Settings() {
       toast.success('Settings saved')
     }
   }
-
-  const handlePresetSelect = useCallback((preset: typeof PROVIDER_PRESETS[number]) => {
-    updateField('baseUrl', preset.baseUrl)
-    updateField('modelName', preset.model)
-    setShowPresets(false)
-  }, [updateField])
 
   const handleTestConnection = useCallback(async () => {
     if (!settings.apiKey || !settings.baseUrl) {
@@ -67,40 +53,7 @@ export default function Settings() {
     <div className="max-w-5xl mx-auto space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12 w-full overflow-x-hidden">
       <PageHeader />
 
-      <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6 w-full">
-        {/* Provider presets */}
-        <div className="relative">
-          <button
-            onClick={() => setShowPresets(!showPresets)}
-            className="w-full flex items-center justify-between px-4 sm:px-5 py-3 sm:py-3.5 bg-white border border-neutral-200/60 rounded-xl text-sm font-display font-semibold text-neutral-600 hover:border-neutral-300 transition-all touch-manipulation"
-          >
-            <div className="flex items-center gap-2.5">
-              <Zap className="w-4 h-4 text-orange-500" />
-              <span className="text-xs sm:text-sm">Quick Setup — Choose a Provider</span>
-            </div>
-            <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${showPresets ? 'rotate-180' : ''}`} />
-          </button>
-          
-          {showPresets && (
-            <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-neutral-200/60 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] z-20 overflow-hidden animate-scale-in">
-              {PROVIDER_PRESETS.map((preset) => (
-                <button
-                  key={preset.label}
-                  onClick={() => handlePresetSelect(preset)}
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 text-left hover:bg-neutral-50 transition-colors flex items-center justify-between group touch-manipulation border-b border-neutral-50 last:border-0"
-                >
-                  <div>
-                    <p className="text-xs sm:text-sm font-display font-bold text-neutral-800 tracking-tight">{preset.label}</p>
-                    <p className="text-[9px] sm:text-[10px] text-neutral-400 font-mono mt-0.5">{preset.model}</p>
-                  </div>
-                  <span className="text-[9px] font-display font-semibold text-neutral-300 group-hover:text-orange-500 transition-colors uppercase tracking-wider">Select</span>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Settings form */}
+      <div className="max-w-2xl mx-auto w-full">
         <SettingsForm
           settings={settings}
           errors={errors}
