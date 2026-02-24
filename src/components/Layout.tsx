@@ -37,8 +37,8 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="flex flex-col">
-              <h1 className="text-base font-display font-bold tracking-tight leading-none text-black" style={{ fontWeight: 700 }}>RAJ AI UI</h1>
-              <span className="text-[10px] font-display font-medium text-neutral-400 tracking-wider uppercase leading-none">Component Engine</span>
+              <h1 className="text-base font-display font-semibold tracking-tight leading-none text-black" style={{ fontWeight: 600 }}>RAJ AI UI</h1>
+              <span className="text-[10px] font-display font-normal text-neutral-400 tracking-wider uppercase leading-none" style={{ fontWeight: 400 }}>Component Engine</span>
             </div>
           </Link>
 
@@ -51,13 +51,13 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-5 py-2.5 rounded-full text-sm font-display font-medium transition-all duration-300 flex items-center gap-2 touch-manipulation no-underline ${
+                  className={`px-5 py-2.5 rounded-full text-sm font-display transition-all duration-300 flex items-center gap-2 touch-manipulation no-underline ${
                     active
-                      ? 'bg-neutral-900 text-white shadow-lg'
-                      : 'text-neutral-600 hover:text-black hover:bg-white/80'
+                      ? 'bg-neutral-900 text-white shadow-lg font-medium'
+                      : 'text-neutral-500 hover:text-black hover:bg-white/80 font-normal'
                   }`}
+                  style={{ fontWeight: active ? 500 : 400, textDecoration: 'none' }}
                   aria-current={active ? 'page' : undefined}
-                  style={{ textDecoration: 'none' }}
                 >
                   <Icon className={`w-4 h-4 ${active ? 'text-orange-500' : ''}`} />
                   <span>{item.label}</span>
@@ -92,7 +92,7 @@ export default function Layout({ children }: LayoutProps) {
                   )}
                   <Icon className={`w-5 h-5 relative z-10 transition-all duration-300 ${active ? 'text-orange-500 scale-110' : ''}`} />
                 </div>
-                <span className={`text-[10px] font-display font-semibold tracking-wide transition-colors duration-300 ${active ? 'text-orange-500' : 'text-neutral-400'}`}>
+                <span className={`text-[10px] font-display tracking-wide transition-colors duration-300 ${active ? 'text-orange-500' : 'text-neutral-400'}`} style={{ fontWeight: active ? 500 : 400 }}>
                   {item.label}
                 </span>
               </Link>

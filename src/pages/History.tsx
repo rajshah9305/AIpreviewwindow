@@ -95,11 +95,12 @@ const PageHeader = ({ count, onClearClick }: PageHeaderProps) => (
   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-6">
     <div>
       <h2 className="heading-section text-neutral-900">History</h2>
-      <p className="text-sm sm:text-sm text-neutral-500 mt-1.5 font-normal">{count} generation{count !== 1 ? 's' : ''} saved</p>
+      <p className="text-sm sm:text-sm text-neutral-400 mt-1.5" style={{ fontWeight: 300 }}>{count} generation{count !== 1 ? 's' : ''} saved</p>
     </div>
     <button
       onClick={onClearClick}
-      className="flex items-center justify-center gap-2 sm:gap-2 px-5 sm:px-5 py-3 sm:py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-sm sm:text-xs font-display font-medium border-2 border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95 min-h-[48px] sm:min-h-0"
+      className="flex items-center justify-center gap-2 sm:gap-2 px-5 sm:px-5 py-3 sm:py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-sm sm:text-xs font-display border border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95 min-h-[48px] sm:min-h-0"
+      style={{ fontWeight: 400 }}
     >
       <Trash2 className="w-4 h-4 sm:w-4 sm:h-4" /> Clear All
     </button>
