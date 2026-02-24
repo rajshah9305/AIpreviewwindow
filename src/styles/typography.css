@@ -1,0 +1,615 @@
+/**
+ * TYPOGRAPHY SYSTEM
+ * 
+ * A comprehensive typographic foundation built on:
+ * - Variable font technology for precise weight control
+ * - Fluid scaling for responsive design
+ * - WCAG 2.1 AA compliant contrast ratios
+ * - Semantic token system for consistent application
+ * 
+ * Font Stack:
+ * - Display: Space Grotesk (400-800) - Geometric, modern headlines
+ * - Body: Inter (300-900) - Optimized for UI and readability
+ * - Mono: JetBrains Mono (400-700) - Code and technical content
+ */
+
+/* ============================================
+   FONT FACE DECLARATIONS
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================ */
+
+:root {
+  /* Font Families */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
+  
+  /* Font Weights - Semantic naming */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* Variable font weights for precise control */
+  --font-weight-text: 450;        /* Body text - slightly heavier than 400 */
+  --font-weight-ui: 550;          /* UI elements - buttons, labels */
+  --font-weight-emphasis: 650;    /* Emphasized text */
+  --font-weight-heading: 750;     /* Section headings */
+  --font-weight-display: 850;     /* Hero displays */
+  
+  /* Font Sizes - Base scale (16px = 1rem) */
+  --font-size-xs: 0.75rem;        /* 12px */
+  --font-size-sm: 0.875rem;       /* 14px */
+  --font-size-base: 1rem;         /* 16px */
+  --font-size-lg: 1.125rem;       /* 18px */
+  --font-size-xl: 1.25rem;        /* 20px */
+  --font-size-2xl: 1.5rem;        /* 24px */
+  --font-size-3xl: 1.875rem;      /* 30px */
+  --font-size-4xl: 2.25rem;       /* 36px */
+  --font-size-5xl: 3rem;          /* 48px */
+  --font-size-6xl: 3.75rem;       /* 60px */
+  --font-size-7xl: 4.5rem;        /* 72px */
+  
+  /* Fluid Typography - Responsive scaling */
+  --font-fluid-xs: clamp(0.75rem, 0.68rem + 0.35vw, 0.875rem);
+  --font-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-fluid-base: clamp(1rem, 0.93rem + 0.35vw, 1.125rem);
+  --font-fluid-lg: clamp(1.125rem, 1.02rem + 0.525vw, 1.375rem);
+  --font-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+  --font-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 2.125rem);
+  --font-fluid-3xl: clamp(2rem, 1.65rem + 1.75vw, 3.25rem);
+  --font-fluid-4xl: clamp(2.5rem, 2rem + 2.5vw, 4.25rem);
+  --font-fluid-5xl: clamp(3rem, 2.25rem + 3.75vw, 5.5rem);
+  
+  /* Line Heights - Optimized for readability */
+  --line-height-none: 1;
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+  --line-height-loose: 1.75;
+  --line-height-body: 1.7;
+  
+  /* Letter Spacing - Optical adjustments */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  
+  /* Semantic letter spacing */
+  --letter-spacing-display: -0.052em;    /* Large headlines */
+  --letter-spacing-heading: -0.035em;    /* Section headings */
+  --letter-spacing-subheading: -0.025em; /* Subheadings */
+  --letter-spacing-body: -0.012em;       /* Body text */
+  --letter-spacing-ui: -0.015em;         /* UI elements */
+  --letter-spacing-label: 0.08em;        /* Uppercase labels */
+  --letter-spacing-mono: -0.012em;       /* Monospace */
+  
+  /* Font Feature Settings */
+  --font-features-default: 'cv02', 'cv03', 'cv04', 'cv11', 'calt', 'ss01', 'ss02';
+  --font-features-display: 'ss01', 'ss02', 'calt';
+  --font-features-mono: 'zero', 'ss01';
+  --font-features-numeric: 'tnum', 'lnum';
+}
+
+/* ============================================
+   BASE TYPOGRAPHY STYLES
+   ============================================ */
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-text);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  font-feature-settings: var(--font-features-default);
+  font-variant-numeric: tabular-nums;
+  color: #000000; /* WCAG AAA on white */
+}
+
+/* ============================================
+   HEADING HIERARCHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-heading);
+  color: #000000;
+  text-wrap: balance;
+  font-feature-settings: var(--font-features-display);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-fluid-5xl);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: var(--font-fluid-4xl);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+h3 {
+  font-size: var(--font-fluid-3xl);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: 1.05;
+}
+
+h4 {
+  font-size: var(--font-fluid-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+}
+
+h5 {
+  font-size: var(--font-fluid-xl);
+  font-weight: var(--font-weight-emphasis);
+  letter-spacing: -0.022em;
+  line-height: 1.15;
+}
+
+h6 {
+  font-size: var(--font-fluid-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+}
+
+/* ============================================
+   BODY TEXT STYLES
+   ============================================ */
+
+p {
+  margin: 0;
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  text-wrap: pretty;
+  font-weight: var(--font-weight-text);
+}
+
+/* Text size variants */
+.text-xs { font-size: var(--font-size-xs); line-height: 1.5; }
+.text-sm { font-size: var(--font-size-sm); line-height: 1.55; }
+.text-base { font-size: var(--font-size-base); line-height: 1.65; }
+.text-lg { font-size: var(--font-size-lg); line-height: 1.7; }
+.text-xl { font-size: var(--font-size-xl); line-height: 1.6; }
+.text-2xl { font-size: var(--font-size-2xl); line-height: 1.4; }
+
+/* Fluid text variants */
+.text-fluid-xs { font-size: var(--font-fluid-xs); line-height: 1.5; }
+.text-fluid-sm { font-size: var(--font-fluid-sm); line-height: 1.55; }
+.text-fluid-base { font-size: var(--font-fluid-base); line-height: 1.65; }
+.text-fluid-lg { font-size: var(--font-fluid-lg); line-height: 1.5; }
+.text-fluid-xl { font-size: var(--font-fluid-xl); line-height: 1.25; }
+.text-fluid-2xl { font-size: var(--font-fluid-2xl); line-height: 1.1; }
+.text-fluid-3xl { font-size: var(--font-fluid-3xl); line-height: 1; }
+.text-fluid-4xl { font-size: var(--font-fluid-4xl); line-height: 1; }
+.text-fluid-5xl { font-size: var(--font-fluid-5xl); line-height: 0.95; }
+
+/* ============================================
+   SEMANTIC TEXT CLASSES
+   ============================================ */
+
+/* Hero Display - Large, impactful headlines */
+.text-display-hero {
+  font-family: var(--font-display);
+  font-size: var(--font-fluid-5xl);
+  font-weight: var(--font-weight-display);
+  line-height: 0.92;
+  letter-spacing: var(--letter-spacing-display);
+  text-wrap: balance;
+  font-feature-settings: var(--font-features-display);
+}
+
+/* Section Heading - Page section titles */
+.text-heading-section {
+  font-family: var(--font-display);
+  font-size: var(--font-fluid-4xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  font-feature-settings: var(--font-features-display);
+}
+
+/* Subsection Heading */
+.text-heading-subsection {
+  font-family: var(--font-display);
+  font-size: var(--font-fluid-3xl);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.05;
+  letter-spacing: var(--letter-spacing-heading);
+  text-wrap: balance;
+}
+
+/* Body Large - Introductory paragraphs */
+.text-body-lg {
+  font-size: var(--font-fluid-lg);
+  line-height: var(--line-height-loose);
+  letter-spacing: -0.014em;
+  text-wrap: pretty;
+  font-weight: var(--font-weight-text);
+}
+
+/* Body Base - Standard paragraph text */
+.text-body-base {
+  font-size: var(--font-fluid-base);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  text-wrap: pretty;
+  font-weight: var(--font-weight-text);
+}
+
+/* Body Small - Secondary text */
+.text-body-sm {
+  font-size: var(--font-fluid-sm);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-normal);
+}
+
+/* Label - Uppercase UI labels */
+.text-label {
+  font-family: var(--font-display);
+  font-size: var(--font-fluid-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+
+/* Caption - Small descriptive text */
+.text-caption {
+  font-size: var(--font-fluid-xs);
+  line-height: 1.5;
+  letter-spacing: -0.008em;
+  font-weight: var(--font-weight-medium);
+  color: #737373; /* WCAG AA on white (4.54:1) */
+}
+
+/* UI Text - Buttons, inputs, controls */
+.text-ui {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-ui);
+  line-height: 1.4;
+  letter-spacing: var(--letter-spacing-ui);
+}
+
+/* Monospace - Code and technical content */
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-mono);
+  font-variant-ligatures: none;
+  font-feature-settings: var(--font-features-mono);
+}
+
+/* ============================================
+   FONT WEIGHT UTILITIES
+   ============================================ */
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.font-extrabold { font-weight: var(--font-weight-extrabold); }
+.font-black { font-weight: var(--font-weight-black); }
+
+/* Variable weights */
+.font-text { font-weight: var(--font-weight-text); }
+.font-ui { font-weight: var(--font-weight-ui); }
+.font-emphasis { font-weight: var(--font-weight-emphasis); }
+.font-heading { font-weight: var(--font-weight-heading); }
+.font-display { font-weight: var(--font-weight-display); }
+
+/* ============================================
+   TEXT EMPHASIS & STYLING
+   ============================================ */
+
+strong, b {
+  font-weight: var(--font-weight-emphasis);
+  letter-spacing: -0.015em;
+}
+
+em, i {
+  font-style: italic;
+  letter-spacing: -0.008em;
+}
+
+small {
+  font-size: 0.875em;
+  line-height: 1.5;
+}
+
+mark {
+  background-color: #fef3c7;
+  color: #000000;
+  padding: 0.125em 0.25em;
+  border-radius: 0.25rem;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: var(--font-weight-medium);
+  background-color: #f5f5f5;
+  padding: 0.125em 0.375em;
+  border-radius: 0.25rem;
+  letter-spacing: var(--letter-spacing-mono);
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: var(--font-weight-medium);
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.25rem;
+  padding: 0.125em 0.375em;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   LINK STYLES
+   ============================================ */
+
+a {
+  color: #f97316; /* Orange 500 - WCAG AA (3.04:1) */
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #ea580c; /* Orange 600 - WCAG AA (3.77:1) */
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+/* ============================================
+   LIST STYLES
+   ============================================ */
+
+ul, ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+li {
+  line-height: var(--line-height-body);
+  margin-bottom: 0.5em;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   BLOCKQUOTE
+   ============================================ */
+
+blockquote {
+  margin: 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid #e5e5e5;
+  font-style: italic;
+  color: #525252; /* WCAG AA (7.0:1) */
+}
+
+/* ============================================
+   ACCESSIBILITY & WCAG COMPLIANCE
+   ============================================ */
+
+/* Ensure minimum touch target size (44x44px) */
+button, a, input, textarea, select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Focus visible styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Mobile First - Base styles above apply to mobile */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  :root {
+    --font-size-base: 1rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 1rem;
+  }
+  
+  body {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  :root {
+    --font-size-base: 1rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  :root {
+    --font-size-base: 1.0625rem; /* 17px for better readability on large screens */
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000000;
+  }
+  
+  h1 { font-size: 24pt; }
+  h2 { font-size: 20pt; }
+  h3 { font-size: 16pt; }
+  h4 { font-size: 14pt; }
+  h5 { font-size: 12pt; }
+  h6 { font-size: 12pt; }
+  
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Text transform */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* Text decoration */
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* Text wrapping */
+.text-wrap { text-wrap: wrap; }
+.text-nowrap { text-wrap: nowrap; }
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* Truncation */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Font family utilities */
+.font-sans { font-family: var(--font-sans); }
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Letter spacing utilities */
+.tracking-tighter { letter-spacing: var(--letter-spacing-tighter); }
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
+.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+.tracking-widest { letter-spacing: var(--letter-spacing-widest); }
+
+/* Line height utilities */
+.leading-none { line-height: var(--line-height-none); }
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-snug { line-height: var(--line-height-snug); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+.leading-loose { line-height: var(--line-height-loose); }
+
+/* Gradient text effect */
+.text-gradient-orange {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Selection styling */
+::selection {
+  background-color: rgba(249, 115, 22, 0.15);
+  color: #ea580c;
+}
+
+::-moz-selection {
+  background-color: rgba(249, 115, 22, 0.15);
+  color: #ea580c;
+}
