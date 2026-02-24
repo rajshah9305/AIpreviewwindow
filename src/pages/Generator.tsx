@@ -10,14 +10,6 @@ import { APP_CONFIG, ROUTES, LOADING_VARIATIONS, ANIMATION_DELAYS } from '../con
 import ComponentPreview from '../components/ComponentPreview'
 import LoadingSkeleton from '../components/LoadingSkeleton'
 
-const PROMPT_SUGGESTIONS = [
-  'A pricing card with toggle',
-  'A user profile dashboard',
-  'A file upload dropzone',
-  'A notification center panel',
-  'A testimonial carousel',
-]
-
 export default function Generator() {
   const {
     instruction,
@@ -73,9 +65,6 @@ export default function Generator() {
           <HeroSection
             hasSettings={hasSettings}
             onNavigateToSettings={() => navigate(ROUTES.SETTINGS)}
-            onSuggestionClick={(s) => {
-              handleInstructionChange(s)
-            }}
           />
         )}
 
@@ -99,10 +88,9 @@ export default function Generator() {
 interface HeroSectionProps {
   hasSettings: boolean
   onNavigateToSettings: () => void
-  onSuggestionClick: (suggestion: string) => void
 }
 
-const HeroSection = ({ hasSettings, onNavigateToSettings, onSuggestionClick }: HeroSectionProps) => (
+const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
   <div className="max-w-4xl mx-auto text-center mb-6 sm:mb-10 md:mb-14 animate-slide-up px-2 sm:px-4 w-full">
     <div className="inline-flex items-center justify-center mb-5 sm:mb-7 md:mb-9 animate-text-reveal">
       <div className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-orange-500/20 bg-orange-500/5 backdrop-blur-sm flex items-center gap-2">
@@ -127,19 +115,6 @@ const HeroSection = ({ hasSettings, onNavigateToSettings, onSuggestionClick }: H
       <br className="hidden sm:block" />
       {' '}Describe what you need, AI handles the rest.
     </p>
-
-    {/* Prompt suggestions */}
-    <div className="mt-6 sm:mt-8 md:mt-10 flex flex-wrap justify-center gap-2 sm:gap-2.5 animate-text-reveal px-2" style={{ animationDelay: '0.6s' }}>
-      {PROMPT_SUGGESTIONS.map((suggestion) => (
-        <button
-          key={suggestion}
-          onClick={() => onSuggestionClick(suggestion)}
-          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-full text-[10px] sm:text-[11px] font-display font-semibold text-neutral-500 hover:text-orange-500 hover:border-orange-500/30 hover:bg-orange-500/5 transition-all duration-300 touch-manipulation tracking-tight whitespace-nowrap"
-        >
-          {suggestion}
-        </button>
-      ))}
-    </div>
 
     {!hasSettings && (
       <div className="mt-8 sm:mt-10 md:mt-12 p-5 sm:p-6 md:p-7 bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-neutral-200/60 inline-block text-left shadow-[0_8px_40px_rgba(0,0,0,0.06)] max-w-md mx-auto w-full sm:w-auto animate-scale-in transition-all duration-300 hover:shadow-[0_12px_48px_rgba(0,0,0,0.1)]" style={{ animationDelay: '0.7s' }}>
