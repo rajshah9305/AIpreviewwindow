@@ -260,7 +260,7 @@ const InputArea = ({
   return (
     <div className="fixed bottom-0 sm:bottom-0 left-0 right-0 z-[90] w-full bg-gradient-to-t from-[#faf8f6] via-[#faf8f6]/95 to-transparent pt-6 pb-16 sm:pb-0">
       <div className="w-full max-w-3xl mx-auto px-3 sm:px-4 md:px-6 pb-3 sm:pb-4 md:pb-6">
-        <div className="bg-white/95 backdrop-blur-2xl border border-neutral-200/60 rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 md:p-3 shadow-[0_12px_48px_rgba(0,0,0,0.1),0_2px_8px_rgba(0,0,0,0.04)] group/input transition-all duration-300 focus-within:border-orange-500/40 focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.12)] w-full">
+        <div className="bg-white/95 backdrop-blur-2xl border-2 border-black rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 md:p-3 shadow-[0_12px_48px_rgba(0,0,0,0.1),0_2px_8px_rgba(0,0,0,0.04)] group/input transition-all duration-300 focus-within:border-black focus-within:shadow-[0_16px_64px_rgba(249,115,22,0.12)] w-full">
           {error && (
             <div className="mx-1 sm:mx-1.5 md:mx-2 mb-2 sm:mb-2.5 p-2.5 sm:p-3 bg-red-50/80 backdrop-blur-sm rounded-xl text-[10px] sm:text-[11px] font-display font-bold text-red-600 flex items-center justify-between animate-slide-up border border-red-100/60">
               <span className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
