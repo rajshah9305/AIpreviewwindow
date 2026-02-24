@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Wand2, AlertCircle, RefreshCw, Zap, ArrowRight } from 'lucide-react'
+import { AlertCircle, RefreshCw, Zap, ArrowRight } from 'lucide-react'
 import { useGeneration } from '../contexts/GenerationContext'
 import { useToast } from '../components/ToastContainer'
 import { useKeyboardShortcut } from '../hooks/useKeyboardShortcut'
@@ -59,7 +59,7 @@ export default function Generator() {
   })
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-8rem)] relative w-full max-w-full overflow-x-hidden pb-[140px] sm:pb-[130px]">
+    <div className="flex flex-col min-h-[calc(100vh-8rem)] relative w-full max-w-full overflow-x-hidden">
       <div className="flex-1 w-full">
         {!loading && !result && (
           <HeroSection
@@ -91,29 +91,28 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
-  <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-10 md:mb-14 animate-slide-up px-3 sm:px-4 w-full">
-    <div className="inline-flex items-center justify-center mb-6 sm:mb-7 md:mb-9 animate-text-reveal">
-      <div className="px-5 sm:px-5 py-2.5 sm:py-2.5 rounded-full border-2 border-orange-500/30 bg-gradient-to-r from-orange-500/10 to-orange-600/10 backdrop-blur-sm flex items-center gap-2.5 shadow-lg shadow-orange-500/10">
-        <Zap className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-orange-500" fill="currentColor" />
-        <span className="text-xs sm:text-[11px] md:text-xs font-display font-bold text-orange-600 tracking-[0.12em] uppercase">
-          {APP_CONFIG.TAGLINE}
+  <div className="max-w-4xl mx-auto text-center pt-16 sm:pt-20 md:pt-24 pb-8 animate-slide-up px-3 sm:px-4 w-full">
+    <div className="inline-flex items-center justify-center mb-8 sm:mb-10 animate-text-reveal">
+      <div className="px-5 py-2 rounded-full bg-orange-50 border border-orange-200 flex items-center gap-2.5">
+        <Zap className="w-4 h-4 text-orange-500" fill="currentColor" />
+        <span className="text-xs font-display font-bold text-orange-600 tracking-[0.12em] uppercase">
+          Next-Gen Component Engine
         </span>
       </div>
     </div>
 
-    <h2 className="heading-hero mb-6 sm:mb-7 md:mb-9 text-black px-2 break-words leading-[1.05]">
-      <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.1s' }}>Build</span>{' '}
-      <span className="text-gradient-orange animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>Faster</span>
-      <br className="sm:hidden" />
-      <span className="hidden sm:inline">{' '}</span>
-      <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.3s' }}>Design</span>{' '}
-      <span className="text-gradient-orange animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>Better</span>
-    </h2>
+    <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-black tracking-tight leading-[1.05] mb-6 sm:mb-8 px-2 break-words">
+      <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.1s' }}>Build </span>
+      <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>Faster</span>
+      <br />
+      <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.3s' }}>Design </span>
+      <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>Better</span>
+    </h1>
 
-    <p className="text-base sm:text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed break-words font-medium" style={{ animationDelay: '0.5s' }}>
+    <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed break-words mb-12" style={{ animationDelay: '0.5s' }}>
       Transform your ideas into production-ready UI components.
       <br className="hidden sm:block" />
-      {' '}Describe what you need, AI handles the rest.
+      Describe what you need, AI handles the rest.
     </p>
 
     {!hasSettings && (
@@ -209,8 +208,8 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
     </div>
 
     <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
-      <div className="absolute left-0 top-0 bottom-4 w-10 sm:w-12 bg-gradient-to-r from-[#faf8f6] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-4 w-10 sm:w-12 bg-gradient-to-l from-[#faf8f6] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-4 w-10 sm:w-12 bg-gradient-to-r from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-4 w-10 sm:w-12 bg-gradient-to-l from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
       
       <div className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin">
         <div className="flex gap-4 sm:gap-4 md:gap-5 lg:gap-6">
@@ -257,8 +256,6 @@ const InputArea = ({
   onClearError,
 }: InputAreaProps) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
-  const charCount = instruction.length
-  const charPercent = (charCount / APP_CONFIG.MAX_INSTRUCTION_LENGTH) * 100
 
   React.useEffect(() => {
     const textarea = textareaRef.current
@@ -269,13 +266,13 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-0 sm:bottom-0 left-0 right-0 z-[90] w-full bg-gradient-to-t from-[#faf8f6] via-[#faf8f6] to-transparent pt-8 pb-20 sm:pb-0">
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-4 md:px-6 pb-4 sm:pb-4 md:pb-6">
-        <div className="bg-white backdrop-blur-2xl border-2 border-neutral-900 rounded-2xl sm:rounded-3xl p-2.5 sm:p-2.5 md:p-3 shadow-[0_16px_64px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)] group/input transition-all duration-300 focus-within:border-orange-500 focus-within:shadow-[0_20px_80px_rgba(249,115,22,0.15)] w-full">
+    <div className="fixed bottom-0 sm:bottom-8 left-0 right-0 z-[90] w-full px-4 sm:px-6 pb-20 sm:pb-0">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="bg-white backdrop-blur-2xl border-3 border-black rounded-[2rem] p-2 shadow-[0_20px_80px_rgba(0,0,0,0.15)] group/input transition-all duration-300 focus-within:shadow-[0_24px_96px_rgba(0,0,0,0.2)] w-full">
           {error && (
-            <div className="mx-1.5 sm:mx-1.5 md:mx-2 mb-2.5 sm:mb-2.5 p-3.5 sm:p-3 bg-red-50 backdrop-blur-sm rounded-xl text-xs sm:text-[11px] font-display font-bold text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
-              <span className="flex items-center gap-2 sm:gap-2 min-w-0 flex-1">
-                <AlertCircle className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" />
+            <div className="mx-2 mb-2 p-3.5 bg-red-50 backdrop-blur-sm rounded-2xl text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
+              <span className="flex items-center gap-2 min-w-0 flex-1">
+                <AlertCircle className="w-4 h-4 shrink-0" />
                 <span className="break-words line-clamp-2">{error}</span>
               </span>
               <button
@@ -288,15 +285,15 @@ const InputArea = ({
             </div>
           )}
 
-          <div className="flex items-end gap-2.5 sm:gap-2.5">
+          <div className="flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <textarea
                 ref={textareaRef}
                 value={instruction}
                 onChange={(e) => onInstructionChange(e.target.value)}
                 placeholder="Describe your component..."
-                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 sm:px-4 py-4 sm:py-3.5 text-base sm:text-base font-sans font-medium placeholder:text-neutral-300 resize-none min-h-[56px] max-h-[120px] scrollbar-hide text-neutral-900 leading-relaxed rounded-lg"
-                style={{ fontSize: 'max(16px, 1rem)', letterSpacing: '-0.015em' }}
+                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-5 py-4 text-base font-sans font-normal placeholder:text-neutral-400 resize-none min-h-[56px] max-h-[120px] scrollbar-hide text-neutral-900 leading-relaxed rounded-lg"
+                style={{ fontSize: 'max(16px, 1rem)', letterSpacing: '-0.01em' }}
                 disabled={loading}
                 rows={1}
                 aria-label="Component description"
@@ -307,57 +304,45 @@ const InputArea = ({
               />
             </div>
 
-            <div className="flex items-center gap-2.5 shrink-0 pb-1.5">
-              {/* Character count indicator */}
-              {charCount > 0 && (
-                <div className="hidden sm:flex items-center gap-1.5">
-                  <div className="w-8 h-1 bg-neutral-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-300 ${
-                        charPercent > 90 ? 'bg-red-400' : charPercent > 70 ? 'bg-orange-400' : 'bg-neutral-300'
-                      }`}
-                      style={{ width: `${Math.min(charPercent, 100)}%` }}
-                    />
-                  </div>
-                  <span className={`text-[9px] font-mono font-medium tabular-nums ${
-                    charPercent > 90 ? 'text-red-400' : 'text-neutral-300'
-                  }`}>
-                    {charCount}
-                  </span>
-                </div>
-              )}
+            <div className="flex items-center gap-2 shrink-0 pr-2">
+              {/* Attachment icon placeholder */}
+              <button
+                type="button"
+                className="p-2.5 text-neutral-400 hover:text-neutral-600 transition-colors rounded-lg hover:bg-neutral-50"
+                aria-label="Attach file"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                </svg>
+              </button>
 
               <button
                 onClick={onGenerate}
                 disabled={loading || !instruction.trim()}
                 type="button"
-                className={`h-12 w-12 sm:h-12 sm:w-12 shrink-0 flex items-center justify-center rounded-xl transition-all duration-300 touch-manipulation ${
+                className={`px-6 py-3 rounded-full text-sm font-display font-bold transition-all duration-300 touch-manipulation flex items-center gap-2 ${
                   loading || !instruction.trim()
-                    ? 'bg-neutral-100 text-neutral-300 cursor-not-allowed'
-                    : 'bg-gradient-to-br from-orange-500 to-orange-600 text-white hover:shadow-xl hover:shadow-orange-500/30 active:scale-95 hover:scale-105 shadow-lg shadow-orange-500/20'
+                    ? 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                    : 'bg-neutral-900 text-white hover:bg-black shadow-lg hover:shadow-xl active:scale-95'
                 }`}
                 aria-label="Generate components"
               >
                 {loading ? (
-                  <div className="spinner !w-5 !h-5 !border-2 !border-white/30 !border-t-white" />
+                  <>
+                    <div className="spinner !w-4 !h-4 !border-2 !border-white/30 !border-t-white" />
+                    <span>Creating...</span>
+                  </>
                 ) : (
-                  <Wand2 className="w-5 h-5 sm:w-5 sm:h-5" />
+                  <>
+                    <span>Create</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </>
                 )}
               </button>
             </div>
           </div>
-
-          {/* Keyboard shortcut hint */}
-          {instruction.trim() && !loading && (
-            <div className="hidden sm:flex items-center justify-end px-3 pb-1 -mt-1">
-              <span className="text-[9px] font-mono text-neutral-300">
-                <kbd className="px-1 py-0.5 bg-neutral-50 rounded text-neutral-400 border border-neutral-100">⌘</kbd>
-                {' + '}
-                <kbd className="px-1 py-0.5 bg-neutral-50 rounded text-neutral-400 border border-neutral-100">↵</kbd>
-                {' to generate'}
-              </span>
-            </div>
-          )}
         </div>
       </div>
     </div>
