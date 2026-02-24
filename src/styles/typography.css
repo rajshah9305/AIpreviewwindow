@@ -392,6 +392,10 @@ a {
 
 a:hover {
   color: #ea580c; /* Orange 600 - WCAG AA (3.77:1) */
+}
+
+/* Only underline content links, not navigation */
+a:not(.no-underline):hover {
   text-decoration: underline;
 }
 
