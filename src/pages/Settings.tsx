@@ -76,7 +76,7 @@ const PageHeader = () => (
   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-neutral-200/60 pb-5 sm:pb-6 w-full">
     <div>
       <h2 className="heading-section truncate text-neutral-900">Settings</h2>
-      <p className="text-sm sm:text-sm text-neutral-500 mt-1.5 font-medium">Configure your AI provider connection</p>
+      <p className="text-sm sm:text-sm text-neutral-500 mt-1.5 font-normal">Configure your AI provider connection</p>
     </div>
   </div>
 )
@@ -153,7 +153,7 @@ const SettingsForm = ({
       <button
         onClick={onTestConnection}
         disabled={testing || !settings.baseUrl}
-        className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display font-bold uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation border-2 min-h-[52px] ${
+        className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display font-medium uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation border-2 min-h-[52px] ${
           testResult === 'success'
             ? 'border-green-200 bg-green-50 text-green-600'
             : testResult === 'error'
@@ -174,7 +174,7 @@ const SettingsForm = ({
       <button
         onClick={onSave}
         disabled={!isModified}
-        className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display font-bold uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation min-h-[52px] ${
+        className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display font-medium uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation min-h-[52px] ${
           isModified
             ? 'bg-neutral-900 text-white hover:bg-black shadow-md hover:shadow-lg'
             : 'bg-neutral-100 text-neutral-300 cursor-not-allowed'
@@ -213,7 +213,7 @@ const FormField = ({
   rightElement,
 }: FormFieldProps) => (
   <div className="space-y-2.5">
-    <label className="flex items-center gap-2 text-xs sm:text-[11px] font-display font-bold text-neutral-500 uppercase tracking-[0.08em] ml-0.5">
+    <label className="flex items-center gap-2 text-xs sm:text-[11px] font-display font-medium text-neutral-500 uppercase tracking-[0.08em] ml-0.5">
       <Icon className="w-3.5 h-3.5 text-orange-500/70" /> {label}
     </label>
     <div className="relative">
@@ -222,7 +222,7 @@ const FormField = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full px-4 py-3.5 sm:py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all bg-white placeholder:text-neutral-300 text-base font-sans tracking-tight min-h-[52px] ${
+        className={`w-full px-4 py-3.5 sm:py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all bg-white placeholder:text-neutral-300 text-base font-sans tracking-tight min-h-[52px] font-normal ${
           rightElement ? 'pr-14' : ''
         } ${error ? 'border-red-200 focus:ring-red-500/5 focus:border-red-400' : 'border-neutral-200'}`}
         style={{ fontSize: 'max(16px, 1rem)' }}
@@ -230,7 +230,7 @@ const FormField = ({
       {rightElement}
     </div>
     {error && (
-      <p className="text-xs font-display font-bold text-red-500 ml-0.5 tracking-wide">{error}</p>
+      <p className="text-xs font-display font-medium text-red-500 ml-0.5 tracking-wide">{error}</p>
     )}
   </div>
 )

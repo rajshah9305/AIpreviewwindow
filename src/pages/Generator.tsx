@@ -95,13 +95,13 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
     <div className="inline-flex items-center justify-center mb-8 sm:mb-10 animate-text-reveal">
       <div className="px-5 py-2 rounded-full bg-orange-50 border border-orange-200 flex items-center gap-2.5">
         <Zap className="w-4 h-4 text-orange-500" fill="currentColor" />
-        <span className="text-xs font-display font-bold text-orange-600 tracking-[0.12em] uppercase">
+        <span className="text-xs font-display font-semibold text-orange-600 tracking-[0.12em] uppercase">
           Next-Gen Component Engine
         </span>
       </div>
     </div>
 
-    <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-black tracking-tight leading-[1.05] mb-6 sm:mb-8 px-2 break-words">
+    <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight leading-[1.05] mb-6 sm:mb-8 px-2 break-words">
       <span className="text-black animate-text-reveal inline-block" style={{ animationDelay: '0.1s' }}>Build </span>
       <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.2s' }}>Faster</span>
       <br />
@@ -109,7 +109,7 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
       <span className="text-orange-500 animate-text-reveal inline-block" style={{ animationDelay: '0.4s' }}>Better</span>
     </h1>
 
-    <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed break-words mb-12" style={{ animationDelay: '0.5s' }}>
+    <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed break-words mb-12 font-normal" style={{ animationDelay: '0.5s' }}>
       Transform your ideas into production-ready UI components.
       <br className="hidden sm:block" />
       Describe what you need, AI handles the rest.
@@ -143,11 +143,11 @@ const LoadingState = () => (
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-3 border-b border-neutral-200/60 pb-4 sm:pb-4 md:pb-6">
       <div className="min-w-0">
         <h3 className="heading-section truncate text-neutral-900">Generating</h3>
-        <p className="text-xs sm:text-xs md:text-sm text-neutral-500 mt-1.5 font-sans truncate font-medium">Creating 5 unique design variations...</p>
+        <p className="text-xs sm:text-xs md:text-sm text-neutral-500 mt-1.5 font-sans truncate font-normal">Creating 5 unique design variations...</p>
       </div>
       <div className="flex items-center gap-2.5 bg-orange-50 px-4 py-2 rounded-xl border border-orange-100">
         <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-        <span className="text-xs sm:text-xs font-display font-bold text-orange-600 tracking-wide uppercase">Processing</span>
+        <span className="text-xs sm:text-xs font-display font-medium text-orange-600 tracking-wide uppercase">Processing</span>
       </div>
     </div>
 
@@ -191,16 +191,16 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2.5 mb-2 bg-green-50 px-4 py-2 rounded-xl border border-green-100 inline-flex">
           <div className="w-2 h-2 bg-green-500 rounded-full" />
-          <span className="text-xs sm:text-xs font-display font-bold text-green-600 tracking-wide uppercase">Complete</span>
+          <span className="text-xs sm:text-xs font-display font-medium text-green-600 tracking-wide uppercase">Complete</span>
         </div>
         <h3 className="heading-section truncate text-neutral-900">Your Collection</h3>
-        <p className="text-xs sm:text-xs md:text-sm text-neutral-500 mt-1.5 font-sans truncate font-medium">
+        <p className="text-xs sm:text-xs md:text-sm text-neutral-500 mt-1.5 font-sans truncate font-normal">
           {result.variations.length} variations generated — scroll to explore
         </p>
       </div>
       <button
         onClick={onClearAndNew}
-        className="flex items-center justify-center gap-2 sm:gap-2 px-5 sm:px-5 py-3 sm:py-2.5 bg-white border-2 border-neutral-200 text-neutral-700 rounded-xl text-sm sm:text-xs font-display font-bold hover:bg-neutral-50 hover:border-neutral-300 transition-all active:scale-95 touch-manipulation tracking-tight shrink-0 whitespace-nowrap shadow-sm min-h-[48px] sm:min-h-0"
+        className="flex items-center justify-center gap-2 sm:gap-2 px-5 sm:px-5 py-3 sm:py-2.5 bg-white border-2 border-neutral-200 text-neutral-700 rounded-xl text-sm sm:text-xs font-display font-medium hover:bg-neutral-50 hover:border-neutral-300 transition-all active:scale-95 touch-manipulation tracking-tight shrink-0 whitespace-nowrap shadow-sm min-h-[48px] sm:min-h-0"
       >
         <RefreshCw className="w-4 h-4 sm:w-4 sm:h-4" />
         <span>New Generation</span>
@@ -270,7 +270,7 @@ const InputArea = ({
       <div className="w-full max-w-4xl mx-auto">
         <div className="bg-white backdrop-blur-2xl border-3 border-black rounded-[2rem] p-2 shadow-[0_20px_80px_rgba(0,0,0,0.15)] group/input transition-all duration-300 focus-within:shadow-[0_24px_96px_rgba(0,0,0,0.2)] w-full">
           {error && (
-            <div className="mx-2 mb-2 p-3.5 bg-red-50 backdrop-blur-sm rounded-2xl text-xs font-display font-bold text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
+            <div className="mx-2 mb-2 p-3.5 bg-red-50 backdrop-blur-sm rounded-2xl text-xs font-display font-medium text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2 min-w-0 flex-1">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span className="break-words line-clamp-2">{error}</span>
@@ -320,7 +320,7 @@ const InputArea = ({
                 onClick={onGenerate}
                 disabled={loading || !instruction.trim()}
                 type="button"
-                className={`px-6 py-3 rounded-full text-sm font-display font-bold transition-all duration-300 touch-manipulation flex items-center gap-2 ${
+                className={`px-6 py-3 rounded-full text-sm font-display font-medium transition-all duration-300 touch-manipulation flex items-center gap-2 ${
                   loading || !instruction.trim()
                     ? 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
                     : 'bg-neutral-900 text-white hover:bg-black shadow-lg hover:shadow-xl active:scale-95'
