@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,59 +24,76 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'calt';
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'calt', 'ss01', 'ss02';
+    font-variant-numeric: tabular-nums;
     min-height: 100vh;
     min-height: -webkit-fill-available;
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
-    letter-spacing: -0.01em;
-    font-weight: 400;
+    letter-spacing: -0.011em;
+    font-weight: 450;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold text-black;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     text-wrap: balance;
-    line-height: 1.15;
+    line-height: 1.1;
+    font-feature-settings: 'ss01', 'ss02', 'calt';
   }
   
-  h1 { @apply text-fluid-4xl; font-weight: 800; letter-spacing: -0.04em; }
-  h2 { @apply text-fluid-3xl; font-weight: 800; letter-spacing: -0.04em; }
-  h3 { @apply text-fluid-2xl; font-weight: 700; letter-spacing: -0.03em; }
-  h4 { @apply text-fluid-xl; font-weight: 700; }
+  h1 { @apply text-fluid-4xl; font-weight: 850; letter-spacing: -0.048em; line-height: 0.95; }
+  h2 { @apply text-fluid-3xl; font-weight: 800; letter-spacing: -0.042em; line-height: 1; }
+  h3 { @apply text-fluid-2xl; font-weight: 750; letter-spacing: -0.035em; line-height: 1.05; }
+  h4 { @apply text-fluid-xl; font-weight: 700; letter-spacing: -0.028em; line-height: 1.1; }
+  h5 { @apply text-fluid-lg; font-weight: 650; letter-spacing: -0.022em; line-height: 1.15; }
+  h6 { @apply text-fluid-base; font-weight: 600; letter-spacing: -0.018em; line-height: 1.2; }
   
   p { 
     @apply leading-relaxed;
     text-wrap: pretty;
-    letter-spacing: -0.01em;
-    line-height: 1.65;
+    letter-spacing: -0.012em;
+    line-height: 1.7;
+    font-weight: 450;
+  }
+  
+  strong, b {
+    font-weight: 650;
+    letter-spacing: -0.015em;
+  }
+  
+  em, i {
+    font-style: italic;
+    letter-spacing: -0.008em;
   }
   
   .text-display {
     font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.032em;
+    font-feature-settings: 'ss01', 'ss02', 'calt';
   }
   
   .text-mono {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.012em;
     font-variant-ligatures: none;
+    font-feature-settings: 'zero', 'ss01';
   }
   
-  /* Fluid typography */
-  .text-fluid-xs { font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); }
-  .text-fluid-sm { font-size: clamp(0.875rem, 0.825rem + 0.25vw, 1rem); }
-  .text-fluid-base { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); }
-  .text-fluid-lg { font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem); }
-  .text-fluid-xl { font-size: clamp(1.5rem, 1.35rem + 0.75vw, 2rem); }
-  .text-fluid-2xl { font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem); }
-  .text-fluid-3xl { font-size: clamp(2.5rem, 2.15rem + 1.75vw, 4rem); }
-  .text-fluid-4xl { font-size: clamp(2.75rem, 2.25rem + 2vw, 4.5rem); }
+  /* Fluid typography with refined scale */
+  .text-fluid-xs { font-size: clamp(0.75rem, 0.68rem + 0.35vw, 0.875rem); line-height: 1.5; }
+  .text-fluid-sm { font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1rem); line-height: 1.55; }
+  .text-fluid-base { font-size: clamp(1rem, 0.93rem + 0.35vw, 1.125rem); line-height: 1.65; }
+  .text-fluid-lg { font-size: clamp(1.125rem, 1.02rem + 0.525vw, 1.375rem); line-height: 1.5; }
+  .text-fluid-xl { font-size: clamp(1.5rem, 1.3rem + 1vw, 2.125rem); line-height: 1.25; }
+  .text-fluid-2xl { font-size: clamp(2rem, 1.65rem + 1.75vw, 3.25rem); line-height: 1.1; }
+  .text-fluid-3xl { font-size: clamp(2.5rem, 2rem + 2.5vw, 4.25rem); line-height: 1; }
+  .text-fluid-4xl { font-size: clamp(3rem, 2.25rem + 3.75vw, 5.5rem); line-height: 0.95; }
   
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { @apply bg-transparent; }
@@ -91,16 +108,19 @@
   .btn-primary {
     @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-neutral-900 text-white rounded-xl font-display text-xs sm:text-sm tracking-tight transition-all duration-300 hover:bg-black hover:shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation;
     font-weight: 700;
+    letter-spacing: -0.015em;
   }
 
   .btn-orange {
     @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-orange-500 text-white rounded-xl font-display text-xs sm:text-sm tracking-tight transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation;
     font-weight: 700;
+    letter-spacing: -0.015em;
   }
   
   .btn-secondary {
     @apply px-5 sm:px-6 py-2.5 sm:py-3 bg-neutral-100 text-neutral-700 rounded-xl font-display text-xs sm:text-sm tracking-tight hover:bg-neutral-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 touch-manipulation;
-    font-weight: 700;
+    font-weight: 650;
+    letter-spacing: -0.012em;
   }
   
   .card {
@@ -115,12 +135,17 @@
     @apply w-full px-4 sm:px-5 py-3 sm:py-3.5 border border-neutral-200/60 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all duration-300 bg-white placeholder:text-neutral-300 text-sm tracking-tight touch-manipulation;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: max(16px, 1rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.5;
   }
   
   .input-error { @apply border-red-200 focus:ring-red-500/5 focus:border-red-400; }
   
   .badge { 
     @apply inline-flex items-center px-2.5 py-1 rounded-lg text-[9px] font-display font-bold tracking-wider uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
   }
   .badge-primary { @apply badge bg-orange-500/10 text-orange-600; }
   .badge-neutral { @apply badge bg-neutral-100 text-neutral-500; }
@@ -129,25 +154,60 @@
   
   .heading-hero {
     @apply font-display text-fluid-4xl;
-    font-weight: 800;
-    letter-spacing: -0.045em;
-    line-height: 0.95;
+    font-weight: 850;
+    letter-spacing: -0.052em;
+    line-height: 0.92;
     text-wrap: balance;
+    font-feature-settings: 'ss01', 'ss02', 'calt';
   }
   
   .heading-section {
     @apply font-display text-fluid-3xl;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    text-wrap: balance;
+    font-feature-settings: 'ss01', 'ss02', 'calt';
+  }
+  
+  .heading-subsection {
+    @apply font-display text-fluid-2xl;
     font-weight: 750;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
+    letter-spacing: -0.038em;
+    line-height: 1.05;
     text-wrap: balance;
   }
   
   .text-body-lg {
     font-size: clamp(1rem, 0.5vw + 0.9rem, 1.25rem);
-    line-height: 1.7;
-    letter-spacing: -0.01em;
+    line-height: 1.75;
+    letter-spacing: -0.014em;
     text-wrap: pretty;
+    font-weight: 450;
+  }
+  
+  .text-body-base {
+    font-size: clamp(0.9375rem, 0.45vw + 0.85rem, 1.125rem);
+    line-height: 1.7;
+    letter-spacing: -0.012em;
+    text-wrap: pretty;
+    font-weight: 450;
+  }
+  
+  .text-label {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    font-size: clamp(0.625rem, 0.6rem + 0.125vw, 0.6875rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  
+  .text-caption {
+    font-size: clamp(0.6875rem, 0.65rem + 0.1875vw, 0.8125rem);
+    line-height: 1.5;
+    letter-spacing: -0.008em;
+    font-weight: 500;
   }
 }
 
