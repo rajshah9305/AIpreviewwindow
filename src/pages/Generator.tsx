@@ -110,9 +110,7 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
     </h1>
 
     <p className="text-lg sm:text-xl md:text-2xl text-neutral-400 max-w-2xl mx-auto px-3 sm:px-4 animate-text-reveal font-sans leading-relaxed break-words mb-12 font-light" style={{ animationDelay: '0.5s', fontWeight: 300 }}>
-      Transform your ideas into production-ready UI components.
-      <br className="hidden sm:block" />
-      Describe what you need, AI handles the rest.
+      Transform your ideas into production-ready UI components. Describe what you need, AI handles the rest.
     </p>
 
     {!hasSettings && (
