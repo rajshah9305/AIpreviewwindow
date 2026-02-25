@@ -264,9 +264,9 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-24 sm:bottom-12 left-0 right-0 z-[90] w-full px-4 sm:px-6">
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.06)] focus-within:shadow-[0_16px_48px_rgba(0,0,0,0.12)] focus-within:border-orange-500/30 rounded-3xl w-full">
+    <div className="fixed bottom-[calc(6.5rem+env(safe-area-inset-bottom))] sm:bottom-10 left-0 right-0 z-[90] w-full px-4 sm:px-6 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+      <div className="w-full max-w-[calc(100%-1rem)] sm:max-w-4xl mx-auto">
+        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 shadow-[0_12px_48px_rgba(0,0,0,0.12)] focus-within:shadow-[0_20px_64px_rgba(0,0,0,0.16)] focus-within:border-orange-500/30 rounded-[2rem] w-full">
           {error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
