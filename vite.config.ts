@@ -27,6 +27,10 @@ export default defineConfig({
         manualChunks: (id) => {
           // Vendor chunks
           if (id.includes('node_modules')) {
+            // Icons
+            if (id.includes('lucide')) {
+              return 'icons-vendor'
+            }
             // React ecosystem
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
               return 'react-vendor'
@@ -34,10 +38,6 @@ export default defineConfig({
             // Three.js for GLSL effects
             if (id.includes('three')) {
               return 'three-vendor'
-            }
-            // Icons
-            if (id.includes('lucide-react')) {
-              return 'icons-vendor'
             }
             // Other dependencies
             return 'vendor'

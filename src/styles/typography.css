@@ -599,6 +599,7 @@ button, a, input, textarea, select {
 /* Font family utilities */
 .font-sans { font-family: var(--font-sans); }
 .font-display { font-family: var(--font-display); }
+.font-accent { font-family: var(--font-accent); }
 .font-mono { font-family: var(--font-mono); }
 
 /* Letter spacing utilities */

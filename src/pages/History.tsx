@@ -11,7 +11,7 @@ import type { GenerationResult } from '../types'
 
 export default function History() {
   const {
-    history,
+    history: filteredHistory,
     selectedResult,
     searchQuery,
     isEmpty,
@@ -21,6 +21,7 @@ export default function History() {
   } = useHistory()
 
   const [showClearDialog, setShowClearDialog] = useState(false)
+  const isSearchEmpty = !isEmpty && filteredHistory.length === 0
   const toast = useToast()
   const navigate = useNavigate()
 
@@ -49,7 +50,7 @@ export default function History() {
   return (
     <div className="space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12">
       <PageHeader
-        count={history.length}
+        count={filteredHistory.length}
         onClearClick={() => setShowClearDialog(true)}
       />
 
@@ -57,14 +58,25 @@ export default function History() {
         <div className="lg:col-span-4 space-y-3 sm:space-y-4">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
           <HistoryList
-            items={history}
+            items={filteredHistory}
             selectedTimestamp={selectedResult?.timestamp}
             onSelect={setSelectedResult}
           />
         </div>
 
         <div className="lg:col-span-8">
-          {selectedResult ? (
+          {isSearchEmpty ? (
+            <div className="h-full min-h-[350px] sm:min-h-[400px] flex items-center justify-center border border-dashed border-neutral-200/60 rounded-2xl p-8 bg-neutral-50/30 animate-fade-in">
+              <div className="text-center">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mx-auto mb-4 shadow-sm">
+                  <Search className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-300" />
+                </div>
+                <p className="text-neutral-400 text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.08em]">
+                  No matches found for "{searchQuery}"
+                </p>
+              </div>
+            </div>
+          ) : selectedResult ? (
             <ResultDetail result={selectedResult} />
           ) : (
             <EmptySelection />

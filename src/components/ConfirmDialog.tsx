@@ -28,6 +28,9 @@ export default function ConfirmDialog({
       <div
         className="absolute inset-0 bg-black/30 backdrop-blur-sm"
         onClick={onCancel}
+        aria-label="Close dialog"
+        role="button"
+        tabIndex={-1}
       />
       <div className="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-[0_24px_64px_rgba(0,0,0,0.12)] border border-neutral-100/60 animate-scale-in">
         {variant === 'danger' && (
