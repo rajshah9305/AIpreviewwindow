@@ -108,23 +108,6 @@
 }
 
 @layer components {
-  .btn-primary {
-    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-neutral-900 text-white rounded-xl font-display text-sm sm:text-base tracking-tight transition-all duration-300 hover:bg-black hover:shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-ui);
-  }
-
-  .btn-orange {
-    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-orange-500 text-white rounded-xl font-display text-sm sm:text-base tracking-tight transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-ui);
-  }
-  
-  .btn-secondary {
-    @apply px-5 sm:px-6 py-3 sm:py-3.5 bg-neutral-100 text-neutral-700 rounded-xl font-display text-sm sm:text-base tracking-tight hover:bg-neutral-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 touch-manipulation min-h-[48px];
-    font-weight: var(--font-weight-emphasis);
-    letter-spacing: -0.012em;
-  }
   
   .card {
     @apply bg-white rounded-2xl border-2 border-neutral-100 shadow-[0_8px_32px_rgb(0,0,0,0.04)];
@@ -565,22 +548,6 @@ textarea {
     @apply active:scale-95;
   }
   
-  /* Premium card styles */
-  .card-premium {
-    @apply bg-white rounded-2xl border border-neutral-200;
-    @apply shadow-[0_4px_16px_rgba(0,0,0,0.03)];
-    @apply transition-all duration-500;
-  }
-  
-  /* Premium input styles */
-  .input-premium {
-    @apply w-full px-4 py-3 rounded-xl;
-    @apply bg-white border border-neutral-200;
-    @apply font-sans text-base font-400 tracking-snug;
-    @apply transition-all duration-300;
-    @apply focus:border-orange-500 focus:ring-4 focus:ring-orange-500/5;
-    @apply placeholder:text-neutral-300 placeholder:font-400;
-  }
   
   /* Badge styles */
   .badge-premium {

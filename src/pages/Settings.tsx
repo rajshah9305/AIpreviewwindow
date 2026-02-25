@@ -25,24 +25,34 @@ export default function Settings() {
   }
 
   const handleTestConnection = useCallback(async () => {
-    if (!settings.apiKey || !settings.baseUrl) {
-      toast.warning('Fill in API key and endpoint first')
+    if (!settings.baseUrl) {
+      toast.warning('Fill in provider endpoint first')
       return
     }
     setTesting(true)
     setTestResult(null)
     try {
-      const response = await fetch('/api/health')
-      if (response.ok) {
+      const response = await fetch('/api/test-connection', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          baseUrl: settings.baseUrl,
+          apiKey: settings.apiKey
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.reachable) {
         setTestResult('success')
-        toast.success('API server is reachable')
+        toast.success('Provider endpoint is reachable')
       } else {
         setTestResult('error')
-        toast.error('API server returned an error')
+        toast.error(data.message || 'Could not reach provider endpoint')
       }
-    } catch {
+    } catch (err) {
       setTestResult('error')
-      toast.error('Could not reach API server')
+      toast.error('Failed to test connection')
     } finally {
       setTesting(false)
       setTimeout(() => setTestResult(null), 3000)

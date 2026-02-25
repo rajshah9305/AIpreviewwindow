@@ -9,6 +9,9 @@ export default {
       screens: {
         'xs': '375px',
       },
+      spacing: {
+        '4.5': '1.125rem',
+      },
       colors: {
         orange: {
           500: '#f97316',

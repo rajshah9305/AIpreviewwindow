@@ -322,9 +322,10 @@ After deployment, verify:
 - **Warning**: Orange 500
 
 ### Typography
-- **Display**: Outfit (headings, 400-900)
-- **Body**: Inter (text, 300-900)
-- **Mono**: Fira Code (code, 400-700)
+- **Display**: Space Grotesk (headings, 300-700)
+- **Body**: Inter (text, 100-900)
+- **Accent**: DM Sans (UI elements, 100-1000)
+- **Mono**: JetBrains Mono (code, 400-700)
 
 ### Spacing Scale
 - **Base unit**: 4px (0.25rem)
@@ -396,5 +397,5 @@ npm run build
 
 - Built with React, Tailwind CSS, and Three.js
 - Icons by Lucide
-- Fonts: Inter, Outfit, and Fira Code from Google Fonts
+- Fonts: Inter, Space Grotesk, DM Sans, and JetBrains Mono from Google Fonts
 - Inspired by modern design systems and mobile-first principles
