@@ -93,9 +93,9 @@ interface HeroSectionProps {
 const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
   <div className="max-w-5xl mx-auto text-center pt-20 sm:pt-24 md:pt-32 pb-12 animate-slide-up px-4 sm:px-6 w-full">
     <div className="inline-flex items-center justify-center mb-10 sm:mb-12 animate-text-reveal-up" style={{ animationDelay: '0.1s' }}>
-      <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 border border-orange-200/60 flex items-center gap-2.5 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
-        <Zap className="w-4 h-4 text-orange-500 animate-pulse-glow" fill="currentColor" />
-        <span className="text-xs font-accent font-650 text-orange-600 tracking-widest uppercase">
+      <div className="px-5 py-2.5 rounded-full bg-white border border-neutral-200 flex items-center gap-2.5 shadow-sm transition-all duration-300">
+        <Zap className="w-4 h-4 text-[#f97316]" fill="currentColor" />
+        <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">
           Next-Gen AI Component Engine
         </span>
       </div>
@@ -103,10 +103,10 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
 
     <h1 className="text-6xl sm:text-7xl md:text-8xl font-display font-700 tracking-tightest leading-[0.95] mb-8 sm:mb-10 px-2 break-words">
       <span className="text-black animate-text-reveal-up inline-block" style={{ animationDelay: '0.2s' }}>Build </span>
-      <span className="text-gradient-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.3s' }}>Faster</span>
+      <span className="text-brand-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.3s' }}>Faster</span>
       <br />
       <span className="text-black animate-text-reveal-up inline-block" style={{ animationDelay: '0.4s' }}>Design </span>
-      <span className="text-gradient-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.5s' }}>Better</span>
+      <span className="text-brand-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.5s' }}>Better</span>
     </h1>
 
     <p className="text-xl sm:text-2xl md:text-3xl text-neutral-500 max-w-3xl mx-auto px-4 sm:px-6 animate-text-reveal-up font-accent leading-relaxed break-words mb-16 font-400 tracking-snug" style={{ animationDelay: '0.6s' }}>
@@ -114,10 +114,10 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
     </p>
 
     {!hasSettings && (
-      <div className="mt-12 sm:mt-14 md:mt-16 p-7 sm:p-8 card-premium inline-block text-left max-w-lg mx-auto w-[calc(100%-2rem)] sm:w-auto animate-text-reveal-scale hover:scale-[1.02] transition-all duration-500" style={{ animationDelay: '0.7s' }}>
+      <div className="mt-12 sm:mt-14 md:mt-16 p-7 sm:p-8 bg-white border border-neutral-200 rounded-2xl inline-block text-left max-w-lg mx-auto w-[calc(100%-2rem)] sm:w-auto animate-text-reveal-scale shadow-[0_8px_32px_rgba(0,0,0,0.04)]" style={{ animationDelay: '0.7s' }}>
         <div className="flex items-start gap-5">
-          <div className="w-14 h-14 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 rounded-2xl flex items-center justify-center shadow-xl shadow-orange-500/40 shrink-0 animate-pulse-glow">
-            <AlertCircle className="w-7 h-7 text-white" />
+          <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center shadow-md shrink-0">
+            <AlertCircle className="w-7 h-7 text-[#f97316]" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-display font-700 text-base text-neutral-900 tracking-tight mb-2">Setup Required</p>
@@ -143,9 +143,9 @@ const LoadingState = () => (
         <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Generating</h3>
         <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">Creating 5 unique design variations with AI precision...</p>
       </div>
-      <div className="flex items-center gap-3 bg-gradient-to-r from-orange-50 to-amber-50 px-5 py-2.5 rounded-xl border border-orange-200/60 shadow-sm">
-        <div className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse" />
-        <span className="text-xs font-accent font-650 text-orange-600 tracking-widest uppercase">Processing</span>
+      <div className="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-neutral-200 shadow-sm">
+        <div className="w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" />
+        <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">Processing</span>
       </div>
     </div>
 
@@ -187,9 +187,9 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
   <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-3 mb-3 bg-gradient-to-r from-emerald-50 to-green-50 px-5 py-2.5 rounded-xl border border-emerald-200/60 inline-flex shadow-sm">
+        <div className="flex items-center gap-3 mb-3 bg-white px-5 py-2.5 rounded-xl border border-emerald-200 inline-flex shadow-sm">
           <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-xs font-accent font-650 text-emerald-600 tracking-widest uppercase">Complete</span>
+          <span className="text-[10px] font-display font-700 text-emerald-600 tracking-widest-xl uppercase">Complete</span>
         </div>
         <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Your Collection</h3>
         <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">
@@ -264,11 +264,11 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-0 sm:bottom-8 left-0 right-0 z-[90] w-full px-4 sm:px-6 pb-20 sm:pb-0">
+    <div className="fixed bottom-0 sm:bottom-8 left-0 right-0 z-[90] w-full px-2 sm:px-6 pb-20 sm:pb-0">
       <div className="w-full max-w-4xl mx-auto">
-        <div className="card-premium p-2.5 group/input transition-all duration-500 focus-within:shadow-[0_16px_64px_rgba(0,0,0,0.15)] focus-within:scale-[1.01] w-full">
+        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 focus-within:shadow-[0_16px_64px_rgba(0,0,0,0.15)] rounded-3xl w-full">
           {error && (
-            <div className="mx-2 mb-2 p-4 bg-gradient-to-r from-red-50 to-rose-50 backdrop-blur-sm rounded-2xl text-sm font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-200/60">
+            <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span className="break-words line-clamp-2">{error}</span>
@@ -318,10 +318,10 @@ const InputArea = ({
                 onClick={onGenerate}
                 disabled={loading || !instruction.trim()}
                 type="button"
-                className={`px-7 py-3.5 rounded-full text-sm font-accent font-600 tracking-snug transition-all duration-300 touch-manipulation flex items-center gap-2.5 ${
+                className={`px-5 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-display font-700 tracking-widest uppercase transition-all duration-300 touch-manipulation flex items-center gap-2.5 ${
                   loading || !instruction.trim()
-                    ? 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-neutral-900 to-black text-white hover:shadow-2xl hover:shadow-neutral-900/30 hover:scale-105 active:scale-95'
+                    ? 'bg-neutral-100 text-neutral-300 cursor-not-allowed'
+                    : 'bg-black text-white hover:shadow-xl hover:shadow-neutral-900/20 active:scale-95'
                 }`}
                 aria-label="Generate components"
               >

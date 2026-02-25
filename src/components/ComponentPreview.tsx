@@ -88,7 +88,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
     <>
       {isExpanded && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-md z-[110] animate-fade-in"
+          className="fixed inset-0 bg-black/40 z-[110] animate-fade-in"
           onClick={() => setIsExpanded(false)}
           role="button"
           aria-label="Close expanded view"
@@ -98,11 +98,11 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
       )}
       <div className={`bg-white rounded-2xl overflow-hidden border flex flex-col group/card transition-all duration-500 ${
         isExpanded
-          ? 'fixed inset-4 sm:inset-8 md:inset-12 z-[120] shadow-2xl border-neutral-200/60'
-          : 'relative h-full w-full border-neutral-100/80 hover:border-neutral-200 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]'
+          ? 'fixed inset-4 sm:inset-8 md:inset-12 z-[120] shadow-2xl border-neutral-200'
+          : 'relative h-full w-full border-neutral-200 hover:border-neutral-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.04)]'
       }`}>
         {/* Header */}
-        <div className="px-4 sm:px-4 py-3 sm:py-3 border-b border-neutral-100/60 flex items-center justify-between shrink-0 bg-white/90 backdrop-blur-md">
+        <div className="px-4 sm:px-4 py-3 sm:py-3 border-b border-neutral-200 flex items-center justify-between shrink-0 bg-white">
           <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
             <div className="w-2.5 h-2.5 rounded-full bg-orange-500 shrink-0 ring-4 ring-orange-500/10" />
             <span className="text-xs sm:text-xs font-display font-bold text-neutral-900 tracking-tight leading-none truncate" style={{ fontWeight: 750 }}>
