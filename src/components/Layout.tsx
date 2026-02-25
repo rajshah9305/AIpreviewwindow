@@ -69,7 +69,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-[100] sm:hidden safe-bottom">
-        <div className="mx-4 mb-4 bg-white border border-neutral-200 rounded-[2rem] px-2 py-2 shadow-[0_12px_48px_rgba(0,0,0,0.12)] flex items-center justify-around gap-1">
+        <div className="mx-6 mb-6 bg-white border border-neutral-200 rounded-[2.5rem] px-2 py-2 shadow-[0_20px_80px_rgba(0,0,0,0.15)] flex items-center justify-around gap-1">
           {navItems.map((item) => {
             const Icon = item.icon
             const active = isActive(item.path)
@@ -97,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-64 sm:pb-32">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-80 sm:pb-48">
         {children}
       </main>
     </div>
