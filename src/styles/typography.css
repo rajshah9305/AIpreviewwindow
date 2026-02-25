@@ -618,12 +618,6 @@ button, a, input, textarea, select {
 .leading-loose { line-height: var(--line-height-loose); }
 
 /* Gradient text effect */
-.text-gradient-orange {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
 /* Selection styling */
 ::selection {

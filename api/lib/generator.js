@@ -24,7 +24,7 @@ const STYLE_THEMES = {
   modern: {
     name: 'Contemporary',
     description: 'Cutting-edge design following current high-end trends',
-    traits: ['glassmorphism', 'sharp grids', 'modern utility'],
+    traits: ['precision grids', 'geometric clarity', 'modern utility'],
   },
 }
 
@@ -41,11 +41,12 @@ Design Style: ${theme.name} (${theme.description})
 Key Traits: ${theme.traits.join(', ')}
 
 Strict Design System:
-1. Palette: Primary Orange (#f97316), Pure Black (#000000), Pure White (#ffffff).
-2. Typography: Use sans-serif (Inter) or display (Space Grotesk) fonts.
-3. Shadows: Use high-end, very subtle shadows (e.g., shadow-[0_10px_40px_rgba(0,0,0,0.04)]).
-4. Corners: Use refined rounding (rounded-xl to rounded-2xl).
-5. Hover: Add smooth transitions and sophisticated hover effects.
+1. Palette: Primary Orange (#f97316), Pure Black (#000000), Pure White (#ffffff). Use neutral scales (slate/neutral/zinc) for borders and subtle backgrounds only.
+2. Aesthetics: Use solid backgrounds and clean borders. Strictly NO gradients, glassmorphism, or backdrop blurs.
+3. Typography: Use sans-serif (Inter) or display (Space Grotesk) fonts.
+4. Shadows: Use high-end, very subtle shadows (e.g., shadow-[0_10px_40px_rgba(0,0,0,0.04)]).
+5. Corners: Use refined rounding (rounded-xl to rounded-2xl).
+6. Hover: Add smooth transitions and sophisticated hover effects.
 
 Technical Constraints:
 - Return ONLY the raw HTML code (no markdown, no explanations).

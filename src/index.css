@@ -215,19 +215,16 @@
 }
 
 @layer utilities {
-  .text-gradient-orange {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .text-orange-brand {
+    @apply text-[#f97316];
   }
 
   .shadow-premium {
-    box-shadow: 0 8px 32px rgb(0 0 0 / 0.06), 0 2px 8px rgb(0 0 0 / 0.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
   }
   
   .shadow-premium-lg {
-    box-shadow: 0 16px 64px rgb(0 0 0 / 0.08), 0 4px 16px rgb(0 0 0 / 0.04);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
   }
 
   .scrollbar-hide {
@@ -393,19 +390,17 @@ textarea {
    ============================================ */
 
 @layer utilities {
-  /* Text gradient effects */
-  .text-gradient-primary {
-    @apply bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 bg-clip-text text-transparent;
+  /* Text brand effects */
+  .text-brand-primary {
+    @apply text-[#f97316];
   }
   
-  .text-gradient-dark {
-    @apply bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent;
+  .text-brand-dark {
+    @apply text-black;
   }
   
-  .text-gradient-shine {
-    @apply bg-gradient-to-r from-neutral-400 via-white to-neutral-400 bg-clip-text text-transparent;
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
+  .text-brand-shine {
+    @apply text-neutral-400;
   }
   
   /* Text shadow effects */
@@ -554,53 +549,51 @@ textarea {
 @layer components {
   /* Premium button styles */
   .btn-primary {
-    @apply px-6 py-3 rounded-xl font-accent font-600 text-sm tracking-snug;
-    @apply bg-gradient-to-r from-orange-600 to-orange-500;
-    @apply text-white shadow-lg shadow-orange-500/30;
+    @apply px-6 py-3 rounded-xl font-display font-700 text-sm tracking-widest uppercase;
+    @apply bg-black;
+    @apply text-white shadow-md;
     @apply transition-all duration-300;
-    @apply hover:shadow-xl hover:shadow-orange-500/40 hover:-translate-y-0.5;
+    @apply hover:bg-neutral-900 hover:shadow-lg;
     @apply active:scale-95;
   }
   
   .btn-secondary {
-    @apply px-6 py-3 rounded-xl font-accent font-500 text-sm tracking-snug;
-    @apply bg-white border-2 border-neutral-200 text-neutral-900;
+    @apply px-6 py-3 rounded-xl font-display font-700 text-sm tracking-widest uppercase;
+    @apply bg-white border border-neutral-200 text-neutral-900;
     @apply shadow-sm transition-all duration-300;
-    @apply hover:border-neutral-300 hover:shadow-md hover:-translate-y-0.5;
+    @apply hover:bg-neutral-50 hover:border-neutral-300;
     @apply active:scale-95;
   }
   
   /* Premium card styles */
   .card-premium {
-    @apply bg-white rounded-2xl border border-neutral-200/50;
-    @apply shadow-[0_8px_32px_rgba(0,0,0,0.06)];
-    @apply backdrop-blur-xl;
+    @apply bg-white rounded-2xl border border-neutral-200;
+    @apply shadow-[0_4px_16px_rgba(0,0,0,0.03)];
     @apply transition-all duration-500;
-    @apply hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] hover:-translate-y-1;
   }
   
   /* Premium input styles */
   .input-premium {
     @apply w-full px-4 py-3 rounded-xl;
-    @apply bg-white border-2 border-neutral-200;
+    @apply bg-white border border-neutral-200;
     @apply font-sans text-base font-400 tracking-snug;
     @apply transition-all duration-300;
-    @apply focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10;
-    @apply placeholder:text-neutral-400 placeholder:font-400;
+    @apply focus:border-orange-500 focus:ring-4 focus:ring-orange-500/5;
+    @apply placeholder:text-neutral-300 placeholder:font-400;
   }
   
   /* Badge styles */
   .badge-premium {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full;
-    @apply font-accent text-xs font-600 tracking-wide uppercase;
-    @apply bg-gradient-to-r from-orange-50 to-amber-50;
-    @apply text-orange-700 border border-orange-200/50;
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
+    @apply font-display text-[10px] font-700 tracking-widest uppercase;
+    @apply bg-orange-50;
+    @apply text-orange-600 border border-orange-100;
   }
   
   /* Section header styles */
   .section-header {
     @apply font-display text-4xl sm:text-5xl font-700 tracking-tighter;
-    @apply text-gradient-dark;
+    @apply text-brand-dark;
     @apply mb-4;
   }
   
@@ -647,8 +640,8 @@ textarea {
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .text-gradient-primary,
-  .text-gradient-dark {
+  .text-brand-primary,
+  .text-brand-dark {
     @apply text-black bg-none;
   }
 }
