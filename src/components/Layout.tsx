@@ -97,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-24 sm:pb-8">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-48 sm:pb-16">
         {children}
       </main>
     </div>

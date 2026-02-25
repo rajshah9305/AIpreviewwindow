@@ -264,9 +264,9 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-0 sm:bottom-8 left-0 right-0 z-[90] w-full px-2 sm:px-6 pb-20 sm:pb-0">
+    <div className="fixed bottom-24 sm:bottom-12 left-0 right-0 z-[90] w-full px-4 sm:px-6">
       <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 focus-within:shadow-[0_16px_64px_rgba(0,0,0,0.15)] rounded-3xl w-full">
+        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.06)] focus-within:shadow-[0_16px_48px_rgba(0,0,0,0.12)] focus-within:border-orange-500/30 rounded-3xl w-full">
           {error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
@@ -290,7 +290,7 @@ const InputArea = ({
                 value={instruction}
                 onChange={(e) => onInstructionChange(e.target.value)}
                 placeholder="Describe your component in detail..."
-                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-6 py-4 text-base font-accent resize-none min-h-[60px] max-h-[120px] scrollbar-hide text-neutral-700 leading-relaxed rounded-xl placeholder:text-neutral-400 placeholder:font-400 font-450 tracking-snug"
+                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-5 py-4 text-base font-accent font-medium resize-none min-h-[60px] max-h-[120px] scrollbar-hide text-neutral-700 leading-relaxed rounded-xl placeholder:text-neutral-400 placeholder:font-400 tracking-snug"
                 style={{ fontSize: 'max(16px, 1rem)' }}
                 disabled={loading}
                 rows={1}
