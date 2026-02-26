@@ -1,3 +1,4 @@
+// src/App.tsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -13,31 +14,24 @@ const History = lazy(() => import('./pages/History'))
 
 function App() {
   return (
-    <ErrorBoundary>
-      <ToastProvider>
-        <Router>
-          <GenerationProvider>
+    <Router>
+      <ErrorBoundary>
+        <GenerationProvider>
+          <ToastProvider>
             <Layout>
-              <Suspense fallback={
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                  <div className="h-[450px] sm:h-[500px] md:h-[550px]">
-                    <LoadingSkeleton />
-                  </div>
-                </div>
-              }>
+              <Suspense fallback={<LoadingSkeleton />}>
                 <Routes>
-                  <Route path="/" element={<Navigate to="/generator" replace />} />
-                  <Route path="/generator" element={<Generator />} />
+                  <Route path="/" element={<Generator />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/history" element={<History />} />
-                  <Route path="*" element={<Navigate to="/generator" replace />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Suspense>
             </Layout>
-          </GenerationProvider>
-        </Router>
-      </ToastProvider>
-    </ErrorBoundary>
+          </ToastProvider>
+        </GenerationProvider>
+      </ErrorBoundary>
+    </Router>
   )
 }
 
