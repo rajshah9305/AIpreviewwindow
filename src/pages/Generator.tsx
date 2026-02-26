@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AlertCircle, RefreshCw, Zap, ArrowRight } from 'lucide-react'
+import { AlertCircle, RefreshCw, Zap, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useGeneration } from '../contexts/GenerationContext'
 import { useToast } from '../components/ToastContainer'
 import { useKeyboardShortcut } from '../hooks/useKeyboardShortcut'
@@ -93,7 +93,7 @@ interface HeroSectionProps {
 const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
   <div className="max-w-5xl mx-auto text-center pt-20 sm:pt-24 md:pt-32 pb-12 animate-slide-up px-4 sm:px-6 w-full">
     <div className="inline-flex items-center justify-center mb-10 sm:mb-12 animate-text-reveal-up" style={{ animationDelay: '0.1s' }}>
-      <div className="px-5 py-2.5 rounded-full bg-white border border-neutral-200 flex items-center gap-2.5 shadow-sm transition-all duration-300">
+      <div className="px-5 py-2.5 rounded-full bg-white border border-neutral-200 flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-orange-200">
         <Zap className="w-4 h-4 text-[#f97316]" fill="currentColor" />
         <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">
           Next-Gen AI Component Engine
@@ -101,7 +101,7 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
       </div>
     </div>
 
-    <h1 className="text-6xl sm:text-7xl md:text-8xl font-display font-700 tracking-tightest leading-[0.95] mb-8 sm:mb-10 px-2 break-words">
+    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-700 tracking-tightest leading-[0.95] mb-8 sm:mb-10 px-2 break-words">
       <span className="text-black animate-text-reveal-up inline-block" style={{ animationDelay: '0.2s' }}>Build </span>
       <span className="text-brand-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.3s' }}>Faster</span>
       <br />
@@ -109,7 +109,7 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
       <span className="text-brand-primary animate-text-reveal-up inline-block animate-gradient-shift" style={{ animationDelay: '0.5s' }}>Better</span>
     </h1>
 
-    <p className="text-xl sm:text-2xl md:text-3xl text-neutral-500 max-w-3xl mx-auto px-4 sm:px-6 animate-text-reveal-up font-accent leading-relaxed break-words mb-16 font-400 tracking-snug" style={{ animationDelay: '0.6s' }}>
+    <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-3xl mx-auto px-4 sm:px-6 animate-text-reveal-up font-accent leading-relaxed break-words mb-16 font-400 tracking-snug" style={{ animationDelay: '0.6s' }}>
       Transform your ideas into production-ready UI components with AI-powered precision.
     </p>
 
@@ -136,31 +136,64 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
   </div>
 )
 
-const LoadingState = () => (
-  <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
-    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
-      <div className="min-w-0">
-        <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Generating</h3>
-        <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">Creating 5 unique design variations with AI precision...</p>
-      </div>
-      <div className="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-neutral-200 shadow-sm">
-        <div className="w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" />
-        <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">Processing</span>
-      </div>
-    </div>
+const LoadingState = () => {
+  const scrollRef = useRef<HTMLDivElement>(null)
 
-    <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
-      <div className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin">
-        <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
-          {LOADING_VARIATIONS.map((v, i) => (
-            <div
-              key={v.id}
-              className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px]"
-              style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
-            >
-              <LoadingSkeleton />
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === 'left' ? -400 : 400
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
+        <div className="min-w-0">
+          <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Generating</h3>
+          <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">Creating 5 unique design variations with AI precision...</p>
+        </div>
+        <div className="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-neutral-200 shadow-sm">
+          <div className="w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" />
+          <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">Processing</span>
+        </div>
+      </div>
+
+      <div className="relative group">
+        <div className="hidden md:block">
+          <button
+            onClick={() => scroll('left')}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 disabled:opacity-0"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 disabled:opacity-0"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin"
+          >
+            <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
+              {LOADING_VARIATIONS.map((v, i) => (
+                <div
+                  key={v.id}
+                  className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px]"
+                  style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
+                >
+                  <LoadingSkeleton />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
       
@@ -175,51 +208,84 @@ const LoadingState = () => (
         ))}
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 interface ResultsStateProps {
   result: { variations: Array<{ id: string; name: string; code: string; style: 'minimal' | 'bold' | 'elegant' | 'playful' | 'modern' }> }
   onClearAndNew: () => void
 }
 
-const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
-  <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
-    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-3 mb-3 bg-white px-5 py-2.5 rounded-xl border border-emerald-200 inline-flex shadow-sm">
-          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-[10px] font-display font-700 text-emerald-600 tracking-widest-xl uppercase">Complete</span>
-        </div>
-        <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Your Collection</h3>
-        <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">
-          {result.variations.length} premium variations generated — scroll to explore each design
-        </p>
-      </div>
-      <button
-        onClick={onClearAndNew}
-        className="btn-secondary flex items-center justify-center gap-2.5 shrink-0 whitespace-nowrap min-h-[52px] sm:min-h-[44px] group"
-      >
-        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
-        <span>New Generation</span>
-      </button>
-    </div>
+const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null)
 
-    <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
-      <div className="absolute left-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-r from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-l from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
-      
-      <div className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin">
-        <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
-          {result.variations.map((variation, i) => (
-            <div
-              key={variation.id}
-              className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px] hover-lift"
-              style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
-            >
-              <ComponentPreview variation={variation} />
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === 'left' ? -400 : 400
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-3 mb-3 bg-white px-5 py-2.5 rounded-xl border border-emerald-200 inline-flex shadow-sm">
+            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="text-[10px] font-display font-700 text-emerald-600 tracking-widest-xl uppercase">Complete</span>
+          </div>
+          <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Your Collection</h3>
+          <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">
+            {result.variations.length} premium variations generated — scroll to explore each design
+          </p>
+        </div>
+        <button
+          onClick={onClearAndNew}
+          className="btn-secondary flex items-center justify-center gap-2.5 shrink-0 whitespace-nowrap min-h-[52px] sm:min-h-[44px] group"
+        >
+          <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+          <span>New Generation</span>
+        </button>
+      </div>
+
+      <div className="relative group">
+        <div className="hidden md:block">
+          <button
+            onClick={() => scroll('left')}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 disabled:opacity-0"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 disabled:opacity-0"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
+          <div className="absolute left-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-r from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-l from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
+
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin"
+          >
+            <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
+              {result.variations.map((variation, i) => (
+                <div
+                  key={variation.id}
+                  className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px] hover-lift"
+                  style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
+                >
+                  <ComponentPreview variation={variation} />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
       
@@ -233,8 +299,8 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => (
         ))}
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 interface InputAreaProps {
   instruction: string
@@ -264,7 +330,7 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-[calc(8rem+env(safe-area-inset-bottom))] sm:bottom-12 left-0 right-0 z-[90] w-full px-4 sm:px-6 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+    <div className="fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] sm:bottom-12 left-0 right-0 z-[90] w-full px-4 sm:px-6 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-[calc(100%-1rem)] sm:max-w-4xl mx-auto">
         <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 shadow-[0_24px_96px_rgba(0,0,0,0.16)] focus-within:shadow-[0_32px_128px_rgba(0,0,0,0.2)] focus-within:border-orange-500/40 rounded-[2.5rem] w-full">
           {error && (
