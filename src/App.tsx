@@ -21,10 +21,11 @@ function App() {
             <Layout>
               <Suspense fallback={<LoadingSkeleton />}>
                 <Routes>
-                  <Route path="/" element={<Generator />} />
+                  <Route path="/" element={<Navigate to="/generator" replace />} />
+                  <Route path="/generator" element={<Generator />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/history" element={<History />} />
-                  <Route path="*" element={<Navigate to="/" replace />} />
+                  <Route path="*" element={<Navigate to="/generator" replace />} />
                 </Routes>
               </Suspense>
             </Layout>

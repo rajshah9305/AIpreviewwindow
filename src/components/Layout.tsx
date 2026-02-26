@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
       <nav className="sticky top-0 z-[100] w-full px-4 sm:px-6 py-4 safe-top bg-[#f5f5f5] border-b border-neutral-200/50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3.5 group no-underline" style={{ textDecoration: 'none' }}>
+          <Link to="/generator" className="flex items-center gap-3.5 group no-underline" style={{ textDecoration: 'none' }}>
             <div className="relative w-11 h-11">
               <div className="relative w-full h-full bg-black rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-md">
                 <Sparkles className="w-5 h-5 text-[#f97316] group-hover:text-orange-400 transition-colors" />

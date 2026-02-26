@@ -13,7 +13,7 @@ export const STORAGE_KEYS = {
 } as const
 
 export const ROUTES = {
-  HOME: '/',
+  HOME: '/generator',
   GENERATOR: '/generator',
   HISTORY: '/history',
   SETTINGS: '/settings',
