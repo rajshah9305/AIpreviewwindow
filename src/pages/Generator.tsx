@@ -24,21 +24,10 @@ export default function Generator() {
 
   const toast = useToast()
   const navigate = useNavigate()
-  const [hasSettings, setHasSettings] = useState(false)
-
-  useEffect(() => {
-    const settings = storage.loadSettings()
-    setHasSettings(!!(settings?.apiKey))
-  }, [])
 
   const handleGenerateClick = useCallback(async () => {
-    if (!hasSettings) {
-      toast.warning('Please configure your AI settings first')
-      setTimeout(() => navigate(ROUTES.SETTINGS), ANIMATION_DELAYS.NAVIGATION_DELAY)
-      return
-    }
     await handleGenerate()
-  }, [hasSettings, handleGenerate, toast, navigate])
+  }, [handleGenerate])
 
   const handleClearAndNew = useCallback(() => {
     clearResult()
@@ -74,11 +63,9 @@ export default function Generator() {
         instruction={instruction}
         loading={loading}
         error={error}
-        hasSettings={hasSettings}
         onInstructionChange={handleInstructionChange}
         onGenerate={handleGenerateClick}
         onClearError={clearError}
-        onNavigateToSettings={() => navigate(ROUTES.SETTINGS)}
       />
     </div>
   )
@@ -279,22 +266,18 @@ interface InputAreaProps {
   instruction: string
   loading: boolean
   error: string | null
-  hasSettings: boolean
   onInstructionChange: (value: string) => void
   onGenerate: () => void
   onClearError: () => void
-  onNavigateToSettings: () => void
 }
 
 const InputArea = ({
   instruction,
   loading,
   error,
-  hasSettings,
   onInstructionChange,
   onGenerate,
   onClearError,
-  onNavigateToSettings,
 }: InputAreaProps) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -310,28 +293,7 @@ const InputArea = ({
     <div className="fixed bottom-[calc(8rem+env(safe-area-inset-bottom))] sm:bottom-20 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-4xl mx-auto">
         <div className="bg-white border border-neutral-200 p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_32px_128px_rgba(0,0,0,0.18)] focus-within:shadow-[0_48px_160px_rgba(0,0,0,0.22)] focus-within:border-orange-500/50 rounded-[2.5rem] w-full overflow-hidden">
-          {!hasSettings && (
-            <div className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 animate-fade-in">
-              <div className="flex items-center gap-4 sm:gap-5 min-w-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/10">
-                  <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#f97316]" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm sm:text-base font-display font-800 text-neutral-900 tracking-tight leading-tight">Setup Required</p>
-                  <p className="text-[10px] sm:text-xs text-neutral-500 font-accent font-400 tracking-snug mt-0.5">Connect your AI provider to start</p>
-                </div>
-              </div>
-              <button
-                onClick={onNavigateToSettings}
-                className="bg-[#f97316] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-display font-700 text-[10px] sm:text-[11px] tracking-widest uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-95 w-full sm:w-auto group"
-              >
-                <span>Connect Provider</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </div>
-          )}
-
-          {hasSettings && error && (
+          {error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
                 <AlertCircle className="w-4 h-4 shrink-0" />
@@ -347,10 +309,9 @@ const InputArea = ({
             </div>
           )}
 
-          {hasSettings && (
-            <div className="flex items-center gap-4">
-              <div className="flex-1 min-w-0">
-                <textarea
+          <div className="flex items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <textarea
                 ref={textareaRef}
                 value={instruction}
                 onChange={(e) => onInstructionChange(e.target.value)}
@@ -395,7 +356,6 @@ const InputArea = ({
               </button>
             </div>
           </div>
-          )}
         </div>
       </div>
     </div>
