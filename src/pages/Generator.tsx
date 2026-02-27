@@ -62,10 +62,7 @@ export default function Generator() {
     <div className="flex flex-col min-h-[calc(100vh-8rem)] relative w-full max-w-full overflow-x-hidden">
       <div className="flex-1 w-full">
         {!loading && !result && (
-          <HeroSection
-            hasSettings={hasSettings}
-            onNavigateToSettings={() => navigate(ROUTES.SETTINGS)}
-          />
+          <HeroSection />
         )}
 
         {loading && <LoadingState />}
@@ -77,20 +74,17 @@ export default function Generator() {
         instruction={instruction}
         loading={loading}
         error={error}
+        hasSettings={hasSettings}
         onInstructionChange={handleInstructionChange}
         onGenerate={handleGenerateClick}
         onClearError={clearError}
+        onNavigateToSettings={() => navigate(ROUTES.SETTINGS)}
       />
     </div>
   )
 }
 
-interface HeroSectionProps {
-  hasSettings: boolean
-  onNavigateToSettings: () => void
-}
-
-const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) => (
+const HeroSection = () => (
   <div className="max-w-5xl mx-auto text-center pt-20 sm:pt-24 md:pt-32 pb-12 animate-slide-up px-4 sm:px-6 w-full">
     <div className="inline-flex items-center justify-center mb-10 sm:mb-12 animate-text-reveal-up" style={{ animationDelay: '0.1s' }}>
       <div className="px-5 py-2.5 rounded-full bg-white border border-neutral-200 flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-orange-200">
@@ -112,27 +106,6 @@ const HeroSection = ({ hasSettings, onNavigateToSettings }: HeroSectionProps) =>
     <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-3xl mx-auto px-4 sm:px-6 animate-text-reveal-up font-accent leading-relaxed break-words mb-16 font-400 tracking-snug" style={{ animationDelay: '0.6s' }}>
       Transform your ideas into production-ready UI components with AI-powered precision.
     </p>
-
-    {!hasSettings && (
-      <div className="mt-12 sm:mt-14 md:mt-16 p-7 sm:p-8 bg-white border border-neutral-200 rounded-2xl inline-block text-left max-w-lg mx-auto w-[calc(100%-2rem)] sm:w-auto animate-text-reveal-scale shadow-[0_8px_32px_rgba(0,0,0,0.04)]" style={{ animationDelay: '0.7s' }}>
-        <div className="flex items-start gap-5">
-          <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center shadow-md shrink-0">
-            <AlertCircle className="w-7 h-7 text-[#f97316]" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display font-700 text-base text-neutral-900 tracking-tight mb-2">Setup Required</p>
-            <p className="text-sm text-neutral-600 mb-5 leading-relaxed font-accent font-400">Connect your AI provider to unlock the full power of component generation</p>
-            <button
-              onClick={onNavigateToSettings}
-              className="btn-primary w-full flex items-center justify-center gap-2.5 group min-h-[52px]"
-            >
-              <span>Connect Provider</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </div>
-    )}
   </div>
 )
 
@@ -306,18 +279,22 @@ interface InputAreaProps {
   instruction: string
   loading: boolean
   error: string | null
+  hasSettings: boolean
   onInstructionChange: (value: string) => void
   onGenerate: () => void
   onClearError: () => void
+  onNavigateToSettings: () => void
 }
 
 const InputArea = ({
   instruction,
   loading,
   error,
+  hasSettings,
   onInstructionChange,
   onGenerate,
   onClearError,
+  onNavigateToSettings,
 }: InputAreaProps) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -330,10 +307,31 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] sm:bottom-12 left-0 right-0 z-[90] w-full px-4 sm:px-6 animate-slide-up" style={{ animationDelay: '0.8s' }}>
-      <div className="w-full max-w-[calc(100%-1rem)] sm:max-w-4xl mx-auto">
-        <div className="bg-white border border-neutral-200 p-1.5 sm:p-2.5 group/input transition-all duration-500 shadow-[0_24px_96px_rgba(0,0,0,0.16)] focus-within:shadow-[0_32px_128px_rgba(0,0,0,0.2)] focus-within:border-orange-500/40 rounded-[2.5rem] w-full">
-          {error && (
+    <div className="fixed bottom-[calc(8rem+env(safe-area-inset-bottom))] sm:bottom-20 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="bg-white border border-neutral-200 p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_32px_128px_rgba(0,0,0,0.18)] focus-within:shadow-[0_48px_160px_rgba(0,0,0,0.22)] focus-within:border-orange-500/50 rounded-[2.5rem] w-full overflow-hidden">
+          {!hasSettings && (
+            <div className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 animate-fade-in">
+              <div className="flex items-center gap-4 sm:gap-5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/10">
+                  <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#f97316]" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm sm:text-base font-display font-800 text-neutral-900 tracking-tight leading-tight">Setup Required</p>
+                  <p className="text-[10px] sm:text-xs text-neutral-500 font-accent font-400 tracking-snug mt-0.5">Connect your AI provider to start</p>
+                </div>
+              </div>
+              <button
+                onClick={onNavigateToSettings}
+                className="bg-[#f97316] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-display font-700 text-[10px] sm:text-[11px] tracking-widest uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-95 w-full sm:w-auto group"
+              >
+                <span>Connect Provider</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
+          )}
+
+          {hasSettings && error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
                 <AlertCircle className="w-4 h-4 shrink-0" />
@@ -349,14 +347,15 @@ const InputArea = ({
             </div>
           )}
 
-          <div className="flex items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <textarea
+          {hasSettings && (
+            <div className="flex items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <textarea
                 ref={textareaRef}
                 value={instruction}
                 onChange={(e) => onInstructionChange(e.target.value)}
                 placeholder="Describe your component in detail..."
-                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-5 py-4 text-base font-accent font-medium resize-none min-h-[60px] max-h-[120px] scrollbar-hide text-neutral-700 leading-relaxed rounded-xl placeholder:text-neutral-400 placeholder:font-400 tracking-snug"
+                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-6 py-5 text-base font-accent font-500 resize-none min-h-[64px] max-h-[140px] scrollbar-hide text-neutral-800 leading-relaxed rounded-2xl placeholder:text-neutral-400 placeholder:font-400 tracking-snug"
                 style={{ fontSize: 'max(16px, 1rem)' }}
                 disabled={loading}
                 rows={1}
@@ -368,15 +367,15 @@ const InputArea = ({
               />
             </div>
 
-            <div className="flex items-center gap-2 shrink-0 pr-2">
+            <div className="flex items-center gap-2 shrink-0 pr-4">
               <button
                 onClick={onGenerate}
                 disabled={loading || !instruction.trim()}
                 type="button"
-                className={`px-5 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-display font-700 tracking-widest uppercase transition-all duration-300 touch-manipulation flex items-center gap-2.5 ${
+                className={`px-6 sm:px-8 py-3.5 rounded-full text-xs font-display font-800 tracking-widest uppercase transition-all duration-500 touch-manipulation flex items-center gap-3 ${
                   loading || !instruction.trim()
-                    ? 'bg-neutral-100 text-neutral-300 cursor-not-allowed'
-                    : 'bg-black text-white hover:shadow-xl hover:shadow-neutral-900/20 active:scale-95'
+                    ? 'bg-neutral-50 text-neutral-300 cursor-not-allowed border border-neutral-100'
+                    : 'bg-black text-white hover:shadow-2xl hover:shadow-neutral-900/30 active:scale-95'
                 }`}
                 aria-label="Generate components"
               >
@@ -396,6 +395,7 @@ const InputArea = ({
               </button>
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>
