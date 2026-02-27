@@ -290,9 +290,9 @@ const InputArea = ({
   }, [instruction])
 
   return (
-    <div className="fixed bottom-[calc(8rem+env(safe-area-inset-bottom))] sm:bottom-20 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+    <div className="fixed bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:bottom-32 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white border border-neutral-200 p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_32px_128px_rgba(0,0,0,0.18)] focus-within:shadow-[0_48px_160px_rgba(0,0,0,0.22)] focus-within:border-orange-500/50 rounded-[2.5rem] w-full overflow-hidden">
+        <div className="bg-white border border-neutral-200 p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_48px_160px_rgba(0,0,0,0.2)] focus-within:shadow-[0_64px_192px_rgba(0,0,0,0.25)] focus-within:border-orange-500/50 rounded-[2.5rem] w-full overflow-hidden">
           {error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
