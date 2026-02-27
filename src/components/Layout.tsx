@@ -26,7 +26,7 @@ export default function Layout({ children }: LayoutProps) {
       </Suspense>
 
       {/* Top navigation */}
-      <nav className="sticky top-0 z-[100] w-full px-4 sm:px-6 py-4 safe-top bg-[#f5f5f5] border-b border-neutral-200/50">
+      <nav className="sticky top-0 z-[100] w-full px-4 sm:px-6 py-4 safe-top bg-[#f5f5f5] border-b-2 border-black">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link to="/generator" className="flex items-center gap-3.5 group no-underline" style={{ textDecoration: 'none' }}>
@@ -69,7 +69,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-[110] sm:hidden safe-bottom">
-        <div className="mx-6 mb-6 bg-white border border-neutral-200 rounded-[2.5rem] px-2 py-2 shadow-[0_32px_128px_rgba(0,0,0,0.2)] flex items-center justify-around gap-1">
+        <div className="mx-6 mb-6 bg-white border-2 border-black rounded-[2.5rem] px-2 py-2 shadow-[0_32px_128px_rgba(0,0,0,0.2)] flex items-center justify-around gap-1">
           {navItems.map((item) => {
             const Icon = item.icon
             const active = isActive(item.path)

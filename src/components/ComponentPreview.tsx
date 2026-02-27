@@ -40,7 +40,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
   const renderContent = (fullScreenMode: boolean) => (
     <div className={`flex flex-col h-full bg-neutral-50 ${fullScreenMode ? 'h-screen' : 'h-full'}`}>
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 bg-white shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b-2 border-black bg-white shrink-0">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-lg">
             <button
@@ -119,8 +119,8 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
       {/* Content Area */}
       <div className={`flex-1 relative overflow-hidden flex items-center justify-center p-4 ${fullScreenMode ? 'bg-neutral-100/50' : 'bg-white'}`}>
         {activeTab === 'preview' ? (
-          <div className={`transition-all duration-500 ease-in-out bg-white shadow-sm overflow-hidden border border-neutral-100 rounded-lg ${
-            fullScreenMode && viewport === 'mobile' ? 'w-[375px] h-[667px] shadow-2xl border-neutral-200' : 'w-full h-full'
+          <div className={`transition-all duration-500 ease-in-out bg-white shadow-sm overflow-hidden border-2 border-black rounded-lg ${
+            fullScreenMode && viewport === 'mobile' ? 'w-[375px] h-[667px] shadow-2xl border-black' : 'w-full h-full'
           } ${fullScreenMode && viewport === 'mobile' ? 'max-h-[90vh]' : ''}`}>
             <iframe
               title={`${variation.name} preview`}
@@ -151,7 +151,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
 
   return (
     <div
-      className="group h-full flex flex-col bg-white rounded-2xl border border-neutral-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden hover:border-neutral-300 hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300"
+      className="group h-full flex flex-col bg-white rounded-2xl border-2 border-black shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden hover:border-black hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

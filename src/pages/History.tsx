@@ -104,7 +104,7 @@ interface PageHeaderProps {
 }
 
 const PageHeader = ({ count, onClearClick }: PageHeaderProps) => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-6">
+  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b-2 border-black pb-5 sm:pb-6">
     <div>
       <h2 className="heading-section text-neutral-900">History</h2>
       <p className="text-sm sm:text-sm text-neutral-400 mt-1.5" style={{ fontWeight: 300 }}>{count} generation{count !== 1 ? 's' : ''} saved</p>
@@ -126,12 +126,12 @@ interface SearchBarProps {
 
 const SearchBar = ({ value, onChange }: SearchBarProps) => (
   <div className="relative group">
-    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-neutral-300 group-focus-within:text-orange-500 transition-colors duration-300" />
+    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-neutral-300 group-focus-within:text-black transition-colors duration-300" />
     <input
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Search generations..."
-      className="w-full pl-11 pr-11 py-3.5 sm:py-3.5 bg-white border-2 border-neutral-200 rounded-xl text-base font-sans font-medium focus:outline-none focus:border-orange-500/40 focus:ring-4 focus:ring-orange-500/5 transition-all placeholder:text-neutral-300 min-h-[48px]"
+      className="w-full pl-11 pr-11 py-3.5 sm:py-3.5 bg-white border-2 border-black rounded-xl text-base font-sans font-medium focus:outline-none focus:border-black focus:ring-4 focus:ring-orange-500/5 transition-all placeholder:text-neutral-300 min-h-[48px]"
       style={{ letterSpacing: '-0.015em', fontSize: 'max(16px, 1rem)' }}
       aria-label="Search history"
     />
@@ -185,7 +185,7 @@ const HistoryItem = ({ item, isSelected, onSelect, index }: HistoryItemProps) =>
     className={`w-full p-4 sm:p-3.5 rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation animate-slide-up min-h-[72px] ${
       isSelected
         ? 'bg-neutral-900 text-white shadow-lg shadow-black/10'
-        : 'bg-white border-2 border-neutral-100 hover:border-neutral-200 text-neutral-600 hover:shadow-sm'
+        : 'bg-white border-2 border-black hover:bg-neutral-50 text-neutral-600 hover:shadow-sm'
     }`}
     style={{ animationDelay: `${index * 30}ms` }}
   >

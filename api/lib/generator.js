@@ -3,28 +3,28 @@ import { callAI } from './ai-client.js'
 const STYLE_THEMES = {
   minimal: {
     name: 'Minimalist',
-    description: 'Ultra-clean, high-end minimalism with precise proportions',
-    traits: ['ample whitespace', 'hairline borders', 'refined typography'],
+    description: 'Ultra-clean, high-end minimalism with bold black borders and precise proportions',
+    traits: ['ample whitespace', 'bold black borders', 'refined typography'],
   },
   bold: {
     name: 'Statement',
-    description: 'Professional, high-contrast design with clean, bold elements',
-    traits: ['clean borders', 'bold headings', 'strategic orange accents'],
+    description: 'Professional, high-contrast design with clean, bold black elements',
+    traits: ['bold black borders', 'impactful headings', 'strategic orange accents'],
   },
   elegant: {
     name: 'Sophisticated',
-    description: 'Luxurious aesthetic with subtle layers and fluid spacing',
-    traits: ['soft shadows', 'refined spacing', 'premium feel'],
+    description: 'Luxurious aesthetic with bold black borders and fluid spacing',
+    traits: ['bold black borders', 'refined spacing', 'premium high-contrast feel'],
   },
   playful: {
     name: 'Expressive',
-    description: 'Dynamic and engaging with organic shapes and interactions',
-    traits: ['rounded corners', 'animated states', 'friendly layout'],
+    description: 'Dynamic and engaging with organic shapes, bold black borders and interactions',
+    traits: ['bold black borders', 'animated states', 'friendly high-contrast layout'],
   },
   modern: {
     name: 'Contemporary',
-    description: 'Cutting-edge design following current high-end trends',
-    traits: ['precision grids', 'geometric clarity', 'modern utility'],
+    description: 'Cutting-edge design with bold black borders following current high-end trends',
+    traits: ['bold black borders', 'geometric clarity', 'modern high-contrast utility'],
   },
 }
 
@@ -41,15 +41,16 @@ Design Style: ${theme.name} (${theme.description})
 Key Traits: ${theme.traits.join(', ')}
 
 Strict Design System:
-1. Palette: Primary Orange (#f97316), Pure Black (#000000), Pure White (#ffffff). Use neutral scales (slate/neutral/zinc) for borders and subtle backgrounds only.
-2. Aesthetics: Use solid backgrounds and clean borders. Strictly NO gradients, glassmorphism, or backdrop blurs.
+1. Palette: Primary Orange (#f97316), Pure Black (#000000), Pure White (#ffffff). Use pure black (#000000) for all main borders.
+2. Aesthetics: Use solid backgrounds and bold 2px black borders (border-2 border-black) for all main containers and boxes. Strictly NO gradients, glassmorphism, or backdrop blurs.
 3. Typography: Use sans-serif (Inter) or display (Space Grotesk) fonts.
-4. Shadows: Use high-end, very subtle shadows (e.g., shadow-[0_10px_40px_rgba(0,0,0,0.04)]).
+4. Shadows: Use high-end shadows (e.g., shadow-[0_10px_40px_rgba(0,0,0,0.06)]).
 5. Corners: Use refined rounding (rounded-xl to rounded-2xl).
-6. Hover: Add smooth transitions and sophisticated hover effects.
+6. Hover: Add smooth transitions and sophisticated high-contrast hover effects.
 
 Technical Constraints:
 - Return ONLY the raw HTML code (no markdown, no explanations).
+- CRITICAL: Strictly follow the user's NLP input only. Do not add any features, sections, or content that was not requested by the user. Accuracy to the provided description is the highest priority.
 - Use Tailwind CSS classes exclusively.
 - Lucide icons are available via <i data-lucide="icon-name"></i>.
 - You can include simple vanilla JavaScript in <script> tags for basic interactivity (toggles, tabs, modals).
