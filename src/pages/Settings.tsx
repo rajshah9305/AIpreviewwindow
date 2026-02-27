@@ -83,7 +83,7 @@ export default function Settings() {
 }
 
 const PageHeader = () => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-neutral-200/60 pb-5 sm:pb-6 w-full">
+  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b-2 border-black pb-5 sm:pb-6 w-full">
     <div>
       <h2 className="heading-section truncate text-neutral-900">Settings</h2>
       <p className="text-sm sm:text-sm text-neutral-400 mt-1.5" style={{ fontWeight: 300 }}>Configure your AI provider connection</p>
@@ -118,7 +118,7 @@ const SettingsForm = ({
   onSave,
   onTestConnection,
 }: SettingsFormProps) => (
-  <div className="bg-white rounded-2xl border border-neutral-200 p-6 sm:p-6 md:p-8 space-y-6 sm:space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] w-full">
+  <div className="bg-white rounded-2xl border-2 border-black p-6 sm:p-6 md:p-8 space-y-6 sm:space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] w-full">
     <div className="space-y-5 sm:space-y-5 w-full">
       <FormField
         icon={Server}
@@ -165,10 +165,10 @@ const SettingsForm = ({
         disabled={testing || !settings.baseUrl}
         className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation border-2 min-h-[52px] ${
           testResult === 'success'
-            ? 'border-green-200 bg-green-50 text-green-600'
+            ? 'border-green-500 bg-green-50 text-green-600'
             : testResult === 'error'
-            ? 'border-red-200 bg-red-50 text-red-500'
-            : 'border-neutral-200 bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:border-neutral-300'
+            ? 'border-red-500 bg-red-50 text-red-500'
+            : 'border-black bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:border-black'
         } ${testing ? 'opacity-60 cursor-wait' : ''} ${!settings.baseUrl ? 'opacity-40 cursor-not-allowed' : ''}`}
         style={{ fontWeight: 500 }}
       >
@@ -234,9 +234,9 @@ const FormField = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full px-4 py-3.5 sm:py-3.5 border rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all bg-white placeholder:text-neutral-300 text-base font-sans tracking-tight min-h-[52px] ${
+        className={`w-full px-4 py-3.5 sm:py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all bg-white placeholder:text-neutral-300 text-base font-sans tracking-tight min-h-[52px] ${
           rightElement ? 'pr-14' : ''
-        } ${error ? 'border-red-200 focus:ring-red-500/5 focus:border-red-400' : 'border-neutral-200'}`}
+        } ${error ? 'border-red-500 focus:ring-red-500/5 focus:border-red-400' : 'border-black'}`}
         style={{ fontSize: 'max(16px, 1rem)' }}
       />
       {rightElement}

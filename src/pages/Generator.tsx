@@ -74,7 +74,7 @@ export default function Generator() {
 const HeroSection = () => (
   <div className="max-w-5xl mx-auto text-center pt-20 sm:pt-24 md:pt-32 pb-12 animate-slide-up px-4 sm:px-6 w-full">
     <div className="inline-flex items-center justify-center mb-10 sm:mb-12 animate-text-reveal-up" style={{ animationDelay: '0.1s' }}>
-      <div className="px-5 py-2.5 rounded-full bg-white border border-neutral-200 flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-orange-200">
+      <div className="px-5 py-2.5 rounded-full bg-white border-2 border-black flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-black">
         <Zap className="w-4 h-4 text-[#f97316]" fill="currentColor" />
         <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">
           Next-Gen AI Component Engine
@@ -108,7 +108,7 @@ const LoadingState = () => {
 
   return (
     <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-4 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-4 border-b-2 border-black pb-5 sm:pb-5 md:pb-7">
         <div className="min-w-0">
           <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Generating</h3>
           <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">Creating 5 unique design variations with AI precision...</p>
@@ -188,7 +188,7 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
 
   return (
     <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b border-neutral-200/60 pb-5 sm:pb-5 md:pb-7">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b-2 border-black pb-5 sm:pb-5 md:pb-7">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-3 mb-3 bg-white px-5 py-2.5 rounded-xl border border-emerald-200 inline-flex shadow-sm">
             <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
@@ -292,7 +292,7 @@ const InputArea = ({
   return (
     <div className="fixed bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:bottom-32 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white border border-neutral-200 p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_48px_160px_rgba(0,0,0,0.2)] focus-within:shadow-[0_64px_192px_rgba(0,0,0,0.25)] focus-within:border-orange-500/50 rounded-[2.5rem] w-full overflow-hidden">
+        <div className="bg-white border-2 border-black p-2 sm:p-3 group/input transition-all duration-500 shadow-[0_48px_160px_rgba(0,0,0,0.2)] focus-within:shadow-[0_64px_192px_rgba(0,0,0,0.25)] focus-within:border-black rounded-[2.5rem] w-full overflow-hidden">
           {error && (
             <div className="mx-1 mb-1 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">

@@ -32,7 +32,7 @@ export default function ConfirmDialog({
         role="button"
         tabIndex={-1}
       />
-      <div className="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-[0_24px_64px_rgba(0,0,0,0.12)] border border-neutral-100/60 animate-scale-in">
+      <div className="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-[0_24px_64px_rgba(0,0,0,0.12)] border-2 border-black animate-scale-in">
         {variant === 'danger' && (
           <div className="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center mb-4">
             <AlertTriangle className="w-5 h-5 text-red-500" />
