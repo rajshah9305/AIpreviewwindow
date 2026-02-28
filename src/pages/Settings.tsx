@@ -83,9 +83,9 @@ export default function Settings() {
 }
 
 const PageHeader = () => (
-  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b-2 border-black pb-5 sm:pb-6 w-full">
+  <div className="flex flex-col items-center justify-center text-center gap-3 border-b-2 border-black pb-8 sm:pb-10 w-full">
     <div>
-      <h2 className="heading-section truncate text-neutral-900">Settings</h2>
+      <h2 className="heading-section text-neutral-900">Settings</h2>
       <p className="text-sm sm:text-sm text-neutral-400 mt-1.5" style={{ fontWeight: 300 }}>Configure your AI provider connection</p>
     </div>
   </div>

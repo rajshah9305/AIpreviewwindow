@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AlertCircle, RefreshCw, Zap, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { AlertCircle, RefreshCw, Zap, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
 import { useGeneration } from '../contexts/GenerationContext'
 import { useToast } from '../components/ToastContainer'
 import { useKeyboardShortcut } from '../hooks/useKeyboardShortcut'
@@ -137,10 +137,10 @@ const LoadingState = () => {
           </button>
         </div>
 
-        <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
+        <div className="relative">
           <div
             ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin"
+            className="overflow-x-auto overflow-y-hidden pb-4 snap-x snap-mandatory scroll-smooth scrollbar-thin"
           >
             <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
               {LOADING_VARIATIONS.map((v, i) => (
@@ -226,13 +226,13 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
           </button>
         </div>
 
-        <div className="relative -mx-3 sm:-mx-3 md:-mx-4 lg:-mx-6 w-screen max-w-full" style={{ maxWidth: 'calc(100vw - 1rem)' }}>
+        <div className="relative">
           <div className="absolute left-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-r from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-4 w-12 sm:w-16 bg-gradient-to-l from-[#f5f5f5] to-transparent z-10 pointer-events-none" />
 
           <div
             ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden pb-4 px-3 sm:px-3 md:px-4 lg:px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin"
+            className="overflow-x-auto overflow-y-hidden pb-4 snap-x snap-mandatory scroll-smooth scrollbar-thin"
           >
             <div className="flex gap-5 sm:gap-5 md:gap-6 lg:gap-7">
               {result.variations.map((variation, i) => (
@@ -348,9 +348,7 @@ const InputArea = ({
                 ) : (
                   <>
                     <span>Create</span>
-                    <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
+                    <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                   </>
                 )}
               </button>
