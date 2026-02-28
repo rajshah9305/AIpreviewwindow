@@ -27,7 +27,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Top navigation */}
       <nav className="sticky top-0 z-[100] w-full px-4 sm:px-6 py-4 safe-top bg-[#f5f5f5] border-b-2 border-black">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link to="/generator" className="flex items-center gap-3.5 group no-underline" style={{ textDecoration: 'none' }}>
             <div className="relative w-11 h-11">
@@ -97,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
       
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-96 sm:pb-80">
+      <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-96 sm:pb-80">
         {children}
       </main>
     </div>
