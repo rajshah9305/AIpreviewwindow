@@ -98,6 +98,24 @@ const HeroSection = () => (
 
 const LoadingState = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const handleScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft
+      const itemWidth = scrollRef.current.offsetWidth * 0.8 // Approximate width of variation
+      const index = Math.round(scrollLeft / itemWidth)
+      setActiveIndex(index)
+    }
+  }, [])
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll)
+      return () => scrollContainer.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -162,8 +180,9 @@ const LoadingState = () => {
         {LOADING_VARIATIONS.map((_, i) => (
           <div
             key={i}
-            className="w-2 h-2 rounded-full bg-orange-300 animate-pulse"
-            style={{ animationDelay: `${i * 200}ms` }}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === activeIndex ? 'bg-orange-500 w-8' : 'bg-orange-200 w-2'
+            }`}
           />
         ))}
       </div>
@@ -178,6 +197,24 @@ interface ResultsStateProps {
 
 const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const handleScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft
+      const itemWidth = scrollRef.current.offsetWidth * 0.8
+      const index = Math.round(scrollLeft / itemWidth)
+      setActiveIndex(index)
+    }
+  }, [])
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll)
+      return () => scrollContainer.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -254,7 +291,9 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
         {result.variations.map((_, i) => (
           <div
             key={i}
-            className={`h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-orange-500 w-8' : 'bg-neutral-300 w-2'}`}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === activeIndex ? 'bg-orange-500 w-8' : 'bg-neutral-300 w-2'
+            }`}
           />
         ))}
       </div>
@@ -310,13 +349,13 @@ const InputArea = ({
           )}
 
           <div className="flex items-center gap-4">
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 relative">
               <textarea
                 ref={textareaRef}
                 value={instruction}
                 onChange={(e) => onInstructionChange(e.target.value)}
                 placeholder="Describe your component in detail..."
-                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-6 py-5 text-base font-accent font-500 resize-none min-h-[64px] max-h-[140px] scrollbar-hide text-neutral-800 leading-relaxed rounded-2xl placeholder:text-neutral-400 placeholder:font-400 tracking-snug"
+                className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-6 pt-5 pb-8 text-base font-accent font-500 resize-none min-h-[64px] max-h-[140px] scrollbar-hide text-neutral-800 leading-relaxed rounded-2xl placeholder:text-neutral-400 placeholder:font-400 tracking-snug"
                 style={{ fontSize: 'max(16px, 1rem)' }}
                 disabled={loading}
                 rows={1}
@@ -326,6 +365,9 @@ const InputArea = ({
                 autoCapitalize="sentences"
                 spellCheck="true"
               />
+              <div className="absolute bottom-2 left-6 text-[10px] font-display font-bold text-neutral-300 uppercase tracking-widest pointer-events-none">
+                {instruction.length} / {APP_CONFIG.MAX_INSTRUCTION_LENGTH}
+              </div>
             </div>
 
             <div className="flex items-center gap-2 shrink-0 pr-4">
@@ -333,10 +375,10 @@ const InputArea = ({
                 onClick={onGenerate}
                 disabled={loading || !instruction.trim()}
                 type="button"
-                className={`px-6 sm:px-8 py-3.5 rounded-full text-xs font-display font-800 tracking-widest uppercase transition-all duration-500 touch-manipulation flex items-center gap-3 ${
+                className={`btn-primary flex items-center gap-3 ${
                   loading || !instruction.trim()
-                    ? 'bg-neutral-50 text-neutral-300 cursor-not-allowed border border-neutral-100'
-                    : 'bg-black text-white hover:shadow-2xl hover:shadow-neutral-900/30 active:scale-95'
+                    ? 'opacity-40 cursor-not-allowed'
+                    : ''
                 }`}
                 aria-label="Generate components"
               >

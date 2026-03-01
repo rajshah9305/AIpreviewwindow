@@ -48,14 +48,14 @@ export default function History() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12">
+    <div className="max-w-6xl mx-auto space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12">
       <PageHeader
         count={filteredHistory.length}
         onClearClick={() => setShowClearDialog(true)}
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8">
-        <div className="space-y-3 sm:space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+        <div className="md:col-span-4 space-y-4">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
           <HistoryList
             items={filteredHistory}
@@ -64,7 +64,7 @@ export default function History() {
           />
         </div>
 
-        <div className="w-full">
+        <div className="md:col-span-8 w-full">
           {isSearchEmpty ? (
             <div className="h-full min-h-[350px] sm:min-h-[400px] flex items-center justify-center border border-dashed border-neutral-200/60 rounded-2xl p-8 bg-neutral-50/30 animate-fade-in">
               <div className="text-center">
@@ -154,7 +154,7 @@ interface HistoryListProps {
 }
 
 const HistoryList = ({ items, selectedTimestamp, onSelect }: HistoryListProps) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[40vh] overflow-auto p-1 scrollbar-thin">
+  <div className="flex flex-col gap-3 max-h-[60vh] overflow-auto p-1 scrollbar-thin">
     {items.map((item, i) => (
       <HistoryItem
         key={item.timestamp}

@@ -51,6 +51,7 @@ export default {
         'wide': '0.03em',
         'wider': '0.06em',
         'widest': '0.12em',
+        'widest-xl': '0.15em',
       },
       lineHeight: {
         'tighter': '1.1',

@@ -99,13 +99,20 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             </div>
           )}
 
-          <button
-            onClick={copyCode}
-            className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
-            title="Copy code"
-          >
-            {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-          </button>
+          <div className="flex items-center gap-2">
+            {copied && (
+              <span className="text-[10px] font-display font-bold text-green-600 uppercase tracking-wider animate-fade-in">
+                Copied!
+              </span>
+            )}
+            <button
+              onClick={copyCode}
+              className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
+              title="Copy code"
+            >
+              {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+            </button>
+          </div>
           <button
             onClick={() => setIsFullscreen(!isFullscreen)}
             className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
