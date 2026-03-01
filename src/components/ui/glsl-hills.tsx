@@ -232,7 +232,7 @@ void main(void) {
       
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0xfaf8f6, 1);
+      renderer.setClearColor(0xf5f5f5, 1);
       camera.position.set(0, 16, cameraZ);
       camera.lookAt(new THREE.Vector3(0, 28, 0));
       scene.add(plane.mesh);

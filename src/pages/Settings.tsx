@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react'
-import { Save, Key, Server, Tag, Eye, EyeOff, CheckCircle, Zap } from 'lucide-react'
+import React, { useState, useCallback } from 'react'
+import { Save, Key, Server, Tag, Eye, EyeOff, CheckCircle, Zap, Sparkles } from 'lucide-react'
 import { useSettings } from '../hooks/useSettings'
 import { useToast } from '../components/ToastContainer'
 
@@ -59,11 +59,51 @@ export default function Settings() {
     }
   }, [settings, toast])
 
+  const AI_PRESETS = [
+    {
+      id: 'openai',
+      name: 'OpenAI',
+      baseUrl: 'https://api.openai.com/v1',
+      modelName: 'gpt-4o',
+    },
+    {
+      id: 'anthropic',
+      name: 'Anthropic',
+      baseUrl: 'https://api.anthropic.com/v1',
+      modelName: 'claude-3-5-sonnet-20240620',
+    }
+  ]
+
+  const applyPreset = (preset: typeof AI_PRESETS[0]) => {
+    updateField('baseUrl', preset.baseUrl)
+    updateField('modelName', preset.modelName)
+    toast.success(`Applied ${preset.name} preset`)
+  }
+
   return (
     <div className="max-w-5xl mx-auto space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12 w-full overflow-x-hidden">
       <PageHeader />
 
-      <div className="max-w-2xl mx-auto w-full">
+      <div className="max-w-2xl mx-auto w-full space-y-6">
+        {/* Preset section */}
+        <div className="bg-white rounded-2xl border-2 border-black p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+          <label className="flex items-center gap-2 text-xs font-display text-neutral-400 uppercase tracking-[0.08em] mb-4 font-500">
+            <Sparkles className="w-3.5 h-3.5 text-orange-500/70" /> Quick Start Presets
+          </label>
+          <div className="grid grid-cols-2 gap-3">
+            {AI_PRESETS.map((preset) => (
+              <button
+                key={preset.id}
+                onClick={() => applyPreset(preset)}
+                className="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-black hover:bg-neutral-50 transition-all group"
+              >
+                <span className="font-display font-bold text-sm text-neutral-800">{preset.name}</span>
+                <span className="text-[10px] text-neutral-400 font-accent mt-1">{preset.modelName}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <SettingsForm
           settings={settings}
           errors={errors}
