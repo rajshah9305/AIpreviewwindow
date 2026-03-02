@@ -1,26 +1,59 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { Code, Eye, Copy, Check, Maximize2, Minimize2, Smartphone, Monitor, X } from 'lucide-react'
+import { Code, Eye, Copy, Check, Maximize2, Smartphone, Monitor, X, Download, RefreshCw } from 'lucide-react'
 import { ComponentVariation } from '../types'
 
 interface ComponentPreviewProps { variation: ComponentVariation }
+
+const STYLE_BADGE_COLORS: Record<string, string> = {
+  minimal: 'bg-neutral-100 text-neutral-600',
+  bold: 'bg-orange-50 text-orange-700',
+  elegant: 'bg-stone-100 text-stone-600',
+  playful: 'bg-amber-50 text-amber-700',
+  modern: 'bg-zinc-100 text-zinc-600',
+}
 
 export default function ComponentPreview({ variation }: ComponentPreviewProps) {
   const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview')
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [viewport, setViewport] = useState<'desktop' | 'mobile'>('desktop')
   const [copied, setCopied] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const [iframeKey, setIframeKey] = useState(0)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
-  const copyCode = async () => {
+  const copyCode = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(variation.code)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      // ignore
+      // Fallback for browsers without clipboard API
+      const textarea = document.createElement('textarea')
+      textarea.value = variation.code
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     }
-  }
+  }, [variation.code])
+
+  const downloadCode = useCallback(() => {
+    const blob = new Blob([variation.code], { type: 'text/html' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${variation.name.toLowerCase().replace(/\s+/g, '-')}-component.html`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }, [variation.code, variation.name])
+
+  const refreshPreview = useCallback(() => {
+    setIframeKey(k => k + 1)
+  }, [])
 
   // Effect to handle escape key for fullscreen
   useEffect(() => {
@@ -37,38 +70,91 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
     }
   }, [isFullscreen])
 
+  const badgeClass = STYLE_BADGE_COLORS[variation.style] || 'bg-neutral-100 text-neutral-600'
+
+  const ToolbarActions = ({ fullScreenMode }: { fullScreenMode: boolean }) => (
+    <div className="flex items-center gap-1.5">
+      {fullScreenMode && activeTab === 'preview' && (
+        <button
+          onClick={refreshPreview}
+          className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+          title="Refresh preview"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </button>
+      )}
+      <button
+        onClick={downloadCode}
+        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+        title="Download HTML"
+      >
+        <Download className="w-4 h-4" />
+      </button>
+      <button
+        onClick={copyCode}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-display font-bold uppercase tracking-wider transition-all ${
+          copied
+            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+            : 'text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100'
+        }`}
+        title="Copy code"
+      >
+        {copied ? (
+          <>
+            <Check className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Copied!</span>
+          </>
+        ) : (
+          <>
+            <Copy className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Copy</span>
+          </>
+        )}
+      </button>
+      <button
+        onClick={() => setIsFullscreen(!isFullscreen)}
+        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+        title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+      >
+        {isFullscreen ? <X className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+      </button>
+    </div>
+  )
+
   const renderContent = (fullScreenMode: boolean) => (
-    <div className={`flex flex-col h-full bg-neutral-50 ${fullScreenMode ? 'h-screen' : 'h-full'}`}>
+    <div className={`flex flex-col ${fullScreenMode ? 'h-screen' : 'h-full'} bg-neutral-50`}>
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b-2 border-black bg-white shrink-0">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-lg">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b-2 border-black bg-white shrink-0 gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          {/* Tab switcher */}
+          <div className="flex items-center gap-0.5 bg-neutral-100 p-1 rounded-lg shrink-0">
             <button
               onClick={() => setActiveTab('preview')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider transition-all ${
                 activeTab === 'preview'
                   ? 'bg-white text-neutral-900 shadow-sm'
                   : 'text-neutral-500 hover:text-neutral-700'
               }`}
             >
               <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              Preview
+              <span>Preview</span>
             </button>
             <button
               onClick={() => setActiveTab('code')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider transition-all ${
                 activeTab === 'code'
                   ? 'bg-white text-neutral-900 shadow-sm'
                   : 'text-neutral-500 hover:text-neutral-700'
               }`}
             >
               <Code className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              Code
+              <span>Code</span>
             </button>
           </div>
 
+          {/* Viewport toggle (fullscreen + preview only) */}
           {activeTab === 'preview' && fullScreenMode && (
-            <div className="hidden sm:flex items-center gap-1 border-l border-neutral-200 pl-4">
+            <div className="hidden sm:flex items-center gap-0.5 border-l border-neutral-200 pl-3">
               <button
                 onClick={() => setViewport('desktop')}
                 className={`p-1.5 rounded-md transition-colors ${
@@ -83,56 +169,63 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                 className={`p-1.5 rounded-md transition-colors ${
                   viewport === 'mobile' ? 'text-neutral-900 bg-neutral-100' : 'text-neutral-400 hover:text-neutral-600'
                 }`}
-                title="Mobile view"
+                title="Mobile view (375px)"
               >
                 <Smartphone className="w-4 h-4" />
               </button>
             </div>
           )}
-        </div>
 
-        <div className="flex items-center gap-2">
+          {/* Variation name in fullscreen */}
           {fullScreenMode && (
-            <div className="hidden sm:block mr-4 text-right">
-              <div className="text-xs font-display font-bold text-neutral-900">{variation.name}</div>
-              <div className="text-[10px] text-neutral-400 font-accent">{variation.style}</div>
+            <div className="hidden sm:block border-l border-neutral-200 pl-3 min-w-0">
+              <p className="text-xs font-display font-bold text-neutral-900 truncate">{variation.name}</p>
+              <p className="text-[10px] text-neutral-400 font-accent capitalize">{variation.style} style</p>
             </div>
           )}
-
-          <button
-            onClick={copyCode}
-            className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
-            title="Copy code"
-          >
-            {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-          </button>
-          <button
-            onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
-            title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-          >
-            {isFullscreen ? <X className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-          </button>
         </div>
+
+        <ToolbarActions fullScreenMode={fullScreenMode} />
       </div>
 
       {/* Content Area */}
-      <div className={`flex-1 relative overflow-hidden flex items-center justify-center p-4 ${fullScreenMode ? 'bg-neutral-100/50' : 'bg-white'}`}>
+      <div className={`flex-1 relative overflow-hidden flex items-center justify-center ${
+        activeTab === 'preview' ? (fullScreenMode ? 'bg-neutral-100/50 p-6' : 'bg-white p-0') : 'p-0'
+      }`}>
         {activeTab === 'preview' ? (
-          <div className={`transition-all duration-500 ease-in-out bg-white shadow-sm overflow-hidden border-2 border-black rounded-lg ${
-            fullScreenMode && viewport === 'mobile' ? 'w-[375px] h-[667px] shadow-2xl border-black' : 'w-full h-full'
-          } ${fullScreenMode && viewport === 'mobile' ? 'max-h-[90vh]' : ''}`}>
+          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${
+            fullScreenMode && viewport === 'mobile'
+              ? 'w-[375px] h-[667px] shadow-2xl border-2 border-black rounded-[2rem] bg-white'
+              : 'w-full h-full bg-white'
+          }`}>
             <iframe
+              key={iframeKey}
+              ref={iframeRef}
               title={`${variation.name} preview`}
               srcDoc={variation.code}
               sandbox="allow-scripts allow-modals allow-forms"
               className="w-full h-full border-0 bg-white"
+              loading="lazy"
             />
           </div>
         ) : (
-          <div className="w-full h-full overflow-auto bg-[#0d1117] text-neutral-300 p-6 font-mono text-xs sm:text-sm rounded-lg shadow-inner custom-scrollbar leading-relaxed">
-            <pre className="whitespace-pre-wrap break-all">
-              <code>{variation.code}</code>
+          <div className="w-full h-full overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs sm:text-sm leading-relaxed custom-scrollbar">
+            {/* Code header bar */}
+            <div className="sticky top-0 flex items-center justify-between px-5 py-2.5 bg-[#161b22] border-b border-white/5 z-10">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                <span className="ml-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                  {variation.name.toLowerCase().replace(/\s+/g, '-')}.html
+                </span>
+              </div>
+              <span className="text-[10px] text-neutral-600 font-mono">
+                {variation.code.split('\n').length} lines
+              </span>
+            </div>
+            <pre className="p-5 whitespace-pre-wrap break-all">
+              <code className="text-neutral-300">{variation.code}</code>
             </pre>
           </div>
         )}
@@ -150,19 +243,28 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
   }
 
   return (
-    <div
-      className="group h-full flex flex-col bg-white rounded-2xl border-2 border-black shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden hover:border-black hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Header */}
-      <div className="px-5 py-4 border-b border-neutral-100 bg-white flex items-center justify-between shrink-0">
-        <div>
-          <h3 className="font-display font-bold text-neutral-900 text-sm tracking-tight">{variation.name}</h3>
-          <p className="text-[10px] font-accent font-medium text-neutral-400 uppercase tracking-wider mt-0.5">{variation.style} Style</p>
+    <div className="group h-full flex flex-col bg-white rounded-2xl border-2 border-black shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300">
+      {/* Card Header */}
+      <div className="px-5 py-3.5 border-b border-neutral-100 bg-white flex items-center justify-between shrink-0">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2.5">
+            <h3 className="font-display font-bold text-neutral-900 text-sm tracking-tight truncate">{variation.name}</h3>
+            <span className={`shrink-0 text-[9px] font-display font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${badgeClass}`}>
+              {variation.style}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-           <button
+        <div className="flex items-center gap-1 shrink-0 ml-2">
+          <button
+            onClick={copyCode}
+            className={`p-2 rounded-lg transition-all ${
+              copied ? 'text-emerald-500 bg-emerald-50' : 'text-neutral-400 hover:text-orange-500 hover:bg-orange-50'
+            }`}
+            title="Copy code"
+          >
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+          </button>
+          <button
             onClick={() => setIsFullscreen(true)}
             className="p-2 text-neutral-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors"
             title="Expand view"
@@ -172,9 +274,70 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
         </div>
       </div>
 
-      {/* Main Content Container - force height to match parent via flex-1 */}
-      <div className="flex-1 relative min-h-[300px]">
-        {renderContent(false)}
+      {/* Tab bar */}
+      <div className="flex items-center gap-0 border-b border-neutral-100 bg-neutral-50/50 px-4 pt-2">
+        <button
+          onClick={() => setActiveTab('preview')}
+          className={`flex items-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold uppercase tracking-wider border-b-2 transition-all -mb-px ${
+            activeTab === 'preview'
+              ? 'border-black text-neutral-900'
+              : 'border-transparent text-neutral-400 hover:text-neutral-600'
+          }`}
+        >
+          <Eye className="w-3 h-3" />
+          Preview
+        </button>
+        <button
+          onClick={() => setActiveTab('code')}
+          className={`flex items-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold uppercase tracking-wider border-b-2 transition-all -mb-px ${
+            activeTab === 'code'
+              ? 'border-black text-neutral-900'
+              : 'border-transparent text-neutral-400 hover:text-neutral-600'
+          }`}
+        >
+          <Code className="w-3 h-3" />
+          Code
+        </button>
+      </div>
+
+      {/* Main Content Container */}
+      <div className="flex-1 relative min-h-[280px] overflow-hidden">
+        {activeTab === 'preview' ? (
+          <iframe
+            key={iframeKey}
+            ref={iframeRef}
+            title={`${variation.name} preview`}
+            srcDoc={variation.code}
+            sandbox="allow-scripts allow-modals allow-forms"
+            className="w-full h-full border-0 bg-white absolute inset-0"
+            loading="lazy"
+          />
+        ) : (
+          <div className="absolute inset-0 overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs leading-relaxed">
+            <div className="sticky top-0 flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-white/5 z-10">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                <span className="ml-2 text-[9px] font-mono text-neutral-600 uppercase tracking-widest">
+                  {variation.name.toLowerCase().replace(/\s+/g, '-')}.html
+                </span>
+              </div>
+              <button
+                onClick={copyCode}
+                className={`flex items-center gap-1 px-2 py-1 rounded text-[9px] font-mono transition-all ${
+                  copied ? 'text-emerald-400' : 'text-neutral-500 hover:text-neutral-300'
+                }`}
+              >
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+            </div>
+            <pre className="p-4 whitespace-pre-wrap break-all">
+              <code>{variation.code}</code>
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   )

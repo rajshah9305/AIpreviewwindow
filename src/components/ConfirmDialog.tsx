@@ -1,4 +1,5 @@
-import { AlertTriangle } from 'lucide-react'
+import { useEffect } from 'react'
+import { AlertTriangle, X } from 'lucide-react'
 
 interface ConfirmDialogProps {
   isOpen: boolean;
@@ -21,6 +22,16 @@ export default function ConfirmDialog({
   onCancel,
   variant = 'primary',
 }: ConfirmDialogProps) {
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancel()
+      if (e.key === 'Enter') onConfirm()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [isOpen, onCancel, onConfirm])
+
   if (!isOpen) return null;
 
   return (
@@ -32,14 +43,22 @@ export default function ConfirmDialog({
         role="button"
         tabIndex={-1}
       />
-      <div className="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-[0_24px_64px_rgba(0,0,0,0.12)] border-2 border-black animate-scale-in">
+      <div className="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-[0_24px_64px_rgba(0,0,0,0.12)] border-2 border-black animate-scale-in" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <button
+          onClick={onCancel}
+          className="absolute top-4 right-4 p-2 text-neutral-300 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-all"
+          aria-label="Close dialog"
+        >
+          <X className="w-4 h-4" />
+        </button>
+
         {variant === 'danger' && (
-          <div className="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-red-50 border-2 border-red-100 rounded-xl flex items-center justify-center mb-4">
             <AlertTriangle className="w-5 h-5 text-red-500" />
           </div>
         )}
 
-        <h3 className="text-base sm:text-lg font-display font-bold tracking-tight text-neutral-900">{title}</h3>
+        <h3 id="dialog-title" className="text-base sm:text-lg font-display font-bold tracking-tight text-neutral-900 pr-8">{title}</h3>
         
         {description && (
           <p className="text-xs sm:text-sm text-neutral-500 mt-2 leading-relaxed">{description}</p>

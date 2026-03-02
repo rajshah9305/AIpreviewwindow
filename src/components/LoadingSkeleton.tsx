@@ -1,35 +1,45 @@
 export default function LoadingSkeleton() {
   return (
-    <div className="bg-white border border-neutral-200 rounded-2xl h-full flex flex-col overflow-hidden relative group shadow-sm">
+    <div className="bg-white border-2 border-black rounded-2xl h-full flex flex-col overflow-hidden relative group shadow-sm">
       {/* Header */}
-      <div className="px-5 py-3.5 border-b border-neutral-200 flex items-center justify-between bg-white relative z-10">
+      <div className="px-5 py-3.5 border-b border-neutral-100 flex items-center justify-between bg-white relative z-10">
         <div className="flex items-center space-x-3">
-          <div className="w-3 h-3 rounded-full bg-orange-100 animate-pulse" />
-          <div className="h-3.5 bg-neutral-100 rounded-full w-28 animate-pulse" />
+          <div className="w-3 h-3 rounded-full bg-orange-200 animate-pulse" />
+          <div className="h-3 bg-neutral-100 rounded-full w-24 animate-pulse" />
         </div>
         <div className="flex space-x-2">
-          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" />
-          <div className="w-9 h-9 rounded-xl bg-neutral-50 animate-pulse" style={{ animationDelay: '150ms' }} />
+          <div className="w-8 h-8 rounded-lg bg-neutral-50 animate-pulse" />
+          <div className="w-8 h-8 rounded-lg bg-neutral-50 animate-pulse" style={{ animationDelay: '150ms' }} />
         </div>
       </div>
       
+      {/* Tab bar */}
+      <div className="flex items-center gap-1 px-4 py-2 border-b border-neutral-100 bg-neutral-50/50">
+        <div className="h-6 w-20 bg-neutral-100 rounded-lg animate-pulse" />
+        <div className="h-6 w-16 bg-neutral-50 rounded-lg animate-pulse" style={{ animationDelay: '100ms' }} />
+      </div>
+
       {/* Body */}
-      <div className="flex-1 p-12 flex flex-col items-center justify-center space-y-8 relative z-10">
+      <div className="flex-1 p-8 sm:p-12 flex flex-col items-center justify-center space-y-6 relative z-10">
+        {/* Spinner */}
         <div className="relative">
-          <div className="w-24 h-24 rounded-3xl bg-neutral-50 animate-pulse shadow-sm" />
+          <div className="w-20 h-20 rounded-2xl bg-neutral-50 animate-pulse shadow-sm border border-neutral-100" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-10 h-10 border-2 border-neutral-100 border-t-[#f97316] rounded-full animate-spin" />
+            <div className="w-9 h-9 border-2 border-neutral-100 border-t-[#f97316] rounded-full animate-spin" />
           </div>
         </div>
 
-        <div className="space-y-4 w-full max-w-[220px]">
-          <div className="h-3 bg-neutral-100 rounded-full w-full animate-pulse" />
-          <div className="h-3 bg-neutral-50 rounded-full w-4/5 mx-auto animate-pulse" style={{ animationDelay: '150ms' }} />
-          <div className="h-3 bg-neutral-100 rounded-full w-3/5 mx-auto animate-pulse" style={{ animationDelay: '300ms' }} />
+        {/* Text lines */}
+        <div className="space-y-3 w-full max-w-[200px]">
+          <div className="h-2.5 bg-neutral-100 rounded-full w-full animate-pulse" />
+          <div className="h-2.5 bg-neutral-50 rounded-full w-4/5 mx-auto animate-pulse" style={{ animationDelay: '150ms' }} />
+          <div className="h-2.5 bg-neutral-100 rounded-full w-3/5 mx-auto animate-pulse" style={{ animationDelay: '300ms' }} />
         </div>
 
-        <div className="badge-premium animate-pulse">
-          <span className="text-orange-500">Generating...</span>
+        {/* Badge */}
+        <div className="flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full border border-orange-100 animate-pulse">
+          <div className="w-2 h-2 rounded-full bg-orange-300 animate-pulse" />
+          <span className="text-[10px] font-display font-bold uppercase tracking-widest text-orange-400">Generating...</span>
         </div>
       </div>
 

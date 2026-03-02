@@ -14,9 +14,21 @@ export default {
       },
       colors: {
         orange: {
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
           500: '#f97316',
           600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
           DEFAULT: '#f97316',
+        },
+        brand: {
+          primary: '#f97316',
+          dark: '#000000',
         },
       },
       fontFamily: {
@@ -51,6 +63,7 @@ export default {
         'wide': '0.03em',
         'wider': '0.06em',
         'widest': '0.12em',
+        'widest-xl': '0.18em',
       },
       lineHeight: {
         'tighter': '1.1',
@@ -59,6 +72,21 @@ export default {
         'normal': '1.5',
         'relaxed': '1.625',
         'loose': '1.75',
+      },
+      boxShadow: {
+        'premium': '0 4px 12px rgba(0,0,0,0.08)',
+        'premium-lg': '0 8px 32px rgba(0,0,0,0.06)',
+        'premium-xl': '0 16px 64px rgba(0,0,0,0.08)',
+      },
+      animation: {
+        'slide-up': 'slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'scale-in': 'scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'text-reveal-up': 'text-reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'gradient-shift': 'gradient-shift 4s ease infinite',
+        'float-subtle': 'float-subtle 3s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'loading-bar': 'loading-bar 2s infinite ease-in-out',
       },
     },
   },
