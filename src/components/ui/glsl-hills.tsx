@@ -133,7 +133,7 @@ void main(void) {
   vec3 updatePosition = (rotateMatrixX(radians(90.0)) * vec4(position, 1.0)).xyz;
 
   // Adjust hill frequency based on aspect ratio to keep peaks visible on mobile
-  float responsiveX = updatePosition.x / (128.0 * min(1.0, uAspect * 0.8));
+  float responsiveX = updatePosition.x / (112.0 * min(1.0, uAspect * 0.8));
   float sin1 = sin(radians(responsiveX * 90.0));
 
   vec3 noisePosition = updatePosition + vec3(0.0, 0.0, time * -30.0);
@@ -155,10 +155,20 @@ void main(void) {
 #define GLSLIFY 1
 varying vec3 vPosition;
 
+float random(vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 void main(void) {
-  float opacity = (96.0 - length(vPosition)) / 256.0 * 1.2;
+  float dist = length(vPosition);
+  float opacity = (112.0 - dist) / 256.0 * 1.4;
+  opacity = clamp(opacity, 0.0, 1.0);
+
+  float grain = random(vPosition.xy + vPosition.z) * 0.08;
   vec3 brandOrange = vec3(0.97, 0.45, 0.08);
-  gl_FragColor = vec4(brandOrange, opacity);
+  vec3 finalColor = brandOrange + grain;
+
+  gl_FragColor = vec4(finalColor, opacity);
 }`,
             transparent: true
           })

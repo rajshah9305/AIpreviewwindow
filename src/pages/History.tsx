@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Clock, Trash2, Search, Calendar, ChevronRight, Layers, X, Wand2 } from 'lucide-react'
+import { Clock, Trash2, Search, Calendar, ChevronRight, Layers, X, Wand2, ArrowLeft } from 'lucide-react'
 import { useHistory } from '../hooks/useHistory'
 import { useToast } from '../components/ToastContainer'
 import { ROUTES, ANIMATION_DELAYS } from '../config/constants'
@@ -21,7 +21,6 @@ export default function History() {
   } = useHistory()
 
   const [showClearDialog, setShowClearDialog] = useState(false)
-  const [view, setView] = useState<'split' | 'list'>('split')
   const isSearchEmpty = !isEmpty && filteredHistory.length === 0
   const toast = useToast()
   const navigate = useNavigate()
@@ -49,11 +48,9 @@ export default function History() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-5 sm:space-y-7 md:space-y-9 animate-fade-in pb-16 sm:pb-12">
+    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 animate-fade-in pb-24">
       <PageHeader
         count={filteredHistory.length}
-        view={view}
-        onViewChange={setView}
         onClearClick={() => setShowClearDialog(true)}
       />
 
@@ -61,46 +58,56 @@ export default function History() {
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
       {isSearchEmpty ? (
-        <div className="h-full min-h-[350px] sm:min-h-[400px] flex items-center justify-center border border-dashed border-neutral-200/60 rounded-2xl p-8 bg-neutral-50/30 animate-fade-in">
+        <div className="h-full min-h-[350px] flex items-center justify-center border-2 border-dashed border-black/5 rounded-[3rem] p-12 bg-white/30 backdrop-blur-sm animate-fade-in">
           <div className="text-center">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mx-auto mb-4 shadow-sm">
-              <Search className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-300" />
+            <div className="w-14 h-14 bg-white rounded-3xl border border-black/5 flex items-center justify-center mx-auto mb-6 shadow-glass">
+              <Search className="w-6 h-6 text-neutral-200" />
             </div>
-            <p className="text-neutral-400 text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.08em]">
+            <p className="text-neutral-400 text-[11px] font-display font-bold uppercase tracking-widest">
               No matches found for &ldquo;{searchQuery}&rdquo;
             </p>
           </div>
         </div>
-      ) : view === 'split' ? (
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-5 sm:gap-6">
-          {/* History list */}
-          <div className="space-y-2">
-            <p className="text-[10px] font-display font-bold uppercase tracking-widest text-neutral-400 px-1">
-              {filteredHistory.length} generation{filteredHistory.length !== 1 ? 's' : ''}
-            </p>
-            <HistoryList
-              items={filteredHistory}
-              selectedTimestamp={selectedResult?.timestamp}
-              onSelect={setSelectedResult}
-            />
-          </div>
-
-          {/* Detail panel */}
-          <div className="min-w-0">
-            {selectedResult ? (
-              <ResultDetail result={selectedResult} />
-            ) : (
-              <EmptySelection />
-            )}
-          </div>
+      ) : selectedResult ? (
+        <div className="animate-fade-in">
+          <button
+            onClick={() => setSelectedResult(null)}
+            className="flex items-center gap-2 mb-8 px-5 py-2.5 bg-black text-white rounded-full text-xs font-display font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-xl active:scale-95"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Collection</span>
+          </button>
+          <ResultDetail result={selectedResult} />
         </div>
       ) : (
-        /* Full list view */
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredHistory.map((item, i) => (
-            <div key={item.timestamp} className="animate-slide-up" style={{ animationDelay: `${i * 50}ms` }}>
-              <ResultDetail result={item} />
-            </div>
+            <button
+              key={item.timestamp}
+              onClick={() => setSelectedResult(item)}
+              className="text-left p-6 rounded-[2.5rem] bg-white border border-black/5 hover:border-black/10 hover:shadow-glass transition-all duration-500 animate-scale-in relative group overflow-hidden"
+              style={{ animationDelay: `${i * 40}ms` }}
+            >
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="p-2.5 rounded-2xl bg-neutral-50 group-hover:bg-orange-50 transition-colors">
+                    <Wand2 className="w-4 h-4 text-neutral-400 group-hover:text-orange-500 transition-colors" />
+                  </div>
+                  <span className="text-[10px] font-display font-bold uppercase tracking-widest text-neutral-400">
+                    {new Date(item.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                  </span>
+                </div>
+                <h3 className="text-base font-display font-700 leading-tight line-clamp-2 mb-4 tracking-tight group-hover:text-orange-500 transition-colors">
+                  &ldquo;{item.instruction}&rdquo;
+                </h3>
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] font-display font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-neutral-50 text-neutral-500 group-hover:bg-orange-500 group-hover:text-white transition-all">
+                    {item.variations.length} variations
+                  </span>
+                </div>
+              </div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
           ))}
         </div>
       )}
@@ -119,48 +126,20 @@ export default function History() {
   )
 }
 
-interface PageHeaderProps {
-  count: number
-  view: 'split' | 'list'
-  onViewChange: (v: 'split' | 'list') => void
-  onClearClick: () => void
-}
-
-const PageHeader = ({ count, view, onViewChange, onClearClick }: PageHeaderProps) => (
-  <div className="flex flex-col items-center justify-center text-center gap-3 sm:gap-4 border-b-2 border-black pb-8 sm:pb-10">
+const PageHeader = ({ count, onClearClick }: { count: number; onClearClick: () => void }) => (
+  <div className="flex flex-col items-center justify-center text-center gap-4 border-b-2 border-black/5 pb-10 sm:pb-12">
     <div>
-      <h2 className="heading-section text-neutral-900">History</h2>
-      <p className="text-sm sm:text-sm text-neutral-400 mt-1.5 font-accent" style={{ fontWeight: 300 }}>
-        {count} generation{count !== 1 ? 's' : ''} saved
+      <h2 className="text-4xl sm:text-5xl font-display font-800 tracking-tightest text-neutral-900">Collection</h2>
+      <p className="text-sm text-neutral-400 mt-2 font-accent font-400 tracking-snug">
+        {count} generation{count !== 1 ? 's' : ''} curated by you
       </p>
     </div>
     <div className="flex items-center gap-2">
-      {/* View toggle */}
-      <div className="flex items-center gap-0.5 bg-neutral-100 p-1 rounded-xl border border-neutral-200">
-        <button
-          onClick={() => onViewChange('split')}
-          className={`px-3 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all ${
-            view === 'split' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'
-          }`}
-        >
-          Split
-        </button>
-        <button
-          onClick={() => onViewChange('list')}
-          className={`px-3 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all ${
-            view === 'list' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'
-          }`}
-        >
-          All
-        </button>
-      </div>
-
       <button
         onClick={onClearClick}
-        className="flex items-center justify-center gap-2 px-4 py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-display border border-transparent hover:border-red-100 touch-manipulation tracking-tight active:scale-95"
-        style={{ fontWeight: 500 }}
+        className="flex items-center justify-center gap-2.5 px-5 py-2.5 text-red-500 hover:bg-red-50 rounded-full transition-all text-[11px] font-display font-bold uppercase tracking-widest border border-transparent hover:border-red-100 touch-manipulation active:scale-95"
       >
-        <Trash2 className="w-3.5 h-3.5" /> Clear All
+        <Trash2 className="w-4 h-4" /> Clear All
       </button>
     </div>
   </div>
@@ -194,78 +173,6 @@ const SearchBar = ({ value, onChange }: SearchBarProps) => (
   </div>
 )
 
-interface HistoryListProps {
-  items: GenerationResult[]
-  selectedTimestamp?: number
-  onSelect: (item: GenerationResult) => void
-}
-
-const HistoryList = ({ items, selectedTimestamp, onSelect }: HistoryListProps) => (
-  <div className="flex flex-col gap-2 max-h-[60vh] overflow-auto pr-1 scrollbar-thin">
-    {items.map((item, i) => (
-      <HistoryItem
-        key={item.timestamp}
-        item={item}
-        isSelected={selectedTimestamp === item.timestamp}
-        onSelect={() => onSelect(item)}
-        index={i}
-      />
-    ))}
-    {items.length === 0 && (
-      <div className="text-center py-12 opacity-40">
-        <p className="text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.1em] text-neutral-400">No matches found</p>
-      </div>
-    )}
-  </div>
-)
-
-interface HistoryItemProps {
-  item: { timestamp: number; instruction: string; variations: Array<{ style: string }> }
-  isSelected: boolean
-  onSelect: () => void
-  index: number
-}
-
-const HistoryItem = ({ item, isSelected, onSelect, index }: HistoryItemProps) => (
-  <button
-    onClick={onSelect}
-    className={`w-full p-4 sm:p-3.5 rounded-xl text-left transition-all duration-300 flex items-center justify-between group touch-manipulation animate-slide-up min-h-[72px] ${
-      isSelected
-        ? 'bg-neutral-900 text-white shadow-lg shadow-black/10'
-        : 'bg-white border-2 border-black hover:bg-neutral-50 text-neutral-600 hover:shadow-sm'
-    }`}
-    style={{ animationDelay: `${index * 30}ms` }}
-  >
-    <div className="min-w-0 flex-1">
-      <p className={`text-sm font-display font-bold truncate tracking-tight ${isSelected ? 'text-white' : 'text-neutral-800'}`}>
-        {item.instruction}
-      </p>
-      <div className="flex items-center gap-3 mt-1.5">
-        <div className={`flex items-center gap-1.5 ${isSelected ? 'opacity-60' : 'opacity-50'}`}>
-          <Calendar className="w-3 h-3" />
-          <p className="text-[10px] font-display font-semibold tracking-wide">
-            {new Date(item.timestamp).toLocaleDateString(undefined, {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-          </p>
-        </div>
-        <div className={`flex items-center gap-1.5 ${isSelected ? 'opacity-60' : 'opacity-50'}`}>
-          <Layers className="w-3 h-3" />
-          <p className="text-[10px] font-display font-semibold tracking-wide">
-            {item.variations?.length || 0} variations
-          </p>
-        </div>
-      </div>
-    </div>
-    <ChevronRight
-      className={`w-4 h-4 transition-all shrink-0 ml-3 ${
-        isSelected ? 'text-orange-400 translate-x-0.5' : 'text-neutral-200 group-hover:translate-x-0.5 group-hover:text-neutral-400'
-      }`}
-    />
-  </button>
-)
 
 interface ResultDetailProps {
   result: {
@@ -278,16 +185,16 @@ interface ResultDetailProps {
 }
 
 const ResultDetail = ({ result }: ResultDetailProps) => (
-  <div className="space-y-4 sm:space-y-5 animate-fade-in">
+  <div className="space-y-6 sm:space-y-8 animate-fade-in">
     {/* Instruction card */}
-    <div className="p-5 sm:p-6 bg-neutral-900 rounded-2xl text-white relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
-      <div className="absolute top-0 right-0 w-40 sm:w-56 h-40 sm:h-56 bg-orange-500/8 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+    <div className="p-8 sm:p-10 bg-black rounded-[3rem] text-white relative overflow-hidden shadow-2xl">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="relative z-10">
-        <div className="flex items-start gap-3 mb-4">
-          <div className="w-8 h-8 rounded-xl bg-orange-500/20 flex items-center justify-center shrink-0 mt-0.5">
-            <Wand2 className="w-4 h-4 text-orange-400" />
+        <div className="flex items-start gap-4 mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0 mt-1">
+            <Wand2 className="w-6 h-6 text-orange-400" />
           </div>
-          <p className="text-base sm:text-lg font-display tracking-tight leading-snug" style={{ fontWeight: 700 }}>
+          <p className="text-2xl sm:text-3xl font-display font-800 tracking-tightest leading-[1.1]">
             &ldquo;{result.instruction}&rdquo;
           </p>
         </div>
@@ -327,18 +234,5 @@ const MetadataBadge = ({ label, value }: { label: string; value: string }) => (
       {label}
     </p>
     <p className="text-[11px] font-display font-bold text-white mt-0.5 tracking-tight leading-none">{value}</p>
-  </div>
-)
-
-const EmptySelection = () => (
-  <div className="h-full min-h-[350px] sm:min-h-[400px] flex items-center justify-center border border-dashed border-neutral-200/60 rounded-2xl p-8 bg-neutral-50/30">
-    <div className="text-center">
-      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mx-auto mb-4 shadow-sm">
-        <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-300" />
-      </div>
-      <p className="text-neutral-400 text-[10px] sm:text-xs font-display font-bold uppercase tracking-[0.08em]">
-        Select a generation to preview
-      </p>
-    </div>
   </div>
 )

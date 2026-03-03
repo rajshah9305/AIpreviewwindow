@@ -78,7 +78,7 @@
   --font-fluid-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2.125rem);
   --font-fluid-3xl: clamp(2rem, 1.75rem + 1.25vw, 3rem);
   --font-fluid-4xl: clamp(2.5rem, 2rem + 2vw, 4rem);
-  --font-fluid-5xl: clamp(3rem, 2.25rem + 3vw, 5.5rem);
+  --font-fluid-5xl: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
   --font-fluid-6xl: clamp(3.5rem, 2.5rem + 4vw, 7rem);
   --font-fluid-7xl: clamp(4rem, 3rem + 5vw, 9rem);
   
@@ -103,7 +103,7 @@
   --letter-spacing-widest: 0.12em;
   
   /* Contextual letter spacing for optimal readability */
-  --letter-spacing-hero: -0.055em;       /* Maximum impact headlines */
+  --letter-spacing-hero: -0.065em;       /* Maximum impact headlines */
   --letter-spacing-display: -0.045em;    /* Large headlines */
   --letter-spacing-heading: -0.035em;    /* Section headings */
   --letter-spacing-subheading: -0.025em; /* Subheadings */
