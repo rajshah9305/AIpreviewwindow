@@ -135,20 +135,20 @@ export default function Settings() {
 
       <div className="max-w-2xl mx-auto w-full space-y-5">
         {/* Provider Presets */}
-        <div className="bg-white rounded-2xl border-2 border-black p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="glass-panel rounded-[2.5rem] p-6 sm:p-8 shadow-glass">
+          <div className="flex items-center gap-3 mb-6">
             <h3 className="text-sm font-display font-bold text-neutral-900 tracking-tight">Quick Setup</h3>
-            <span className="text-[10px] font-display font-bold uppercase tracking-widest text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">Provider Presets</span>
+            <span className="text-[9px] font-display font-bold uppercase tracking-widest text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full">Provider Presets</span>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {PROVIDER_PRESETS.map((preset) => (
               <button
                 key={preset.name}
                 onClick={() => handlePresetSelect(preset)}
-                className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all duration-200 text-center touch-manipulation ${
+                className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-300 text-center touch-manipulation ${
                   selectedPreset === preset.name
-                    ? 'border-black bg-black text-white shadow-md'
-                    : 'border-neutral-200 bg-neutral-50 hover:border-black hover:bg-white text-neutral-700'
+                    ? 'border-black bg-black text-white shadow-xl scale-105'
+                    : 'border-black/5 bg-white/50 hover:border-black/10 hover:bg-white text-neutral-700'
                 }`}
               >
                 <span className="text-lg leading-none">{preset.icon}</span>
@@ -161,7 +161,7 @@ export default function Settings() {
         </div>
 
         {/* Main Settings Form */}
-        <div className="bg-white rounded-2xl border-2 border-black p-6 sm:p-6 md:p-8 space-y-5 sm:space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] w-full">
+        <div className="glass-panel rounded-[2.5rem] p-8 sm:p-10 space-y-8 shadow-glass w-full">
           <FormField
             icon={Server}
             label="Provider Endpoint"
@@ -252,14 +252,13 @@ export default function Settings() {
             <button
               onClick={handleTestConnection}
               disabled={testing || !settings.baseUrl}
-              className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation border-2 min-h-[52px] ${
+              className={`flex-1 py-4 rounded-2xl font-display font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 text-[11px] touch-manipulation border-2 min-h-[56px] ${
                 testResult === 'success'
                   ? 'border-emerald-500 bg-emerald-50 text-emerald-600'
                   : testResult === 'error'
                   ? 'border-red-500 bg-red-50 text-red-500'
-                  : 'border-black bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:border-black'
-              } ${testing ? 'opacity-60 cursor-wait' : ''} ${!settings.baseUrl ? 'opacity-40 cursor-not-allowed' : ''}`}
-              style={{ fontWeight: 500 }}
+                  : 'border-black/5 bg-white text-neutral-600 hover:border-black/20 hover:bg-neutral-50'
+              } ${testing ? 'opacity-60 cursor-wait animate-pulse' : ''} ${!settings.baseUrl ? 'opacity-40 cursor-not-allowed' : ''}`}
             >
               {testing ? (
                 <div className="w-4 h-4 border-2 border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />
@@ -274,12 +273,11 @@ export default function Settings() {
             <button
               onClick={handleSave}
               disabled={!isModified}
-              className={`flex-1 py-3.5 sm:py-3 rounded-xl font-display uppercase tracking-[0.06em] transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-xs touch-manipulation min-h-[52px] ${
+              className={`flex-1 py-4 rounded-2xl font-display font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 text-[11px] touch-manipulation min-h-[56px] ${
                 isModified
-                  ? 'bg-neutral-900 text-white hover:bg-black shadow-md hover:shadow-lg active:scale-95'
+                  ? 'bg-black text-white hover:scale-[1.02] shadow-xl active:scale-95'
                   : 'bg-neutral-100 text-neutral-300 cursor-not-allowed'
               }`}
-              style={{ fontWeight: 500 }}
             >
               {isSaved ? (
                 <CheckCircle className="w-4 h-4 text-emerald-400" />
@@ -317,10 +315,10 @@ export default function Settings() {
 }
 
 const PageHeader = () => (
-  <div className="flex flex-col items-center justify-center text-center gap-3 border-b-2 border-black pb-8 sm:pb-10 w-full">
+  <div className="flex flex-col items-center justify-center text-center gap-4 border-b-2 border-black/5 pb-10 sm:pb-12 w-full">
     <div>
-      <h2 className="heading-section text-neutral-900">Settings</h2>
-      <p className="text-sm sm:text-sm text-neutral-400 mt-1.5 font-accent" style={{ fontWeight: 300 }}>Configure your AI provider connection</p>
+      <h2 className="text-4xl sm:text-5xl font-display font-800 tracking-tightest text-neutral-900">Preferences</h2>
+      <p className="text-sm text-neutral-400 mt-2 font-accent font-400 tracking-snug">Configure your AI engine and connection</p>
     </div>
   </div>
 )
@@ -348,9 +346,9 @@ const FormField = ({
   rightElement,
   hint,
 }: FormFieldProps) => (
-  <div className="space-y-2.5">
-    <label className="flex items-center gap-2 text-xs sm:text-[11px] font-display text-neutral-400 uppercase tracking-[0.08em] ml-0.5" style={{ fontWeight: 500 }}>
-      <Icon className="w-3.5 h-3.5 text-orange-500/70" /> {label}
+  <div className="space-y-3">
+    <label className="flex items-center gap-2.5 text-[10px] font-display text-neutral-400 uppercase tracking-widest ml-1 font-bold">
+      <Icon className="w-3.5 h-3.5 text-orange-500" /> {label}
     </label>
     <div className="relative">
       <input
@@ -358,9 +356,9 @@ const FormField = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full px-4 py-3.5 sm:py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500/40 transition-all bg-white placeholder:text-neutral-300 text-base font-sans tracking-tight min-h-[52px] ${
-          rightElement ? 'pr-14' : ''
-        } ${error ? 'border-red-500 focus:ring-red-500/5 focus:border-red-400' : 'border-black'}`}
+        className={`w-full px-6 py-4 border-2 rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 transition-all bg-white/50 backdrop-blur-sm placeholder:text-neutral-300 text-base font-accent font-500 tracking-tight min-h-[60px] ${
+          rightElement ? 'pr-16' : ''
+        } ${error ? 'border-red-500 focus:ring-red-500/5 focus:border-red-400' : 'border-black/10 hover:border-black/20'}`}
         style={{ fontSize: 'max(16px, 1rem)' }}
       />
       {rightElement}

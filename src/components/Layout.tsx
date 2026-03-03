@@ -26,9 +26,9 @@ export default function Layout({ children }: LayoutProps) {
         <GLSLHills />
       </Suspense>
 
-      {/* Top navigation */}
-      <nav className="sticky top-0 z-[100] w-full px-4 sm:px-6 py-3.5 safe-top bg-[#f5f5f5]/95 backdrop-blur-sm border-b-2 border-black">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+      {/* Top navigation - Floating Island */}
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-2rem)] max-w-4xl px-4 sm:px-6 py-2.5 glass-panel rounded-full shadow-glass border-white/40 animate-slide-up">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
             to="/generator"
@@ -36,23 +36,23 @@ export default function Layout({ children }: LayoutProps) {
             style={{ textDecoration: 'none' }}
             aria-label="RAJ AI UI - Home"
           >
-            <div className="relative w-10 h-10">
+            <div className="relative w-9 h-9">
               <div className="relative w-full h-full bg-black rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-md">
-                <Sparkles className="w-4.5 h-4.5 text-[#f97316] group-hover:text-orange-400 transition-colors" />
+                <Sparkles className="w-4 h-4 text-[#f97316] group-hover:text-orange-400 transition-colors" />
               </div>
             </div>
-            <div className="flex flex-col">
-              <h1 className="text-base font-display font-700 tracking-tighter leading-none text-black group-hover:text-[#f97316] transition-all duration-300">
+            <div className="hidden xs:flex flex-col">
+              <h1 className="text-sm font-display font-700 tracking-tighter leading-none text-black group-hover:text-[#f97316] transition-all duration-300">
                 RAJ AI UI
               </h1>
-              <span className="text-[9px] font-accent font-600 text-neutral-400 tracking-widest uppercase leading-none group-hover:text-orange-500 transition-colors duration-300">
+              <span className="text-[8px] font-accent font-600 text-neutral-400 tracking-widest uppercase leading-none group-hover:text-orange-500 transition-colors duration-300">
                 Component Engine
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden sm:flex items-center gap-1.5">
+          <div className="hidden sm:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon
               const active = isActive(item.path)
@@ -60,19 +60,24 @@ export default function Layout({ children }: LayoutProps) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-5 py-2.5 rounded-full text-sm font-accent transition-all duration-300 flex items-center gap-2 touch-manipulation no-underline tracking-snug ${
+                  className={`px-4 py-2 rounded-full text-[13px] font-accent transition-all duration-300 flex items-center gap-2 touch-manipulation no-underline tracking-snug ${
                     active
                       ? 'bg-black text-white shadow-lg shadow-neutral-900/10 font-600'
-                      : 'text-neutral-500 hover:text-black hover:bg-white hover:shadow-sm font-500 border border-transparent hover:border-neutral-200'
+                      : 'text-neutral-500 hover:text-black hover:bg-white/50 font-500 border border-transparent'
                   }`}
                   style={{ textDecoration: 'none' }}
                   aria-current={active ? 'page' : undefined}
                 >
-                  <Icon className={`w-4 h-4 transition-all duration-300 ${active ? 'text-orange-500' : ''}`} />
+                  <Icon className={`w-3.5 h-3.5 transition-all duration-300 ${active ? 'text-orange-500' : ''}`} />
                   <span>{item.label}</span>
                 </Link>
               )
             })}
+          </div>
+
+          {/* Mobile indicator for navigation presence on scroll */}
+          <div className="sm:hidden flex items-center gap-1 bg-black/5 px-3 py-1.5 rounded-full">
+            <span className="text-[10px] font-display font-700 uppercase tracking-widest text-black/40">Menu</span>
           </div>
         </div>
       </nav>
@@ -106,8 +111,10 @@ export default function Layout({ children }: LayoutProps) {
       </nav>
       
       {/* Main content */}
-      <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-96 sm:pb-80">
-        {children}
+      <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-0 relative z-10 overflow-x-hidden pb-96 sm:pb-80 mt-24">
+        <div className="animate-fade-in" style={{ animationDuration: '1s' }}>
+          {children}
+        </div>
       </main>
     </div>
   )

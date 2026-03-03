@@ -77,6 +77,8 @@ export default {
         'premium': '0 4px 12px rgba(0,0,0,0.08)',
         'premium-lg': '0 8px 32px rgba(0,0,0,0.06)',
         'premium-xl': '0 16px 64px rgba(0,0,0,0.08)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.08)',
+        'inner-glow': 'inset 0 0 20px 0 rgba(249, 115, 22, 0.05)',
       },
       animation: {
         'slide-up': 'slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -85,8 +87,48 @@ export default {
         'text-reveal-up': 'text-reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'gradient-shift': 'gradient-shift 4s ease infinite',
         'float-subtle': 'float-subtle 3s ease-in-out infinite',
+        'float-slow': 'float-slow 6s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'loading-bar': 'loading-bar 2s infinite ease-in-out',
+      },
+      keyframes: {
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'text-reveal-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'gradient-shift': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+        'float-subtle': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+        },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { 'box-shadow': '0 0 20px rgba(249, 115, 22, 0.2)' },
+          '50%': { 'box-shadow': '0 0 40px rgba(249, 115, 22, 0.4)' },
+        },
+        'loading-bar': {
+          '0%': { transform: 'translateX(-100%)' },
+          '50%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
     },
   },

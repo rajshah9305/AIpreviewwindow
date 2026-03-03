@@ -99,12 +99,12 @@ const HeroSection = ({ hasSettings, onNavigateSettings }: HeroSectionProps) => (
       </div>
     </div>
 
-    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-700 tracking-tightest leading-[0.95] mb-8 sm:mb-10 px-2 break-words">
+    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-800 tracking-tightest leading-[0.95] mb-8 sm:mb-10 px-2 break-words animate-float-slow">
       <span className="text-black animate-text-reveal-up inline-block" style={{ animationDelay: '0.2s' }}>Build </span>
-      <span className="text-[#f97316] animate-text-reveal-up inline-block" style={{ animationDelay: '0.3s' }}>Faster</span>
+      <span className="text-gradient-orange animate-text-reveal-up inline-block" style={{ animationDelay: '0.3s' }}>Faster</span>
       <br />
       <span className="text-black animate-text-reveal-up inline-block" style={{ animationDelay: '0.4s' }}>Design </span>
-      <span className="text-[#f97316] animate-text-reveal-up inline-block" style={{ animationDelay: '0.5s' }}>Better</span>
+      <span className="text-gradient-orange animate-text-reveal-up inline-block" style={{ animationDelay: '0.5s' }}>Better</span>
     </h1>
 
     <p className="text-lg sm:text-xl md:text-2xl text-neutral-500 max-w-3xl mx-auto px-4 sm:px-6 animate-text-reveal-up font-accent leading-relaxed break-words mb-10 font-400 tracking-snug" style={{ animationDelay: '0.6s' }}>
@@ -219,7 +219,7 @@ const LoadingState = () => {
             {LOADING_VARIATIONS.map((v, i) => (
               <div
                 key={v.id}
-                className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px]"
+                className="flex-shrink-0 snap-start snap-always animate-scale-in w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px]"
                 style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
               >
                 <LoadingSkeleton />
@@ -331,7 +331,7 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
               {result.variations.map((variation, i) => (
                 <div
                   key={variation.id}
-                  className="flex-shrink-0 snap-start snap-always animate-slide-up w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px] hover-lift"
+                  className="flex-shrink-0 snap-start snap-always animate-scale-in w-[88vw] sm:w-[75vw] md:w-[55vw] lg:w-[450px] xl:w-[500px] h-[380px] xs:h-[420px] sm:h-[460px] md:h-[500px] lg:h-[550px] hover-lift"
                   style={{ animationDelay: `${i * ANIMATION_DELAYS.STAGGER_BASE}ms` }}
                 >
                   <ComponentPreview variation={variation} />
@@ -408,7 +408,7 @@ const InputArea = ({
   return (
     <div className="fixed bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:bottom-32 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white border-2 border-black p-2 sm:p-3 transition-all duration-500 shadow-[0_48px_160px_rgba(0,0,0,0.2)] focus-within:shadow-[0_64px_192px_rgba(0,0,0,0.25)] focus-within:border-black rounded-[2.5rem] w-full overflow-hidden">
+        <div className="glass-panel p-2 sm:p-3 transition-all duration-500 shadow-glass focus-within:shadow-inner-glow focus-within:border-orange-500/30 rounded-[3rem] w-full overflow-hidden">
           {error && (
             <div className="mx-1 mb-2 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
