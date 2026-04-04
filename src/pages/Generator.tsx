@@ -92,7 +92,7 @@ const HeroSection = ({ hasSettings, onNavigateSettings }: HeroSectionProps) => (
   <div className="max-w-5xl mx-auto text-center pt-20 sm:pt-24 md:pt-32 pb-12 animate-slide-up px-4 sm:px-6 w-full">
     <div className="inline-flex items-center justify-center mb-10 sm:mb-12 animate-text-reveal-up" style={{ animationDelay: '0.1s' }}>
       <div className="px-5 py-2.5 rounded-full bg-white border-2 border-black flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:shadow-md">
-        <Zap className="w-4 h-4 text-[#f97316]" fill="currentColor" />
+        <Zap className="w-4 h-4 text-[#f97316]" fill="currentColor" aria-hidden="true" />
         <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest-xl uppercase">
           Next-Gen AI Component Engine
         </span>
@@ -114,14 +114,14 @@ const HeroSection = ({ hasSettings, onNavigateSettings }: HeroSectionProps) => (
     {!hasSettings && (
       <div className="animate-text-reveal-up mb-12" style={{ animationDelay: '0.7s' }}>
         <div className="inline-flex items-center gap-3 px-5 py-3.5 bg-orange-50 border-2 border-orange-200 rounded-2xl text-orange-700">
-          <Settings className="w-4 h-4 shrink-0" />
+          <Settings className="w-4 h-4 shrink-0" aria-hidden="true" />
           <span className="text-sm font-accent font-500">Configure your AI provider to get started</span>
           <button
             onClick={onNavigateSettings}
             className="flex items-center gap-1.5 text-sm font-display font-700 text-orange-600 hover:text-orange-700 transition-colors underline underline-offset-2"
           >
             Go to Settings
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -188,7 +188,7 @@ const LoadingState = () => {
           <p className="text-sm sm:text-base text-neutral-500 font-accent font-400 tracking-snug">Creating 5 unique design variations with AI precision...</p>
         </div>
         <div className="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-neutral-200 shadow-sm self-start sm:self-auto">
-          <div className="w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" />
+          <div className="w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" aria-hidden="true" />
           <span className="text-[10px] font-display font-700 text-neutral-900 tracking-widest uppercase">Processing</span>
         </div>
       </div>
@@ -197,17 +197,17 @@ const LoadingState = () => {
         <div className="hidden md:block">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 
@@ -241,7 +241,7 @@ const LoadingState = () => {
               }
             }}
             className={`rounded-full transition-all duration-300 ${
-              i === activeIndex ? 'bg-orange-500 w-6 h-2' : 'bg-neutral-300 w-2 h-2'
+              i === activeIndex ? 'bg-orange-500 w-6 h-2' : 'bg-neutral-300 w-2 h-2 hover:bg-neutral-400'
             }`}
             aria-label={`Go to variation ${i + 1}`}
           />
@@ -283,8 +283,8 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
     <div className="space-y-6 sm:space-y-7 md:space-y-9 animate-fade-in w-full max-w-full overflow-x-hidden">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 border-b-2 border-black pb-5 sm:pb-5 md:pb-7">
         <div className="min-w-0 flex-1">
-          <div className="inline-flex items-center gap-2 mb-3 bg-white px-4 py-2 rounded-xl border border-emerald-200 shadow-sm">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <div className="inline-flex items-center gap-2 mb-3 bg-white px-4 py-2 rounded-xl border border-emerald-200 shadow-sm" role="status">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" aria-hidden="true" />
             <span className="text-[10px] font-display font-700 text-emerald-600 tracking-widest uppercase">Complete</span>
           </div>
           <h3 className="font-display text-3xl sm:text-4xl font-700 tracking-tighter text-neutral-900 mb-2">Your Collection</h3>
@@ -294,9 +294,9 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
         </div>
         <button
           onClick={onClearAndNew}
-          className="btn-secondary flex items-center justify-center gap-2.5 shrink-0 whitespace-nowrap min-h-[52px] sm:min-h-[44px] group"
+          className="btn-secondary flex items-center justify-center gap-2.5 shrink-0 whitespace-nowrap min-h-[52px] sm:min-h-[44px] group active:scale-95 transition-transform"
         >
-          <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+          <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" aria-hidden="true" />
           <span>New Generation</span>
         </button>
       </div>
@@ -305,17 +305,17 @@ const ResultsState = ({ result, onClearAndNew }: ResultsStateProps) => {
         <div className="hidden md:block">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 backdrop-blur-sm border border-neutral-200 shadow-lg text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 
@@ -406,13 +406,13 @@ const InputArea = ({
   }
 
   return (
-    <div className="fixed bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:bottom-32 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+    <div className="fixed bottom-[calc(7.5rem+env(safe-area-inset-bottom))] sm:bottom-32 left-0 right-0 z-[90] w-full px-4 sm:px-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
       <div className="w-full max-w-4xl mx-auto">
         <div className="glass-panel p-2 sm:p-3 transition-all duration-500 shadow-glass focus-within:shadow-inner-glow focus-within:border-orange-500/30 rounded-[3rem] w-full overflow-hidden">
           {error && (
-            <div className="mx-1 mb-2 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100">
+            <div className="mx-1 mb-2 p-3 bg-red-50 rounded-2xl text-xs font-accent font-500 text-red-600 flex items-center justify-between animate-slide-up border border-red-100" role="alert" aria-live="polite">
               <span className="flex items-center gap-2.5 min-w-0 flex-1">
-                <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-500" aria-hidden="true" />
                 <span className="break-words line-clamp-2">{error}</span>
               </span>
               <button
@@ -454,7 +454,8 @@ const InputArea = ({
                   </p>
                   <p className={`text-[10px] font-mono transition-colors ${
                     isAtLimit ? 'text-red-500 font-bold' : isNearLimit ? 'text-orange-500' : 'text-neutral-400'
-                  }`}>
+                  }`} aria-live="polite">
+                    <span className="sr-only">Character count: </span>
                     {charCount}/{maxChars}
                   </p>
                 </div>
@@ -471,17 +472,17 @@ const InputArea = ({
                     ? 'bg-neutral-100 text-neutral-300 cursor-not-allowed border border-neutral-200'
                     : 'bg-black text-white hover:bg-neutral-800 hover:shadow-xl hover:shadow-neutral-900/20 active:scale-95'
                 }`}
-                aria-label="Generate components"
+                aria-label={loading ? 'Creating components' : 'Create components'}
               >
                 {loading ? (
                   <>
-                    <div className="spinner !w-4 !h-4 !border-2 !border-white/30 !border-t-white" />
+                    <div className="spinner !w-4 !h-4 !border-2 !border-white/30 !border-t-white" aria-hidden="true" />
                     <span>Creating</span>
                   </>
                 ) : (
                   <>
                     <span>Create</span>
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
                   </>
                 )}
               </button>

@@ -74,30 +74,33 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
 
   const ToolbarActions = ({ fullScreenMode }: { fullScreenMode: boolean }) => (
     <div className="flex items-center gap-1.5">
-      {fullScreenMode && activeTab === 'preview' && (
+      {activeTab === 'preview' && (
         <button
           onClick={refreshPreview}
-          className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+          className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all active:scale-95"
           title="Refresh preview"
+          aria-label="Refresh preview"
         >
           <RefreshCw className="w-4 h-4" />
         </button>
       )}
       <button
         onClick={downloadCode}
-        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all active:scale-95"
         title="Download HTML"
+        aria-label="Download HTML"
       >
         <Download className="w-4 h-4" />
       </button>
       <button
         onClick={copyCode}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-display font-bold uppercase tracking-wider transition-all ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-display font-bold uppercase tracking-wider transition-all active:scale-95 ${
           copied
             ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
             : 'text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100'
         }`}
         title="Copy code"
+        aria-label="Copy code"
       >
         {copied ? (
           <>
@@ -113,8 +116,9 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
       </button>
       <button
         onClick={() => setIsFullscreen(!isFullscreen)}
-        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all"
+        className="p-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-all active:scale-95"
         title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+        aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
       >
         {isFullscreen ? <X className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
       </button>
@@ -161,6 +165,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                   viewport === 'desktop' ? 'text-neutral-900 bg-neutral-100' : 'text-neutral-400 hover:text-neutral-600'
                 }`}
                 title="Desktop view"
+                aria-label="Desktop view"
               >
                 <Monitor className="w-4 h-4" />
               </button>
@@ -170,6 +175,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                   viewport === 'mobile' ? 'text-neutral-900 bg-neutral-100' : 'text-neutral-400 hover:text-neutral-600'
                 }`}
                 title="Mobile view (375px)"
+                aria-label="Mobile view"
               >
                 <Smartphone className="w-4 h-4" />
               </button>
@@ -209,23 +215,23 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             />
           </div>
         ) : (
-          <div className="w-full h-full overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs sm:text-sm leading-relaxed custom-scrollbar">
+          <div className="w-full h-full overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs sm:text-sm leading-relaxed custom-scrollbar selection:bg-orange-500/30 selection:text-white">
             {/* Code header bar */}
             <div className="sticky top-0 flex items-center justify-between px-5 py-2.5 bg-[#161b22] border-b border-white/5 z-10">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <div className="w-3 h-3 rounded-full bg-green-500/60" />
-                <span className="ml-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                <span className="ml-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest font-bold">
                   {variation.name.toLowerCase().replace(/\s+/g, '-')}.html
                 </span>
               </div>
-              <span className="text-[10px] text-neutral-600 font-mono">
+              <span className="text-[10px] text-neutral-600 font-mono font-bold uppercase tracking-wider">
                 {variation.code.split('\n').length} lines
               </span>
             </div>
-            <pre className="p-5 whitespace-pre-wrap break-all">
-              <code className="text-neutral-300">{variation.code}</code>
+            <pre className="p-6 whitespace-pre-wrap break-all font-mono">
+              <code className="text-neutral-300 selection:bg-orange-500/40">{variation.code}</code>
             </pre>
           </div>
         )}
@@ -235,7 +241,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
 
   if (isFullscreen) {
     return createPortal(
-      <div className="fixed inset-0 z-[200] bg-white animate-fade-in">
+      <div className="fixed inset-0 z-[200] bg-white animate-fade-in" role="dialog" aria-modal="true" aria-label={`Fullscreen preview of ${variation.name}`}>
         {renderContent(true)}
       </div>,
       document.body
@@ -256,18 +262,28 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
         </div>
         <div className="flex items-center gap-1 shrink-0 ml-2">
           <button
+            onClick={refreshPreview}
+            className="p-2 text-neutral-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors active:scale-95"
+            title="Refresh preview"
+            aria-label="Refresh preview"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+          <button
             onClick={copyCode}
-            className={`p-2 rounded-lg transition-all ${
+            className={`p-2 rounded-lg transition-all active:scale-95 ${
               copied ? 'text-emerald-500 bg-emerald-50' : 'text-neutral-400 hover:text-orange-500 hover:bg-orange-50'
             }`}
             title="Copy code"
+            aria-label="Copy code"
           >
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
           <button
             onClick={() => setIsFullscreen(true)}
-            className="p-2 text-neutral-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors"
+            className="p-2 text-neutral-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors active:scale-95"
             title="Expand view"
+            aria-label="Expand view"
           >
             <Maximize2 className="w-4 h-4" />
           </button>
@@ -313,13 +329,13 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             loading="lazy"
           />
         ) : (
-          <div className="absolute inset-0 overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs leading-relaxed">
+          <div className="absolute inset-0 overflow-auto bg-[#0d1117] text-neutral-300 font-mono text-xs leading-relaxed selection:bg-orange-500/30">
             <div className="sticky top-0 flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-white/5 z-10">
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
-                <span className="ml-2 text-[9px] font-mono text-neutral-600 uppercase tracking-widest">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                <span className="ml-2 text-[9px] font-mono text-neutral-500 uppercase tracking-widest font-bold">
                   {variation.name.toLowerCase().replace(/\s+/g, '-')}.html
                 </span>
               </div>
@@ -333,8 +349,8 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
                 {copied ? 'Copied' : 'Copy'}
               </button>
             </div>
-            <pre className="p-4 whitespace-pre-wrap break-all">
-              <code>{variation.code}</code>
+            <pre className="p-5 whitespace-pre-wrap break-all font-mono">
+              <code className="selection:bg-orange-500/40">{variation.code}</code>
             </pre>
           </div>
         )}
