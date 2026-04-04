@@ -111,19 +111,21 @@ export default function Settings() {
 
       if (response.ok && data.reachable) {
         setTestResult('success')
-        toast.success('Provider endpoint is reachable')
+        toast.success(`Connected! ${selectedPreset ? `${selectedPreset} ` : ''}endpoint is reachable.`)
       } else {
         setTestResult('error')
-        toast.error(data.message || 'Could not reach provider endpoint')
+        const errorMessage = data.message || (data.statusCode ? `Server responded with ${data.statusCode}` : 'Could not reach provider endpoint')
+        toast.error(errorMessage)
       }
-    } catch {
+    } catch (err) {
       setTestResult('error')
-      toast.error('Failed to test connection')
+      const msg = err instanceof Error ? err.message : 'Failed to test connection'
+      toast.error(msg)
     } finally {
       setTesting(false)
       setTimeout(() => setTestResult(null), 3000)
     }
-  }, [settings, toast])
+  }, [settings, toast, selectedPreset])
 
   // Find the current preset's model list
   const currentPreset = PROVIDER_PRESETS.find(p => p.name === selectedPreset)
@@ -145,7 +147,7 @@ export default function Settings() {
               <button
                 key={preset.name}
                 onClick={() => handlePresetSelect(preset)}
-                className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-300 text-center touch-manipulation ${
+                className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-300 text-center touch-manipulation active:scale-95 ${
                   selectedPreset === preset.name
                     ? 'border-black bg-black text-white shadow-xl scale-105'
                     : 'border-black/5 bg-white/50 hover:border-black/10 hover:bg-white text-neutral-700'
@@ -193,6 +195,7 @@ export default function Settings() {
                   onClick={() => setShowModels(!showModels)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-neutral-400 hover:text-neutral-700 transition-colors"
                   title="Show suggested models"
+                  aria-expanded={showModels}
                 >
                   {showModels ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
@@ -259,6 +262,7 @@ export default function Settings() {
                   ? 'border-red-500 bg-red-50 text-red-500'
                   : 'border-black/5 bg-white text-neutral-600 hover:border-black/20 hover:bg-neutral-50'
               } ${testing ? 'opacity-60 cursor-wait animate-pulse' : ''} ${!settings.baseUrl ? 'opacity-40 cursor-not-allowed' : ''}`}
+              aria-busy={testing}
             >
               {testing ? (
                 <div className="w-4 h-4 border-2 border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />

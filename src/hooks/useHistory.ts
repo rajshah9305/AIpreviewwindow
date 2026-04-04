@@ -10,9 +10,6 @@ export const useHistory = () => {
   useEffect(() => {
     const loaded = storage.loadHistory()
     setHistory(loaded)
-    if (loaded.length > 0) {
-      setSelectedResult(loaded[0])
-    }
   }, [])
 
   const filteredHistory = useMemo(() => {
