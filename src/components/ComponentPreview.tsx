@@ -1,3 +1,4 @@
+import { wrapInTemplate } from "../lib/preview-template"
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { Code, Eye, Copy, Check, Maximize2, Smartphone, Monitor, X, Download, RefreshCw } from 'lucide-react'
@@ -208,7 +209,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
               key={iframeKey}
               ref={iframeRef}
               title={`${variation.name} preview`}
-              srcDoc={variation.code}
+              srcDoc={wrapInTemplate(variation.code)}
               sandbox="allow-scripts allow-modals allow-forms"
               className="w-full h-full border-0 bg-white"
               loading="lazy"
@@ -323,7 +324,7 @@ export default function ComponentPreview({ variation }: ComponentPreviewProps) {
             key={iframeKey}
             ref={iframeRef}
             title={`${variation.name} preview`}
-            srcDoc={variation.code}
+            srcDoc={wrapInTemplate(variation.code)}
             sandbox="allow-scripts allow-modals allow-forms"
             className="w-full h-full border-0 bg-white absolute inset-0"
             loading="lazy"
