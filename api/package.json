@@ -1,0 +1,14 @@
+{
+  "name": "ai-ui-generator-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Serverless API for AI-powered UI component generation",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node dev-server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5"
+  }
+}

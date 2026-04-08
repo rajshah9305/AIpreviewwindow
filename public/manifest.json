@@ -1,0 +1,19 @@
+{
+  "name": "RAJ AI UI Generator",
+  "short_name": "RAJ AI UI",
+  "description": "AI-powered UI component generator with natural language input",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "development", "utilities"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "32x32 48x48 72x72 96x96 128x128 144x144 152x152 192x192 384x384 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

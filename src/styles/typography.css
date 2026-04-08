@@ -1,0 +1,44 @@
+/* Typography design tokens — consumed by index.css and Tailwind */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-accent:  'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+  --font-size-xs:   0.75rem;
+  --font-size-sm:   0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg:   1.125rem;
+  --font-size-xl:   1.25rem;
+
+  --font-weight-text:     400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-extrabold:800;
+  --font-weight-display:  800;
+
+  --line-height-tight:   1.1;
+  --line-height-snug:    1.25;
+  --line-height-normal:  1.5;
+  --line-height-relaxed: 1.65;
+  --line-height-body:    1.6;
+
+  --letter-spacing-tightest: -0.06em;
+  --letter-spacing-tighter:  -0.04em;
+  --letter-spacing-tight:    -0.025em;
+  --letter-spacing-snug:     -0.015em;
+  --letter-spacing-body:     -0.011em;
+  --letter-spacing-normal:    0;
+  --letter-spacing-wide:      0.03em;
+  --letter-spacing-wider:     0.06em;
+  --letter-spacing-widest:    0.1em;
+  --letter-spacing-label:     0.08em;
+
+  --font-features-default: 'kern' 1, 'liga' 1, 'calt' 1;
+  --font-features-display: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+  --font-features-mono:    'kern' 0, 'liga' 1, 'calt' 1;
+}

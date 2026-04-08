@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Turn plain English into production-ready UI components — 5 unique design variations, instantly." />
+    <meta name="theme-color" content="#f97316" />
+    <meta name="color-scheme" content="light" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RAJ AI UI" />
+
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="RAJ AI UI — Component Engine" />
+    <meta property="og:description" content="Turn plain English into production-ready UI components — 5 unique design variations, instantly." />
+    <meta property="og:image"       content="/og-image.png" />
+
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="RAJ AI UI — Component Engine" />
+    <meta name="twitter:description" content="Turn plain English into production-ready UI components — 5 unique design variations, instantly." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="/manifest.json" />
+
+    <title>RAJ AI UI — Component Engine</title>
+
+    <style>
+      /* Critical: prevent flash of unstyled content */
+      html { background: #f5f4f1; }
+      body { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Skip to main content for keyboard users -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-neutral-900 focus:text-white focus:rounded-xl focus:text-sm focus:font-medium focus:shadow-lg"
+    >
+      Skip to main content
+    </a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
